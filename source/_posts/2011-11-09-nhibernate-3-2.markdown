@@ -1,0 +1,14 @@
+---
+author: draptik
+comments: true
+date: 2011-11-09 00:10:15
+layout: post
+slug: nhibernate-3-2
+title: NHibernate 3.2 Upgrades
+wordpress_id: 459
+categories:
+- programming
+---
+
+Trying Google Plus for blogging...
+[https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3](https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3)

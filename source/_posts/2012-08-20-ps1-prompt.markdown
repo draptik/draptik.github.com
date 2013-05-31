@@ -1,0 +1,13 @@
+---
+author: draptik
+comments: true
+date: 2012-08-20 21:31:20
+layout: post
+slug: ps1-prompt
+title: PS1 prompt
+wordpress_id: 504
+categories:
+- linux
+---
+
+Here's my current PS1 prompt for bash with optional git support: [https://gist.github.com/3324534](https://gist.github.com/3324534)
