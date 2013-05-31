@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>NAS-Box SS4000-E ignores partition table of plugged-in external harddrive - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Intel&rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2009/05/27/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">NAS-Box SS4000-E Ignores Partition Table of Plugged-in External Harddrive</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-27T01:54:45+02:00" pubdate data-updated="true">May 27<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Intel&rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</p>
+
+<p>This is not reflected by the &ldquo;mount&rdquo; command:
+<code>
+ root# mount
+   ...snipped some lines...
+/dev/sdf1 on /nas/usbdisk1 type vfat  (rw,nodiratime,gid=11578,fmask=0000,dmask=0000)
+</code></p>
+
+<p>I&rsquo;ll have to copy the data via intranet (slower than via USB).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-27T01:54:45+02:00" pubdate data-updated="true">May 27<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/" title="Previous Post: Problem upgrading VMware Tools (because of JIT-Debugger) solved">&laquo; Problem upgrading VMware Tools (because of JIT-Debugger) solved</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/" title="Next Post: Porting phone book from Nokia 6230i to Samsung S7220">Porting phone book from Nokia 6230i to Samsung S7220 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

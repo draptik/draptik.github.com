@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="1
+svn add `svn st | grep "^?" | awk '{print $2}'` ">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/page/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/">Snippet for Adding Unknown Files/dirs to Subversion (Command Line)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-29T21:58:31+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>svn add `svn st | grep "^?" | awk '{print $2}'`</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/">Installing SQL Server Management Studio 2008 Express After Installing Visual Studio 2010</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-17T23:48:06+01:00" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Visual Studio 2010 comes with its own version of SQL Server Express.</p>
+
+<p>If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards and run into trouble, take a look at this <a href="http://blog.alexonasp.net/post/2010/01/07/SQL-Server-2008-Management-Studio-Express-nachtraglich-installieren.aspx">post by Alexander Zeitler</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/">Configure VirtualBox Windows Guest System to Use 2 Monitors</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-01T22:13:43+01:00" pubdate data-updated="true">Jan 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><strong>﻿Purpose</strong></h2>
+
+<p>Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.<br/>
+This solution should work for all Linux distributions supported by VirtualBox4.</p>
+
+<h2><strong>﻿Required software</strong></h2>
+
+<ul>
+<li><p><a href="http://www.ubuntu.com/">Ubuntu 10.10</a> (aka Maverick) as host for VirtualBox4</p></li>
+<li><p><a href="http://www.virtualbox.org/">VirtualBox 4</a></p></li>
+<li><p>VirtualBox guest sytem: Windows XP (incl. VirtualBox guest additions)</p></li>
+</ul>
+
+
+<h2><strong>Configuration</strong></h2>
+
+<ol>
+<li> Setup virtual guest machine (windows) within vm host system (GNU/Linux) to use two monitors:</li>
+</ol>
+
+
+<p>[caption id=&ldquo;attachment_378&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Setting up virtualbox 4 to use 2 monitors for windows xp guest&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png"><img src="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png?w=300" alt="virtualbox-host-ubuntu-10.10" /></a>[/caption]</p>
+
+<ol>
+<li> Within virtual guest (windows): Configure dual monitor setup:</li>
+</ol>
+
+
+<p>[caption id=&ldquo;attachment_379&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;263&rdquo; caption=&ldquo;Setup within virtualbox guest system (windows)&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png"><img src="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png?w=263" alt="virtualbox_dualmonitor_windows_config" /></a>[/caption]</p>
+
+<h2>Side note</h2>
+
+<p>Upgrading from VirtualBox owned by Sun to VirtualBox owned by Oracle was very smooth. Even for Linux host systems. Oracle, thanks for that!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/">NHibernate Code Completion (IntelliSense) for Visual Studio</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-08T22:47:42+01:00" pubdate data-updated="true">Dec 8<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&rsquo;s XML folder.</p>
+
+<p>For example (NHibernate 2.0.1):</p>
+
+<p>Files to copy:</p>
+
+<p><code>${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd
+${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
+</code></p>
+
+<p>Destination:</p>
+
+<p><code>C:\Programme\Microsoft Visual Studio 10.0\Xml\Schemas</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/11/03/emacs-murrine_style_draw_box-assertion-height-1-failed/">Emacs: Murrine_style_draw_box: Assertion `height >= -1&#8217; Failed</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-03T00:59:09+01:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs</p>
+
+<p><code>murrine_style_draw_box: assertion</code>height >= -1&#8217; failed`</p>
+
+<p>after <em>every action</em> within Emacs.</p>
+
+<p>The solution is simple, but has not been integrated in the Ubuntu repository yet.</p>
+
+<p>Here it is:</p>
+
+<p>In the file</p>
+
+<p><code>/usr/share/themes/Ambiance/gtk-2.0/gtkrc</code></p>
+
+<p>change</p>
+
+<p><code>GtkRange::trough-under-steppers = 0</code></p>
+
+<p>to</p>
+
+<p><code>GtkRange::trough-under-steppers = 1</code></p>
+
+<p>For details see <a href="https://bugs.launchpad.net/ubuntu/+source/emacs23/+bug/538541">Bug #538541</a>, <a href="https://bugs.launchpad.net/ubuntu/+source/emacs-snapshot/+bug/550532">Bug #550532</a> and ﻿<a href="http://thehacklist.blogspot.com/2010/06/resolving-murrinestyledrawbox-assertion.html">Resolving &ldquo;murrine_style_draw_box: assertion `height >= -1&#8217;&rdquo;</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/08/20/using-nunit-with-visual-studio-express/">Using NUnit With Visual Studio Express</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-20T02:08:36+02:00" pubdate data-updated="true">Aug 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since Microsoft&rsquo;s <strong>Visual Studio Express</strong> edition does not allow installation of any plugins anymore (f.ex. <a href="http://www.testdriven.net/">TestDriven.Net</a>), here is a quick workaround to get <a href="http://www.nunit.org/">NUnit</a>-GUI working. Add this to your Post-Build section of your Project settings:</p>
+
+<p><code>
+copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
+</code></p>
+
+<p>For more details please consult <a href="http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx">http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/06/25/praise-for-railstutorial-org/">Praise for Railstutorial.org</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-06-25T22:56:42+02:00" pubdate data-updated="true">Jun 25<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple of weeks back I discovered a great tutorial on Ruby on Rails by Michael Hartl at ﻿﻿<a href="http://www.railstutorial.org">http://www.railstutorial.org</a></p>
+
+<p>The tutorial takes you through the steps of building a <a href="http://twitter.com/">Twitter</a>-like application (not a client!) from scratch. Aside from learning Ruby on Rails, this tutorial also teaches other useful technologies, techniques and best practices, such as:</p>
+
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">Behaviour driven development</a> (BDD) using <a href="http://rspec.info/">RSpec</a> for unit, integration and functional testing</p></li>
+<li><p>Version control using <a href="http://git-scm.com/">Git</a></p></li>
+<li><p>Deployment using <a href="http://heroku.com/">Heroku</a></p></li>
+<li><p>Basics of web design (CSS, Ajax)</p></li>
+<li><p>Setting up a database (the tutorial uses the lightweight SQLite3 format, but this can be ported to &lsquo;real&rsquo; databases quite easily with Rails)</p></li>
+<li><p>Generating fake data for the test/staging database as well as the unit testing database</p></li>
+</ul>
+
+
+<p><a href="http://www.dwheeler.com/sloccount/">sloccount</a> (SLOC: source lines of code) for the complete tutorial&rsquo;s source code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sloccount .
+</span><span class='line'>...
+</span><span class='line'>SLOC    Directory       SLOC-by-Language <span class="o">(</span>Sorted<span class="o">)</span>
+</span><span class='line'>1182    spec            <span class="nv">ruby</span><span class="o">=</span>1182
+</span><span class='line'>361     app             <span class="nv">ruby</span><span class="o">=</span>361
+</span><span class='line'>167     vendor          <span class="nv">ruby</span><span class="o">=</span>167
+</span><span class='line'>141     config          <span class="nv">ruby</span><span class="o">=</span>141
+</span><span class='line'>109     db              <span class="nv">ruby</span><span class="o">=</span>109
+</span><span class='line'>35      script          <span class="nv">ruby</span><span class="o">=</span>35
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>How to read these results?</p>
+
+<ul>
+<li><p>app: The actual application is less than 400 lines of code (this even includes the generated HTML)! Try that using Java or ASP.NET&hellip; ;&ndash;)</p></li>
+<li><p>spec: Tests are almost 4 times the size of the actual code (~1200 lines). These tests include unit, integration and functional tests!</p></li>
+<li><p>Most of the remaining code is auto-generated Rails code.</p></li>
+</ul>
+
+
+<p>You can get my commented sources from <a href="http://github.com">GitHub</a> at <a href="http://github.com/draptik/railstutorial">http://github.com/draptik/railstutorial</a></p>
+
+<p>If you want to have a look at the application: It is currently deployed at <a href="http://heroku.com/">Heroku</a>: <a href="http://draptik-railstutorial.heroku.com/">http://draptik-railstutorial.heroku.com/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/">Using a Different Minor-mode-prefix With Rinari (Emacs Rails)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-27T22:40:27+02:00" pubdate data-updated="true">Apr 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://rinari.rubyforge.org/">Rinari</a> is a Ruby on Rails Minor Mode for GNU/Emacs.</p>
+
+<p><strong>Problem:</strong> Most key mappings / keyboard shortcuts rely on the hard coded strings <code>;</code> and <code>'</code> (I.e. <code>C-; f c</code> &ndash;> <code>rinari-find-controller</code>). These prefixes are difficult to access on a German keyboard because they require the shift modifier.</p>
+
+<p><strong>Solution:</strong> The following code adds a comma to the list of rinari-prefix strings. Add it to your GNU/Emacs configuration file (i.e. <code>~/.emacs</code>):</p>
+
+<figure class='code'><figcaption><span>~/.emacs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;~/your-path-to-rinari-source-code/rinari&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="err">﻿</span><span class="c1">;; This patch must appear before the line &quot;(require &#39;rinari)&quot;!</span>
+</span><span class='line'><span class="p">(</span><span class="nf">defvar</span> <span class="nv">rinari-minor-mode-prefixes</span>
+</span><span class='line'><span class="p">(</span><span class="nb">list </span><span class="s">&quot;;&quot;</span> <span class="s">&quot;&#39;&quot;</span> <span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="c1">;; CHANGE Added comma to prefix list</span>
+</span><span class='line'>     <span class="s">&quot;List of characters, each of which will be bound (with C-c) as a rinari-minor-mode keymap prefix.&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;rinari</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Result: </strong>We can now access the command <code>rinari-find-controller</code> with the key sequence <code>C-c , f c</code>.</p>
+
+<p><strong>Side note:</strong> I&rsquo;m all ears for more Emacs-Lispy solutions to this problem. ;&ndash;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/">Using Basic Emacs Keybindings in Gnome-Terminal</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-15T23:00:10+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Summary:</strong> Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people familiar with Emacs.</p>
+
+<p>This is so simple that I almost afraid to post it&hellip;</p>
+
+<p>&hellip;One of those things that has been bothering you for years(!), but was never urgent enough to invest time figuring out how to fix&hellip;</p>
+
+<p><strong>Problem: </strong></p>
+
+<p>You&rsquo;re used to Emacs shortcuts. Bash (and many other shells) support Emacs keybindings out of the box. But your default terminal comes with a stupid menu bar. So you press <code>M-d</code> (Emacs&#8217; &ldquo;kill-word&rdquo;; for non-Emacs users: this corresponds to the key sequence <code>Alt-d</code>) and end up calling the &ldquo;File&rdquo; menu entry of the Gnome-Terminal (File is called &ldquo;<strong>D</strong>atei&rdquo; in German, which is my LOCAL). If you your LOCAL settings are English, you will have the same problem with the Emacs shortcut <code>M-f</code> (in Emacs this is &ldquo;word-forward&rdquo;): The Gnome-Terminal will grap the key sequence and open the &ldquo;<strong>F</strong>ile&rdquo; menu.</p>
+
+<p><strong>Solution:</strong></p>
+
+<ol>
+<li><p> Open your Gnome-Terminal</p></li>
+<li><p> Edit &ndash;> Keyboard shortcuts &ndash;> DISABLE ALL MENU ACCESS KEYS (If you have German settings the menu entry is called: &ldquo;Bearbeiten &ndash;> Tastenkombinationen &ndash;> Alle Menükürzel aktivieren&rdquo;. Disable the checkbox..)</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/">Executing a Script After Mounting a TrueCrypt Partition on Ubuntu 9.10 (Karmic Koala)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-08T01:18:40+01:00" pubdate data-updated="true">Dec 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Goal: </strong>Automatically run a script/program of your choice after mounting a TrueCrypt partition on Ubuntu 9.10.</p>
+
+<p><strong>Background info on udev (very short)</strong></p>
+
+<ul>
+<li><p>UDEV listens to certain events. Depending on the event, a certain &ldquo;rule&rdquo; can be executed.</p></li>
+<li><p>To see some of the default rules, visit <code>lib/udev/rules.d</code> and study those examples.</p></li>
+<li><p>Many current GNU/Linux distros use the udev system to manage actions that should happen after automounting.</p></li>
+</ul>
+
+
+<p><strong>Setup</strong></p>
+
+<p>My setup</p>
+
+<p>Your setup might differ! I have a USB stick. Amongst other things, it includes a TrueCrypt partition. I am able to (un)mount the TrueCrypt partition using the TrueCrypt program.</p>
+
+<p>Info required for udev</p>
+
+<p>udev needs a way of identifying your partition. We can use udevadm info (this corresponds to udevinfo in older tutorials) to get this info. I know that my truecrypt partition is always mounted to /media/truecryt1. This is mapped from /dev/mapper/truecrypt1 (have a look at the output of the &ldquo;mount&rdquo; command after mounting truecrypt to see these details).</p>
+
+<p>We need unique infos about the truecrypt partition for udev. To aquire this info, use:
+<code>
+$ udevadm info -a -p $(udevadm info -q path -n /dev/mapper/truecrypt1)
+</code></p>
+
+<p>On my system the output is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>udevadm info -a -p <span class="k">$(</span>udevadm info -q path -n /dev/mapper/truecrypt1<span class="k">)</span>
+</span><span class='line'>Udevadm info starts with the device specified by the devpath and <span class="k">then</span>
+</span><span class='line'>walks up the chain of parent devices. It prints <span class="k">for </span>every device
+</span><span class='line'>found, all possible attributes in the udev rules key format.
+</span><span class='line'>A rule to match, can be composed by the attributes of the device
+</span><span class='line'>and the attributes from one single parent device.
+</span><span class='line'>
+</span><span class='line'>looking at device <span class="s1">&#39;/devices/virtual/block/dm-0&#39;</span>:
+</span><span class='line'><span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;dm-0&quot;</span>
+</span><span class='line'><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>
+</span><span class='line'><span class="nv">DRIVER</span><span class="o">==</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>range<span class="o">}==</span><span class="s2">&quot;1&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>extrange<span class="o">}==</span><span class="s2">&quot;1&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>removable<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>ro<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>size<span class="o">}==</span><span class="s2">&quot;6290941&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>alignmentoffset<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>capability<span class="o">}==</span><span class="s2">&quot;10&quot;</span>
+</span><span class='line'>ATTR<span class="o">{</span>stat<span class="o">}==</span><span class="s2">&quot;    6521        0     7172     5870        1        0     1        0        0       70     5870&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Not much unique stuff there. The only thing that looks unique is <code>ATTR{size}=="6290941"</code>. Let&rsquo;s take that.</p>
+
+<p><strong>udev rule</strong></p>
+
+<ul>
+<li><p>Go to <code>etc/udev/rules.d</code></p></li>
+<li><p>Create a new file <code>85-myrules.rules</code></p></li>
+<li><p>Add the following line (adapted to your needs) 
+<code>sh
+ACTION=="add", KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", ATTR{size}=="6290941", RUN+="/usr/bin/touch /home/your-user-name-here/testcrypt.txt"
+</code></p></li>
+<li><p>Some notes:</p>
+
+<ul>
+<li><p><code>==</code> corresponds to a &ldquo;check&rdquo; (ie check if kernel equals dm-.., check if subsystem equals block, check if attribute-size equals 6290941)</p></li>
+<li><p><code>=</code>  corresponds to an assignment</p></li>
+<li><p><code>+=</code> corresponds to an assignment</p></li>
+</ul>
+</li>
+</ul>
+
+
+<p><strong>Test</strong></p>
+
+<ul>
+<li><p>Unmount your TrueCrypt volume</p></li>
+<li><p>Reload udev: <code>sudo reload udev</code></p></li>
+<li><p>Mount your TrueCrypt volume</p></li>
+<li><p>Check your home directory: It should now contain a file testcrypt.txt</p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

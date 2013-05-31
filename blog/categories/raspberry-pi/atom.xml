@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Raspberry Pi | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/raspberry-pi/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-05-31T13:51:41+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setting up a network printer using Raspberry Pi]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/"/>
+    <updated>2013-05-30T08:30:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi</id>
+    <content type="html"><![CDATA[<p><a href="http://www.lynsayshepherd.com/blog/?p=1340">This post by Lynsay</a> describes in detail how to convert a non-network printer into a network printer.</p>
+
+<p>You will have to install CUPS and SAMBA on your Raspberry Pi.</p>
+
+<p>Once your done you can access the printer from any OS (windows, linux, mac) within your network.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RPi/XBMC: Keeping content in sync]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/"/>
+    <updated>2013-05-25T19:24:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync</id>
+    <content type="html"><![CDATA[<p>If you have multiple <a href="http://www.raspberrypi.org/">Rasperry Pi</a>/<a href="http://xbmc.org/">XBMC</a> clients and want to</p>
+
+<ul>
+<li>keep your &ldquo;history&rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume)</li>
+<li>do not want to individually update every RPi/XBMC client if the content of your data storage changes</li>
+</ul>
+
+
+<p>then this post might be for you.</p>
+
+<p><a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL">The XBMC Wiki decribes this in detail</a>.
+This post just describes an actual implementation using Raspberry Pi clients and server.</p>
+
+<p>To do this you will need a MySQL database on a machine in your network which is always accessible from your Raspberry Pi/XBMC clients (called <code>RPI-Client</code> from now on).
+Since I didn&rsquo;t have a machine like this in my network I decided to buy another RPi for this purpose (referred to as <code>RPi-Server</code> from now on).</p>
+
+<p><strong>The content of the MySQL database only contains metadata for each entry, not the actual data</strong> (information like (a) the file path and (b) the last timestamp within the movie you were watching).</p>
+
+<p>Here is a diagram showing my network setup for two Rasperry Pi clients running XBMC:</p>
+
+<p><code>sh network
++---+
+|   |   |---------------------------------|
+|   |---| RPi-Client-1 (XBMC living room) |
+|   |   |---------------------------------|
+|   |
+| L |   |------------------------------|
+| A |---| RPi-Client-2 (XBMC bed room) |
+| N |   |------------------------------|
+|   |
+|   |   |-----------------------|
+|   |---| RPi-Server (Raspbian) |
+|   |   |-----------------------|
+|   |
+|   |   |-----|
+|   |---| NAS |
+|   |   |-----|
++---+
+</code></p>
+
+<ul>
+<li>The clients <code>RPi-Client-X</code> are default <a href="http://openelec.tv/">OpenELEC</a> installations.</li>
+<li>The server <code>RPi-Server</code> is a default <a href="http://www.raspbian.org/">Raspbian</a> installation.</li>
+</ul>
+
+
+<h2>RPi-Server Setup</h2>
+
+<p>The <code>RPi-Server</code> has to provide a MySQL database which can be accessed from each <code>RPi-Client-X</code>.
+Just follow the <a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL/Setting_up_MySQL">simple setup instructions on the XBMC-Wiki</a>.</p>
+
+<p>This is how you can check the status of your MySQL server:</p>
+
+<p><code>
+rpi-server$ sudo /etc/init.d/mysql status
+</code></p>
+
+<h2>RPi-Client Setup</h2>
+
+<p>Each <code>RPi-Client-X</code> needs to be configured to use the <code>RPi-Server</code> database.</p>
+
+<p><code>RPi-Server: 192.168.179.36</code></p>
+
+<p>``` xml advancedsettings.xml
+<advancedsettings>
+  <videodatabase></p>
+
+<pre><code>    &lt;type&gt;mysql&lt;/type&gt;
+    &lt;host&gt;192.168.179.36&lt;/host&gt;
+    &lt;port&gt;3306&lt;/port&gt;
+    &lt;user&gt;xbmc&lt;/user&gt;
+    &lt;pass&gt;xbmc&lt;/pass&gt;
+</code></pre>
+
+<p>  </videodatabase>
+  <musicdatabase></p>
+
+<pre><code>    &lt;type&gt;mysql&lt;/type&gt;
+    &lt;host&gt;192.168.179.36&lt;/host&gt;
+    &lt;port&gt;3306&lt;/port&gt;
+    &lt;user&gt;xbmc&lt;/user&gt;
+    &lt;pass&gt;xbmc&lt;/pass&gt;
+</code></pre>
+
+<p>  </musicdatabase>
+</advancedsettings>
+```</p>
+
+<p>Note:
+The location of the file <code>advancedsettings.xml</code> might very depending on your XBMC installation.
+For OpenELEC the file is located at <code>/storage/.xbmc/userdata/advancedsettings.xml</code>.</p>
+
+<h2>XBMC Library Update (optional)</h2>
+
+<p>Once the above setup works you can install the <a href="http://wiki.xbmc.org/index.php?title=Add-on:XBMC_Library_Auto_Update">XBMC Addon:Library Auto Update</a>.
+This plugin provides a GUI to setup a cron job to sync the content your <code>RPi-Client-X</code> has acces to (i.e. your NAS) with your MySQL database.
+Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
+
+<h2>MySQL Backup (optional)</h2>
+
+<p>A bit overkill, but I also backup the MySQL Database from the <code>RPi-Server</code> to my NAS using <a href="http://sourceforge.net/projects/automysqlbackup/">automysqlbackup</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mapping missing context menu in OpenELEC with Remote Control HAMA MCE]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/"/>
+    <updated>2013-05-24T21:27:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce</id>
+    <content type="html"><![CDATA[<p><img class="right" src="/images/posts/Hama_mce_remote.jpg" width="150" height="150" title="&lsquo;Remote control HAMA MCE&rsquo; &lsquo;Remote control HAMA MCE&rsquo;" >
+The IR remote control <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> works out of the box with <a href="http://xbmc.org">XBMC</a>. Except that XBMC&rsquo;s context menu is not mapped to any key.</p>
+
+<p>An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent <a href="https://play.google.com/store/apps/details?id=org.leetzone.android.yatsewidgetfree&amp;hl=en">Yatse app</a>.</p>
+
+<h2>Setup</h2>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Raspberry_Pi">Raspberry Pi</a> with <a href="http://www.openelec.tv/">OpenELEC</a></li>
+<li>Remote control: <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> (~20EUR)</li>
+</ul>
+
+
+<h2>Problem</h2>
+
+<p>Remote control does not have a key which is mapped to the context menu.</p>
+
+<h2>For the impatient</h2>
+
+<ul>
+<li>Login to your Raspberry Pi with SSH</li>
+<li>Create file <code>/storage/.xbmc/userdata/Lircmap.xml</code>.</li>
+<li>Add following content:
+<code>xml /storage/.xbmc/userdata/Lircmap.xml
+    &lt;lircmap&gt;
+        &lt;remote device="devinput"&gt;
+            &lt;title&gt;KEY_INFO&lt;/title&gt;
+        &lt;/remote&gt;
+    &lt;/lircmap&gt;
+</code></li>
+<li>Restart Raspberry Pi</li>
+</ul>
+
+
+<h2>Solution</h2>
+
+<h3>File locations</h3>
+
+<ul>
+<li>OpenELEC’s system location for keymap related configs are located here: <code>/usr/share/xbmc/system/</code> (I found this information in the <a href="http://openelec.tv/forum/103-infared-remotes/37369-why-is-the-lircmap-xml-in-read-only-mode#37369">openelec forum</a>)</li>
+<li>System default keymaps folder: <code>/usr/share/xbmc/system/keymaps/</code></li>
+<li>System default Lircmap.xml: <code>/usr/share/xbmc/system/Lircmap.xml</code></li>
+<li>Root user’s keymaps folder (empty by default): <code>/storage/.xbmc/userdata/keymaps/</code></li>
+<li>Root user’s Lircmap.xml does not exist by default. It has to be created: <code>/storage/.xbmc/userdata/Lircmap.xml</code></li>
+</ul>
+
+
+<h3>Workflow</h3>
+
+<h4>Get device name and name of desired button on remote control (‘irw’)</h4>
+
+<ul>
+<li>Adapted from <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">Guide To Test a Remote and Remap Keys</a></li>
+<li>Login via SSH</li>
+<li>Type command <code>irw</code></li>
+<li>Press the button on remote control where you would like to map the context menu (I pressed the button with the ‘right mouse click’ symbol). This will output something like:
+<code>sh
+root# irw
+17b 0 KEY_INFO devinput
+17b 0 KEY_INFO_UP devinput
+</code>
+<code>KEY_INFO</code> is the <strong>key name</strong>, <code>devinput</code> is the <strong>device name</strong>.</li>
+</ul>
+
+
+<p>The next sentence in the <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">guide</a> was not clear to me (<em>userdata SMB share</em> is <code>/usr/share/xbmc/system/</code>…):</p>
+
+<blockquote><p>Make sure you have a proper remote.xml in your keymaps folder which is inside your userdata SMB share (or located at /storage/.xbmc/userdata/keymaps/remote.xml)</p></blockquote>
+
+<p>With OpenELEC the location of <em>userdata SMB share</em> is <code>/usr/share/xbmc/system/Lircmap.xml</code>.</p>
+
+<h4>Get function name for context menu</h4>
+
+<p>The function name can be read from <code>/usr/share/xbmc/system/Lircmap.xml</code>. Search for <code>ContextMenu</code>. This should look like:
+<code>xml /usr/share/xbmc/system/Lircmap.xml
+...
+&lt;title&gt;ContextMenu&lt;/title&gt;
+...
+</code>
+The function name for context menu is <code>title</code>.</p>
+
+<h4>Create customized Lircmap.xml</h4>
+
+<p>Create <code>/storage/.xbmc/userdata/Lircmap.xml</code>:
+<code>sh
+$ nano /storage/.xbmc/userdata/Lircmap.xml
+</code>
+and add the following content (adapt to your needs):
+``` xml /storage/.xbmc/userdata/Lircmap.xml
+<lircmap></p>
+
+<pre><code>&lt;remote device=”devinput”&gt;
+    &lt;title&gt;KEY_INFO&lt;/title&gt;
+&lt;/remote&gt;
+</code></pre>
+
+<p></lircmap>
+```</p>
+
+<p>That’s it. Restart Raspberry Pi and the context menu should now work.</p>
+]]></content>
+  </entry>
+  
+</feed>
