@@ -111,49 +111,51 @@ java -jar "$appName"-1.0-SNAPSHOT.jar
 Here is the file `sample-pom.xml`:
 
 ``` xml
-  4.0.0
-  org.foo
-  my-app
-  jar
-  1.0-SNAPSHOT
-  my-app
-  http://maven.apache.org
-  
-
-  
-    org.apache.maven.plugins
-    maven-compiler-plugin
-  
-  
-    org.apache.maven.plugins
-    maven-eclipse-plugin
-  
-  
-    org.apache.maven.plugins
-    maven-jar-plugin
-    
-      
-        
-          true
-          org.foo.App
-        
-      
-    
-  
-  
-    org.apache.maven.plugins
-    maven-surefire-plugin
-  
-
-
-  
-    
-      junit
-      junit
-      3.8.1
-      test
-    
-  
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.foo</groupId>
+  <artifactId>my-app</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>my-app</name>
+  <url>http://maven.apache.org</url>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>org.foo.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
 ```
 

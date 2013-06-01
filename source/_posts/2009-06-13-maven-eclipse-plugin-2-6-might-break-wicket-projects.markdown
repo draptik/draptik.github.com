@@ -20,15 +20,19 @@ In short: If your `pom.xml` file contains
 
 
 ``` xml
-	org.apache.maven.plugins
-	maven-eclipse-plugin
-	2.6
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-eclipse-plugin</artifactId>
+    <version>2.6</version>
+</plugin>
 ```
 
 replace it with this
 
 ``` xml
-	org.apache.maven.plugins
-	maven-eclipse-plugin
-	2.5.1
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-eclipse-plugin</artifactId>
+    <version>2.5.1</version>
+</plugin>
 ```
