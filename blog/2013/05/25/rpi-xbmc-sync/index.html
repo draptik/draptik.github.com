@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RPi/XBMC: Keeping content in sync - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="If you have multiple Rasperry Pi/XBMC clients and want to keep your &ldquo;history&rdquo; in sync (watch a movie in room1, stop, start the same movie &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RPi/XBMC: Keeping Content in Sync</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T19:24:00+02:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>If you have multiple <a href="http://www.raspberrypi.org/">Rasperry Pi</a>/<a href="http://xbmc.org/">XBMC</a> clients and want to</p>
+
+<ul>
+<li>keep your &ldquo;history&rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume)</li>
+<li>do not want to individually update every RPi/XBMC client if the content of your data storage changes</li>
+</ul>
+
+
+<p>then this post might be for you.</p>
+
+<p><a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL">The XBMC Wiki decribes this in detail</a>.
+This post just describes an actual implementation using Raspberry Pi clients and server.</p>
+
+<p>To do this you will need a MySQL database on a machine in your network which is always accessible from your Raspberry Pi/XBMC clients (called <code>RPI-Client</code> from now on).
+Since I didn&rsquo;t have a machine like this in my network I decided to buy another RPi for this purpose (referred to as <code>RPi-Server</code> from now on).</p>
+
+<p><strong>The content of the MySQL database only contains metadata for each entry, not the actual data</strong> (information like (a) the file path and (b) the last timestamp within the movie you were watching).</p>
+
+<p>Here is a diagram showing my network setup for two Rasperry Pi clients running XBMC:</p>
+
+<figure class='code'><figcaption><span>network</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>+---+
+</span><span class='line'>|   |   |---------------------------------|
+</span><span class='line'>|   |---| RPi-Client-1 <span class="o">(</span>XBMC living room<span class="o">)</span> |
+</span><span class='line'>|   |   |---------------------------------|
+</span><span class='line'>|   |
+</span><span class='line'>| L |   |------------------------------|
+</span><span class='line'>| A |---| RPi-Client-2 <span class="o">(</span>XBMC bed room<span class="o">)</span> |
+</span><span class='line'>| N |   |------------------------------|
+</span><span class='line'>|   |
+</span><span class='line'>|   |   |-----------------------|
+</span><span class='line'>|   |---| RPi-Server <span class="o">(</span>Raspbian<span class="o">)</span> |
+</span><span class='line'>|   |   |-----------------------|
+</span><span class='line'>|   |
+</span><span class='line'>|   |   |-----|
+</span><span class='line'>|   |---| NAS |
+</span><span class='line'>|   |   |-----|
+</span><span class='line'>+---+
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The clients <code>RPi-Client-X</code> are default <a href="http://openelec.tv/">OpenELEC</a> installations.</li>
+<li>The server <code>RPi-Server</code> is a default <a href="http://www.raspbian.org/">Raspbian</a> installation.</li>
+</ul>
+
+
+<h2>RPi-Server Setup</h2>
+
+<p>The <code>RPi-Server</code> has to provide a MySQL database which can be accessed from each <code>RPi-Client-X</code>.
+Just follow the <a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL/Setting_up_MySQL">simple setup instructions on the XBMC-Wiki</a>.</p>
+
+<p>This is how you can check the status of your MySQL server:</p>
+
+<p><code>
+rpi-server$ sudo /etc/init.d/mysql status
+</code></p>
+
+<h2>RPi-Client Setup</h2>
+
+<p>Each <code>RPi-Client-X</code> needs to be configured to use the <code>RPi-Server</code> database.</p>
+
+<p><code>RPi-Server: 192.168.179.36</code></p>
+
+<figure class='code'><figcaption><span>advancedsettings.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;advancedsettings&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;videodatabase&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;type&gt;</span>mysql<span class="nt">&lt;/type&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;host&gt;</span>192.168.179.36<span class="nt">&lt;/host&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;port&gt;</span>3306<span class="nt">&lt;/port&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;user&gt;</span>xbmc<span class="nt">&lt;/user&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;pass&gt;</span>xbmc<span class="nt">&lt;/pass&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/videodatabase&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;musicdatabase&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;type&gt;</span>mysql<span class="nt">&lt;/type&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;host&gt;</span>192.168.179.36<span class="nt">&lt;/host&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;port&gt;</span>3306<span class="nt">&lt;/port&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;user&gt;</span>xbmc<span class="nt">&lt;/user&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;pass&gt;</span>xbmc<span class="nt">&lt;/pass&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/musicdatabase&gt;</span>
+</span><span class='line'><span class="nt">&lt;/advancedsettings&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note:
+The location of the file <code>advancedsettings.xml</code> might very depending on your XBMC installation.
+For OpenELEC the file is located at <code>/storage/.xbmc/userdata/advancedsettings.xml</code>.</p>
+
+<h2>XBMC Library Update (optional)</h2>
+
+<p>Once the above setup works you can install the <a href="http://wiki.xbmc.org/index.php?title=Add-on:XBMC_Library_Auto_Update">XBMC Addon:Library Auto Update</a>.
+This plugin provides a GUI to setup a cron job to sync the content your <code>RPi-Client-X</code> has acces to (i.e. your NAS) with your MySQL database.
+Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
+
+<h2>MySQL Backup (optional)</h2>
+
+<p>A bit overkill, but I also backup the MySQL Database from the <code>RPi-Server</code> to my NAS using <a href="http://sourceforge.net/projects/automysqlbackup/">automysqlbackup</a>.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-25T19:24:00+02:00" pubdate data-updated="true">May 25<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/raspberry-pi/'>Raspberry Pi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/" title="Previous Post: Mapping missing context menu in OpenELEC with Remote Control HAMA MCE">&laquo; Mapping missing context menu in OpenELEC with Remote Control HAMA MCE</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/" title="Next Post: Setting up a network printer using Raspberry Pi">Setting up a network printer using Raspberry Pi &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/';
+        var disqus_url = 'http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

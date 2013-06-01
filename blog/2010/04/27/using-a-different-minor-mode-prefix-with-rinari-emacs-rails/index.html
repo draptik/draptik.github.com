@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using a different minor-mode-prefix with Rinari (Emacs Rails) - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Rinari is a Ruby on Rails Minor Mode for GNU/Emacs. Problem: Most key mappings / keyboard shortcuts rely on the hard coded strings ; and ' (I.e. C-; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Using a Different Minor-mode-prefix With Rinari (Emacs Rails)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-27T22:40:27+02:00" pubdate data-updated="true">Apr 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://rinari.rubyforge.org/">Rinari</a> is a Ruby on Rails Minor Mode for GNU/Emacs.</p>
+
+<p><strong>Problem:</strong> Most key mappings / keyboard shortcuts rely on the hard coded strings <code>;</code> and <code>'</code> (I.e. <code>C-; f c</code> &ndash;> <code>rinari-find-controller</code>). These prefixes are difficult to access on a German keyboard because they require the shift modifier.</p>
+
+<p><strong>Solution:</strong> The following code adds a comma to the list of rinari-prefix strings. Add it to your GNU/Emacs configuration file (i.e. <code>~/.emacs</code>):</p>
+
+<figure class='code'><figcaption><span>~/.emacs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;~/your-path-to-rinari-source-code/rinari&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="err">﻿</span><span class="c1">;; This patch must appear before the line &quot;(require &#39;rinari)&quot;!</span>
+</span><span class='line'><span class="p">(</span><span class="nf">defvar</span> <span class="nv">rinari-minor-mode-prefixes</span>
+</span><span class='line'><span class="p">(</span><span class="nb">list </span><span class="s">&quot;;&quot;</span> <span class="s">&quot;&#39;&quot;</span> <span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="c1">;; CHANGE Added comma to prefix list</span>
+</span><span class='line'>     <span class="s">&quot;List of characters, each of which will be bound (with C-c) as a rinari-minor-mode keymap prefix.&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;rinari</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Result: </strong>We can now access the command <code>rinari-find-controller</code> with the key sequence <code>C-c , f c</code>.</p>
+
+<p><strong>Side note:</strong> I&rsquo;m all ears for more Emacs-Lispy solutions to this problem. ;&ndash;)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-27T22:40:27+02:00" pubdate data-updated="true">Apr 27<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/programming/'>programming</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/" title="Previous Post: Using basic Emacs keybindings in Gnome-Terminal">&laquo; Using basic Emacs keybindings in Gnome-Terminal</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/06/25/praise-for-railstutorial-org/" title="Next Post: Praise for Railstutorial.org">Praise for Railstutorial.org &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/';
+        var disqus_url = 'http://draptik.github.io/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-06-01T09:37:58+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ReorderList demo for AjaxControlToolkit]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/"/>
+    <updated>2013-05-30T15:55:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit</id>
+    <content type="html"><![CDATA[<p><a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/Default.aspx">AjaxControlToolkit&rsquo;s</a>
+<a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/ReorderList/ReorderList.aspx">ReorderList</a>
+provides drag and drop functionality within a list.</p>
+
+<p>``` html ReorderListDemo.aspx <a href="https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx">https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx</a> Source Article</p>
+
+<p><div class="CssReorderList"></p>
+
+<pre><code>&lt;!-- ClientMode="AutoID" is required for certain versions of AjaxControlToolkit  --&gt;
+&lt;ajaxToolkit:ReorderList ID="MyReorderList" runat="server"
+                         DataKeyField="MyId"
+                         SortOrderField="MyPosition"
+                         PostBackOnReorder="False"
+                         ClientIDMode="AutoID"
+                         DragHandleAlignment="Left" 
+                         ItemInsertLocation="Beginning"
+                         AllowReorder="true"
+    &gt;
+    &lt;ItemTemplate&gt;
+        &lt;div style="background-color: yellow;" class="CssItemArea"&gt;
+            &lt;asp:HiddenField runat="server" ID="hdfMyId" 
+                Value="&lt;%# ((DummyViewModel)Container.DataItem).MyId %&gt;" /&gt;
+            &lt;asp:Label runat="server" ID="lblName" 
+                Text="&lt;%# ((DummyViewModel)Container.DataItem).MyName %&gt;"/&gt;
+            &lt;asp:Label runat="server" ID="lblPosition" 
+                Text="&lt;%# ((DummyViewModel)Container.DataItem).MyPosition %&gt;"/&gt;
+        &lt;/div&gt;
+    &lt;/ItemTemplate&gt;
+    &lt;DragHandleTemplate&gt;
+        &lt;div class="CssDragHandle"&gt;&lt;strong&gt;DRAG ME&lt;/strong&gt;&lt;/div&gt;
+    &lt;/DragHandleTemplate&gt;
+&lt;/ajaxToolkit:ReorderList&gt;
+</code></pre>
+
+<p><div>  <br/>
+```
+I&rsquo;ve placed a working example project on <a href="https://github.com/draptik/actdemos">github</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[IT book recommendations]]></title>
+    <link href="http://draptik.github.io/blog/2012/12/15/it-book-recommendations/"/>
+    <updated>2012-12-15T01:17:20+01:00</updated>
+    <id>http://draptik.github.io/blog/2012/12/15/it-book-recommendations</id>
+    <content type="html"><![CDATA[<p>I now have a list of IT book recommendations at <a href="https://github.com/draptik/reader/blob/master/README.md">GitHub</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Impressions during developing my first application with Mono and Gtk# (GtkSharp)]]></title>
+    <link href="http://draptik.github.io/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/"/>
+    <updated>2012-09-30T02:57:56+02:00</updated>
+    <id>http://draptik.github.io/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp</id>
+    <content type="html"><![CDATA[<h2>Why Mono? Why Gtk?</h2>
+
+<p>Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.</p>
+
+<p>That answers the first question: Mono gives me C# and the .NET stack.</p>
+
+<p>On the other hand I have been using linux as a desktop environment on my home machine for over a decade. I am comfortable with using linux as my primary OS.</p>
+
+<p>That answers the second question: Mono gives me access to Gtk, the graphics library of gnome, which is the default &ldquo;desktop&rdquo; in many linux distributions.</p>
+
+<h2>The App</h2>
+
+<p>I want to synchronize different Git repositories semi-automatically using a Gui.</p>
+
+<ul>
+<li><p>Default behaviour of the automation can be loaded via a Json file.</p></li>
+<li><p>Each entry describes a repository set to be synchronized.</p></li>
+</ul>
+
+
+<p>The app is located at <a href="https://github.com/draptik/RepoSync">https://github.com/draptik/RepoSync</a><a href="https://github.com/draptik/RepoSync">
+</a></p>
+
+<p>I also published a small demo application for gtk# and treeview: <a href="https://github.com/draptik/GtkSharpTreeViewDemo">https://github.com/draptik/GtkSharpTreeViewDemo</a></p>
+
+<h2>Impressions</h2>
+
+<h5>Monodevelop vs Visual Studio</h5>
+
+<p>I&rsquo;ll keep it brief: If you&rsquo;re used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
+
+<h5>Gtk# API</h5>
+
+<p>The Gtk# API is not your typical .NET library. You will very soon notice that the origins are C/C++. This takes some getting used to if you have a .NET background.</p>
+
+<p>Typically there are no return values. Instead Gtk# methods very often use the &ldquo;out&rdquo; keyword in .NET because that comes closer to the C++ implementation using pointers.</p>
+
+<p>Here is an example:</p>
+
+<p>``` c# Mono Gtk# Code
+bool someBool = false;
+if (listStore.GetIterFirst (out iter)) {</p>
+
+<pre><code>do {
+    someBool = (bool) listStore.GetValue (iter, 0);
+} while (someBool &amp;&amp; listStore.IterNext (ref iter));
+</code></pre>
+
+<p>}
+return someBool;
+```</p>
+
+<p><code>c# Pseudo-C# Code
+return listStore.ToList().Any(s =&gt; s.MyBoolProp);
+</code></p>
+
+<p>From the .NET side, I don&rsquo;t like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;&ndash;)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Converting a Mercurial repository to Git]]></title>
+    <link href="http://draptik.github.io/blog/2012/02/07/converting-a-mercurial-repository-to-git/"/>
+    <updated>2012-02-07T01:40:01+01:00</updated>
+    <id>http://draptik.github.io/blog/2012/02/07/converting-a-mercurial-repository-to-git</id>
+    <content type="html"><![CDATA[<p>Note to self:</p>
+
+<p>Converting Hg repos to git using hg-fast-export.</p>
+
+<p>Installation:</p>
+
+<p><code>
+$ sudo aptitude install hg-fast-export
+</code></p>
+
+<p>Usage:</p>
+
+<p>``` sh
+$ cd new_git_dir</p>
+
+<p>$ git init</p>
+
+<p>$ hg-fast-export -r &lt;hg-repo>
+```</p>
+
+<p>Works with:</p>
+
+<p>git version 1.7.5.4</p>
+
+<p>hg version 2.1</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Converting a Subversion repository to Git]]></title>
+    <link href="http://draptik.github.io/blog/2012/02/07/converting-a-subversion-repository-to-git/"/>
+    <updated>2012-02-07T00:10:21+01:00</updated>
+    <id>http://draptik.github.io/blog/2012/02/07/converting-a-subversion-repository-to-git</id>
+    <content type="html"><![CDATA[<p>Just discovered this:</p>
+
+<p><a href="http://john.albin.net/">John Albin</a> wrote an excellent article on how to convert a <a href="http://en.wikipedia.org/wiki/Apache_Subversion">subversion</a> repository to <a href="http://en.wikipedia.org/wiki/Git_(software">git</a>):</p>
+
+<p><a href="http://john.albin.net/git/convert-subversion-to-git">http://john.albin.net/git/convert-subversion-to-git</a></p>
+]]></content>
+  </entry>
+  
+</feed>

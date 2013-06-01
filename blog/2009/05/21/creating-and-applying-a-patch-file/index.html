@@ -1,0 +1,429 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Creating and applying a patch file - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="This is a simple example shell script demonstrating how to apply a patch file. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2009/05/21/creating-and-applying-a-patch-file">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Creating and Applying a Patch File</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-21T05:00:26+02:00" pubdate data-updated="true">May 21<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is a simple example shell script demonstrating how to apply a patch file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Description: Simple demo of creating and</span>
+</span><span class='line'><span class="c"># applying a patch file.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># Author: draptik</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## TODO: Make sure you don&#39;t have a directory by </span>
+</span><span class='line'><span class="c">## this name</span>
+</span><span class='line'><span class="nv">DEMODIR</span><span class="o">=</span><span class="s2">&quot;$HOME/tmp/diff-patch-demo-draptik&quot;</span>
+</span><span class='line'><span class="nv">ORIGDIR</span><span class="o">=</span><span class="s2">&quot;$DEMODIR/original-stuff&quot;</span>
+</span><span class='line'><span class="nv">APPLYDIR</span><span class="o">=</span><span class="s2">&quot;$DEMODIR/patch-usage&quot;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Cleanup before use</span>
+</span><span class='line'>rm -rf <span class="s2">&quot;$DEMODIR&quot;</span>
+</span><span class='line'>mkdir <span class="s2">&quot;$DEMODIR&quot;</span>
+</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$DEMODIR&quot;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Create directories</span>
+</span><span class='line'>mkdir <span class="nv">$ORIGDIR</span>
+</span><span class='line'>mkdir <span class="nv">$APPLYDIR</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Switch directory</span>
+</span><span class='line'><span class="nb">cd</span> <span class="nv">$ORIGDIR</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Create original file (the file you want to patch)</span>
+</span><span class='line'><span class="nv">ORIGCODE</span><span class="o">=</span><span class="s2">&quot;mycode.txt&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;This is the old content&quot;</span> &gt; <span class="nv">$ORIGCODE</span>
+</span><span class='line'><span class="c">## Create file with your changes</span>
+</span><span class='line'><span class="nv">NEWCODE</span><span class="o">=</span><span class="s2">&quot;mycode.new.txt&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;THIS IS THE NEW CONTENT&quot;</span> &gt; <span class="nv">$NEWCODE</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## ============================</span>
+</span><span class='line'><span class="c"># 1. CREATE A PATCH</span>
+</span><span class='line'><span class="c">## ============================</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Make a diff between the files and save the</span>
+</span><span class='line'><span class="c">## result to $PATCHFILE</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## You can use different diff options:</span>
+</span><span class='line'><span class="c">##     &quot;-u&quot; (unified)</span>
+</span><span class='line'><span class="c">##  OR</span>
+</span><span class='line'><span class="c">##     &quot;-c&quot; (context).</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## The &quot;-u&quot; option is specific to GNU.</span>
+</span><span class='line'><span class="c">## PDTODO: Write about different diff formats.</span>
+</span><span class='line'><span class="nv">PATCHFILE</span><span class="o">=</span><span class="s2">&quot;patch-mycode&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;***************************&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** YOU ARE NOW IN FOLDER: \&quot;$PWD\&quot;&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** DIFF BETWEEN\n***\t\&quot;$PWD/$ORIGCODE\&quot;\n*** AND\n***\t\&quot;$PWD/$NEWCODE\&quot;:&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;***************************&quot;</span>
+</span><span class='line'>diff -u <span class="nv">$ORIGCODE</span> <span class="nv">$NEWCODE</span> | tee <span class="nv">$PATCHFILE</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Switch directory</span>
+</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$DEMODIR&quot;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Copy the unpatched original file ($ORIGCODE) and </span>
+</span><span class='line'><span class="c">## the $PATCHFILE to different directory ($APPLYDIR).</span>
+</span><span class='line'>cp <span class="nv">$ORIGDIR</span>/<span class="nv">$ORIGCODE</span> <span class="nv">$APPLYDIR</span>
+</span><span class='line'>cp <span class="nv">$ORIGDIR</span>/<span class="nv">$PATCHFILE</span> <span class="nv">$APPLYDIR</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## ============================</span>
+</span><span class='line'><span class="c"># APPLY A PATCH</span>
+</span><span class='line'><span class="c">## ============================</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Apply the patch to a copy of the original file</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## The &quot;--backup&quot; option will create a file </span>
+</span><span class='line'><span class="c">## &quot;$ORIGCODE.orig&quot; as backup. </span>
+</span><span class='line'><span class="c">## You can drop this option.</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="nb">cd</span> <span class="nv">$APPLYDIR</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;***************************&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** YOU ARE NOW IN FOLDER: \&quot;$PWD\&quot; ...&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** NOW PATCHING WITH COMMAND \&quot;patch --backup -p0 &lt; $PATCHFILE\&quot;...&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;***************************&quot;</span>
+</span><span class='line'>patch --backup -p0 &lt; <span class="nv">$PATCHFILE</span>
+</span><span class='line'><span class="c">## patch -p0 &lt; $PATCHFILE</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">## Show that the file has been patched correctly:</span>
+</span><span class='line'><span class="nb">cd</span> ..
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;****************************&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** YOU ARE NOW IN FOLDER: \&quot;$PWD\&quot;&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;*** DIFF BETWEEN\n***\t\&quot;$ORIGDIR/$ORIGCODE\&quot;\n*** AND\n***\t\&quot;$APPLYDIR/$NEWCODE\&quot;:&quot;</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;****************************&quot;</span>
+</span><span class='line'>diff -u <span class="nv">$ORIGDIR</span>/<span class="nv">$ORIGCODE</span> <span class="nv">$APPLYDIR</span>/<span class="nv">$ORIGCODE</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-21T05:00:26+02:00" pubdate data-updated="true">May 21<span>st</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/04/29/from-804-lts-to-jaunty-jackalone-ubuntu-904/" title="Previous Post: From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software">&laquo; From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/" title="Next Post: Maven2 Heap Overflow in JUnit test cases: Howto increase memory">Maven2 Heap Overflow in JUnit test cases: Howto increase memory &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2009/05/21/creating-and-applying-a-patch-file/';
+        var disqus_url = 'http://draptik.github.io/blog/2009/05/21/creating-and-applying-a-patch-file/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

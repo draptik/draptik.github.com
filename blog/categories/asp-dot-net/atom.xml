@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: asp.net | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/asp-dot-net/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-06-01T09:37:58+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ReorderList demo for AjaxControlToolkit]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/"/>
+    <updated>2013-05-30T15:55:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit</id>
+    <content type="html"><![CDATA[<p><a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/Default.aspx">AjaxControlToolkit&rsquo;s</a>
+<a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/ReorderList/ReorderList.aspx">ReorderList</a>
+provides drag and drop functionality within a list.</p>
+
+<p>``` html ReorderListDemo.aspx <a href="https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx">https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx</a> Source Article</p>
+
+<p><div class="CssReorderList"></p>
+
+<pre><code>&lt;!-- ClientMode="AutoID" is required for certain versions of AjaxControlToolkit  --&gt;
+&lt;ajaxToolkit:ReorderList ID="MyReorderList" runat="server"
+                         DataKeyField="MyId"
+                         SortOrderField="MyPosition"
+                         PostBackOnReorder="False"
+                         ClientIDMode="AutoID"
+                         DragHandleAlignment="Left" 
+                         ItemInsertLocation="Beginning"
+                         AllowReorder="true"
+    &gt;
+    &lt;ItemTemplate&gt;
+        &lt;div style="background-color: yellow;" class="CssItemArea"&gt;
+            &lt;asp:HiddenField runat="server" ID="hdfMyId" 
+                Value="&lt;%# ((DummyViewModel)Container.DataItem).MyId %&gt;" /&gt;
+            &lt;asp:Label runat="server" ID="lblName" 
+                Text="&lt;%# ((DummyViewModel)Container.DataItem).MyName %&gt;"/&gt;
+            &lt;asp:Label runat="server" ID="lblPosition" 
+                Text="&lt;%# ((DummyViewModel)Container.DataItem).MyPosition %&gt;"/&gt;
+        &lt;/div&gt;
+    &lt;/ItemTemplate&gt;
+    &lt;DragHandleTemplate&gt;
+        &lt;div class="CssDragHandle"&gt;&lt;strong&gt;DRAG ME&lt;/strong&gt;&lt;/div&gt;
+    &lt;/DragHandleTemplate&gt;
+&lt;/ajaxToolkit:ReorderList&gt;
+</code></pre>
+
+<p><div>  <br/>
+```
+I&rsquo;ve placed a working example project on <a href="https://github.com/draptik/actdemos">github</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

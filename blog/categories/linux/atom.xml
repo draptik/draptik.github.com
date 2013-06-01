@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-06-01T09:37:58+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why I switched from Ubuntu to Arch Linux]]></title>
+    <link href="http://draptik.github.io/blog/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/"/>
+    <updated>2012-10-16T03:35:34+02:00</updated>
+    <id>http://draptik.github.io/blog/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux</id>
+    <content type="html"><![CDATA[<p>Ubuntu is a great GNU/Linux distribution. I have been using it since 2004, and except for one LTS (long term support) upgrade a couple years back everything was fine. That LTS upgrade a couple years back screwed up the X system, leaving me with the bash shell. Don&rsquo;t get me wrong: I enjoy dabling with my Linux system, but an LTS upgrade should be safe.</p>
+
+<p>Well, this was years ago.</p>
+
+<p>After upgrading from Ubuntu 11.10 to 12.04 the same thing happened again: No X system.</p>
+
+<p>I have a cheap Nvidia card with dual head setup (dual head means you can plug in 2 monitors). Worked fine with Ubuntu since 2009. So I upgraded to Ubuntu 12.04. And I&rsquo;m back to: No X system.</p>
+
+<p>I was not amused.</p>
+
+<p>It was not a hardware problem: The old OS (Ubuntu 11.10) worked fine. It was not the fault of Nvidia. I am talking about a video card for 20-50 bucks! Not one of those high-end video cards.</p>
+
+<p>Instead of switching to another deb or rpm based system I decided to switch to one of those &ldquo;rolling&rdquo; distributions like Gentoo or Arch. I picked the later and have so far not regrated the decision.</p>
+
+<p>Arch Linux is my home production system of choice.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PS1 prompt]]></title>
+    <link href="http://draptik.github.io/blog/2012/08/20/ps1-prompt/"/>
+    <updated>2012-08-20T23:31:20+02:00</updated>
+    <id>http://draptik.github.io/blog/2012/08/20/ps1-prompt</id>
+    <content type="html"><![CDATA[<p>Here&rsquo;s my current PS1 prompt for bash with optional git support: <a href="https://gist.github.com/3324534">https://gist.github.com/3324534</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GNU/Emacs: Desktop Save with "Lazy Loading"]]></title>
+    <link href="http://draptik.github.io/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/"/>
+    <updated>2012-03-27T22:33:18+02:00</updated>
+    <id>http://draptik.github.io/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading</id>
+    <content type="html"><![CDATA[<p>When using <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html">desktop-save-mode</a> using <code>desktop-restore-eager</code> is a must:</p>
+
+<p>``` scheme
+(custom-set-variables</p>
+
+<pre><code>'(desktop-save-mode t)
+'(desktop-restore-eager 5))
+</code></pre>
+
+<p>```</p>
+
+<p><code>desktop-save-mode</code> will load your last session. Setting <code>desktop-restore-eager</code> to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Workaround for VirtualBox 4.0.8 regression bug]]></title>
+    <link href="http://draptik.github.io/blog/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/"/>
+    <updated>2011-05-25T22:35:29+02:00</updated>
+    <id>http://draptik.github.io/blog/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug</id>
+    <content type="html"><![CDATA[<p><del>The current version of Oracle&rsquo;s VirtualBox (4.0.8) has</del> Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</p>
+
+<p>Here is the summary of the workaround posted as <a href="http://www.virtualbox.org/ticket/8948">VirtualBox Ticket 8948</a>:</p>
+
+<ol>
+<li><p> Edit the settings file to allow the VM to start again (Replace control characters in line 315 with 4.0.8).</p></li>
+<li><p> Start the Windows guest</p></li>
+<li><p> Run <code>regedit</code></p></li>
+<li><p> Go to <code>HKLM\SOFTWARE\Oracle\VirtualBox Guest Additions</code></p></li>
+<li><p> Create a string key <code>VersionEx</code> (use exactly this spelling)</p></li>
+<li><p> Give it a reasonable value (ie 4.0.8)</p></li>
+<li><p> Shut down the VM.</p></li>
+<li><p> Repeat step 1</p></li>
+<li><p> Restart and shutdown windows guest again</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+
+<p>Edit: This bug has been fixed in version 4.0.10 (released 2011-06-27).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding Truecrypt to Ubuntu's Unity panel]]></title>
+    <link href="http://draptik.github.io/blog/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/"/>
+    <updated>2011-05-09T21:55:56+02:00</updated>
+    <id>http://draptik.github.io/blog/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel</id>
+    <content type="html"><![CDATA[<p>To add applications like Truecrypt to Ubuntu&rsquo;s Unity panel the application has to be &ldquo;white listed&rdquo;.</p>
+
+<ol>
+<li><p> Install dconf-editor (ie <code>sudo aptitude install dconf-editor</code>)</p></li>
+<li><p> Go to section desktop | unity | panel and add &lsquo;Truecrypt&rsquo; to the systray-whitelist variable</p></li>
+<li><p> Restart Unity (or log out and back in again)</p></li>
+</ol>
+
+
+<p>That&rsquo;s it. Found this solution <a href="http://askubuntu.com/questions/35076/how-do-i-whitelist-truecrypt-to-work-under-unity">here</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &ldquo;Jaunty Jackalone&rdquo; = JJ) was very smooth. It did NOT screw up the X-Server &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2009/04/29/from-804-lts-to-jaunty-jackalone-ubuntu-904">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-29T00:26:03+02:00" pubdate data-updated="true">Apr 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &ldquo;Jaunty Jackalone&rdquo; = JJ) was very smooth. It did NOT screw up the X-Server, SMB, Cups, NFS, SSH, USB, etc.  For me it was about a 3GB download.</p>
+
+<p>The first thing I noticed was that a nasty gdm-login-screen-resolution bug was fixed by upgrading from 8.04 to 8.10.</p>
+
+<p>Since each upgrade changes the default version of ones most used/favorite software, I will list those products I was concerned about most:</p>
+
+<p><strong>Sun Java </strong> (<a href="http://java.sun.com/">http://java.sun.com/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>OK</em>: JJ comes with the current Java JRE and SDK version (1.6_13)</li>
+</ul>
+
+
+<p><strong>Eclipse </strong>(<a href="http://www.eclipse.org/">http://www.eclipse.org/</a>)</p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with version 3.2 (2 years old). The current version is 3.4 (Ganymede). But since you can run Eclipse directly without compiling, this is no big deal.</li>
+</ul>
+
+
+<p><strong>GNU Emacs </strong><a href="http://www.gnu.org/software/emacs/">(http://www.gnu.org/software/emacs/)</a><strong>
+</strong></p>
+
+<ul>
+<li><p><strong><em>GNU Emacs snapshot</em></strong> (=bleeding edge/developer version): <em>OK</em>: installing emacs-snapshot-gtk gives a current developer version  (build from 2009-04-05)</p></li>
+<li><p><strong><em>Emacs stable</em></strong>: <em>Out-of-date</em>: The current Emacs version is 22.3. JJ has Emacs version 22.2, although Emacs 22.3 was released 2008/09.</p></li>
+</ul>
+
+
+<p><strong>AUCTeX </strong>(<a href="http://www.gnu.org/software/auctex/">http://www.gnu.org/software/auctex/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with AUCTeX version 11.84. Version 11.85 was released 2008/02. I&rsquo;ll have to install this manually.</li>
+</ul>
+
+
+<p><strong>R </strong> (<a href="http://www.r-project.org/">http://www.r-project.org/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>OK</em>: JJ has 2.9.0. The current version is 2.9.0.</li>
+</ul>
+
+
+<p><strong>TexLive</strong> (<a href="http://www.tug.org/texlive/">http://www.tug.org/texlive/</a>)</p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with texlive-2007&hellip; Just download the current texlive-2008 from the texlive homepage and install it beside the Ubuntu texlive version.</li>
+</ul>
+
+
+<p><strong>Skype-Plugin for Pidgin&rsquo;s Instant Messenger</strong></p>
+
+<ul>
+<li>I&rsquo;ve already written a <a href="http://draptik.wordpress.com/2009/04/09/pidgin-the-multi-plattform-multi-protocol-instant-messenger/">blog</a> on some of the nice Pidgin features. After upgrading to JJ and seeing that Pidgin is used for internal messaging within Ubuntu, I am even more convinced that this is currently THE multi-protocol multi-plattform instant messenger to go with. Get the skype-plugin from <a href="http://eion.robbmob.com/">http://eion.robbmob.com/</a> and install the Debian/Ubuntu skype4pidgin.deb file by executing &ldquo;sudo dpkg -i skype4pidgin.deb&rdquo;</li>
+</ul>
+
+
+<p><strong>GTKtalog </strong>(<a href="http://www.nongnu.org/gtktalog/">http://www.nongnu.org/gtktalog/</a>)<strong>
+</strong></p>
+
+<ul>
+<li>Not present in JJ&rsquo;s repositories. I&rsquo;m very sad about this, because to my knowledge this is the only software for managing a CD/DVD collection which does not require a database. Although its user interface (Tck/Tk) is not-so-stylish-up-to-date, it has many features which I have grown accostumed to and which are lacking even in current high-end Disk-Manager programs.</li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-29T00:26:03+02:00" pubdate data-updated="true">Apr 29<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/04/19/accessing-further-windows-partitions-with-portable-ubuntu/" title="Previous Post: Accessing further (Windows) Partitions with Portable Ubuntu">&laquo; Accessing further (Windows) Partitions with Portable Ubuntu</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/05/21/creating-and-applying-a-patch-file/" title="Next Post: Creating and applying a patch file">Creating and applying a patch file &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2013 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2009/04/29/from-804-lts-to-jaunty-jackalone-ubuntu-904/';
+        var disqus_url = 'http://draptik.github.io/blog/2009/04/29/from-804-lts-to-jaunty-jackalone-ubuntu-904/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
