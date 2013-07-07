@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Snippet for adding unknown files/dirs to Subversion (command line) - draptik</title>
+  <title>draptik</title>
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="1
-svn add `svn st | grep "^?" | awk '{print $2}'` ">
+  <meta name="description" content="After years of ignorance I discovered the wonderful GNU screen program on my GNU/Linux system. Basically screen is a window manager for terminals or &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://draptik.github.io/blog/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line">
+  <link rel="canonical" href="http://draptik.github.io/blog/page/6">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
@@ -65,12 +64,15 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Snippet for Adding Unknown Files/dirs to Subversion (Command Line)</h1>
+      <h1 class="entry-title"><a href="/blog/2009/04/09/fixing-cygwins-gnu-screen-program/">Fixing Cygwin&#8217;s GNU Screen Program</a></h1>
     
     
       <p class="meta">
@@ -86,76 +88,59 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
   
 
 
-<time datetime="2011-03-29T21:58:31+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2011</time>
+<time datetime="2009-04-09T14:57:47+02:00" pubdate data-updated="true">Apr 9<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn add `svn st | grep "^?" | awk '{print $2}'`</span></code></pre></td></tr></table></div></figure>
+  <div class="entry-content"><p>After years of ignorance I discovered the wonderful GNU screen program on my GNU/Linux system. Basically screen is a window manager for terminals or terminal sessions. But after installing the Cygwin package on my Windows box I ended up with this error message after trying to invoke screen:</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C:\&gt;screen
+</span><span class='line'>Cannot find terminfo entry for 'cygwin'.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is unlikely to help others, but I&rsquo;ll keep it as a reference&hellip; The culprit was a messed up installation. I had the following directories:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/usr/share/tabset       # &lt;- this folder was empty
+</span><span class='line'>/usr/share/tabset(2)
+</span><span class='line'>/usr/share/terminfo     # &lt;- this folder was empty
+</span><span class='line'>/usr/share/terminfo(2)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I just had to delete the empty directories and rename tabset(2) and terminfo(2)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rmdir /usr/share/tabset /usr/share/terminfo
+</span><span class='line'>$ mv /usr/share/tabset\(2\) /usr/share/tabset
+</span><span class='line'>$ mv /usr/share/terminfo\(2\) /usr/share/terminfo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and now screen works just fine with Cygwin.</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2011-03-29T21:58:31+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2011</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/programming/'>programming</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/" title="Previous Post: Installing SQL Server Management Studio 2008 Express after installing Visual Studio 2010">&laquo; Installing SQL Server Management Studio 2008 Express after installing Visual Studio 2010</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2011/04/12/nhibernate-simple-setup/" title="Next Post: NHibernate Simple Setup">NHibernate Simple Setup &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -188,7 +173,6 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -202,10 +186,7 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
       var disqus_shortname = 'draptik';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://draptik.github.io/blog/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/';
-        var disqus_url = 'http://draptik.github.io/blog/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

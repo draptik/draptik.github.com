@@ -9,9 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="AjaxControlToolkit&rsquo;s
-ReorderList
-provides drag and drop functionality within a list. ReorderListDemo.aspxSource Article1
+  <meta name="description" content="Just a note to self: Get a list of all linux environment variables and their values using the export command. Here is an example: 1
 2
 3
 4
@@ -19,9 +17,7 @@ provides drag and drop functionality within a list. ReorderListDemo.aspxSource A
 6
 7
 8
-9
-10
-11 &hellip;">
+9 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +74,81 @@ provides drag and drop functionality within a list. ReorderListDemo.aspxSource A
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/05/listing-environment-variables-linux/">Listing Environment Variables (Linux)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T23:33:00+02:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just a note to self: Get a list of all linux environment variables and their values using the <code>export</code> command.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pi@rpidev ~ <span class="nv">$ </span><span class="nb">export</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">HOME</span><span class="o">=</span><span class="s2">&quot;/home/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">&quot;/opt/java/jdk1.7.0_25&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_GB.UTF-8&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LOGNAME</span><span class="o">=</span><span class="s2">&quot;pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LS_COLORS</span><span class="o">=</span><span class="s2">&quot;rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">MAIL</span><span class="o">=</span><span class="s2">&quot;/var/mail/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">OLDPWD</span><span class="o">=</span><span class="s2">&quot;/home/pi/myinstall_notes&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/opt/java/jdk1.7.0_25/bin&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">PWD</span><span class="o">=</span><span class="s2">&quot;/home/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SHELL</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SHLVL</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_CLIENT</span><span class="o">=</span><span class="s2">&quot;192.168.179.32 39295 22&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_CONNECTION</span><span class="o">=</span><span class="s2">&quot;192.168.179.32 39295 192.168.179.148 22&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_TTY</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">TERM</span><span class="o">=</span><span class="s2">&quot;xterm&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">USER</span><span class="o">=</span><span class="s2">&quot;pi&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -824,53 +895,6 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/">GNU/Emacs: Desktop Save With &#8220;Lazy Loading&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-27T22:33:18+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When using <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html">desktop-save-mode</a> using <code>desktop-restore-eager</code> is a must:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">custom-set-variables</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-save-mode</span> <span class="nv">t</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-restore-eager</span> <span class="mi">5</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>desktop-save-mode</code> will load your last session. Setting <code>desktop-restore-eager</code> to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -886,6 +910,10 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/05/listing-environment-variables-linux/">Listing Environment Variables (Linux)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
       </li>
     
@@ -899,10 +927,6 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
     
       <li class="post">
         <a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a>
       </li>
     
   </ul>
