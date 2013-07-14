@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jersey | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/jersey/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-07-14T15:57:34+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS example using a Java RESTful web service]]></title>
+    <link href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/"/>
+    <updated>2013-07-13T20:12:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service</id>
+    <content type="html"><![CDATA[<p><a href="http://angularjs.org/">AngularJS</a> is the current MVV-Whatever JavaScript framework by Google.
+Among other things, it provides bidirectional data binding.</p>
+
+<p>Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:</p>
+
+<ol>
+<li><p>Java backend provides a RESTful web service.</p></li>
+<li><p>AngularJS consumes the web service.</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+
+<h1>Project structure</h1>
+
+<p>I intentionally put the backend and frontend code in the same project to simplify the example. In a real project you probably want to have seperate projects for front- and backend.</p>
+
+<p><code>sh
++---------------------------------------------------+
+| demo project                                      |
+|                                                   |
+| +----------------+              +---------------+ |
+| | backend (Java) | &lt; -(REST)- &gt; | frontend (JS) | |
+| +----------------+              +---------------+ |
+|                                                   |
++---------------------------------------------------+
+</code></p>
+
+<p>Since the backend is Java based, I used a Maven default structure (<code>maven-archetype-site-simple</code>):</p>
+
+<p>``` sh project structure
+├── _documentation
+│   └── readme.txt
+├── ngdemo.iml
+├── pom.xml
+└── src</p>
+
+<pre><code>└── main
+    ├── java
+    │   └── ngdemo
+    │       ├── domain
+    │       │   └── User.java
+    │       ├── rest
+    │       │   └── UserRestService.java
+    │       └── service
+    │           └── UserService.java
+    └── webapp
+        ├── css
+        │   └── app.css
+        ├── img
+        ├── index-async.html
+        ├── index.html
+        ├── index.jsp
+        ├── js
+        │   ├── app.js
+        │   ├── controllers.js
+        │   ├── directives.js
+        │   ├── filters.js
+        │   └── services.js
+        ├── lib
+        │   └── angular
+        │       ├── angular-cookies.js
+        │       ├── angular-cookies.min.js
+        │       ├── angular.js
+        │       ├── angular-loader.js
+        │       ├── angular-loader.min.js
+        │       ├── angular.min.js
+        │       ├── angular-resource.js
+        │       ├── angular-resource.min.js
+        │       ├── angular-sanitize.js
+        │       ├── angular-sanitize.min.js
+        │       └── version.txt
+        ├── partials
+        │   └── partial1.html
+        └── WEB-INF
+            └── web.xml
+</code></pre>
+
+<p>```</p>
+
+<p><code>src/main/java</code> is the backend.</p>
+
+<p><code>src/main/webapp/js</code> is the frontend.</p>
+
+<p><code>src/main/webapp/</code> also includes a copy of angular-seed.</p>
+
+<h1>RESTful web service (backend)</h1>
+
+<p><a href="https://jersey.java.net/">Jersey</a> is the Java reference implementation for providing REST.</p>
+
+<p>Install the following dependencies in your <code>pom.xml</code>:</p>
+
+<p>``` xml pom.xml</p>
+
+<!-- .. -->
+
+
+<!-- RESTful web service: Jersey -->
+
+
+<p><dependency></p>
+
+<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
+&lt;artifactId&gt;jersey-server&lt;/artifactId&gt;
+&lt;version&gt;1.17.1&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
+&lt;artifactId&gt;jersey-servlet&lt;/artifactId&gt;
+&lt;version&gt;1.17.1&lt;/version&gt;
+</code></pre>
+
+<p></dependency>
+<dependency></p>
+
+<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
+&lt;artifactId&gt;jersey-json&lt;/artifactId&gt;
+&lt;version&gt;1.17.1&lt;/version&gt;
+</code></pre>
+
+<p></dependency></p>
+
+<!-- .. -->
+
+
+<p>```</p>
+
+<p>Add the following servlet snippet to your <code>web.xml</code>:</p>
+
+<p>``` html web.xml</p>
+
+<!-- .. -->
+
+
+<p><servlet></p>
+
+<pre><code>&lt;servlet-name&gt;jersey-serlvet&lt;/servlet-name&gt;
+
+&lt;servlet-class&gt;
+    com.sun.jersey.spi.container.servlet.ServletContainer
+&lt;/servlet-class&gt;
+
+&lt;init-param&gt;
+    &lt;param-name&gt;com.sun.jersey.config.property.packages&lt;/param-name&gt;
+    &lt;param-value&gt;ngdemo.rest&lt;/param-value&gt;
+&lt;/init-param&gt;
+
+&lt;init-param&gt;
+    &lt;param-name&gt;com.sun.jersey.api.json.POJOMappingFeature&lt;/param-name&gt;
+    &lt;param-value&gt;true&lt;/param-value&gt;
+&lt;/init-param&gt;
+
+&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+</code></pre>
+
+<p></servlet></p>
+
+<p>&lt;servlet-mapping></p>
+
+<pre><code>&lt;servlet-name&gt;jersey-serlvet&lt;/servlet-name&gt;
+&lt;url-pattern&gt;/rest/*&lt;/url-pattern&gt;
+</code></pre>
+
+<p>&lt;/servlet-mapping></p>
+
+<!-- .. -->
+
+
+<p>```</p>
+
+<p>Enough configuration for now: Create a simple <code>User</code> object&hellip;</p>
+
+<p>``` java User.java
+package ngdemo.domain;</p>
+
+<p>import javax.xml.bind.annotation.XmlRootElement;</p>
+
+<p>@XmlRootElement
+public class User {</p>
+
+<pre><code>private String firstName;
+private String lastName;
+
+public String getFirstName() {
+    return firstName;
+}
+
+public void setFirstName(String firstName) {
+    this.firstName = firstName;
+}
+
+public String getLastName() {
+    return lastName;
+}
+
+public void setLastName(String lastName) {
+    this.lastName = lastName;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>&hellip;and a service class&hellip;</p>
+
+<p>``` java UserService.java
+package ngdemo.service;</p>
+
+<p>import ngdemo.domain.User;</p>
+
+<p>public class UserService {</p>
+
+<pre><code>public User getDefaultUser() {
+    User user = new User();
+    user.setFirstName("JonFromREST");
+    user.setLastName("DoeFromREST");
+    return user;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>&hellip;and finally the RESTful Service&hellip;:</p>
+
+<p>``` java UserRestService.java
+package ngdemo.rest;</p>
+
+<p>import ngdemo.domain.User;
+import ngdemo.service.UserService;
+import ngdemo.service.UserServiceImpl;</p>
+
+<p>import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;</p>
+
+<p>@Path(&ldquo;/users&rdquo;)
+public class UserRestService {</p>
+
+<pre><code>@GET
+@Produces(MediaType.APPLICATION_JSON)
+public User getDefaultUserInJSON() {
+    UserService userService = new UserServiceImpl();
+    return userService.getDefaultUser();
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Converting the <code>User</code> object to JSON via <code>@Produces(MediaType.APPLICATION_JSON)</code> requires jersey-json in <code>web.xml</code> (<code>POJOMappingFeature</code>).</p>
+
+<h1>Consuming web service from AngularJS (frontend)</h1>
+
+<p>Don&rsquo;t forget to add <code>angular-resources.js</code> to your <code>index.html</code>&hellip;</p>
+
+<p>Consuming the web service:</p>
+
+<p>``` javascript services.js
+var services = angular.module(&lsquo;ngdemo.services&rsquo;, [&lsquo;ngResource&rsquo;]);</p>
+
+<p>services.factory(&lsquo;UserFactory&rsquo;, function ($resource) {</p>
+
+<pre><code>return $resource('/ngdemo/rest/users', {}, {
+    query: {
+        method: 'GET',
+        params: {},
+        isArray: false
+    }
+})
+</code></pre>
+
+<p>});
+```</p>
+
+<p>Usage in controller:</p>
+
+<p>``` javascript controller.js
+var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
+
+<p>app.controller(&lsquo;MyCtrl1&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UserFactory&rsquo;, function ($scope, UserFactory) {</p>
+
+<pre><code>UserFactory.get({}, function (userFactory) {
+    $scope.firstname = userFactory.firstName;
+})
+</code></pre>
+
+<p>}]);
+```</p>
+
+<p>Usage in view:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;div>
+</span><span class='line'>    &lt;p>
+</span><span class='line'>        Result from RESTful service is: {{ firstname }}
+</span><span class='line'>    &lt;/p>
+</span><span class='line'>&lt;/div>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Et voila:</p>
+
+<p><img src="/images/posts/angular/browser_screenshot.png"></p>
+
+<p>You can download a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
