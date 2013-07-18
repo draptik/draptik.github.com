@@ -276,5 +276,14 @@ Et voila:
 
 {% img /images/posts/angular/browser_screenshot.png %}
 
+Update (2013-07-18):
 
-You can download a copy of this project here: [https://github.com/draptik/angulardemorestful](https://github.com/draptik/angulardemorestful).
+You can clone a copy of this project here: [https://github.com/draptik/angulardemorestful](https://github.com/draptik/angulardemorestful).
+
+To checkout the correct version for this demo, use the following code:
+
+``` sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step1
+```
