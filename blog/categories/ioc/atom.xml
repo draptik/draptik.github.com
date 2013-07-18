@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ioc | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/ioc/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-07-18T23:13:37+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Guice in Java Web Application]]></title>
+    <link href="http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application/"/>
+    <updated>2013-07-18T21:36:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application</id>
+    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google&rsquo;s Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
+
+<p>Advantages compared to <a href="http://en.wikipedia.org/wiki/Spring_Framework">Spring</a>:</p>
+
+<ul>
+<li>Spring is much more than an IoC container, and therefore overkill for many projects.</li>
+<li>Configuration by code. <em>NO XML</em>.</li>
+</ul>
+
+
+<p>Based on my <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">previous post showing how to use AngularJS with a Java RESTful backend</a> I extended the simple demo application to use Guice.</p>
+
+<p>Let&rsquo;s say we have a <code>UserServiceImpl</code> class which depends on a <code>UserFactory</code> interface. The <code>UserFactory</code> interface is injected into the constructor of the <code>UserServiceImpl</code> class.</p>
+
+<p>The only thing we have to do is add the <code>@Inject</code> annotation to the constructor so that Guice can do its job.</p>
+
+<p>``` java UserServiceImpl.java
+package ngdemo.service.impl;</p>
+
+<p>import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import ngdemo.domain.User;
+import ngdemo.service.contract.UserFactory;
+import ngdemo.service.contract.UserService;</p>
+
+<p>import java.util.List;</p>
+
+<p>public class UserServiceImpl implements UserService {</p>
+
+<pre><code>private final UserFactory userFactory;
+
+@Inject
+public UserServiceImpl(UserFactory userFactory) {
+    this.userFactory = userFactory;
+}
+
+@Override
+public List&lt;User&gt; getDefaultUsers() {
+    return this.userFactory.createUsers();
+}
+
+@Override
+public User getDefaultUser() {
+    return this.userFactory.createUser();
+}
+</code></pre>
+
+<p>}
+<code>``
+For the IoC container to know which implementation to inject we have to create a Guice *Module* which derives from</code>AbstractModule`:</p>
+
+<p>``` java UserModule.java
+package ngdemo.infrastructure;</p>
+
+<p>import com.google.inject.AbstractModule;
+import ngdemo.service.contract.UserFactory;
+import ngdemo.service.contract.UserService;
+import ngdemo.service.impl.UserFactoryImpl;
+import ngdemo.service.impl.UserServiceImpl;</p>
+
+<p>public class UserModule extends AbstractModule {</p>
+
+<pre><code>@Override
+protected void configure() {
+    bind(UserFactory.class).to(UserFactoryImpl.class);
+    bind(UserService.class).to(UserServiceImpl.class);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The <code>UserModule</code> class demonstrates the advantage of Guice vs. Spring: <em>NO XML</em>. When using Spring you normally would have to create Spring beans in an XML file like this:</p>
+
+<p>``` xml applicationContext.xml (pseudo code)
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;UTF-8&rdquo;?>
+&lt;beans xmlns=&ldquo;<a href="http://www.springframework.org/schema/beans">http://www.springframework.org/schema/beans</a>&rdquo;</p>
+
+<pre><code>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;
+
+&lt;bean id="userService" class="ngdemo.service.impl.UserServiceImpl"&gt;
+    &lt;constructor-arg ref="userFactory"/&gt;
+&lt;/bean&gt;
+
+&lt;bean id="userFactory" class="ngdemo.service.impl.UserFactoryImpl" /&gt;
+</code></pre>
+
+<p></beans>
+```</p>
+
+<p>Next we have to create a replacement for the servlets required by the servlet container:</p>
+
+<p>``` java ngdemo.infrastructure.NgDemoApplicationSetup.java
+package ngdemo.infrastructure;</p>
+
+<p>import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.inject.servlet.ServletModule;
+import com.sun.jersey.api.core.PackagesResourceConfig;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;</p>
+
+<p>public class NgDemoApplicationSetup extends GuiceServletContextListener {</p>
+
+<pre><code>@Override
+protected Injector getInjector() {
+
+    return Guice.createInjector(new ServletModule() {
+
+        @Override
+        protected void configureServlets() {
+
+            super.configureServlets();
+
+            // Configuring Jersey via Guice:
+            ResourceConfig resourceConfig = new PackagesResourceConfig("ngdemo/rest");
+            for (Class&lt;?&gt; resource : resourceConfig.getClasses()) {
+                bind(resource);
+            }
+            serve("/rest/*").with(GuiceContainer.class);
+        }
+    }, new UserModule()); // &lt;-- Adding other Guice Dependency Injection Modules
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>And finally the file <code>web.xml</code>:</p>
+
+<p>``` xml web.xml
+&lt;!DOCTYPE web-app PUBLIC</p>
+
+<pre><code>    "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;
+</code></pre>
+
+<p>&lt;web-app id=&ldquo;WebApp_ID&rdquo; version=&ldquo;2.4&rdquo;</p>
+
+<pre><code>     xmlns="http://java.sun.com/xml/ns/j2ee"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"&gt;
+
+&lt;display-name&gt;Restful Web Application&lt;/display-name&gt;
+
+&lt;filter&gt;
+    &lt;filter-name&gt;guiceFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;com.google.inject.servlet.GuiceFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;guiceFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+
+&lt;listener&gt;
+    &lt;listener-class&gt;ngdemo.infrastructure.NgDemoApplicationSetup&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+
+<p>&lt;/web-app>
+<code>``
+The file</code>web.xml<code>is now free of any</code><servlet><code>tags. The only thing that has to be configured in XML is the</code>&lt;listener-class><code>. The value of the</code>&lt;listener-class><code>is our Java class</code>NgDemoApplicationSetup`, so all further configuration can be defined in a type safe manner.</p>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step2-guice
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

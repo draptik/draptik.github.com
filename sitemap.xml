@@ -284,15 +284,19 @@
         <loc>
             http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/
         </loc>
-        <lastmod>2013-07-14T15:58:46+02:00</lastmod>
+        <lastmod>2013-07-18T23:01:35+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application/</loc>
+        <lastmod>2013-07-18T23:02:49+02:00</lastmod>
     </url>
     <url>
         <loc>http://draptik.github.io/</loc>
-        <lastmod>2013-07-14T15:58:46+02:00</lastmod>
+        <lastmod>2013-07-18T23:02:49+02:00</lastmod>
     </url>
     <url>
         <loc>http://draptik.github.io/blog/archives/</loc>
-        <lastmod>2013-07-14T15:58:46+02:00</lastmod>
+        <lastmod>2013-07-18T23:02:49+02:00</lastmod>
     </url>
     <url>
         <loc>http://draptik.github.io/robots.txt</loc>

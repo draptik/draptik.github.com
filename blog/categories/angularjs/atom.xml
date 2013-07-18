@@ -4,7 +4,7 @@
   <title><![CDATA[Category: angularjs | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-07-14T15:58:53+02:00</updated>
+  <updated>2013-07-18T23:13:37+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -339,7 +339,17 @@ var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
 
 <p><img src="/images/posts/angular/browser_screenshot.png"></p>
 
-<p>You can download a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+<p>Update (2013-07-18):</p>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step1
+</code></p>
 ]]></content>
   </entry>
   

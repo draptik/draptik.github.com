@@ -9,8 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Here&rsquo;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534
-">
+  <meta name="description" content="Why Mono? Why Gtk? Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the  &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,105 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/">Impressions During Developing My First Application With Mono and Gtk# (GtkSharp)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-30T02:57:56+02:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Why Mono? Why Gtk?</h2>
+
+<p>Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.</p>
+
+<p>That answers the first question: Mono gives me C# and the .NET stack.</p>
+
+<p>On the other hand I have been using linux as a desktop environment on my home machine for over a decade. I am comfortable with using linux as my primary OS.</p>
+
+<p>That answers the second question: Mono gives me access to Gtk, the graphics library of gnome, which is the default &ldquo;desktop&rdquo; in many linux distributions.</p>
+
+<h2>The App</h2>
+
+<p>I want to synchronize different Git repositories semi-automatically using a Gui.</p>
+
+<ul>
+<li><p>Default behaviour of the automation can be loaded via a Json file.</p></li>
+<li><p>Each entry describes a repository set to be synchronized.</p></li>
+</ul>
+
+
+<p>The app is located at <a href="https://github.com/draptik/RepoSync">https://github.com/draptik/RepoSync</a><a href="https://github.com/draptik/RepoSync">
+</a></p>
+
+<p>I also published a small demo application for gtk# and treeview: <a href="https://github.com/draptik/GtkSharpTreeViewDemo">https://github.com/draptik/GtkSharpTreeViewDemo</a></p>
+
+<h2>Impressions</h2>
+
+<h5>Monodevelop vs Visual Studio</h5>
+
+<p>I&rsquo;ll keep it brief: If you&rsquo;re used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
+
+<h5>Gtk# API</h5>
+
+<p>The Gtk# API is not your typical .NET library. You will very soon notice that the origins are C/C++. This takes some getting used to if you have a .NET background.</p>
+
+<p>Typically there are no return values. Instead Gtk# methods very often use the &ldquo;out&rdquo; keyword in .NET because that comes closer to the C++ implementation using pointers.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span>Mono Gtk# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="kt">bool</span> <span class="n">someBool</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">listStore</span><span class="p">.</span><span class="n">GetIterFirst</span> <span class="p">(</span><span class="k">out</span> <span class="n">iter</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">do</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">someBool</span> <span class="p">=</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="n">listStore</span><span class="p">.</span><span class="n">GetValue</span> <span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">someBool</span> <span class="p">&amp;&amp;</span> <span class="n">listStore</span><span class="p">.</span><span class="n">IterNext</span> <span class="p">(</span><span class="k">ref</span> <span class="n">iter</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="n">someBool</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Pseudo-C# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">return</span> <span class="n">listStore</span><span class="p">.</span><span class="n">ToList</span><span class="p">().</span><span class="n">Any</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">MyBoolProp</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>From the .NET side, I don&rsquo;t like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;&ndash;)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -534,61 +632,6 @@ Updater 10.00.00.39 21.06.2011
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/">Workaround for VirtualBox 4.0.8 Regression Bug</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-25T22:35:29+02:00" pubdate data-updated="true">May 25<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><del>The current version of Oracle&rsquo;s VirtualBox (4.0.8) has</del> Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</p>
-
-<p>Here is the summary of the workaround posted as <a href="http://www.virtualbox.org/ticket/8948">VirtualBox Ticket 8948</a>:</p>
-
-<ol>
-<li><p> Edit the settings file to allow the VM to start again (Replace control characters in line 315 with 4.0.8).</p></li>
-<li><p> Start the Windows guest</p></li>
-<li><p> Run <code>regedit</code></p></li>
-<li><p> Go to <code>HKLM\SOFTWARE\Oracle\VirtualBox Guest Additions</code></p></li>
-<li><p> Create a string key <code>VersionEx</code> (use exactly this spelling)</p></li>
-<li><p> Give it a reasonable value (ie 4.0.8)</p></li>
-<li><p> Shut down the VM.</p></li>
-<li><p> Repeat step 1</p></li>
-<li><p> Restart and shutdown windows guest again</p></li>
-</ol>
-
-
-<p>That&rsquo;s it.</p>
-
-<p>Edit: This bug has been fixed in version 4.0.10 (released 2011-06-27).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -606,6 +649,10 @@ Updater 10.00.00.39 21.06.2011
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">AngularJS Example Using a Java RESTful Web Service</a>
       </li>
     
@@ -619,10 +666,6 @@ Updater 10.00.00.39 21.06.2011
     
       <li class="post">
         <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/25/rpi-xbmc-sync/">RPi/XBMC: Keeping Content in Sync</a>
       </li>
     
   </ul>
