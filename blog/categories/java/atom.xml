@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-07-19T14:12:40+02:00</updated>
+  <updated>2013-07-19T19:06:36+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -339,6 +339,8 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.604 sec</p>
 ```</p>
 
 <p>Test time is 2.6 sec. Not bad considering we are starting a web server, deploying our app, creating a client, running the test and shutting down the web server.</p>
+
+<p>Running this test from within IntelliJ takes: 0.009 sec&hellip;</p>
 
 <p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
 
