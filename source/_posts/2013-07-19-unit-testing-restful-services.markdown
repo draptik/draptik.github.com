@@ -319,6 +319,7 @@ Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
 
 Test time is 2.6 sec. Not bad considering we are starting a web server, deploying our app, creating a client, running the test and shutting down the web server.
 
+Running this test from within IntelliJ takes: 0.009 sec...
 
 You can clone a copy of this project here: [https://github.com/draptik/angulardemorestful](https://github.com/draptik/angulardemorestful).
 
