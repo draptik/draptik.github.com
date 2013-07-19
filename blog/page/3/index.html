@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="The current version of Oracle&rsquo;s VirtualBox (4.0.8) has Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian &hellip;">
+  <meta name="description" content="The current version of Antivir Personal slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications. Debugging with active &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/">Antivir Regression Bug Makes Visual Studio 2010 Unusable</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-09T03:04:48+02:00" pubdate data-updated="true">Jul 9<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The current version of <a href="http://www.avira.com/en/for-home">Antivir Personal</a> slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications.</p>
+
+<p>Debugging with active Antivir: appr. <strong>5min</strong> for an empty Default.aspx page to display.</p>
+
+<p>Debugging with deactivated Antivir: <strong>a few seconds</strong> for an empty Default.aspx page to display.</p>
+
+<p>Until Antivir fixes this bug I will give <a href="http://www.microsoft.com/security_essentials/default.aspx?mkt=de-de">Microsoft Security Essentials</a> a try.</p>
+
+<p>Regression because this has been addressed and fixed in December 2010:</p>
+
+<p><a href="http://www.avira.com/en/support-for-free-faq-detail/faqid/805">Antivir FAQ (English)</a></p>
+
+<p><a href="http://www.avira.com/de/support-for-free-faq-detail/faqid/805">Antivir FAQ (Deutsch)</a></p>
+
+<p>This applies to the following version of Antivir:</p>
+
+<pre><code>Produktversion 10.2.0.696 29.06.2011
+Suchengine 8.02.06.04 06.07.2011
+Virendefinitionsdatei 7.11.11.27 07.07.2011
+Control Center 10.00.12.31 28.06.2011
+Config Center 10.00.13.20 28.06.2011
+Luke Filewalker 10.03.00.07 28.06.2011
+AntiVir Guard 10.00.01.59 28.06.2011
+Filter 10.00.26.09 28.06.2011
+AntiVir WebGuard 10.01.09.00 28.06.2011
+Planer 10.00.00.21 02.05.2011
+Updater 10.00.00.39 21.06.2011
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -495,92 +558,6 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/06/25/praise-for-railstutorial-org/">Praise for Railstutorial.org</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-06-25T22:56:42+02:00" pubdate data-updated="true">Jun 25<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A couple of weeks back I discovered a great tutorial on Ruby on Rails by Michael Hartl at ﻿﻿<a href="http://www.railstutorial.org">http://www.railstutorial.org</a></p>
-
-<p>The tutorial takes you through the steps of building a <a href="http://twitter.com/">Twitter</a>-like application (not a client!) from scratch. Aside from learning Ruby on Rails, this tutorial also teaches other useful technologies, techniques and best practices, such as:</p>
-
-<ul>
-<li><p><a href="http://en.wikipedia.org/wiki/Behavior_Driven_Development">Behaviour driven development</a> (BDD) using <a href="http://rspec.info/">RSpec</a> for unit, integration and functional testing</p></li>
-<li><p>Version control using <a href="http://git-scm.com/">Git</a></p></li>
-<li><p>Deployment using <a href="http://heroku.com/">Heroku</a></p></li>
-<li><p>Basics of web design (CSS, Ajax)</p></li>
-<li><p>Setting up a database (the tutorial uses the lightweight SQLite3 format, but this can be ported to &lsquo;real&rsquo; databases quite easily with Rails)</p></li>
-<li><p>Generating fake data for the test/staging database as well as the unit testing database</p></li>
-</ul>
-
-
-<p><a href="http://www.dwheeler.com/sloccount/">sloccount</a> (SLOC: source lines of code) for the complete tutorial&rsquo;s source code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sloccount .
-</span><span class='line'>...
-</span><span class='line'>SLOC    Directory       SLOC-by-Language <span class="o">(</span>Sorted<span class="o">)</span>
-</span><span class='line'>1182    spec            <span class="nv">ruby</span><span class="o">=</span>1182
-</span><span class='line'>361     app             <span class="nv">ruby</span><span class="o">=</span>361
-</span><span class='line'>167     vendor          <span class="nv">ruby</span><span class="o">=</span>167
-</span><span class='line'>141     config          <span class="nv">ruby</span><span class="o">=</span>141
-</span><span class='line'>109     db              <span class="nv">ruby</span><span class="o">=</span>109
-</span><span class='line'>35      script          <span class="nv">ruby</span><span class="o">=</span>35
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>How to read these results?</p>
-
-<ul>
-<li><p>app: The actual application is less than 400 lines of code (this even includes the generated HTML)! Try that using Java or ASP.NET&hellip; ;&ndash;)</p></li>
-<li><p>spec: Tests are almost 4 times the size of the actual code (~1200 lines). These tests include unit, integration and functional tests!</p></li>
-<li><p>Most of the remaining code is auto-generated Rails code.</p></li>
-</ul>
-
-
-<p>You can get my commented sources from <a href="http://github.com">GitHub</a> at <a href="http://github.com/draptik/railstutorial">http://github.com/draptik/railstutorial</a></p>
-
-<p>If you want to have a look at the application: It is currently deployed at <a href="http://heroku.com/">Heroku</a>: <a href="http://draptik-railstutorial.heroku.com/">http://draptik-railstutorial.heroku.com/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -598,6 +575,10 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
       </li>
     
@@ -611,10 +592,6 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
     
       <li class="post">
         <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/">Setting Up a Network Printer Using Raspberry Pi</a>
       </li>
     
   </ul>
