@@ -330,3 +330,5 @@ git clone git@github.com:draptik/angulardemorestful.git
 cd angulardemorestful
 git checkout -f step3-backend-test
 ```
+
+In case you are not using git you can also download the project as ZIP or tar.gz file here: [https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test](https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test)

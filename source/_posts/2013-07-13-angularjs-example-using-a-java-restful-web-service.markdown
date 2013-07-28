@@ -287,3 +287,5 @@ git clone git@github.com:draptik/angulardemorestful.git
 cd angulardemorestful
 git checkout -f step1
 ```
+
+In case you are not using git you can also download the project as ZIP or tar.gz file here: [https://github.com/draptik/angulardemorestful/releases/tag/step1](https://github.com/draptik/angulardemorestful/releases/tag/step1)

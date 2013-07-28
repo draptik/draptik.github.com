@@ -167,3 +167,5 @@ cd angulardemorestful
 git checkout -f step2-guice
 ```
 
+
+In case you are not using git you can also download the project as ZIP or tar.gz file here: [https://github.com/draptik/angulardemorestful/releases/tag/step2-guice](https://github.com/draptik/angulardemorestful/releases/tag/step2-guice)
