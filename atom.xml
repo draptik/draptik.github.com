@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-07-28T13:03:46+02:00</updated>
+  <updated>2013-07-28T13:29:11+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -476,6 +476,8 @@
 </span><span class='line'>git checkout -f step4-angularjs-crud
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud">https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud</a></p>
 ]]></content>
   </entry>
   
@@ -1084,6 +1086,8 @@
 </span><span class='line'>git checkout -f step3-backend-test
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test">https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test</a></p>
 ]]></content>
   </entry>
   
@@ -1376,7 +1380,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step2-guice">https://github.com/draptik/angulardemorestful/releases/tag/step2-guice</a></p>
 ]]></content>
   </entry>
   
@@ -1843,6 +1847,8 @@ Among other things, it provides bidirectional data binding.</p>
 </span><span class='line'>git checkout -f step1
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step1">https://github.com/draptik/angulardemorestful/releases/tag/step1</a></p>
 ]]></content>
   </entry>
   

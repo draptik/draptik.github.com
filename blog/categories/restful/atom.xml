@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RESTful | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/restful/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-07-28T13:03:46+02:00</updated>
+  <updated>2013-07-28T13:29:11+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -343,6 +343,8 @@ git clone git@github.com:draptik/angulardemorestful.git
 cd angulardemorestful
 git checkout -f step4-angularjs-crud
 </code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud">https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud</a></p>
 ]]></content>
   </entry>
   
@@ -684,6 +686,8 @@ git clone git@github.com:draptik/angulardemorestful.git
 cd angulardemorestful
 git checkout -f step3-backend-test
 </code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test">https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test</a></p>
 ]]></content>
   </entry>
   
