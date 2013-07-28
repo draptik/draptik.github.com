@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="There is a new thing called &ldquo;Portable Ubuntu&rdquo;. Get it here: http://portableubuntu.demonccc.com.ar/ It&rsquo;s about 450MB download and &hellip;">
+  <meta name="description" content="If you&rsquo;ve followed my blog on how to install Portable Ubuntu to your USB Stick, you might have noticed people asking &ldquo;how do I access my &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/19/accessing-further-windows-partitions-with-portable-ubuntu/">Accessing Further (Windows) Partitions With Portable Ubuntu</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-19T05:15:45+02:00" pubdate data-updated="true">Apr 19<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&rsquo;ve followed my blog on how to install <a href="http://draptik.wordpress.com/2009/04/13/first-experiences-with-portable-ubuntu-and-upgrading-from-804-to-810/">Portable Ubuntu to your USB Stick</a>, you might have noticed people asking &ldquo;how do I access my other Windows partitions by default&rdquo; or &ldquo;How do I access partition X?&rdquo;.</p>
+
+<p>I&rsquo;ve already answered this question in a reply to a post, but I will describe it here in detail.</p>
+
+<p>Let us assume you have two partitions on your Windows machine: &ldquo;C:&rdquo; and &ldquo;E:&rdquo;. And you want to have access to both partitions once plugging in your Portable Ubuntu USB Stick.</p>
+
+<ol>
+<li><p> Add your changes to <code>config\portable_ubuntu.conf</code> by adding a line<code>
+cofs2=e:\</code></p></li>
+<li><p> Add your changes to the <code>/etc/fstab</code> file by adding a line which almost duplicates the line containing cofs1:
+<code>cofs2 /mnt/E cofs user,dmask=0777,fmask=0666 0 0</code></p></li>
+</ol>
+
+
+<p>The order in which you do 1. and 2. does not matter: you have to restart your Portable Ubuntu again for it to work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -351,6 +401,10 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a>
       </li>
     
@@ -364,10 +418,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     
       <li class="post">
         <a href="/blog/2013/07/05/listing-environment-variables-linux/">Listing Environment Variables (Linux)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a>
       </li>
     
   </ul>

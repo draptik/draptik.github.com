@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RESTful | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/restful/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-07-19T19:06:36+02:00</updated>
+  <updated>2013-07-28T13:03:46+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,339 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RESTful CRUD with AngularJS]]></title>
+    <link href="http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/"/>
+    <updated>2013-07-28T11:15:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs</id>
+    <content type="html"><![CDATA[<p>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.</p>
+
+<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I&rsquo;ve added a Java based sample at the end of this post.</p>
+
+<h2>Frontend (AngularJS)</h2>
+
+<h3>Views (Partials)</h3>
+
+<p>We will create three views.</p>
+
+<p>The first view will display all users (<code>user-list.html</code>):</p>
+
+<p><img src="/images/posts/angular/userlist.png" width="400" height="400"></p>
+
+<p>The view also provides links to edit (<code>ng-click="editUser(user.id)"</code>) and delete (<code>ng-click="deleteUser(user.id)"</code>) specific users as well as a link to create a new user (<code>ng-click="createUser()"</code>).</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;div class="span6">
+</span><span class='line'>    &lt;table class="table table-striped table-condensed">
+</span><span class='line'>        &lt;thead>
+</span><span class='line'>        &lt;tr>
+</span><span class='line'>            &lt;th style="min-width: 80px;">First name&lt;/th>
+</span><span class='line'>            &lt;th style="min-width: 80px;">Last name&lt;/th>
+</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
+</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
+</span><span class='line'>        &lt;/tr>
+</span><span class='line'>        &lt;/thead>
+</span><span class='line'>        &lt;tbody>
+</span><span class='line'>        &lt;tr ng-repeat="user in users">
+</span><span class='line'>            &lt;td>{{ user.firstName }}&lt;/td>
+</span><span class='line'>            &lt;td>{{ user.lastName }}&lt;/td>
+</span><span class='line'>            &lt;td>&lt;a ng-click="editUser(user.id)" class="btn btn-small btn-primary">edit&lt;/a>&lt;/td>
+</span><span class='line'>            &lt;td>&lt;a ng-click="deleteUser(user.id)" class="btn btn-small btn-danger">delete&lt;/a>&lt;/td>
+</span><span class='line'>        &lt;/tr>
+</span><span class='line'>        &lt;/tbody>
+</span><span class='line'>    &lt;/table>
+</span><span class='line'>    &lt;a ng-click="createNewUser()" class="btn btn-small">create new user&lt;/a>
+</span><span class='line'>&lt;/div>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The second and third view (<code>user-detail.html</code> and <code>user-creation.html</code>) both provide a form for entering the user properties.</p>
+
+<p><img src="/images/posts/angular/usercreationdetail.png" width="600" height="600"></p>
+
+<p>They only differ in the actions provided. These actions (<code>cancel()</code>, <code>updateUser()</code>, <code>createNewUser()</code>) are invoked using <code>ng-click</code>:</p>
+
+<p>``` xml user-[detail|creation].html</p>
+
+<div class="container">
+    <h1>User detail</h1>
+
+    <form novalidate="novalidate" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputFirstName">First name:</label>
+            <div class="controls">
+                <input type="text" id="inputFirstName" ng-model="user.firstName"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputLastName">Last name:</label>
+            <div class="controls">
+                <input type="text" id="inputLastName" ng-model="user.lastName"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <!-- user-detail.html: -->
+                <a ng-click="cancel()" class="btn btn-small">cancel</a>
+                <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
+
+                <!-- user-creation.html: -->
+                <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<p>```</p>
+
+<h3>Controller</h3>
+
+<p>Next we will create three controllers corresponding to the three views.</p>
+
+<h4>UserListCtrl</h4>
+
+<p><code>UserListCtrl</code> provides three functions <code>editUser</code>, <code>deleteUser</code> and <code>createUser</code>.</p>
+
+<ul>
+<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs&rsquo;s <code>$location</code> function.</li>
+<li><code>deleteUser</code> calls the <code>UserFactory</code> service method <code>delete</code> (which we will create shortly).</li>
+</ul>
+
+
+<p>Furthermore the <code>$scope.users</code> is filled with the result from the <code>UsersFactory.query()</code> function.</p>
+
+<p>Note that all required dependencies are injected into the controller&rsquo;s signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
+
+<p>``` javascript controller.js
+var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
+
+<p>app.controller(&lsquo;UserListCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UsersFactory&rsquo;, &lsquo;UserFactory&rsquo;, &lsquo;$location&rsquo;,</p>
+
+<pre><code>function ($scope, UsersFactory, UserFactory, $location) {
+
+    // callback for ng-click 'editUser':
+    $scope.editUser = function (userId) {
+        $location.path('/user-detail/' + userId);
+    };
+
+    // callback for ng-click 'deleteUser':
+    $scope.deleteUser = function (userId) {
+        UserFactory.delete({ id: userId });
+        $scope.users = UsersFactory.query();
+    };
+
+    // callback for ng-click 'createUser':
+    $scope.createNewUser = function () {
+        $location.path('/user-creation');
+    };
+
+    $scope.users = UsersFactory.query();
+}]);
+/* ... */
+</code></pre>
+
+<p>```</p>
+
+<h4>UserDetailCtrl and UserCreationCtrl</h4>
+
+<p><code>UserDetailCtrl</code> provides the function <code>udateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
+
+<p><code>UserCreationCtrl</code> provides the function <code>createNewUser</code>, calling <code>UsersFactory.create</code>.</p>
+
+<p>Again, both controllers use <code>$location</code> to redirect back to the <code>user-list</code> partial view.</p>
+
+<p>``` javascript controller.js
+/<em> &hellip; </em>/
+app.controller(&lsquo;UserDetailCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;$routeParams&rsquo;, &lsquo;UserFactory&rsquo;, &lsquo;$location&rsquo;,</p>
+
+<pre><code>function ($scope, $routeParams, UserFactory, $location) {
+
+    // callback for ng-click 'updateUser':
+    $scope.updateUser = function () {
+        UserFactory.update($scope.user);
+        $location.path('/user-list');
+    };
+
+    // callback for ng-click 'cancel':
+    $scope.cancel = function () {
+        $location.path('/user-list');
+    };
+
+    $scope.user = UserFactory.show({id: $routeParams.id});
+}]);
+</code></pre>
+
+<p>app.controller(&lsquo;UserCreationCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UsersFactory&rsquo;, &lsquo;$location&rsquo;,</p>
+
+<pre><code>function ($scope, UsersFactory, $location) {
+
+    // callback for ng-click 'createNewUser':
+    $scope.createNewUser = function () {
+        UsersFactory.create($scope.user);
+        $location.path('/user-list');
+    }
+}]);    
+</code></pre>
+
+<p>```</p>
+
+<p>Don&rsquo;t forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
+
+<p>``` javascript app.js
+angular.module(&lsquo;ngdemo&rsquo;, [&lsquo;ngdemo.filters&rsquo;, &lsquo;ngdemo.services&rsquo;, &lsquo;ngdemo.directives&rsquo;, &lsquo;ngdemo.controllers&rsquo;]).</p>
+
+<pre><code>config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/user-list', {templateUrl: 'partials/user-list.html', controller: 'UserListCtrl'});
+    $routeProvider.when('/user-detail/:id', {templateUrl: 'partials/user-detail.html', controller: 'UserDetailCtrl'});
+    $routeProvider.when('/user-creation', {templateUrl: 'partials/user-creation.html', controller: 'UserCreationCtrl'});
+    $routeProvider.otherwise({redirectTo: '/user-list'});
+}]);
+</code></pre>
+
+<p>```</p>
+
+<h3>Service</h3>
+
+<p>AngularJS can consume the web service using <code>$resource</code>. This module is injected via <code>'ngResource'</code>.</p>
+
+<p>We create two factories:</p>
+
+<ul>
+<li><code>UsersFactory</code> (note the plural s) calls the web service with methods not requiring an id (<code>query</code> and <code>create</code>).</li>
+<li><code>UserFactory</code> calls the web service with methods requiring a user id (<code>show</code>, <code>update</code> and <code>delete</code>).</li>
+</ul>
+
+
+<p>``` javascript services.js
+var services = angular.module(&lsquo;ngdemo.services&rsquo;, [&lsquo;ngResource&rsquo;]);</p>
+
+<p>services.factory(&lsquo;UsersFactory&rsquo;, function ($resource) {</p>
+
+<pre><code>return $resource('/ngdemo/web/users', {}, {
+    query: { method: 'GET', isArray: true },
+    create: { method: 'POST' }
+})
+</code></pre>
+
+<p>});</p>
+
+<p>services.factory(&lsquo;UserFactory&rsquo;, function ($resource) {</p>
+
+<pre><code>return $resource('/ngdemo/web/users/:id', {}, {
+    show: { method: 'GET' },
+    update: { method: 'PUT', params: {id: '@id'} },
+    delete: { method: 'DELETE', params: {id: '@id'} }
+})
+</code></pre>
+
+<p>});
+```</p>
+
+<h2>Backend (Java)</h2>
+
+<p>Here is an example of a RESTful web service created with Java:</p>
+
+<p>``` java UserRestService.java
+package ngdemo.web.rest;</p>
+
+<p>import com.google.inject.Inject;
+import ngdemo.domain.User;
+import ngdemo.service.contract.UserService;</p>
+
+<p>import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.List;</p>
+
+<p>@Path(&ldquo;/users&rdquo;)
+public class UserRestService {</p>
+
+<pre><code>private final UserService userService;
+
+@Inject
+public UserRestService(UserService userService) {
+    this.userService = userService;
+}
+
+@GET
+@Produces(MediaType.APPLICATION_JSON)
+public List&lt;User&gt; getAllUsersInJSON() {
+    return userService.getAllUsers();
+}
+
+@GET
+@Path("{id}")
+@Produces(MediaType.APPLICATION_JSON)
+public User getUserById(@PathParam("id") int id) {
+    return userService.getById(id);
+}
+
+@POST
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public User create(User user) {
+    return userService.createNewUser(user);
+}
+
+@PUT
+@Path("{id}")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public User update(User user) {
+    return userService.update(user);
+}
+
+@DELETE
+@Path("{id}")
+@Produces(MediaType.APPLICATION_JSON)
+public void remove(@PathParam("id") int id) {
+    userService.remove(id);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step4-angularjs-crud
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Unit testing RESTful services]]></title>
