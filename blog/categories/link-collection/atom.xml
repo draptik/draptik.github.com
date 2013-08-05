@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: link-collection | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/link-collection/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2013-08-05T20:55:59+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #1]]></title>
+    <link href="http://draptik.github.io/blog/2013/08/05/link-collection-1/"/>
+    <updated>2013-08-05T20:09:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/08/05/link-collection-1</id>
+    <content type="html"><![CDATA[<p>When I try to learn new technologies I stumble across many sites.
+If a site is useful to the problem at hand, I normally add a comment in my source code referencing the URL.</p>
+
+<p>But if I have the same question again a year (or a week) later, I forgot where I put the URL.
+Then I start to go through my browser&rsquo;s bookmarks and history. Then I look through the multitude of &lsquo;read-it-later&rsquo; services, such as <a href="http://getpocket.com/">Pocket</a>, <a href="http://evernote.com/">Evernote</a>, etc. Sometimes I&rsquo;m lucky and I actually find what I&rsquo;m looking for. Most of the time I end up repeating the same search procedure again (which is a waste of time).</p>
+
+<p>So here&rsquo;s my first link collection. Themed AngularJS&hellip;</p>
+
+<ul>
+<li><p><a href="https://github.com/angular-app/angular-app">AngularJS CRUD application demo</a>: Found this after I created my own demo&hellip;</p></li>
+<li><p><a href="http://addyosmani.com/blog/making-maven-grunt/">Making Maven Grunt</a>:
+Opinionated advice on using build systems for modern web applications (i.e. Java backend: <a href="http://maven.apache.org/">Maven</a>, <a href="http://www.gradle.org/">Gradle</a>) vs. smart frontend (<a href="http://bower.io/">Bower</a>, <a href="http://gruntjs.com/">Grunt</a>). The author describes the different approaches which are possible and gives consise solutions for the non-trivial, but industry-relevant approaches (i.e. invoking Grunt from Maven).</p></li>
+<li><p><a href="https://github.com/yeoman/generator-angular/issues/109">Modularized generator for Yeoman angular</a>:
+An alternative folder/file structure for AngularJS projects compared to <a href="http://yeoman.io/">Yeoman</a>. A kickstart project can be found at <a href="https://github.com/joshdmiller/ng-boilerplate">ng-boilerplate</a>.</p></li>
+<li><p>And if you enjoy David Lynch you&rsquo;ll probably like this <a href="http://www.youtube.com/watch?v=mj-tDjDHxEw">YouTube video</a>. ;&ndash;)</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
