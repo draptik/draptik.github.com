@@ -19,6 +19,6 @@ So here's my first link collection. Themed AngularJS...
 Opinionated advice on using build systems for modern web applications (i.e. Java backend: [Maven](http://maven.apache.org/), [Gradle](http://www.gradle.org/)) vs. smart frontend ([Bower](http://bower.io/), [Grunt](http://gruntjs.com/)). The author describes the different approaches which are possible and gives consise solutions for the non-trivial, but industry-relevant approaches (i.e. invoking Grunt from Maven).
 
 - [Modularized generator for Yeoman angular](https://github.com/yeoman/generator-angular/issues/109): 
-An alternative folder/file structure for AngularJS projects compared to [Yeoman](http://yeoman.io/). A kickstart project can be found at [ng-boilerplate](https://github.com/joshdmiller/ng-boilerplate).
+An alternative folder/file structure for AngularJS projects compared to [Yeoman](http://yeoman.io/). A kickstart project can be found at [ng-boilerplate](https://github.com/joshdmiller/ng-boilerplate). Update (2013-08-07): I stumbled across ng-boilerplate via [AngularJS Best Practices: I’ve Been Doing It Wrong! Part 1 of 3](http://blog.artlogic.com/2013/05/02/ive-been-doing-it-wrong-part-1-of-3/).
 
 - And if you enjoy David Lynch you'll probably like this [YouTube video](http://www.youtube.com/watch?v=mj-tDjDHxEw). ;-)
