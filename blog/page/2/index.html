@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting. Currenty (2013-05-23) Pygments does not work flawlessly &hellip;">
+  <meta name="description" content="The IR remote control HAMA MCE works out of the box with XBMC. Except that XBMC&rsquo;s context menu is not mapped to any key. An alternative &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,167 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/">Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-24T21:27:00+02:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="/images/posts/Hama_mce_remote.jpg" width="150" height="150" title="Remote control HAMA MCE" alt="Remote control HAMA MCE">
+The IR remote control <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> works out of the box with <a href="http://xbmc.org">XBMC</a>. Except that XBMC&rsquo;s context menu is not mapped to any key.</p>
+
+<p>An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent <a href="https://play.google.com/store/apps/details?id=org.leetzone.android.yatsewidgetfree&amp;hl=en">Yatse app</a>.</p>
+
+<h2>Setup</h2>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Raspberry_Pi">Raspberry Pi</a> with <a href="http://www.openelec.tv/">OpenELEC</a></li>
+<li>Remote control: <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> (~20EUR)</li>
+</ul>
+
+
+<h2>Problem</h2>
+
+<p>Remote control does not have a key which is mapped to the context menu.</p>
+
+<h2>For the impatient</h2>
+
+<ul>
+<li>Login to your Raspberry Pi with SSH</li>
+<li>Create file <code>/storage/.xbmc/userdata/Lircmap.xml</code>.</li>
+<li>Add following content:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>/storage/.xbmc/userdata/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;lircmap&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;remote</span> <span class="na">device=</span><span class="s">&quot;devinput&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;title&gt;</span>KEY_INFO<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/remote&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/lircmap&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Restart Raspberry Pi</li>
+</ul>
+
+
+<h2>Solution</h2>
+
+<h3>File locations</h3>
+
+<ul>
+<li>OpenELEC’s system location for keymap related configs are located here: <code>/usr/share/xbmc/system/</code> (I found this information in the <a href="http://openelec.tv/forum/103-infared-remotes/37369-why-is-the-lircmap-xml-in-read-only-mode#37369">openelec forum</a>)</li>
+<li>System default keymaps folder: <code>/usr/share/xbmc/system/keymaps/</code></li>
+<li>System default Lircmap.xml: <code>/usr/share/xbmc/system/Lircmap.xml</code></li>
+<li>Root user’s keymaps folder (empty by default): <code>/storage/.xbmc/userdata/keymaps/</code></li>
+<li>Root user’s Lircmap.xml does not exist by default. It has to be created: <code>/storage/.xbmc/userdata/Lircmap.xml</code></li>
+</ul>
+
+
+<h3>Workflow</h3>
+
+<h4>Get device name and name of desired button on remote control (‘irw’)</h4>
+
+<ul>
+<li>Adapted from <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">Guide To Test a Remote and Remap Keys</a></li>
+<li>Login via SSH</li>
+<li>Type command <code>irw</code></li>
+<li>Press the button on remote control where you would like to map the context menu (I pressed the button with the ‘right mouse click’ symbol). This will output something like:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>root# irw
+</span><span class='line'>17b 0 KEY_INFO devinput
+</span><span class='line'>17b 0 KEY_INFO_UP devinput
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>KEY_INFO</code> is the <strong>key name</strong>, <code>devinput</code> is the <strong>device name</strong>.</p>
+
+<p>The next sentence in the <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">guide</a> was not clear to me (<em>userdata SMB share</em> is <code>/usr/share/xbmc/system/</code>…):</p>
+
+<blockquote><p>Make sure you have a proper remote.xml in your keymaps folder which is inside your userdata SMB share (or located at /storage/.xbmc/userdata/keymaps/remote.xml)</p></blockquote>
+
+<p>With OpenELEC the location of <em>userdata SMB share</em> is <code>/usr/share/xbmc/system/Lircmap.xml</code>.</p>
+
+<h4>Get function name for context menu</h4>
+
+<p>The function name can be read from <code>/usr/share/xbmc/system/Lircmap.xml</code>. Search for <code>ContextMenu</code>. This should look like:</p>
+
+<figure class='code'><figcaption><span>/usr/share/xbmc/system/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
+</span><span class='line'><span class="nt">&lt;title&gt;</span>ContextMenu<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The function name for context menu is <code>title</code>.</p>
+
+<h4>Create customized Lircmap.xml</h4>
+
+<p>Create <code>/storage/.xbmc/userdata/Lircmap.xml</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nano /storage/.xbmc/userdata/Lircmap.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and add the following content (adapt to your needs):</p>
+
+<figure class='code'><figcaption><span>/storage/.xbmc/userdata/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;lircmap&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;remote</span> <span class="na">device=</span><span class="s">”devinput”</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;title&gt;</span>KEY_INFO<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/remote&gt;</span>
+</span><span class='line'><span class="nt">&lt;/lircmap&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That’s it. Restart Raspberry Pi and the context menu should now work.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -542,60 +703,6 @@ $ sudo aptitude install hg-fast-export
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/05/unhaddins-patch-for-nhibernate-3-1/">uNhAddIns Patch for NHibernate 3.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-05T23:07:26+02:00" pubdate data-updated="true">Oct 5<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>since most NuGet packages related to <a href="http://nhforge.org/Default.aspx">NHibernate</a> come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding <a href="http://code.google.com/p/unhaddins/">uNhAddIns</a> (commit #773) with the newer version of NHibernate.</p>
-
-<p>My changes:</p>
-
-<ul>
-<li><p>upgraded NHibernate to version 3.1.0.4000 (Iesi.Collections, NHibernate, NHibernate.ByteCode.Castle)</p></li>
-<li><p>implemented new Interface method &lsquo;IsProxy&rsquo; for IProxyFactoryFactory (CSLProxyFactoryFactory, ProxyFactoryFactory)</p></li>
-</ul>
-
-
-<p>BTW: .NET is becoming more and more like Java&hellip; Who doesn&rsquo;t love names like &lsquo;IProxyFactoryFactory&rsquo;? ;&ndash;)</p>
-
-<p>I did not update any tests.</p>
-
-<p>Feel free to use this code (no licence).</p>
-
-<p>My patch can be found at:</p>
-
-<p><a href="http://unhaddins.googlecode.com/issues/attachment?aid=260000000&amp;name=unhaddins_cloned_774.patch.zip&amp;token=ef134e75687db99ec50f572023909835">Patch at Google Code</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -613,6 +720,10 @@ $ sudo aptitude install hg-fast-export
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
       </li>
     
@@ -626,10 +737,6 @@ $ sudo aptitude install hg-fast-export
     
       <li class="post">
         <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">AngularJS Example Using a Java RESTful Web Service</a>
       </li>
     
   </ul>

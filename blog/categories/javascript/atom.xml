@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-08-07T21:49:57+02:00</updated>
+  <updated>2013-08-19T19:10:40+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,204 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS and CORS]]></title>
+    <link href="http://draptik.github.io/blog/2013/08/19/angularjs-and-cors/"/>
+    <updated>2013-08-19T18:47:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/08/19/angularjs-and-cors</id>
+    <content type="html"><![CDATA[<h2>TL;DR</h2>
+
+<p>While splitting my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</p>
+
+<h2>&hellip;</h2>
+
+<p>This post describes how I split the backend and frontend of my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into separate applications.</p>
+
+<p>Hopefully this will simplify switching the used backend technology in the future (i.e. replacing Java with .NET or Node.JS).</p>
+
+<h2>New directory structure</h2>
+
+<p>To begin with I created two new top level folders: <code>backend/java-backend</code> and <code>frontend</code>.
+Then I moved all Java code (including Java IDE settings, pom.xml, etc.) to the new <code>java-backend</code> folder.
+Since the frontend code (JS, CSS, HTML templates) was previously located in <code>src/main/webapp</code> I moved it to the new frontend folder.</p>
+
+<p>The Java project folder <code>webapp</code> now only contains the following minimal setup:</p>
+
+<p>``` sh
+backend/java-backend/src/main/webapp
+├── index.jsp
+└── WEB-INF</p>
+
+<pre><code>└── web.xml
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>frontend</code> folder now has the following (simplified) structure:</p>
+
+<p><code>sh
+frontend/
+├── css
+├── frontend-web-server.js
+├── index.html
+├── js
+│   ├── app.js
+│   ├── bootstrap
+│   ├── controllers.js
+│   ├── directives.js
+│   ├── filters.js
+│   ├── jquery
+│   └── services.js
+</code></p>
+
+<h2>Frontend web server</h2>
+
+<p>Not knowing anything about node.js (yet), I just copied the simple <a href="https://github.com/angular/angular-phonecat/blob/master/scripts/web-server.js">web server from Google&rsquo;s AngularJS demo application PhoneCat</a> to <code>frontend/frontend-web-server.js</code>. For this server to run you will have to install node.js on your system. The frontend server will be running on <em>port 8000</em>.</p>
+
+<p><code>sh frontend-web-server.js
+// ...
+var DEFAULT_PORT = 8000; // &lt;-- frontend port
+// ...
+</code></p>
+
+<p>We can start/stop the frontend web server using the scripts <code>start_frontend_server.sh</code> and <code>stop_frontend_server.sh</code>.</p>
+
+<h2>Backend web server</h2>
+
+<p>The backend server is Tomcat. We can start/stop the backend web server using the scripts <code>start_java_backend.sh</code> and <code>stop_java_backend.sh</code>. The backend server will be running on <em>port 8080</em>.</p>
+
+<h2>CORS configuration</h2>
+
+<p>Cross-origin resource sharing (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support">Wikipedia for details</a>).</p>
+
+<p>CORS can be configured on the server and/or the client side. The following example demonstrates both approaches.</p>
+
+<h3>Server side configuration example (Java)</h3>
+
+<p>The basic idea is to add additional header information to the different <code>Access-Control-Allow-*</code> properties of the HTTP response.</p>
+
+<p>``` java ResponseCorsFilter.java
+package ngdemo.web.rest;</p>
+
+<p>import com.google.inject.Singleton;</p>
+
+<p>import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;</p>
+
+<p>/*</p>
+
+<pre><code>Allow CORS requests.
+</code></pre>
+
+<p> */
+@Singleton
+public class ResponseCorsFilter implements Filter {</p>
+
+<pre><code>@Override
+public void init(FilterConfig filterConfig) throws ServletException { }
+
+@Override
+public void destroy() { }
+
+@Override
+public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    if (servletResponse instanceof HttpServletResponse) {
+        HttpServletResponse alteredResponse = ((HttpServletResponse) servletResponse);
+        addHeadersFor200Response(alteredResponse);
+    }
+    filterChain.doFilter(servletRequest, servletResponse);
+}
+
+private void addHeadersFor200Response(HttpServletResponse response) {
+    response.addHeader("Access-Control-Allow-Origin", "*");
+    response.addHeader("Access-Control-Allow-Methods", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+    response.addHeader("Access-Control-Allow-Headers", "GET, PUT, OPTIONS, X-XSRF-TOKEN");
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The above filter is used in the Guice configuration via the <code>filter(...).through(...)</code> method:</p>
+
+<p>``` java NgDemoApplicationSetup.java
+package ngdemo.infrastructure;</p>
+
+<p>import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Scopes;
+import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.inject.servlet.ServletModule;
+import com.sun.jersey.api.core.PackagesResourceConfig;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import ngdemo.web.rest.ResponseCorsFilter;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;</p>
+
+<p>public class NgDemoApplicationSetup extends GuiceServletContextListener {</p>
+
+<pre><code>@Override
+protected Injector getInjector() {
+    return Guice.createInjector(new ServletModule() {
+
+        @Override
+        protected void configureServlets() {
+            super.configureServlets();
+            ResourceConfig resourceConfig = new PackagesResourceConfig("ngdemo/web");
+            for (Class&lt;?&gt; resource : resourceConfig.getClasses()) {
+                bind(resource);
+            }
+            bind(JacksonJsonProvider.class).in(Scopes.SINGLETON);
+            serve("/web/*").with(GuiceContainer.class);
+
+            // CORS filter:
+            filter("/web/*").through(ResponseCorsFilter.class);
+        }
+    });
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Client side configuration example (Javascript)</h3>
+
+<p>The opposite approach, configuring the client instead of the server, works by (1) setting the <code>useXDomain</code> property to true and (2) removing header properties.</p>
+
+<p>``` javascript app.js
+&lsquo;use strict&rsquo;;</p>
+
+<p>angular.module(&lsquo;ngdemo&rsquo;)</p>
+
+<pre><code>    .config(['$httpProvider', function ($httpProvider) {
+    // ...
+
+    // delete header from client:
+    // http://stackoverflow.com/questions/17289195/angularjs-post-data-to-external-rest-api
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
+</code></pre>
+
+<p>```</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step5-split-frontend-backend-cors
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors">https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RESTful CRUD with AngularJS]]></title>
