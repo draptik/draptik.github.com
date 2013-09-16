@@ -3,7 +3,7 @@ layout: post
 title: "link collection 2"
 date: 2013-09-16 21:58
 comments: true
-categories: [ link-collection, nancyfx, simpledata, singalr ]
+categories: [ link-collection, nancyfx, simpledata, signalr ]
 ---
 I attended the [Herbstcampus 2013](http://www.herbstcampus.de/) this month. As usual, a very good conference.
 
