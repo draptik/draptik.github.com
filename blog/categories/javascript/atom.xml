@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-10-01T17:46:32+02:00</updated>
+  <updated>2013-10-01T22:08:40+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,224 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Node.js backend providing REST]]></title>
+    <link href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/"/>
+    <updated>2013-10-01T21:25:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest</id>
+    <content type="html"><![CDATA[<h1>TL;DR</h1>
+
+<p>My <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> has a new backend implementation using <a href="http://nodejs.org/">node.js</a>.</p>
+
+<h1>&hellip;</h1>
+
+<p>After some reading I decided I&rsquo;ll stick with node&rsquo;s <code>express</code> module.</p>
+
+<p>OK. Here is a &lsquo;minimal&rsquo; setup for a node.js server:</p>
+
+<p>``` javascript app.js
+var express = require(&lsquo;express&rsquo;);
+var app = express();</p>
+
+<p>//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+  res.header(&lsquo;Access-Control-Allow-Origin&rsquo;, &lsquo;*&rsquo;);
+  res.header(&lsquo;Access-Control-Allow-Methods&rsquo;, &lsquo;GET,PUT,POST,DELETE&rsquo;);
+  res.header(&lsquo;Access-Control-Allow-Headers&rsquo;, &lsquo;Content-Type, X-XSRF-TOKEN&rsquo;);
+  next();
+};</p>
+
+<p>app.use(allowCrossDomain);</p>
+
+<p>/<em> we&rsquo;ll use the same port as tomcat&hellip; </em>/
+var MY_PORT = 8080; // default: 4730</p>
+
+<p>/<em> REST API =========================================== </em>/
+var baseUrl = &lsquo;/ngdemo/web&rsquo;;</p>
+
+<p>/<em> GET ALL &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/users&rsquo;, function(req, res) {</p>
+
+<pre><code>res.json(userRepository.getAll());
+</code></pre>
+
+<p>});</p>
+
+<p>/<em> GET Dummy &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/dummy&rsquo;, function(req, res) {
+  res.json({id: 0, firstName: &lsquo;JonFromREST&rsquo;, lastName: &lsquo;DoeFromREST&rsquo;});
+});</p>
+
+<p>/<em> GET By Id &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/users/:id&rsquo;, function(req, res) {
+  console.log(&lsquo;trying to retrieve user with id: &rsquo; + req.params.id);
+  var user = userRepository.getById(req.params.id);
+  res.json(user);
+});</p>
+
+<p>/<em> POST Create &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.post(baseUrl + &lsquo;/users&rsquo;, function(req, res) {
+  if(!req.body.hasOwnProperty(&lsquo;firstName&rsquo;) || !req.body.hasOwnProperty(&lsquo;lastName&rsquo;)) {</p>
+
+<pre><code>res.statusCode = 400;
+return res.send('Error 400: POST syntax incorrect.');
+</code></pre>
+
+<p>  }</p>
+
+<p>  var newUser = userRepository.addNewUser(req.body.firstName, req.body.lastName);
+  res.json(newUser);
+});</p>
+
+<p>/<em> PUT (Update) &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/
+app.put(baseUrl + &lsquo;/users/:id&rsquo;, function (req, res) {
+  if(!req.body.hasOwnProperty(&lsquo;id&rsquo;) || !req.body.hasOwnProperty(&lsquo;firstName&rsquo;) || !req.body.hasOwnProperty(&lsquo;lastName&rsquo;)) {</p>
+
+<pre><code>res.statusCode = 400;
+return res.send('Error 400: PUT syntax incorrect.');
+</code></pre>
+
+<p>  }
+  var changedUser = userRepository.changeUser(req.params.id, req.body.firstName, req.body.lastName);
+  res.json(changedUser);
+});</p>
+
+<p>/<em> DELETE &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/
+app.delete(baseUrl + &lsquo;/users/:id&rsquo;, function(req, res) {
+  console.log(&lsquo;trying to delete user with id: &rsquo; + req.params.id);
+  userRepository.deleteUser(req.params.id);
+  res.json(true);
+});</p>
+
+<p>/<em> ==================================================== </em>/</p>
+
+<p>app.listen(process.env.PORT || MY_PORT);</p>
+
+<p>/<em> Mmmhh&hellip; how can I place the code below into a seperate file and load it here? </em>/</p>
+
+<p>function User(id, firstName, lastName) {
+  this.id = id;
+  this.firstName = firstName;
+  this.lastName = lastName;
+};</p>
+
+<p>function UserRepository() {</p>
+
+<p>  this.users = [];</p>
+
+<p>  this.createUsers = function() {</p>
+
+<pre><code>var numberOfUsers = 10;
+for (var i = 0; i &lt; numberOfUsers; i++) {
+  var id = i + 1;
+  this.users.push(new User(id, 'Foo' + id, 'Bar' + id));
+};
+return this.users;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getMaxUserId = function() {</p>
+
+<pre><code>return Math.max.apply(Math, this.users.map(function(user) { 
+  return user.id; 
+}));
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getNumberOfUsers = function() {</p>
+
+<pre><code>return this.users.length;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getAll = function() {</p>
+
+<pre><code>return this.users;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getById = function(id) {</p>
+
+<pre><code>var foundUser = false;
+for (var i = 0; i &lt; this.users.length; i++) {
+  var user = this.users[i];
+  console.log('...checking user.id ' + user.id);
+  if (user.id == id) {
+    foundUser = true;
+    return user;
+  };
+};
+if (!foundUser) {
+  console.log('Could not find user with id: ' + id);
+  return 'user with id ' + id + ' not found.';
+};
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.addNewUser = function(firstName, lastName) {</p>
+
+<pre><code>var newUser = new User(this.getMaxUserId() + 1, firstName, lastName);
+this.users.push(newUser);
+return this.getById(newUser.id);
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.changeUser = function(id, firstName, lastName) {</p>
+
+<pre><code>var user = this.getById(id);
+user.firstName = firstName;
+user.lastName = lastName;
+return user;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.deleteUser = function(id) {</p>
+
+<pre><code>// sorry, i'm tired and don't know javascript that well...
+var indexToDelete = -1;
+for (var i = 0; i &lt; this.users.length; i++) {
+  var user = this.users[i];
+  if (user.id == id) {
+    indexToDelete = i;
+    break;
+  };
+};
+
+if (indexToDelete &gt;= 0) {
+  this.users.splice(indexToDelete, 1);
+};
+</code></pre>
+
+<p>  };
+};
+```
+As you can see I am just dabbling with JS&hellip;</p>
+
+<p>But hey: It works! ;&ndash;)</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step6-nodejs-backend
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend">https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[AngularJS and CORS]]></title>
