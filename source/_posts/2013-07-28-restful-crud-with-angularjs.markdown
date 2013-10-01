@@ -130,7 +130,7 @@ app.controller('UserListCtrl', ['$scope', 'UsersFactory', 'UserFactory', '$locat
 
 #### UserDetailCtrl and UserCreationCtrl
 
-`UserDetailCtrl` provides the function `udateUser`, which in turn invokes the service method `UserFactory.update`. The `$scope.user` is filled with the result from calling `UserFactory.show`. `cancel` is just a convenient link redirecting back to the `user-list` view.
+`UserDetailCtrl` provides the function `updateUser`, which in turn invokes the service method `UserFactory.update`. The `$scope.user` is filled with the result from calling `UserFactory.show`. `cancel` is just a convenient link redirecting back to the `user-list` view.
 
 `UserCreationCtrl` provides the function `createNewUser`, calling `UsersFactory.create`.
 
