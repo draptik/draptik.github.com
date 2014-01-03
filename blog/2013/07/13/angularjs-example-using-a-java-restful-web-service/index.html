@@ -1,0 +1,685 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>AngularJS example using a Java RESTful web service - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="AngularJS is the current MVV-Whatever JavaScript framework by Google.
+Among other things, it provides bidirectional data binding. Although I&rsquo;m &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">AngularJS Example Using a Java RESTful Web Service</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T20:12:00+02:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://angularjs.org/">AngularJS</a> is the current MVV-Whatever JavaScript framework by Google.
+Among other things, it provides bidirectional data binding.</p>
+
+<p>Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:</p>
+
+<ol>
+<li><p>Java backend provides a RESTful web service.</p></li>
+<li><p>AngularJS consumes the web service.</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+
+<h1>Project structure</h1>
+
+<p>I intentionally put the backend and frontend code in the same project to simplify the example. In a real project you probably want to have seperate projects for front- and backend.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>+---------------------------------------------------+
+</span><span class='line'>| demo project                                      |
+</span><span class='line'>|                                                   |
+</span><span class='line'>| +----------------+              +---------------+ |
+</span><span class='line'>| | backend <span class="o">(</span>Java<span class="o">)</span> | &lt; -<span class="o">(</span>REST<span class="o">)</span>- &gt; | frontend <span class="o">(</span>JS<span class="o">)</span> | |
+</span><span class='line'>| +----------------+              +---------------+ |
+</span><span class='line'>|                                                   |
+</span><span class='line'>+---------------------------------------------------+
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since the backend is Java based, I used a Maven default structure (<code>maven-archetype-site-simple</code>):</p>
+
+<figure class='code'><figcaption><span>project structure</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>├── _documentation
+</span><span class='line'>│   └── readme.txt
+</span><span class='line'>├── ngdemo.iml
+</span><span class='line'>├── pom.xml
+</span><span class='line'>└── src
+</span><span class='line'>    └── main
+</span><span class='line'>        ├── java
+</span><span class='line'>        │   └── ngdemo
+</span><span class='line'>        │       ├── domain
+</span><span class='line'>        │       │   └── User.java
+</span><span class='line'>        │       ├── rest
+</span><span class='line'>        │       │   └── UserRestService.java
+</span><span class='line'>        │       └── service
+</span><span class='line'>        │           └── UserService.java
+</span><span class='line'>        └── webapp
+</span><span class='line'>            ├── css
+</span><span class='line'>            │   └── app.css
+</span><span class='line'>            ├── img
+</span><span class='line'>            ├── index-async.html
+</span><span class='line'>            ├── index.html
+</span><span class='line'>            ├── index.jsp
+</span><span class='line'>            ├── js
+</span><span class='line'>            │   ├── app.js
+</span><span class='line'>            │   ├── controllers.js
+</span><span class='line'>            │   ├── directives.js
+</span><span class='line'>            │   ├── filters.js
+</span><span class='line'>            │   └── services.js
+</span><span class='line'>            ├── lib
+</span><span class='line'>            │   └── angular
+</span><span class='line'>            │       ├── angular-cookies.js
+</span><span class='line'>            │       ├── angular-cookies.min.js
+</span><span class='line'>            │       ├── angular.js
+</span><span class='line'>            │       ├── angular-loader.js
+</span><span class='line'>            │       ├── angular-loader.min.js
+</span><span class='line'>            │       ├── angular.min.js
+</span><span class='line'>            │       ├── angular-resource.js
+</span><span class='line'>            │       ├── angular-resource.min.js
+</span><span class='line'>            │       ├── angular-sanitize.js
+</span><span class='line'>            │       ├── angular-sanitize.min.js
+</span><span class='line'>            │       └── version.txt
+</span><span class='line'>            ├── partials
+</span><span class='line'>            │   └── partial1.html
+</span><span class='line'>            └── WEB-INF
+</span><span class='line'>                └── web.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>src/main/java</code> is the backend.</p>
+
+<p><code>src/main/webapp/js</code> is the frontend.</p>
+
+<p><code>src/main/webapp/</code> also includes a copy of angular-seed.</p>
+
+<h1>RESTful web service (backend)</h1>
+
+<p><a href="https://jersey.java.net/">Jersey</a> is the Java reference implementation for providing REST.</p>
+
+<p>Install the following dependencies in your <code>pom.xml</code>:</p>
+
+<figure class='code'><figcaption><span>pom.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="c">&lt;!-- .. --&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- RESTful web service: Jersey --&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>jersey-server<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;version&gt;</span>1.17.1<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>jersey-servlet<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;version&gt;</span>1.17.1<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="nt">&lt;dependency&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>jersey-json<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;version&gt;</span>1.17.1<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'><span class="nt">&lt;/dependency&gt;</span>
+</span><span class='line'><span class="c">&lt;!-- .. --&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add the following servlet snippet to your <code>web.xml</code>:</p>
+
+<figure class='code'><figcaption><span>web.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- .. --&gt;</span>
+</span><span class='line'><span class="nt">&lt;servlet&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;servlet</span><span class="na">-name</span><span class="nt">&gt;</span>jersey-serlvet<span class="err">&lt;</span>/servlet-name&gt;
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;servlet</span><span class="na">-class</span><span class="nt">&gt;</span>
+</span><span class='line'>        com.sun.jersey.spi.container.servlet.ServletContainer
+</span><span class='line'>    <span class="err">&lt;</span>/servlet-class&gt;
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;init</span><span class="na">-param</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;param</span><span class="na">-name</span><span class="nt">&gt;</span>com.sun.jersey.config.property.packages<span class="err">&lt;</span>/param-name&gt;
+</span><span class='line'>        <span class="nt">&lt;param</span><span class="na">-value</span><span class="nt">&gt;</span>ngdemo.rest<span class="err">&lt;</span>/param-value&gt;
+</span><span class='line'>    <span class="err">&lt;</span>/init-param&gt;
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;init</span><span class="na">-param</span><span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;param</span><span class="na">-name</span><span class="nt">&gt;</span>com.sun.jersey.api.json.POJOMappingFeature<span class="err">&lt;</span>/param-name&gt;
+</span><span class='line'>        <span class="nt">&lt;param</span><span class="na">-value</span><span class="nt">&gt;</span>true<span class="err">&lt;</span>/param-value&gt;
+</span><span class='line'>    <span class="err">&lt;</span>/init-param&gt;
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;load</span><span class="na">-on-startup</span><span class="nt">&gt;</span>1<span class="err">&lt;</span>/load-on-startup&gt;
+</span><span class='line'><span class="nt">&lt;/servlet&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;servlet</span><span class="na">-mapping</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;servlet</span><span class="na">-name</span><span class="nt">&gt;</span>jersey-serlvet<span class="err">&lt;</span>/servlet-name&gt;
+</span><span class='line'>    <span class="nt">&lt;url</span><span class="na">-pattern</span><span class="nt">&gt;</span>/rest/*<span class="err">&lt;</span>/url-pattern&gt;
+</span><span class='line'><span class="err">&lt;</span>/servlet-mapping&gt;
+</span><span class='line'><span class="c">&lt;!-- .. --&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enough configuration for now: Create a simple <code>User</code> object&hellip;</p>
+
+<figure class='code'><figcaption><span>User.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">domain</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javax.xml.bind.annotation.XmlRootElement</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@XmlRootElement</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">String</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="n">String</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="n">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and a service class&hellip;</p>
+
+<figure class='code'><figcaption><span>UserService.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserService</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getDefaultUser</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">user</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&quot;JonFromREST&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">user</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="s">&quot;DoeFromREST&quot;</span><span class="o">);</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">user</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and finally the RESTful Service&hellip;:</p>
+
+<figure class='code'><figcaption><span>UserRestService.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">rest</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.UserService</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.UserServiceImpl</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.Produces</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;/users&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRestService</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@GET</span>
+</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getDefaultUserInJSON</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">UserService</span> <span class="n">userService</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserServiceImpl</span><span class="o">();</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">getDefaultUser</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Converting the <code>User</code> object to JSON via <code>@Produces(MediaType.APPLICATION_JSON)</code> requires jersey-json in <code>web.xml</code> (<code>POJOMappingFeature</code>).</p>
+
+<h1>Consuming web service from AngularJS (frontend)</h1>
+
+<p>Don&rsquo;t forget to add <code>angular-resources.js</code> to your <code>index.html</code>&hellip;</p>
+
+<p>Consuming the web service:</p>
+
+<figure class='code'><figcaption><span>services.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">services</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo.services&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngResource&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">services</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;UserFactory&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$resource</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">$resource</span><span class="p">(</span><span class="s1">&#39;/ngdemo/rest/users&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">query</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">params</span><span class="o">:</span> <span class="p">{},</span>
+</span><span class='line'>            <span class="nx">isArray</span><span class="o">:</span> <span class="kc">false</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage in controller:</p>
+
+<figure class='code'><figcaption><span>controller.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo.controllers&#39;</span><span class="p">,</span> <span class="p">[]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;MyCtrl1&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;UserFactory&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">UserFactory</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">UserFactory</span><span class="p">.</span><span class="nx">get</span><span class="p">({},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">userFactory</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">firstname</span> <span class="o">=</span> <span class="nx">userFactory</span><span class="p">.</span><span class="nx">firstName</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">})</span>
+</span><span class='line'><span class="p">}]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage in view:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;div>
+</span><span class='line'>    &lt;p>
+</span><span class='line'>        Result from RESTful service is: {{ firstname }}
+</span><span class='line'>    &lt;/p>
+</span><span class='line'>&lt;/div></span></code></pre></td></tr></table></div></figure>
+
+
+<p>Et voila:</p>
+
+<p><img src="/images/posts/angular/browser_screenshot.png"></p>
+
+<p>Update (2013-07-18):</p>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
+</span><span class='line'><span class="nb">cd </span>angulardemorestful
+</span><span class='line'>git checkout -f step1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step1">https://github.com/draptik/angulardemorestful/releases/tag/step1</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T20:12:00+02:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/angularjs/'>angularjs</a>, <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/jersey/'>jersey</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/05/listing-environment-variables-linux/" title="Previous Post: Listing environment variables (Linux)">&laquo; Listing environment variables (Linux)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/18/guice-in-java-web-application/" title="Next Post: Guice in Java Web Application">Guice in Java Web Application &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2014 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/';
+        var disqus_url = 'http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

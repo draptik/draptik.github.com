@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Using basic Emacs keybindings in Gnome-Terminal - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Summary: Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Using Basic Emacs Keybindings in Gnome-Terminal</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-15T23:00:10+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>Summary:</strong> Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people familiar with Emacs.</p>
+
+<p>This is so simple that I almost afraid to post it&hellip;</p>
+
+<p>&hellip;One of those things that has been bothering you for years(!), but was never urgent enough to invest time figuring out how to fix&hellip;</p>
+
+<p><strong>Problem: </strong></p>
+
+<p>You&rsquo;re used to Emacs shortcuts. Bash (and many other shells) support Emacs keybindings out of the box. But your default terminal comes with a stupid menu bar. So you press <code>M-d</code> (Emacs&#8217; &ldquo;kill-word&rdquo;; for non-Emacs users: this corresponds to the key sequence <code>Alt-d</code>) and end up calling the &ldquo;File&rdquo; menu entry of the Gnome-Terminal (File is called &ldquo;<strong>D</strong>atei&rdquo; in German, which is my LOCAL). If you your LOCAL settings are English, you will have the same problem with the Emacs shortcut <code>M-f</code> (in Emacs this is &ldquo;word-forward&rdquo;): The Gnome-Terminal will grap the key sequence and open the &ldquo;<strong>F</strong>ile&rdquo; menu.</p>
+
+<p><strong>Solution:</strong></p>
+
+<ol>
+<li><p> Open your Gnome-Terminal</p></li>
+<li><p> Edit &ndash;> Keyboard shortcuts &ndash;> DISABLE ALL MENU ACCESS KEYS (If you have German settings the menu entry is called: &ldquo;Bearbeiten &ndash;> Tastenkombinationen &ndash;> Alle Menükürzel aktivieren&rdquo;. Disable the checkbox..)</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-15T23:00:10+01:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/" title="Previous Post: Executing a script after mounting a TrueCrypt partition on Ubuntu 9.10 (Karmic Koala)">&laquo; Executing a script after mounting a TrueCrypt partition on Ubuntu 9.10 (Karmic Koala)</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/" title="Next Post: Using a different minor-mode-prefix with Rinari (Emacs Rails)">Using a different minor-mode-prefix with Rinari (Emacs Rails) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2014 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/';
+        var disqus_url = 'http://draptik.github.io/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

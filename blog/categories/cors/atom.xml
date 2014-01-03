@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CORS | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/cors/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2014-01-03T22:44:56+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Node.js backend providing REST]]></title>
+    <link href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/"/>
+    <updated>2013-10-01T21:25:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest</id>
+    <content type="html"><![CDATA[<h1>TL;DR</h1>
+
+<p>My <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> has a new backend implementation using <a href="http://nodejs.org/">node.js</a>.</p>
+
+<h1>&hellip;</h1>
+
+<p>After some reading I decided I&rsquo;ll stick with node&rsquo;s <code>express</code> module.</p>
+
+<p>OK. Here is a &lsquo;minimal&rsquo; setup for a node.js server:</p>
+
+<p>``` javascript app.js
+var express = require(&lsquo;express&rsquo;);
+var app = express();</p>
+
+<p>//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+  res.header(&lsquo;Access-Control-Allow-Origin&rsquo;, &lsquo;*&rsquo;);
+  res.header(&lsquo;Access-Control-Allow-Methods&rsquo;, &lsquo;GET,PUT,POST,DELETE&rsquo;);
+  res.header(&lsquo;Access-Control-Allow-Headers&rsquo;, &lsquo;Content-Type, X-XSRF-TOKEN&rsquo;);
+  next();
+};</p>
+
+<p>app.use(allowCrossDomain);</p>
+
+<p>/<em> we&rsquo;ll use the same port as tomcat&hellip; </em>/
+var MY_PORT = 8080; // default: 4730</p>
+
+<p>/<em> REST API =========================================== </em>/
+var baseUrl = &lsquo;/ngdemo/web&rsquo;;</p>
+
+<p>/<em> GET ALL &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/users&rsquo;, function(req, res) {</p>
+
+<pre><code>res.json(userRepository.getAll());
+</code></pre>
+
+<p>});</p>
+
+<p>/<em> GET Dummy &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/dummy&rsquo;, function(req, res) {
+  res.json({id: 0, firstName: &lsquo;JonFromREST&rsquo;, lastName: &lsquo;DoeFromREST&rsquo;});
+});</p>
+
+<p>/<em> GET By Id &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.get(baseUrl + &lsquo;/users/:id&rsquo;, function(req, res) {
+  console.log(&lsquo;trying to retrieve user with id: &rsquo; + req.params.id);
+  var user = userRepository.getById(req.params.id);
+  res.json(user);
+});</p>
+
+<p>/<em> POST Create &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; </em>/
+app.post(baseUrl + &lsquo;/users&rsquo;, function(req, res) {
+  if(!req.body.hasOwnProperty(&lsquo;firstName&rsquo;) || !req.body.hasOwnProperty(&lsquo;lastName&rsquo;)) {</p>
+
+<pre><code>res.statusCode = 400;
+return res.send('Error 400: POST syntax incorrect.');
+</code></pre>
+
+<p>  }</p>
+
+<p>  var newUser = userRepository.addNewUser(req.body.firstName, req.body.lastName);
+  res.json(newUser);
+});</p>
+
+<p>/<em> PUT (Update) &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/
+app.put(baseUrl + &lsquo;/users/:id&rsquo;, function (req, res) {
+  if(!req.body.hasOwnProperty(&lsquo;id&rsquo;) || !req.body.hasOwnProperty(&lsquo;firstName&rsquo;) || !req.body.hasOwnProperty(&lsquo;lastName&rsquo;)) {</p>
+
+<pre><code>res.statusCode = 400;
+return res.send('Error 400: PUT syntax incorrect.');
+</code></pre>
+
+<p>  }
+  var changedUser = userRepository.changeUser(req.params.id, req.body.firstName, req.body.lastName);
+  res.json(changedUser);
+});</p>
+
+<p>/<em> DELETE &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash; </em>/
+app.delete(baseUrl + &lsquo;/users/:id&rsquo;, function(req, res) {
+  console.log(&lsquo;trying to delete user with id: &rsquo; + req.params.id);
+  userRepository.deleteUser(req.params.id);
+  res.json(true);
+});</p>
+
+<p>/<em> ==================================================== </em>/</p>
+
+<p>app.listen(process.env.PORT || MY_PORT);</p>
+
+<p>/<em> Mmmhh&hellip; how can I place the code below into a seperate file and load it here? </em>/</p>
+
+<p>function User(id, firstName, lastName) {
+  this.id = id;
+  this.firstName = firstName;
+  this.lastName = lastName;
+};</p>
+
+<p>function UserRepository() {</p>
+
+<p>  this.users = [];</p>
+
+<p>  this.createUsers = function() {</p>
+
+<pre><code>var numberOfUsers = 10;
+for (var i = 0; i &lt; numberOfUsers; i++) {
+  var id = i + 1;
+  this.users.push(new User(id, 'Foo' + id, 'Bar' + id));
+};
+return this.users;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getMaxUserId = function() {</p>
+
+<pre><code>return Math.max.apply(Math, this.users.map(function(user) { 
+  return user.id; 
+}));
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getNumberOfUsers = function() {</p>
+
+<pre><code>return this.users.length;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getAll = function() {</p>
+
+<pre><code>return this.users;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.getById = function(id) {</p>
+
+<pre><code>var foundUser = false;
+for (var i = 0; i &lt; this.users.length; i++) {
+  var user = this.users[i];
+  console.log('...checking user.id ' + user.id);
+  if (user.id == id) {
+    foundUser = true;
+    return user;
+  };
+};
+if (!foundUser) {
+  console.log('Could not find user with id: ' + id);
+  return 'user with id ' + id + ' not found.';
+};
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.addNewUser = function(firstName, lastName) {</p>
+
+<pre><code>var newUser = new User(this.getMaxUserId() + 1, firstName, lastName);
+this.users.push(newUser);
+return this.getById(newUser.id);
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.changeUser = function(id, firstName, lastName) {</p>
+
+<pre><code>var user = this.getById(id);
+user.firstName = firstName;
+user.lastName = lastName;
+return user;
+</code></pre>
+
+<p>  };</p>
+
+<p>  this.deleteUser = function(id) {</p>
+
+<pre><code>// sorry, i'm tired and don't know javascript that well...
+var indexToDelete = -1;
+for (var i = 0; i &lt; this.users.length; i++) {
+  var user = this.users[i];
+  if (user.id == id) {
+    indexToDelete = i;
+    break;
+  };
+};
+
+if (indexToDelete &gt;= 0) {
+  this.users.splice(indexToDelete, 1);
+};
+</code></pre>
+
+<p>  };
+};
+```
+As you can see I am just dabbling with JS&hellip;</p>
+
+<p>But hey: It works! ;&ndash;)</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step6-nodejs-backend
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend">https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS and CORS]]></title>
+    <link href="http://draptik.github.io/blog/2013/08/19/angularjs-and-cors/"/>
+    <updated>2013-08-19T18:47:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/08/19/angularjs-and-cors</id>
+    <content type="html"><![CDATA[<h2>TL;DR</h2>
+
+<p>While splitting my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</p>
+
+<h2>&hellip;</h2>
+
+<p>This post describes how I split the backend and frontend of my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into separate applications.</p>
+
+<p>Hopefully this will simplify switching the used backend technology in the future (i.e. replacing Java with .NET or Node.JS).</p>
+
+<h2>New directory structure</h2>
+
+<p>To begin with I created two new top level folders: <code>backend/java-backend</code> and <code>frontend</code>.
+Then I moved all Java code (including Java IDE settings, pom.xml, etc.) to the new <code>java-backend</code> folder.
+Since the frontend code (JS, CSS, HTML templates) was previously located in <code>src/main/webapp</code> I moved it to the new frontend folder.</p>
+
+<p>The Java project folder <code>webapp</code> now only contains the following minimal setup:</p>
+
+<p>``` sh
+backend/java-backend/src/main/webapp
+├── index.jsp
+└── WEB-INF</p>
+
+<pre><code>└── web.xml
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>frontend</code> folder now has the following (simplified) structure:</p>
+
+<p><code>sh
+frontend/
+├── css
+├── frontend-web-server.js
+├── index.html
+├── js
+│   ├── app.js
+│   ├── bootstrap
+│   ├── controllers.js
+│   ├── directives.js
+│   ├── filters.js
+│   ├── jquery
+│   └── services.js
+</code></p>
+
+<h2>Frontend web server</h2>
+
+<p>Not knowing anything about node.js (yet), I just copied the simple <a href="https://github.com/angular/angular-phonecat/blob/master/scripts/web-server.js">web server from Google&rsquo;s AngularJS demo application PhoneCat</a> to <code>frontend/frontend-web-server.js</code>. For this server to run you will have to install node.js on your system. The frontend server will be running on <em>port 8000</em>.</p>
+
+<p><code>sh frontend-web-server.js
+// ...
+var DEFAULT_PORT = 8000; // &lt;-- frontend port
+// ...
+</code></p>
+
+<p>We can start/stop the frontend web server using the scripts <code>start_frontend_server.sh</code> and <code>stop_frontend_server.sh</code>.</p>
+
+<h2>Backend web server</h2>
+
+<p>The backend server is Tomcat. We can start/stop the backend web server using the scripts <code>start_java_backend.sh</code> and <code>stop_java_backend.sh</code>. The backend server will be running on <em>port 8080</em>.</p>
+
+<h2>CORS configuration</h2>
+
+<p>Cross-origin resource sharing (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support">Wikipedia for details</a>).</p>
+
+<p><strong>2014-01-03</strong>
+<del>CORS can be configured on the server and/or the client side.</del>
+CORS must be configured on the server <strong>and</strong> the client side (Thanks to Richard for the pointer!).
+The following example demonstrates <del>both approaches</del> this.</p>
+
+<h3>Server side configuration example (Java)</h3>
+
+<p>The basic idea is to add additional header information to the different <code>Access-Control-Allow-*</code> properties of the HTTP response.</p>
+
+<p>``` java ResponseCorsFilter.java
+package ngdemo.web.rest;</p>
+
+<p>import com.google.inject.Singleton;</p>
+
+<p>import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;</p>
+
+<p>/*</p>
+
+<pre><code>Allow CORS requests.
+</code></pre>
+
+<p> */
+@Singleton
+public class ResponseCorsFilter implements Filter {</p>
+
+<pre><code>@Override
+public void init(FilterConfig filterConfig) throws ServletException { }
+
+@Override
+public void destroy() { }
+
+@Override
+public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    if (servletResponse instanceof HttpServletResponse) {
+        HttpServletResponse alteredResponse = ((HttpServletResponse) servletResponse);
+        addHeadersFor200Response(alteredResponse);
+    }
+    filterChain.doFilter(servletRequest, servletResponse);
+}
+
+private void addHeadersFor200Response(HttpServletResponse response) {
+    response.addHeader("Access-Control-Allow-Origin", "*");
+    response.addHeader("Access-Control-Allow-Methods", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+    response.addHeader("Access-Control-Allow-Headers", "GET, PUT, OPTIONS, X-XSRF-TOKEN");
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>The above filter is used in the Guice configuration via the <code>filter(...).through(...)</code> method:</p>
+
+<p>``` java NgDemoApplicationSetup.java
+package ngdemo.infrastructure;</p>
+
+<p>import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Scopes;
+import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.inject.servlet.ServletModule;
+import com.sun.jersey.api.core.PackagesResourceConfig;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
+import ngdemo.web.rest.ResponseCorsFilter;
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;</p>
+
+<p>public class NgDemoApplicationSetup extends GuiceServletContextListener {</p>
+
+<pre><code>@Override
+protected Injector getInjector() {
+    return Guice.createInjector(new ServletModule() {
+
+        @Override
+        protected void configureServlets() {
+            super.configureServlets();
+            ResourceConfig resourceConfig = new PackagesResourceConfig("ngdemo/web");
+            for (Class&lt;?&gt; resource : resourceConfig.getClasses()) {
+                bind(resource);
+            }
+            bind(JacksonJsonProvider.class).in(Scopes.SINGLETON);
+            serve("/web/*").with(GuiceContainer.class);
+
+            // CORS filter:
+            filter("/web/*").through(ResponseCorsFilter.class);
+        }
+    });
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Client side configuration example (Javascript)</h3>
+
+<p>The opposite approach, configuring the client instead of the server, works by (1) setting the <code>useXDomain</code> property to true and (2) removing header properties.</p>
+
+<p>``` javascript app.js
+&lsquo;use strict&rsquo;;</p>
+
+<p>angular.module(&lsquo;ngdemo&rsquo;)</p>
+
+<pre><code>    .config(['$httpProvider', function ($httpProvider) {
+    // ...
+
+    // delete header from client:
+    // http://stackoverflow.com/questions/17289195/angularjs-post-data-to-external-rest-api
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
+</code></pre>
+
+<p>```</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step5-split-frontend-backend-cors
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors">https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors</a></p>
+]]></content>
+  </entry>
+  
+</feed>

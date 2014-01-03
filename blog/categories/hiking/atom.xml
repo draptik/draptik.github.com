@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hiking | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/hiking/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2014-01-03T22:44:56+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hiking routes in the "Fränkische Schweiz"]]></title>
+    <link href="http://draptik.github.io/blog/2009/04/11/hiking-routes-in-the-frankische-schweiz/"/>
+    <updated>2009-04-11T14:14:25+02:00</updated>
+    <id>http://draptik.github.io/blog/2009/04/11/hiking-routes-in-the-frankische-schweiz</id>
+    <content type="html"><![CDATA[<p>A collection of hiking routes in the Fränkische Schweiz&hellip;</p>
+
+<ul>
+<li><p><a href="http://www.naturerlebnis-fs.de/Tipps/wandern.html">http://www.naturerlebnis-fs.de/Tipps/wandern.html</a></p></li>
+<li><p><a href="http://fraenkische-schweiz.bayern-online.de/die-region/aktiv/sport/wandern-wanderwege/">http://fraenkische-schweiz.bayern-online.de/die-region/aktiv/sport/wandern-wanderwege/</a></p></li>
+<li><p><a href="http://www.fraenkische-schweiz.com/sport/wandern.html">http://www.fraenkische-schweiz.com/sport/wandern.html</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

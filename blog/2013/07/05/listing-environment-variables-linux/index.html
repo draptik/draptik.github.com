@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Listing environment variables (Linux) - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Just a note to self: Get a list of all linux environment variables and their values using the export command. Here is an example: 1
+2
+3
+4
+5
+6
+7
+8
+9 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Listing Environment Variables (Linux)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T23:33:00+02:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Just a note to self: Get a list of all linux environment variables and their values using the <code>export</code> command.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pi@rpidev ~ <span class="nv">$ </span><span class="nb">export</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">HOME</span><span class="o">=</span><span class="s2">&quot;/home/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">&quot;/opt/java/jdk1.7.0_25&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_GB.UTF-8&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LOGNAME</span><span class="o">=</span><span class="s2">&quot;pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">LS_COLORS</span><span class="o">=</span><span class="s2">&quot;rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">MAIL</span><span class="o">=</span><span class="s2">&quot;/var/mail/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">OLDPWD</span><span class="o">=</span><span class="s2">&quot;/home/pi/myinstall_notes&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/opt/java/jdk1.7.0_25/bin&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">PWD</span><span class="o">=</span><span class="s2">&quot;/home/pi&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SHELL</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SHLVL</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_CLIENT</span><span class="o">=</span><span class="s2">&quot;192.168.179.32 39295 22&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_CONNECTION</span><span class="o">=</span><span class="s2">&quot;192.168.179.32 39295 192.168.179.148 22&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">SSH_TTY</span><span class="o">=</span><span class="s2">&quot;/dev/pts/0&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">TERM</span><span class="o">=</span><span class="s2">&quot;xterm&quot;</span>
+</span><span class='line'><span class="nb">declare</span> -x <span class="nv">USER</span><span class="o">=</span><span class="s2">&quot;pi&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-05T23:33:00+02:00" pubdate data-updated="true">Jul 5<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/" title="Previous Post: ReorderList demo for AjaxControlToolkit">&laquo; ReorderList demo for AjaxControlToolkit</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/" title="Next Post: AngularJS example using a Java RESTful web service">AngularJS example using a Java RESTful web service &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2014 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux/';
+        var disqus_url = 'http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

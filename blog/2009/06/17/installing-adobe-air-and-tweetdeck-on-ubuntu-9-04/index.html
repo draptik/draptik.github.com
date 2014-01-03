@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Installing Adobe AIR and TweetDeck on Ubuntu 9.04 - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="This is a short manual on how to install Adobe AIR and Adobe AIR applications such as TweetDeck on Ubuntu 9.04 (This instruction should also work &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Installing Adobe AIR and TweetDeck on Ubuntu 9.04</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-17T22:39:05+02:00" pubdate data-updated="true">Jun 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is a short manual on how to install <a href="http://www.adobe.com/de/products/air/">Adobe AIR</a> and Adobe AIR applications such as <a href="http://www.tweetdeck.com/beta">TweetDeck</a> on <a href="http://www.ubuntu.com">Ubuntu 9.04</a> (This instruction should also work with most up-to-date Linux distributions). Once you have confirmed that everything works (i.e. TweetDeck works), you can delete all downloaded files.</p>
+
+<ol>
+<li><p> Download Adobe AIR from their homepage: <a href="http://airdownload.adobe.com/air/lin/download/latest/AdobeAIRInstaller.bin">http://airdownload.adobe.com/air/lin/download/latest/AdobeAIRInstaller.bin</a></p></li>
+<li><p> Make <code>AdobeAIRInstaller.bin</code> executable</p></li>
+</ol>
+
+
+<p><code>$ chmod +x AdobeAIRInstaller.bin</code></p>
+
+<ol>
+<li> Install Adobe AIR</li>
+</ol>
+
+
+<p><code>$ sudo ./AdobeAIRInstaller.bin</code>This will install Adobe AIR to <code>/opt/Adobe AIR</code></p>
+
+<ol>
+<li> Download TweetDeck</li>
+</ol>
+
+
+<p><code>$ wget \
+[http://tweetdeck.com/beta/TweetDeck_0_25_manual.air](http://tweetdeck.com/beta/TweetDeck_0_25_manual.air)</code></p>
+
+<ol>
+<li> Install TweetDeck using Adobe AIR installer</li>
+</ol>
+
+
+<p><code>$ /opt/Adobe\ AIR/Versions/1.0/airappinstaller</code></p>
+
+<ol>
+<li><p> This will open a GUI installer and automatically start TweetDeck. Furthermore, a starter will be created on your desktop.
+[gallery]</p></li>
+<li><p> The desktop starter is just a script. Here&rsquo;s the content:</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="sb">`</span>~/Desktop<span class="nv">$ </span>cat <span class="se">\</span>
+</span><span class='line'>tweetdeckfast.f9...21.1.desktop
+</span><span class='line'><span class="o">[</span>Desktop Entry<span class="o">]</span>
+</span><span class='line'><span class="nv">Name</span><span class="o">=</span>TweetDeck
+</span><span class='line'><span class="nv">Comment</span><span class="o">=</span>Welcome to TweetDeck - a unique way to view your twitter timeline
+</span><span class='line'><span class="nv">GenericName</span><span class="o">=</span>TweetDeck
+</span><span class='line'><span class="nv">Exec</span><span class="o">=</span><span class="s1">&#39;_opt&#39;</span>/<span class="s1">&#39;TweetDeck&#39;</span>/bin_<span class="s1">&#39;TweetDeck&#39;</span>
+</span><span class='line'><span class="nv">Type</span><span class="o">=</span>Application
+</span><span class='line'><span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+</span><span class='line'><span class="nv">Icon</span><span class="o">=</span>tweetdeckfast.f9...4c21.1
+</span><span class='line'><span class="nv">StartupNotify</span><span class="o">=</span><span class="nb">true</span>
+</span><span class='line'>X-KDE-StartupNotify<span class="o">=</span><span class="nb">true</span>
+</span><span class='line'><span class="nv">Categories</span><span class="o">=</span>Utility;
+</span><span class='line'>X-AppInstall-Package<span class="o">=</span>tweetdeckfast.f9..4c21.1
+</span><span class='line'>X-AppInstall-Section<span class="o">=</span>main<span class="sb">`</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li> To uninstall Adobe AIR and Adobe AIR applications, select &ldquo;Programs&rdquo; &ndash;> &ldquo;Applications&rdquo; &ndash;> Adobe AIR Uninstaller&#8221;. This will also automatically uninstall Adobe AIR applications (i.e. TweetDeck).</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">draptik</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-17T22:39:05+02:00" pubdate data-updated="true">Jun 17<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/06/16/my-helloworld-script-for-maven/" title="Previous Post: My HelloWorld script for Maven">&laquo; My HelloWorld script for Maven</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/" title="Next Post: Maven Error: generics are not supported in source 1.3">Maven Error: generics are not supported in source 1.3 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2014 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/';
+        var disqus_url = 'http://draptik.github.io/blog/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
