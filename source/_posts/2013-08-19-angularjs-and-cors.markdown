@@ -69,7 +69,10 @@ The backend server is Tomcat. We can start/stop the backend web server using the
 
 Cross-origin resource sharing ([CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see [Wikipedia for details](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support)). 
 
-CORS can be configured on the server and/or the client side. The following example demonstrates both approaches.
+**2014-01-03**
+~~CORS can be configured on the server and/or the client side.~~
+CORS must be configured on the server **and** the client side (Thanks to Richard for the pointer!).
+The following example demonstrates ~~both approaches~~ this.
 
 ### Server side configuration example (Java)
 
