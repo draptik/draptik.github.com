@@ -9,7 +9,19 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="This post by Lynsay describes in detail how to convert a non-network printer into a network printer. You will have to install CUPS and SAMBA on your &hellip;">
+  <meta name="description" content="AjaxControlToolkit&rsquo;s
+ReorderList
+provides drag and drop functionality within a list. ReorderListDemo.aspxSource Article1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +78,101 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-30T15:55:00+02:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/Default.aspx">AjaxControlToolkit&rsquo;s</a>
+<a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/ReorderList/ReorderList.aspx">ReorderList</a>
+provides drag and drop functionality within a list.</p>
+
+<figure class='code'><figcaption><span>ReorderListDemo.aspx</span><a href='https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;CssReorderList&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- ClientMode=&quot;AutoID&quot; is required for certain versions of AjaxControlToolkit  --&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ajaxToolkit:ReorderList</span> <span class="na">ID=</span><span class="s">&quot;MyReorderList&quot;</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span>
+</span><span class='line'>                             <span class="na">DataKeyField=</span><span class="s">&quot;MyId&quot;</span>
+</span><span class='line'>                             <span class="na">SortOrderField=</span><span class="s">&quot;MyPosition&quot;</span>
+</span><span class='line'>                             <span class="na">PostBackOnReorder=</span><span class="s">&quot;False&quot;</span>
+</span><span class='line'>                             <span class="na">ClientIDMode=</span><span class="s">&quot;AutoID&quot;</span>
+</span><span class='line'>                             <span class="na">DragHandleAlignment=</span><span class="s">&quot;Left&quot;</span>
+</span><span class='line'>                             <span class="na">ItemInsertLocation=</span><span class="s">&quot;Beginning&quot;</span>
+</span><span class='line'>                             <span class="na">AllowReorder=</span><span class="s">&quot;true&quot;</span>
+</span><span class='line'>        <span class="nt">&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;ItemTemplate&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;background-color: yellow;&quot;</span> <span class="na">class=</span><span class="s">&quot;CssItemArea&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;asp:HiddenField</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;hdfMyId&quot;</span>
+</span><span class='line'>                  <span class="na">Value=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyId %&gt;&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;asp:Label</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;lblName&quot;</span>
+</span><span class='line'>                  <span class="na">Text=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyName %&gt;&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;asp:Label</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;lblPosition&quot;</span>
+</span><span class='line'>                  <span class="na">Text=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyPosition %&gt;&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/ItemTemplate&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;DragHandleTemplate&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;CssDragHandle&quot;</span><span class="nt">&gt;&lt;strong&gt;</span>DRAG ME<span class="nt">&lt;/strong&gt;&lt;/div&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/DragHandleTemplate&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/ajaxToolkit:ReorderList&gt;</span>
+</span><span class='line'><span class="nt">&lt;div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ve placed a working example project on <a href="https://github.com/draptik/actdemos">github</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -764,71 +871,6 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/07/converting-a-mercurial-repository-to-git/">Converting a Mercurial Repository to Git</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-07T01:40:01+01:00" pubdate data-updated="true">Feb 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Note to self:</p>
-
-<p>Converting Hg repos to git using hg-fast-export.</p>
-
-<p>Installation:</p>
-
-<p><code>
-$ sudo aptitude install hg-fast-export
-</code></p>
-
-<p>Usage:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>new_git_dir
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>git init
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>hg-fast-export -r &lt;hg-repo&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Works with:</p>
-
-<p>git version 1.7.5.4</p>
-
-<p>hg version 2.1</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -846,6 +888,10 @@ $ sudo aptitude install hg-fast-export
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
       </li>
     
@@ -859,10 +905,6 @@ $ sudo aptitude install hg-fast-export
     
       <li class="post">
         <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
       </li>
     
   </ul>

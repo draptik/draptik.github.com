@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="This is one of those &ldquo;notes to self&rdquo;&hellip; I recently upgraded Eclipse (3.4 &ndash;> 3.5) and Subversion (1.5 &ndash;> 1.6). I never &hellip;">
+  <meta name="description" content="Short instructions on how to setup Emacs using the Emacs Server/Emacs Client system on a GNU/Linux machine. This post is intended for people familiar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,200 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/23/emacsclient-usage-on-a-gnulinux-system/">Emacsclient Usage on a GNU/Linux System</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-23T23:31:02+02:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Short instructions on how to setup Emacs using the Emacs Server/Emacs Client system on a GNU/Linux machine.</p>
+
+<p>This post is intended for people familiar with GNU/Emacs.</p>
+
+<p><strong>Requirements:</strong></p>
+
+<p>GNU/Emacs 23 or greater (for Ubuntu get the Emacs PPA: <a href="http://https://launchpad.net/~ubuntu-elisp/+archive/ppa">https://launchpad.net/~ubuntu-elisp/+archive/ppa</a>)</p>
+
+<p><strong>Files to edit:</strong></p>
+
+<p><code>~/.emacs</code>
+<code>~/.bashrc</code></p>
+
+<p><strong>System settings using Gnome:</strong></p>
+
+<p>System &ndash;> Einstellungen &ndash;> Startprogramme</p>
+
+<p><strong>For the impatient:</strong></p>
+
+<p>Add this to your <code>~/.bashrc</code>:</p>
+
+<figure class='code'><figcaption><span>~/.bashrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">ALTERNATE_EDITOR</span><span class="o">=</span>emacs <span class="nv">EDITOR</span><span class="o">=</span>emacsclient <span class="nv">VISUAL</span><span class="o">=</span>emacsclient
+</span><span class='line'><span class="c">## you can always use the command &quot;emacs&quot; instead of &quot;emacsclient -c&quot;</span>
+</span><span class='line'><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s1">&#39;emacsclient -c&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add this to your <code>~/.emacs</code>:</p>
+
+<figure class='code'><figcaption><span>~/.emacs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">(</span>server-start<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add this to your system startup options:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/path/to/your/emacs --daemon
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ie:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/bin/emacs --daemon
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gnome panel starter:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/bin/emacsclient -c<span class="err">&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Detailed instructions</strong></p>
+
+<p>Starting Emacs from scratch will always load your init file (default: ~/.emacs). Loading this file can take a few seconds if your init file has grown over the years and if you load many external libraries.</p>
+
+<p>To decrease the load time for situations like this the GNU/Emacs folks have developed the GNU/Emacs daemon and the GNU/Emacs server-client concept.</p>
+
+<p>This concept allows you to attach to an already running session. No matter if you are currently using X or  a TTY session!</p>
+
+<p>Just try it (without changing any settings):</p>
+
+<ol>
+<li><p> Start GNU/Emacs from a shell under X: <code>
+$ emacs
+</code></p></li>
+<li><p> Now start the Emacs server from within Emacs: <code>
+M-x server-start
+</code></p></li>
+<li><p> Open a file from within Emacs (it does not have to exist): <code>
+C-x C-f ~/deleteme.txt
+</code></p></li>
+<li><p> Because we started the Emacs server, we can now start the Emacs client with close-to-zero load time:</p></li>
+<li><p> Starting the Emacs client from a new shell: <code>
+$ emacsclient deleteme-from-shell.txt
+</code></p></li>
+</ol>
+
+
+<p>This will open the file &ldquo;deleteme-from-shell.txt&rdquo; in your running Emacs session. Cool, isn&rsquo;t it?</p>
+
+<p><strong>IMPORTANT:</strong> To close the attached Emacs client without killing the Emacs server you have to use &ldquo;C-x #&rdquo; instead of &ldquo;C-x C-c&rdquo;!</p>
+
+<ol>
+<li> Starting the Emacs client from a new shell AND opening a new Emacs frame:Same as step 5, but use &ldquo;-c&rdquo;: <code>
+$ emacsclient -c deleteme-from-shell.txt
+</code></li>
+</ol>
+
+
+<p>Again: Close the client using &ldquo;C-x #&rdquo;! This will close the frame (=window) while keeping the server running.</p>
+
+<ol>
+<li> Starting the Emacs client from a new shell AND opening it within the current shell:Same as step 5, but use &ldquo;-t&rdquo;: <code>
+$ emacsclient -t deleteme-from-shell.txt
+</code></li>
+</ol>
+
+
+<p>This will also work for a true TTY session. An example of a true TTY session can be achieved by switching to TTY-0 (Ctrl+Alt+F1; to return to your graphical display: Ctrl+Alt+F7). Try it:</p>
+
+<p>Ctrl+Alt+F1</p>
+
+<p>Login with username and password, then type</p>
+
+<p><code>
+$ emacsclient -t deleteme-from-shell.txt
+</code></p>
+
+<p>We are still attached to the same session! Cool!</p>
+
+<p>Switch back to your graphical display: Ctrl+Alt+F7</p>
+
+<ol>
+<li><p> The only drawback so far is that we had to start the Emacs server manually from within an Emacs session using &ldquo;M-x server-start&rdquo;. Otherwise &ldquo;emacsclient&rdquo; will complain that it has no server to attach to. So let&rsquo;s include this feature in our Emacs init file (~/.emacs). Add this to your init file: <code>
+(server-start)
+</code></p></li>
+<li><p> The previous step still requires us to start Emacs before we can invoke emacsclient. Let&rsquo;s tell our default shell (ie Bash) to use &ldquo;emacsclient&rdquo; as default. If that doesn&rsquo;t work, our shell should use &ldquo;emacs&rdquo;. Add the following the your ~/.bashrc: <code>
+export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient
+</code></p></li>
+<li><p>. I prefer to to only use a single command, &ldquo;emacs&rdquo;, and &ldquo;the computer&rdquo; should figure out
+IF an Emacs server is running (then I&rsquo;ll use &ldquo;emacsclient&rdquo; to attach to a running Emacs server)</p></li>
+</ol>
+
+
+<p>OR if I have to start a new Emacs session (which, in turn, starts an Emacs server).</p>
+
+<p>You can always use the command <code>emacs</code> instead of <code>emacsclient -c</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">alias </span><span class="nv">emacs</span><span class="o">=</span><span class="s1">&#39;emacsclient -c&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>. Sugar: To be sure to have an Emacs server running, we can add the Emacs daemon to our system startup options. How to add scripts to your startup options differs strongly between different Linux systems. Here&rsquo;s how I did it (using Gnome):&ldquo;System&rdquo; &ndash;> &ldquo;Einstellungen&rdquo; &ndash;> &ldquo;Startprogramme&rdquo;(in English this should correspond to something like &ldquo;System&rdquo; &ndash;> &ldquo;Settings&rdquo; &ndash;> &ldquo;Start programs&rdquo;)I added a new entry with the following content: <code>
+/path/to/your/emacs --daemon
+</code></li>
+</ol>
+
+
+<p>ie:</p>
+
+<p><code>
+/usr/bin/emacs --daemon
+</code></p>
+
+<ol>
+<li>. Further sugar: To use a Gnome panel starter, just add this program parameter to the starter properties: <code>
+/usr/bin/emacsclient -c
+</code></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -894,46 +1088,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/">Problem Upgrading VMware Tools (Because of JIT-Debugger) Solved</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-26T22:50:47+02:00" pubdate data-updated="true">May 26<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After resurrecting an old VMware installation (I started with the first freely available version of VMware.. version 1) and upgrading successfully (see this <a href="http://draptik.wordpress.com/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/">post</a>), I was not able to update Vmware Tools within my guest OS (Windows XP SP3). I tried the automatic update option as well as the interactive update option. Both resulted in Visual Studio&rsquo;s JIT (Just-In-Time) Debugger complaining and aborting the upgrade (on the guest OS).</p>
-
-<p><strong>Solution</strong>: Within the guest OS (WindowsXP in my case), uninstall VMware Tools and restart the guest OS. After restarting the guest OS the VMware UI &ldquo;VMware Tools&rdquo;-section will have changed from &ldquo;Upgrade VMware Tools&rdquo; to &ldquo;Install VMware Tools&rdquo;. Clicking the latter installed a fresh version of VMware tools without any problems.</p>
-
-<p>This worked with VMware-server-2.0.1-156745 in combination with host OS Ubuntu 9.04 and guest OS Windows XP SP3.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -951,6 +1105,10 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
       </li>
     
@@ -964,10 +1122,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
     
       <li class="post">
         <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
       </li>
     
   </ul>

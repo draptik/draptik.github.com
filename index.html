@@ -9,7 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="TL;DR My AngularJS demo app has a new backend implementation using node.js. &hellip; After some reading I decided I&rsquo;ll stick with node&rsquo;s &hellip;">
+  <meta name="description" content="JavaScript stuff: Basics of NodeJS and ExpressJS: REST, Authentication, Sessions
+Another great tutorial on SPAs: Authentication in Single Page &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-03T23:30:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JavaScript stuff:</p>
+
+<ul>
+<li>Basics of NodeJS and ExpressJS: <a href="http://blog.modulus.io/nodejs-and-express-create-rest-api">REST</a>, <a href="http://blog.modulus.io/nodejs-and-express-basic-authentication">Authentication</a>, <a href="http://blog.modulus.io/nodejs-and-express-sessions">Sessions</a></li>
+<li>Another great tutorial on SPAs: <a href="https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs">Authentication in Single Page Applications</a></li>
+<li>If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: <a href="http://mean.io/">mean.io</a> (Template for MongoDB, ExpressJS, AngularJS and NodeJS)</li>
+<li>and here&rsquo;s a great <a href="http://www.thinkster.io/pick/GUIDJbpIie/angularjs-tutorial-learn-to-build-modern-web-apps">Tutorial on MEAN</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li>This <a href="http://www.youtube.com/watch?v=9ZSbuwCmwuc">video by Roy Osherove</a> shows how to introduce seams into brownfield projects (start at approx. 45min into the video if you want to skip the book recommendations and the intro to the SOLID principle). I learned how to introduce seams into static c# classes and methods using virtual&hellip;</li>
+<li>C# psychology <a href="http://de.slideshare.net/Coverity/the-psychology-of-c-analysis-24025354">by Eric Lippert&hellip;</a></li>
+<li>NHibernate turbo? (untested, but from the man himself: <a href="http://ayende.com/blog/164353/nhibernate-runfaster-secret-toggle?Key=587fe66e-0bcb-4146-96a6-cdb6e2df7df5&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+AyendeRahien+%28Ayende+%40+Rahien%29">pimping NHibernate by Ayende</a>)</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2874,101 +2928,6 @@ Among other things, it provides bidirectional data binding.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/">ReorderList Demo for AjaxControlToolkit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-30T15:55:00+02:00" pubdate data-updated="true">May 30<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/Default.aspx">AjaxControlToolkit&rsquo;s</a>
-<a href="http://www.asp.net/ajaxLibrary/AjaxControlToolkitSampleSite/ReorderList/ReorderList.aspx">ReorderList</a>
-provides drag and drop functionality within a list.</p>
-
-<figure class='code'><figcaption><span>ReorderListDemo.aspx</span><a href='https://github.com/draptik/actdemos/blob/master/AjaxControlToolkitDemos/AjaxControlToolkitDemos/Pages/ReorderListDemo.aspx'>Source Article</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;CssReorderList&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="c">&lt;!-- ClientMode=&quot;AutoID&quot; is required for certain versions of AjaxControlToolkit  --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ajaxToolkit:ReorderList</span> <span class="na">ID=</span><span class="s">&quot;MyReorderList&quot;</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span>
-</span><span class='line'>                             <span class="na">DataKeyField=</span><span class="s">&quot;MyId&quot;</span>
-</span><span class='line'>                             <span class="na">SortOrderField=</span><span class="s">&quot;MyPosition&quot;</span>
-</span><span class='line'>                             <span class="na">PostBackOnReorder=</span><span class="s">&quot;False&quot;</span>
-</span><span class='line'>                             <span class="na">ClientIDMode=</span><span class="s">&quot;AutoID&quot;</span>
-</span><span class='line'>                             <span class="na">DragHandleAlignment=</span><span class="s">&quot;Left&quot;</span>
-</span><span class='line'>                             <span class="na">ItemInsertLocation=</span><span class="s">&quot;Beginning&quot;</span>
-</span><span class='line'>                             <span class="na">AllowReorder=</span><span class="s">&quot;true&quot;</span>
-</span><span class='line'>        <span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;ItemTemplate&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;background-color: yellow;&quot;</span> <span class="na">class=</span><span class="s">&quot;CssItemArea&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;asp:HiddenField</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;hdfMyId&quot;</span>
-</span><span class='line'>                  <span class="na">Value=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyId %&gt;&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;asp:Label</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;lblName&quot;</span>
-</span><span class='line'>                  <span class="na">Text=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyName %&gt;&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;asp:Label</span> <span class="na">runat=</span><span class="s">&quot;server&quot;</span> <span class="na">ID=</span><span class="s">&quot;lblPosition&quot;</span>
-</span><span class='line'>                  <span class="na">Text=</span><span class="s">&quot;&lt;%# ((DummyViewModel)Container.DataItem).MyPosition %&gt;&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/ItemTemplate&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;DragHandleTemplate&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;CssDragHandle&quot;</span><span class="nt">&gt;&lt;strong&gt;</span>DRAG ME<span class="nt">&lt;/strong&gt;&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/DragHandleTemplate&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/ajaxToolkit:ReorderList&gt;</span>
-</span><span class='line'><span class="nt">&lt;div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;ve placed a working example project on <a href="https://github.com/draptik/actdemos">github</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2984,6 +2943,10 @@ provides drag and drop functionality within a list.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
       </li>
     
@@ -2997,10 +2960,6 @@ provides drag and drop functionality within a list.</p>
     
       <li class="post">
         <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
       </li>
     
   </ul>
