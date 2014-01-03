@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2013-10-01T22:19:43+02:00</updated>
+  <updated>2014-01-03T22:44:56+01:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -83,7 +83,10 @@ var DEFAULT_PORT = 8000; // &lt;-- frontend port
 
 <p>Cross-origin resource sharing (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support">Wikipedia for details</a>).</p>
 
-<p>CORS can be configured on the server and/or the client side. The following example demonstrates both approaches.</p>
+<p><strong>2014-01-03</strong>
+<del>CORS can be configured on the server and/or the client side.</del>
+CORS must be configured on the server <strong>and</strong> the client side (Thanks to Richard for the pointer!).
+The following example demonstrates <del>both approaches</del> this.</p>
 
 <h3>Server side configuration example (Java)</h3>
 
