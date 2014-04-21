@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Intel&rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, &hellip;">
+  <meta name="description" content="There must be a smarter way to do this&hellip; But I&rsquo;ll describe my combersome way anyway. It depends on having windows somewhere. Old phone: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/">Porting Phone Book From Nokia 6230i to Samsung S7220</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-30T05:04:17+02:00" pubdate data-updated="true">May 30<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There must be a smarter way to do this&hellip; But I&rsquo;ll describe my combersome way anyway. It depends on having windows somewhere.</p>
+
+<p>Old phone: Nokia 6230i</p>
+
+<p>New phone: Samsung S7220</p>
+
+<p><strong>Goal</strong>: Get all phone contacts from old phone to new phone.</p>
+
+<p><strong>Solution</strong>:</p>
+
+<ol>
+<li><p> Install Nokia phone software on windows</p></li>
+<li><p> Sync phone content with Outlook-Express (make sure Outlook-Express has an emtpy address book before)</p></li>
+<li><p> Export the address book from Outlook-Express as vcf or wab to a file</p></li>
+<li><p> Install Samsung phone software on windows (does not work with wine)</p></li>
+<li><p> Import address book from vcf/wab</p></li>
+<li><p> Synchronize with new phone using Windows software from Samsung</p></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -848,51 +902,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/04/09/pidgin-the-multi-plattform-multi-protocol-instant-messenger/">Pidgin, the Multi-plattform, Multi-protocol Instant Messenger</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-09T16:23:41+02:00" pubdate data-updated="true">Apr 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://www.pidgin.im/">Pidgin </a>is one of the many multi-protocol instant messengers. And its available for many plattforms (Windows, GNU/Linux, Mac OS X, etc). Although pidgin supports many protocols out-of-the-box (f. ex. ICQ, AIM, IRC, XMPP/Jabber, Groupwise), new plugins are constantly emerging. The <a href="http://developer.pidgin.im/wiki/ThirdPartyPlugins">Pidgin-Plugin</a> page gives a nice summary.</p>
-
-<p>Some additional plugins I&rsquo;ve come across are:</p>
-
-<ul>
-<li><p><strong>Skype</strong> Note: This still requires a working <a href="http://www.skype.com">Skype</a> installation (<a href="http://eion.robbmob.com/">http://eion.robbmob.com/</a>)</p></li>
-<li><p><strong>Twitter</strong> Supports <a href="http://twitter.com">Twitter</a>, <a href="http://identi.ca/">Identi.ca</a> and Laconica-base servers. You can microblog directly from within pidgin.  (<a href="http://code.google.com/p/microblog-purple/">http://code.google.com/p/microblog-purple/</a>)</p></li>
-<li><p><strong>Facebook</strong> (<a href="http://code.google.com/p/pidgin-facebookchat/">http://code.google.com/p/pidgin-facebookchat/</a>)</p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -910,6 +919,10 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
       </li>
     
@@ -923,10 +936,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     
       <li class="post">
         <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
       </li>
     
   </ul>

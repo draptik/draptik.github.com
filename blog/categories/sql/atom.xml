@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sql | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/sql/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2014-04-21T04:35:48+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #4]]></title>
+    <link href="http://draptik.github.io/blog/2014/04/21/link-collection-number-4/"/>
+    <updated>2014-04-21T03:24:32+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/04/21/link-collection-number-4</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a bit behind on this section, I know. Here&rsquo;s the first batch:</p>
+
+<p>currently reading:</p>
+
+<ul>
+<li><a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=la_B002O21DQW_1_1?s=books&amp;ie=UTF8&amp;qid=1398046597&amp;sr=1-1">Growing Object-Oriented Software, Guided by Tests</a></li>
+<li><a href="http://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon-ebook/dp/B00BCLEBN8/ref=la_B0096T71SA_1_1?s=books&amp;ie=UTF8&amp;qid=1398046585&amp;sr=1-1">Implementing Domain-Driven Design</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/21389283/mark-seemanns-conflicting-statements-about-bastard-injection-need-some-clarifi/21428909?stw=2#21428909">Mark Seemann&rsquo;s on Bastard Injection</a></li>
+<li><a href="http://blogs.msdn.com/b/ericlippert/archive/2009/05/18/foreach-vs-foreach.aspx">foreach vs ForEach</a></li>
+</ul>
+
+
+<p>sql stuff:</p>
+
+<ul>
+<li><a href="http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/?utm_content=bufferaf1ce&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">SQL Joins explained</a></li>
+<li><a href="http://security.stackexchange.com/questions/25684/how-can-i-explain-sql-injection-without-technical-jargon/25710#25710">SQL explained</a></li>
+</ul>
+
+
+<p>meta:</p>
+
+<ul>
+<li><a href="http://highscalability.com/blog/2014/3/17/intuitively-showing-how-to-scale-a-web-application-using-a-c.html">scaling web apps (decribed as comic)</a></li>
+<li><a href="http://carnotaurus.philipcarney.com/post/3010984357/classes-versus-prototypes-some-philosophical-and">Classes versus Prototypes: A &lsquo;nerd&rsquo; paper from 1997</a></li>
+</ul>
+
+
+<p>&lsquo;Important&rsquo; images/quotes:</p>
+
+<ul>
+<li><a href="http://pbs.twimg.com/media/BhWAOVoIgAA_Tjb.jpg">Askhole</a></li>
+<li><a href="http://pbs.twimg.com/media/BhFyrJbIQAAt2Wb.png">Bugfixing</a></li>
+<li><a href="http://cultureby.com/2011/05/douglas-adams-on-generational-rhythms-in-the-adoption-of-tech.html">Douglas Adams on generations and technology</a></li>
+</ul>
+
+
+<p>other fun stuff:</p>
+
+<ul>
+<li><a href="http://www.mymodernmet.com/profiles/blogs/3d-gifs">Incredible 3D GIFs Created with a Simple Visual Effect</a></li>
+</ul>
+
+
+<p>not so fun:</p>
+
+<ul>
+<li><a href="http://pando.com/2013/10/26/i-challenged-hackers-to-investigate-me-and-what-they-found-out-is-chilling/?utm_content=buffer3a5a4&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">I challenged hackers to investigate me and what they found out is chilling</a></li>
+</ul>
+
+
+<p>And the best tv show I&rsquo;ve seen in ages is called <a href="http://www.imdb.com/title/tt2356777/">True Detective</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
