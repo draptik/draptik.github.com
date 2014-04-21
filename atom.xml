@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-01-08T22:02:18+01:00</updated>
+  <updated>2014-04-21T02:41:51+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -14,7 +14,448 @@
 
   
   <entry>
-    <title type="html"><![CDATA[link collection #3]]></title>
+    <title type="html"><![CDATA[Installing Seafile on Raspberry Pi]]></title>
+    <link href="http://draptik.github.io/blog/2014/04/21/installing-seafile-on-raspberry-pi/"/>
+    <updated>2014-04-21T00:23:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/04/21/installing-seafile-on-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to <a href="http://www.dropbox.com">Dropbox</a> for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi.</p>
+
+<p>I choose <a href="http://seafile.com/en/home/">Seafile</a> over <a href="http://owncloud.org/">Owncloud</a> because I have read multiple posts that (1) Owncloud is not very responsive an a Raspberry Pi and (2) Seafile has a better security model (see <a href="http://blog.kovah.de/private-cloud-owncloud-alternativen-teil-2">1</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">2</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">3</a>).</p>
+
+<p>Using a <a href="TODO">Raspberry Pi</a> for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. <a href="TODO">Raspbian</a>) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.</p>
+
+<p>Installing Seafile should be straightforward from following the instructions at the official <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">Seafile Wiki</a>. If you can read German, you can also follow the excellent instructions on Jan Karres&rsquo;s blog <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Raspberry Pi: Owncloud-Alternative Seafile Server installieren</a>.</p>
+
+<p>As there are some pitfalls along the way, I&rsquo;ll describe how I installed Seafile with SSL support.</p>
+
+<h2>Installation</h2>
+
+<p>Note: This is mainly a merge of <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Jan Karres&rsquo;s blog post (in German)</a> and the <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">official wiki documentation from Seafile</a>.</p>
+
+<h3>Demo values</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>domain: no-ip.org
+</span><span class='line'>sub-domain: mycloud
+</span><span class='line'>DDNS-domain: mycloud.no-ip.org
+</span><span class='line'>internal server name: mycloud
+</span><span class='line'>internal IP address of Raspberry Pi: 192.168.1.42</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Prerequisites</h3>
+
+<p>I&rsquo;ll assume you have a working Raspian installation on a Raspberry Pi.</p>
+
+<p>If you want to reach your Seafile server from the internet and your ISP only provides you with a dynamic IP you will have to register with a <a href="http://en.wikipedia.org/wiki/Dynamic_DNS">DDNS</a> provider such as <a href="http://dyn.com/dns/">Dyn</a> or <a href="http://www.noip.com/">no-ip.com</a>.</p>
+
+<h3>Step 0 Update</h3>
+
+<p>Update Raspbian:</p>
+
+<p><code>$ sudo aptitude update</code></p>
+
+<h3>Step 1 Install dependencies</h3>
+
+<p>Install dependencies required by Seafile:</p>
+
+<p><code>$ sudo aptitude -y install python2.7 python-setuptools python-simplejson python-imaging sqlite3</code></p>
+
+<h3>Step 2 Create seafile user</h3>
+
+<p>For security reasons we&rsquo;ll create a separate user for running Seafile. The user will be called <code>seafile</code> and will not require a password, since we will never be accessing this user directly through SSH.</p>
+
+<p><code>$ sudo adduser seafile --disabled-password</code></p>
+
+<p>Switch to being <code>seafile</code> user:</p>
+
+<p><code>$ sudo su seafile</code></p>
+
+<p>Change to <code>seafile</code>&rsquo;s home directory:</p>
+
+<p><code>$ cd</code></p>
+
+<h3>Step 3 Download and unpack</h3>
+
+<p>First we&rsquo;ll create a new folder <code>mycloud</code> in the seafile user&rsquo;s home directory:</p>
+
+<p><code>$ mkdir mycloud &amp;&amp; cd mycloud</code></p>
+
+<p>Download and unpack Seafile Server for Raspberry Pi from <a href="http://www.seafile.com/en/download/">http://www.seafile.com/en/download/</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>wget https://bitbucket.org/haiwen/seafile/downloads/seafile-server_2.1.5_pi.tar.gz
+</span><span class='line'>tar -xvzf seafile-server_*
+</span><span class='line'>mkdir installed
+</span><span class='line'>mv seafile-server_* installed
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should have the following directory structure:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>tree /home/seafile/mycloud/ -L 2
+</span><span class='line'>/home/seafile/mycloud/
+</span><span class='line'>├── installed
+</span><span class='line'>│   └── seafile-server_2.1.5_pi.tar.gz
+</span><span class='line'>└── seafile-server-2.1.5
+</span><span class='line'>    ├── reset-admin.sh
+</span><span class='line'>    ├── runtime
+</span><span class='line'>    ├── seaf-fuse.sh
+</span><span class='line'>    ├── seafile
+</span><span class='line'>    ├── seafile.sh
+</span><span class='line'>    ├── seahub
+</span><span class='line'>    ├── seahub.sh
+</span><span class='line'>    ├── setup-seafile-mysql.py
+</span><span class='line'>    ├── setup-seafile-mysql.sh
+</span><span class='line'>    ├── setup-seafile.sh
+</span><span class='line'>    └── upgrade
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>All config files are in the folder <code>mycloud</code> (currently there are no config files present yet).
+New versions can be installed side by side without having to change the config files. The install process will create a soft link <code>seafile-server-latest</code> pointing the the most current installation.</p>
+
+<h3>Step 4 Installation</h3>
+
+<p><code>$ cd seafile-server-2.1.5</code></p>
+
+<p>Before you start the install process you can have a look at the options being configured during installation <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server#SSetup">here</a>.</p>
+
+<p>For this example we&rsquo;ll assume your DDNS domain is <code>mycloud.no-ip.org</code> and that we&rsquo;ll use the default location for storing our data.
+Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
+
+<p>During the installation of Seahub (the web frontend for the Seafile server) you must enter an admin email address and provide a password (this password is your Seafile admin password and should not be the same as your email account password).</p>
+
+<p>All other question can be answered by using the default values (press ENTER).</p>
+
+<p><code>./setup-seafile.sh</code></p>
+
+<p>Your directory tree should now look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>tree . -L 2
+</span><span class='line'>.
+</span><span class='line'>├── ccnet <span class="c"># &lt;--------------------------- configuration files</span>
+</span><span class='line'>│   ├── ccnet.conf
+</span><span class='line'>│   ├── ccnet.conf.lan
+</span><span class='line'>│   ├── ccnet.conf.wan
+</span><span class='line'>│   ├── ccnet.db
+</span><span class='line'>│   ├── GroupMgr
+</span><span class='line'>│   ├── misc
+</span><span class='line'>│   ├── mykey.peer
+</span><span class='line'>│   ├── OrgMgr
+</span><span class='line'>│   ├── PeerMgr
+</span><span class='line'>│   └── seafile.ini
+</span><span class='line'>├── conf
+</span><span class='line'>│   └── seafdav.conf
+</span><span class='line'>├── installed
+</span><span class='line'>│   └── seafile-server_2.1.5_pi.tar.gz
+</span><span class='line'>├── logs
+</span><span class='line'>│   ├── ccnet.log
+</span><span class='line'>│   ├── controller.log
+</span><span class='line'>│   ├── http.log
+</span><span class='line'>│   ├── seafile.log
+</span><span class='line'>│   ├── seahub_django_request.log
+</span><span class='line'>│   └── seahub.log
+</span><span class='line'>├── seafile-server-2.1.5
+</span><span class='line'>│   ├── reset-admin.sh
+</span><span class='line'>│   ├── runtime
+</span><span class='line'>│   ├── seaf-fuse.sh
+</span><span class='line'>│   ├── seafile
+</span><span class='line'>│   ├── seafile.sh
+</span><span class='line'>│   ├── seahub
+</span><span class='line'>│   ├── seahub.sh
+</span><span class='line'>│   ├── setup-seafile-mysql.py
+</span><span class='line'>│   ├── setup-seafile-mysql.sh
+</span><span class='line'>│   ├── setup-seafile.sh
+</span><span class='line'>│   └── upgrade
+</span><span class='line'>├── seafile-server-latest -&gt; seafile-server-2.1.5
+</span><span class='line'>├── seahub-data
+</span><span class='line'>│   └── avatars
+</span><span class='line'>├── seahub.db
+</span><span class='line'>├── seahub_settings.py
+</span><span class='line'>└── seahub_settings.pyc
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 5 Update URLs for Seahub</h3>
+
+<p><code>nano /home/seafile/mycloud/ccnet/ccnet.conf</code></p>
+
+<figure class='code'><figcaption><span>/home/seafile/mycloud/ccnet/ccnet.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">SERVICE_URL</span> <span class="o">=</span> https://mycloud.no-ip.org:8001
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Don&rsquo;t forget replacing <code>http</code> with <code>https</code>&hellip;</p>
+
+<p>Also add a line to <code>seahub_settings.py</code>.</p>
+
+<p><code>nano /home/seafile/mycloud/seahub_settings.py</code></p>
+
+<figure class='code'><figcaption><span>/home/seafile/mycloud/seahub_settings.py</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>SECRET_KEY ...
+</span><span class='line'><span class="nv">HTTP_SERVER_ROOT</span> <span class="o">=</span> <span class="s1">&#39;https://mycloud.no-ip.org:8001/seafhttp&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 6 (Re)start Seahub in FastCGI mode</h3>
+
+<p><code>/home/seafile/mycloud/seafile-server-latest/seahub.sh stop</code></p>
+
+<p><code>/home/seafile/mycloud/seafile-server-latest/seahub.sh start-fastcgi</code></p>
+
+<h3>Step 7 Install nginx (as admin)</h3>
+
+<p>IMPORTANT: Do not run steps 7 to 11 as user <code>seafile</code>. Use the default <code>pi</code> user for admin stuff.</p>
+
+<p><code>sudo aptitude install nginx</code></p>
+
+<p>Patching nginx for Raspberry Pi:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo sed -i <span class="s2">&quot;s/worker_processes 4;/worker_processes 1;/g&quot;</span> /etc/nginx/nginx.conf
+</span><span class='line'>sudo sed -i <span class="s2">&quot;s/worker_connections 768;/worker_connections 128;/g&quot;</span> /etc/nginx/nginx.conf
+</span><span class='line'>sudo /etc/init.d/nginx start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 8 Create a self certified SSL certificate (as admin)</h3>
+
+<p>The following commands create a self certified SSL certificate. The second to last command is interactive and will ask a few questions. Provide <em>Country Name</em> (enter your two letter country code, i.e. DE for Germany, UK for United Kingdom) and <em>Common Name</em>. The later should be your DDNS name (<code>mycloud.no-ip.org</code> in this example).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>sudo mkdir /etc/nginx/ssl
+</span><span class='line'><span class="nb">cd</span> /etc/nginx/ssl
+</span><span class='line'>sudo openssl genrsa -out seahub.key 2048
+</span><span class='line'>sudo openssl req -new -key seahub.key -out seahub.csr
+</span><span class='line'>sudo openssl x509 -req -days 3650 -in seahub.csr -signkey seahub.key -out seahub.crt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 9 Create nginx Seahub site (as admin)</h3>
+
+<p><code>sudo nano /etc/nginx/sites-available/seahub</code></p>
+
+<figure class='code'><figcaption><span>/etc/nginx/sites-available/seahub</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>server <span class="o">{</span>
+</span><span class='line'>    listen 8001; <span class="c"># &lt;--------------------------------------- NGINX PORT</span>
+</span><span class='line'>    ssl on; <span class="c"># &lt;-------------------------------------------- SSL</span>
+</span><span class='line'>    ssl_certificate /etc/nginx/ssl/seahub.crt; <span class="c"># &lt;--------- SSL</span>
+</span><span class='line'>    ssl_certificate_key /etc/nginx/ssl/seahub.key; <span class="c"># &lt;----- SSL</span>
+</span><span class='line'>    server_name mycloud.no-ip.org.tld; <span class="c"># &lt;----------------- CHANGE THIS</span>
+</span><span class='line'>    error_page 497  https://<span class="nv">$host</span>:<span class="nv">$server_port$request_uri</span>;
+</span><span class='line'>
+</span><span class='line'>    location / <span class="o">{</span>
+</span><span class='line'>        fastcgi_pass    127.0.0.1:8000;
+</span><span class='line'>        fastcgi_param   SCRIPT_FILENAME     <span class="nv">$document_root$fastcgi_script_name</span>;
+</span><span class='line'>        fastcgi_param   PATH_INFO           <span class="nv">$fastcgi_script_name</span>;
+</span><span class='line'>
+</span><span class='line'>        fastcgi_param   SERVER_PROTOCOL <span class="nv">$server_protocol</span>;
+</span><span class='line'>        fastcgi_param   QUERY_STRING        <span class="nv">$query_string</span>;
+</span><span class='line'>        fastcgi_param   REQUEST_METHOD      <span class="nv">$request_method</span>;
+</span><span class='line'>        fastcgi_param   CONTENT_TYPE        <span class="nv">$content_type</span>;
+</span><span class='line'>        fastcgi_param   CONTENT_LENGTH      <span class="nv">$content_length</span>;
+</span><span class='line'>        fastcgi_param   SERVER_ADDR         <span class="nv">$server_addr</span>;
+</span><span class='line'>        fastcgi_param   SERVER_PORT         <span class="nv">$server_port</span>;
+</span><span class='line'>        fastcgi_param   SERVER_NAME         <span class="nv">$server_name</span>;
+</span><span class='line'>        fastcgi_param   HTTPS   on;
+</span><span class='line'>        fastcgi_param HTTP_SCHEME https;
+</span><span class='line'>
+</span><span class='line'>        access_log      /var/log/nginx/seahub.access.log;
+</span><span class='line'>        error_log       /var/log/nginx/seahub.error.log;
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    location /seafhttp <span class="o">{</span>
+</span><span class='line'>        rewrite ^/seafhttp<span class="o">(</span>.*<span class="o">)</span><span class="nv">$ $1</span> <span class="nb">break</span>;
+</span><span class='line'>        proxy_pass http://127.0.0.1:8082;
+</span><span class='line'>        client_max_body_size 0;
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    location /media <span class="o">{</span>
+</span><span class='line'>        root /home/seafile/seafile-server/seahub;
+</span><span class='line'>        <span class="c"># include /etc/nginx/mime.types; # &lt;--- UNCOMMENT THIS IF CSS FILES AREN&#39;T LOADED</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Step 10 Activate nginx Seahub site (as admin)</h3>
+
+<p><code>sudo ln -s /etc/nginx/sites-available/seahub /etc/nginx/sites-enabled/seahub</code></p>
+
+<h3>Step 11 Restart nginx (as admin)</h3>
+
+<p><code>sudo /etc/init.d/nginx restart</code></p>
+
+<p>TODO Maybe add simple image?</p>
+
+<h3>Step 12 Network: Setup port forwarding</h3>
+
+<p>Depending on your router, the naming might differ. Some routers call it &ldquo;port mapping&rdquo;, some call it &ldquo;port forwarding&rdquo;. For what we are doing, it&rsquo;s all the same.</p>
+
+<p>My ISP provided me with a combined dsl-modem/router called &ldquo;Easybox 904 xDSL&rdquo;, so YMMV:</p>
+
+<p><img class="center" src="http://draptik.github.io/images/posts/seafile_rpi/router_portmapping.png"></p>
+
+<h3>Step 13 Test if everything works</h3>
+
+<h4>LAN test using IP address</h4>
+
+<p>Test if Seafile/Seahub is reachable from within your LAN using the <em>IP address</em> of your Raspberry Pi. Assuming the Raspberry Pi has the internal IP address 192.168.1.42, entering <code>https://192.168.1.42:8001</code> in your browser should render the Seahub page.</p>
+
+<p>If this fails, go back and confirm that you don&rsquo;t have any typos in your config files.</p>
+
+<h4>Internet test</h4>
+
+<p>Test if Seafile/Seahub is reachable from the <em>internet</em>. You must use a device which is not connected to your LAN. If you have a smartphone, you can deactivate your WiFi, and try connecting to your newly setup server at <code>https://mycloud.no-ip.org:8001</code>. The Seahub page should be rendered correctly in your &lsquo;internet&rsquo; browser.</p>
+
+<p>If this fails, go back and confirm that you don&rsquo;t have any typos in your config files.</p>
+
+<h4>LAN test using DDNS</h4>
+
+<p>Try connecting to Seafile/Seahub from within the LAN using the DDNS name: <code>https://mycloud.no-ip.org:8001</code>.</p>
+
+<p>If this works out of the box, you can skip the rest of this article.</p>
+
+<h3>Step 14</h3>
+
+<p>I should probably mention that I am not a trained network admin. So everything below falls under the category &ldquo;works for my setup, sorry I can&rsquo;t provide support&rdquo;.</p>
+
+<p>Here&rsquo;s an image of what has to be accomplished:</p>
+
+<p><img class="center" src="http://draptik.github.io/images/posts/seafile_rpi/nat-loopback.svg"></p>
+
+<h3>Step 14a NAT loopback</h3>
+
+<p>If trying to reach the IP of your DDNS from within your LAN fails, you should try to setup your NAT loopback (see your router documentation for details).</p>
+
+<h3>Step 14b Workaround, in case NAT loopback doesn&rsquo;t work</h3>
+
+<p>This is the tricky part. (Marko, thanks!)</p>
+
+<p><em>BEWARE: This works with my setup, but it might ruin your setup.</em></p>
+
+<ol>
+<li><p>Rename internal LAN DNS zone to <code>no-ip.org</code> (replace with your domain)</p>
+
+<p> <img class="center" src="http://draptik.github.io/images/posts/seafile_rpi/router_rename_wan_domain.png" title="'Rename internal LAN DNS zone'" ></p></li>
+<li><p>Rename internal LAN name (static DHCP lease) to <code>mycould</code> (replace with your sub domain)</p>
+
+<p> <img class="center" src="http://draptik.github.io/images/posts/seafile_rpi/router_dhcp_static_leases.png" title="'Rename internal LAN name'" ></p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Link Collection #3]]></title>
     <link href="http://draptik.github.io/blog/2014/01/03/link-collection-number-3/"/>
     <updated>2014-01-03T23:30:00+01:00</updated>
     <id>http://draptik.github.io/blog/2014/01/03/link-collection-number-3</id>
@@ -40,7 +481,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Node.js backend providing REST]]></title>
+    <title type="html"><![CDATA[Node.js Backend Providing REST]]></title>
     <link href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/"/>
     <updated>2013-10-01T21:25:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest</id>
@@ -383,7 +824,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[link collection #2]]></title>
+    <title type="html"><![CDATA[Link Collection #2]]></title>
     <link href="http://draptik.github.io/blog/2013/09/16/link-collection-2/"/>
     <updated>2013-09-16T21:58:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/09/16/link-collection-2</id>
@@ -692,7 +1133,7 @@ The following example demonstrates <del>both approaches</del> this.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[link collection #1]]></title>
+    <title type="html"><![CDATA[Link Collection #1]]></title>
     <link href="http://draptik.github.io/blog/2013/08/05/link-collection-1/"/>
     <updated>2013-08-05T20:09:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/08/05/link-collection-1</id>
@@ -717,7 +1158,7 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[RESTful CRUD with AngularJS]]></title>
+    <title type="html"><![CDATA[RESTful CRUD With AngularJS]]></title>
     <link href="http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/"/>
     <updated>2013-07-28T11:15:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs</id>
@@ -1185,7 +1626,7 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Unit testing RESTful services]]></title>
+    <title type="html"><![CDATA[Unit Testing RESTful Services]]></title>
     <link href="http://draptik.github.io/blog/2013/07/19/unit-testing-restful-services/"/>
     <updated>2013-07-19T13:18:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/07/19/unit-testing-restful-services</id>
@@ -2088,7 +2529,7 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[AngularJS example using a Java RESTful web service]]></title>
+    <title type="html"><![CDATA[AngularJS Example Using a Java RESTful Web Service]]></title>
     <link href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/"/>
     <updated>2013-07-13T20:12:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service</id>
@@ -2556,7 +2997,7 @@ Among other things, it provides bidirectional data binding.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Listing environment variables (Linux)]]></title>
+    <title type="html"><![CDATA[Listing Environment Variables (Linux)]]></title>
     <link href="http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux/"/>
     <updated>2013-07-05T23:33:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux</id>
@@ -2604,7 +3045,7 @@ Among other things, it provides bidirectional data binding.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[ReorderList demo for AjaxControlToolkit]]></title>
+    <title type="html"><![CDATA[ReorderList Demo for AjaxControlToolkit]]></title>
     <link href="http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/"/>
     <updated>2013-05-30T15:55:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit</id>
@@ -2672,7 +3113,7 @@ provides drag and drop functionality within a list.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Setting up a network printer using Raspberry Pi]]></title>
+    <title type="html"><![CDATA[Setting Up a Network Printer Using Raspberry Pi]]></title>
     <link href="http://draptik.github.io/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/"/>
     <updated>2013-05-30T08:30:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/05/30/setting-up-a-network-printer-using-raspberry-pi</id>
@@ -2685,7 +3126,7 @@ provides drag and drop functionality within a list.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[RPi/XBMC: Keeping content in sync]]></title>
+    <title type="html"><![CDATA[RPi/XBMC: Keeping Content in Sync]]></title>
     <link href="http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/"/>
     <updated>2013-05-25T19:24:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync</id>
@@ -2821,7 +3262,7 @@ Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mapping missing context menu in OpenELEC with Remote Control HAMA MCE]]></title>
+    <title type="html"><![CDATA[Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE]]></title>
     <link href="http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/"/>
     <updated>2013-05-24T21:27:00+02:00</updated>
     <id>http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce</id>
@@ -2993,7 +3434,7 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[IT book recommendations]]></title>
+    <title type="html"><![CDATA[IT Book Recommendations]]></title>
     <link href="http://draptik.github.io/blog/2012/12/15/it-book-recommendations/"/>
     <updated>2012-12-15T01:17:20+01:00</updated>
     <id>http://draptik.github.io/blog/2012/12/15/it-book-recommendations</id>
@@ -3002,7 +3443,7 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Why I switched from Ubuntu to Arch Linux]]></title>
+    <title type="html"><![CDATA[Why I Switched From Ubuntu to Arch Linux]]></title>
     <link href="http://draptik.github.io/blog/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/"/>
     <updated>2012-10-16T03:35:34+02:00</updated>
     <id>http://draptik.github.io/blog/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux</id>
@@ -3025,7 +3466,7 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Impressions during developing my first application with Mono and Gtk# (GtkSharp)]]></title>
+    <title type="html"><![CDATA[Impressions During Developing My First Application With Mono and Gtk# (GtkSharp)]]></title>
     <link href="http://draptik.github.io/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/"/>
     <updated>2012-09-30T02:57:56+02:00</updated>
     <id>http://draptik.github.io/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp</id>
@@ -3097,31 +3538,11 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[PS1 prompt]]></title>
+    <title type="html"><![CDATA[PS1 Prompt]]></title>
     <link href="http://draptik.github.io/blog/2012/08/20/ps1-prompt/"/>
     <updated>2012-08-20T23:31:20+02:00</updated>
     <id>http://draptik.github.io/blog/2012/08/20/ps1-prompt</id>
     <content type="html"><![CDATA[<p>Here&rsquo;s my current PS1 prompt for bash with optional git support: <a href="https://gist.github.com/3324534">https://gist.github.com/3324534</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GNU/Emacs: Desktop Save with "Lazy Loading"]]></title>
-    <link href="http://draptik.github.io/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/"/>
-    <updated>2012-03-27T22:33:18+02:00</updated>
-    <id>http://draptik.github.io/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading</id>
-    <content type="html"><![CDATA[<p>When using <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html">desktop-save-mode</a> using <code>desktop-restore-eager</code> is a must:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">custom-set-variables</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-save-mode</span> <span class="nv">t</span><span class="p">)</span>
-</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-restore-eager</span> <span class="mi">5</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>desktop-save-mode</code> will load your last session. Setting <code>desktop-restore-eager</code> to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</p>
 ]]></content>
   </entry>
   

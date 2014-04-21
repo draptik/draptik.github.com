@@ -9,12 +9,10 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Note to self: Converting Hg repos to git using hg-fast-export. Installation: $ sudo aptitude install hg-fast-export Usage: 1
+  <meta name="description" content="When using desktop-save-mode using desktop-restore-eager is a must: 1
 2
 3
-4
-5
-$ cd new_git_dir &hellip;">
+(custom-set-variables &#39;(desktop-save-mode t) &#39;(desktop-restore- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -29,7 +27,7 @@ $ cd new_git_dir &hellip;">
   <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -71,6 +69,53 @@ $ cd new_git_dir &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/">GNU/Emacs: Desktop Save With &#8220;Lazy Loading&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-27T22:33:18+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When using <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html">desktop-save-mode</a> using <code>desktop-restore-eager</code> is a must:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">custom-set-variables</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-save-mode</span> <span class="nv">t</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-restore-eager</span> <span class="mi">5</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>desktop-save-mode</code> will load your last session. Setting <code>desktop-restore-eager</code> to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -555,42 +600,6 @@ Updater 10.00.00.39 21.06.2011
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/04/12/nhibernate-simple-setup/">NHibernate Simple Setup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-12T00:50:05+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My simple NHibernate 3 setup under GitHub: <a href="https://github.com/draptik/nhibernate-nunit">https://github.com/draptik/nhibernate-nunit</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -608,6 +617,10 @@ Updater 10.00.00.39 21.06.2011
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
       </li>
     
@@ -621,10 +634,6 @@ Updater 10.00.00.39 21.06.2011
     
       <li class="post">
         <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
       </li>
     
   </ul>
@@ -650,7 +659,7 @@ Updater 10.00.00.39 21.06.2011
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
