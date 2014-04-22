@@ -9,7 +9,7 @@ With all the security issues in the past relating to privacy I've been wanting t
 
 I choose [Seafile](http://seafile.com/en/home/) over [Owncloud](http://owncloud.org/) because I have read multiple posts that (1) Owncloud is not very responsive an a Raspberry Pi and (2) Seafile has a better security model (see [1](http://blog.kovah.de/private-cloud-owncloud-alternativen-teil-2), [2](http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html), [3](http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html)).
 
-Using a [Raspberry Pi](TODO) for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. [Raspbian](TODO)) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.
+Using a [Raspberry Pi](http://www.raspberrypi.org) for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. [Raspbian](http://www.raspbian.org)) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.
 
 Installing Seafile should be straightforward from following the instructions at the official [Seafile Wiki](https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server). If you can read German, you can also follow the excellent instructions on Jan Karres's blog [Raspberry Pi: Owncloud-Alternative Seafile Server installieren](http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/).
 
@@ -272,8 +272,6 @@ server {
 ### Step 11 Restart nginx (as admin)
 
 `sudo /etc/init.d/nginx restart`
-
-TODO Maybe add simple image?
 
 ### Step 12 Network: Setup port forwarding
 
