@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloud | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/cloud/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-04-21T04:35:48+02:00</updated>
+  <updated>2014-04-22T04:39:30+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -22,7 +22,7 @@
 
 <p>I choose <a href="http://seafile.com/en/home/">Seafile</a> over <a href="http://owncloud.org/">Owncloud</a> because I have read multiple posts that (1) Owncloud is not very responsive an a Raspberry Pi and (2) Seafile has a better security model (see <a href="http://blog.kovah.de/private-cloud-owncloud-alternativen-teil-2">1</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">2</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">3</a>).</p>
 
-<p>Using a <a href="TODO">Raspberry Pi</a> for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. <a href="TODO">Raspbian</a>) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.</p>
+<p>Using a <a href="http://www.raspberrypi.org">Raspberry Pi</a> for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. <a href="http://www.raspbian.org">Raspbian</a>) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.</p>
 
 <p>Installing Seafile should be straightforward from following the instructions at the official <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">Seafile Wiki</a>. If you can read German, you can also follow the excellent instructions on Jan Karres&rsquo;s blog <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Raspberry Pi: Owncloud-Alternative Seafile Server installieren</a>.</p>
 
@@ -283,8 +283,6 @@ location /media {
 <h3>Step 11 Restart nginx (as admin)</h3>
 
 <p><code>sudo /etc/init.d/nginx restart</code></p>
-
-<p>TODO Maybe add simple image?</p>
 
 <h3>Step 12 Network: Setup port forwarding</h3>
 

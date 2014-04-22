@@ -9,8 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="AngularJS is the current MVV-Whatever JavaScript framework by Google.
-Among other things, it provides bidirectional data binding. Although I&rsquo;m &hellip;">
+  <meta name="description" content="Google&rsquo;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container. Advantages compared to Spring: Spring is much &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,326 @@ Among other things, it provides bidirectional data binding. Although I&rsquo;m &
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-18T21:36:00+02:00" pubdate data-updated="true">Jul 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google&rsquo;s Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
+
+<p>Advantages compared to <a href="http://en.wikipedia.org/wiki/Spring_Framework">Spring</a>:</p>
+
+<ul>
+<li>Spring is much more than an IoC container, and therefore overkill for many projects.</li>
+<li>Configuration by code. <em>NO XML</em>.</li>
+</ul>
+
+
+<p>Based on my <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">previous post showing how to use AngularJS with a Java RESTful backend</a> I extended the simple demo application to use Guice.</p>
+
+<p>Let&rsquo;s say we have a <code>UserServiceImpl</code> class which depends on a <code>UserFactory</code> interface. The <code>UserFactory</code> interface is injected into the constructor of the <code>UserServiceImpl</code> class.</p>
+
+<p>The only thing we have to do is add the <code>@Inject</code> annotation to the constructor so that Guice can do its job.</p>
+
+<figure class='code'><figcaption><span>UserServiceImpl.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">impl</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Inject</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Singleton</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserServiceImpl</span> <span class="kd">implements</span> <span class="n">UserService</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">UserFactory</span> <span class="n">userFactory</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Inject</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="nf">UserServiceImpl</span><span class="o">(</span><span class="n">UserFactory</span> <span class="n">userFactory</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span> <span class="o">=</span> <span class="n">userFactory</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">getDefaultUsers</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span><span class="o">.</span><span class="na">createUsers</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getDefaultUser</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span><span class="o">.</span><span class="na">createUser</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the IoC container to know which implementation to inject we have to create a Guice <em>Module</em> which derives from <code>AbstractModule</code>:</p>
+
+<figure class='code'><figcaption><span>UserModule.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">infrastructure</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.AbstractModule</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserFactory</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.impl.UserFactoryImpl</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.impl.UserServiceImpl</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserModule</span> <span class="kd">extends</span> <span class="n">AbstractModule</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">bind</span><span class="o">(</span><span class="n">UserFactory</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserFactoryImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">bind</span><span class="o">(</span><span class="n">UserService</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserServiceImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>UserModule</code> class demonstrates the advantage of Guice vs. Spring: <em>NO XML</em>. When using Spring you normally would have to create Spring beans in an XML file like this:</p>
+
+<figure class='code'><figcaption><span>applicationContext.xml (pseudo code)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
+</span><span class='line'>  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;userService&quot;</span> <span class="na">class=</span><span class="s">&quot;ngdemo.service.impl.UserServiceImpl&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">&quot;userFactory&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/bean&gt;</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;userFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;ngdemo.service.impl.UserFactoryImpl&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>      
+</span><span class='line'><span class="nt">&lt;/beans&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we have to create a replacement for the servlets required by the servlet container:</p>
+
+<figure class='code'><figcaption><span>ngdemo.infrastructure.NgDemoApplicationSetup.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">infrastructure</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Guice</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Injector</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.GuiceServletContextListener</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.ServletModule</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.PackagesResourceConfig</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NgDemoApplicationSetup</span> <span class="kd">extends</span> <span class="n">GuiceServletContextListener</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nd">@Override</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="n">Injector</span> <span class="nf">getInjector</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">Guice</span><span class="o">.</span><span class="na">createInjector</span><span class="o">(</span><span class="k">new</span> <span class="n">ServletModule</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nd">@Override</span>
+</span><span class='line'>            <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configureServlets</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="kd">super</span><span class="o">.</span><span class="na">configureServlets</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="c1">// Configuring Jersey via Guice:</span>
+</span><span class='line'>                <span class="n">ResourceConfig</span> <span class="n">resourceConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PackagesResourceConfig</span><span class="o">(</span><span class="s">&quot;ngdemo/rest&quot;</span><span class="o">);</span>
+</span><span class='line'>                <span class="k">for</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">resource</span> <span class="o">:</span> <span class="n">resourceConfig</span><span class="o">.</span><span class="na">getClasses</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">bind</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>                <span class="n">serve</span><span class="o">(</span><span class="s">&quot;/rest/*&quot;</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="n">GuiceContainer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">},</span> <span class="k">new</span> <span class="n">UserModule</span><span class="o">());</span> <span class="c1">// &lt;-- Adding other Guice Dependency Injection Modules</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And finally the file <code>web.xml</code>:</p>
+
+<figure class='code'><figcaption><span>web.xml </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;!DOCTYPE web-app PUBLIC</span>
+</span><span class='line'><span class="cp">        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span>
+</span><span class='line'><span class="cp">        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">&quot;WebApp_ID&quot;</span> <span class="na">version=</span><span class="s">&quot;2.4&quot;</span>
+</span><span class='line'>         <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/j2ee&quot;</span>
+</span><span class='line'>         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/j2ee</span>
+</span><span class='line'><span class="s">  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;display-name&gt;</span>Restful Web Application<span class="nt">&lt;/display-name&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;filter&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;filter-name&gt;</span>guiceFilter<span class="nt">&lt;/filter-name&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;filter-class&gt;</span>com.google.inject.servlet.GuiceFilter<span class="nt">&lt;/filter-class&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/filter&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;filter-mapping&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;filter-name&gt;</span>guiceFilter<span class="nt">&lt;/filter-name&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/filter-mapping&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;listener&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;listener-class&gt;</span>ngdemo.infrastructure.NgDemoApplicationSetup<span class="nt">&lt;/listener-class&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/listener&gt;</span>
+</span><span class='line'><span class="nt">&lt;/web-app&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The file <code>web.xml</code> is now free of any <code>&lt;servlet&gt;</code> tags. The only thing that has to be configured in XML is the <code>&lt;listener-class&gt;</code>. The value of the <code>&lt;listener-class&gt;</code> is our Java class <code>NgDemoApplicationSetup</code>, so all further configuration can be defined in a type safe manner.</p>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
+</span><span class='line'><span class="nb">cd </span>angulardemorestful
+</span><span class='line'>git checkout -f step2-guice
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step2-guice">https://github.com/draptik/angulardemorestful/releases/tag/step2-guice</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1248,105 +1567,6 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/">Impressions During Developing My First Application With Mono and Gtk# (GtkSharp)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-30T02:57:56+02:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Why Mono? Why Gtk?</h2>
-
-<p>Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.</p>
-
-<p>That answers the first question: Mono gives me C# and the .NET stack.</p>
-
-<p>On the other hand I have been using linux as a desktop environment on my home machine for over a decade. I am comfortable with using linux as my primary OS.</p>
-
-<p>That answers the second question: Mono gives me access to Gtk, the graphics library of gnome, which is the default &ldquo;desktop&rdquo; in many linux distributions.</p>
-
-<h2>The App</h2>
-
-<p>I want to synchronize different Git repositories semi-automatically using a Gui.</p>
-
-<ul>
-<li><p>Default behaviour of the automation can be loaded via a Json file.</p></li>
-<li><p>Each entry describes a repository set to be synchronized.</p></li>
-</ul>
-
-
-<p>The app is located at <a href="https://github.com/draptik/RepoSync">https://github.com/draptik/RepoSync</a><a href="https://github.com/draptik/RepoSync">
-</a></p>
-
-<p>I also published a small demo application for gtk# and treeview: <a href="https://github.com/draptik/GtkSharpTreeViewDemo">https://github.com/draptik/GtkSharpTreeViewDemo</a></p>
-
-<h2>Impressions</h2>
-
-<h5>Monodevelop vs Visual Studio</h5>
-
-<p>I&rsquo;ll keep it brief: If you&rsquo;re used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
-
-<h5>Gtk# API</h5>
-
-<p>The Gtk# API is not your typical .NET library. You will very soon notice that the origins are C/C++. This takes some getting used to if you have a .NET background.</p>
-
-<p>Typically there are no return values. Instead Gtk# methods very often use the &ldquo;out&rdquo; keyword in .NET because that comes closer to the C++ implementation using pointers.</p>
-
-<p>Here is an example:</p>
-
-<figure class='code'><figcaption><span>Mono Gtk# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="kt">bool</span> <span class="n">someBool</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">listStore</span><span class="p">.</span><span class="n">GetIterFirst</span> <span class="p">(</span><span class="k">out</span> <span class="n">iter</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">do</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">someBool</span> <span class="p">=</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="n">listStore</span><span class="p">.</span><span class="n">GetValue</span> <span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">someBool</span> <span class="p">&amp;&amp;</span> <span class="n">listStore</span><span class="p">.</span><span class="n">IterNext</span> <span class="p">(</span><span class="k">ref</span> <span class="n">iter</span><span class="p">));</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="k">return</span> <span class="n">someBool</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span>Pseudo-C# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">return</span> <span class="n">listStore</span><span class="p">.</span><span class="n">ToList</span><span class="p">().</span><span class="n">Any</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">MyBoolProp</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>From the .NET side, I don&rsquo;t like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;&ndash;)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1372,15 +1592,15 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
       </li>
     
       <li class="post">
+        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a>
       </li>
     
   </ul>
