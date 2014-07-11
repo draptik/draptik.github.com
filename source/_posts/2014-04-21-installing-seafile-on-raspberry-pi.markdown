@@ -257,7 +257,7 @@ server {
     }
     
     location /media {
-        root /home/seafile/seafile-server/seahub;
+        root /home/seafile/mycloud/seafile-serverlatest/seahub; # <-- change: 2014-07-11
         # include /etc/nginx/mime.types; # <--- UNCOMMENT THIS IF CSS FILES AREN'T LOADED
     }
 }
