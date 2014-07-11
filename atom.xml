@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-07-11T17:09:56+02:00</updated>
+  <updated>2014-07-11T17:14:59+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -445,7 +445,7 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
 </span><span class='line'>    <span class="o">}</span>
 </span><span class='line'>
 </span><span class='line'>    location /media <span class="o">{</span>
-</span><span class='line'>        root /home/seafile/seafile-server/seahub;
+</span><span class='line'>        root /home/seafile/mycloud/seafile-serverlatest/seahub; <span class="c"># &lt;-- change: 2014-07-11</span>
 </span><span class='line'>        <span class="c"># include /etc/nginx/mime.types; # &lt;--- UNCOMMENT THIS IF CSS FILES AREN&#39;T LOADED</span>
 </span><span class='line'>    <span class="o">}</span>
 </span><span class='line'><span class="o">}</span>

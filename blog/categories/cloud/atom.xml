@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloud | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/cloud/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-07-11T17:09:56+02:00</updated>
+  <updated>2014-07-11T17:14:59+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -268,7 +268,7 @@ location /seafhttp {
 }
 
 location /media {
-    root /home/seafile/seafile-server/seahub;
+    root /home/seafile/mycloud/seafile-serverlatest/seahub; # &lt;-- change: 2014-07-11
     # include /etc/nginx/mime.types; # &lt;--- UNCOMMENT THIS IF CSS FILES AREN'T LOADED
 }
 </code></pre>
