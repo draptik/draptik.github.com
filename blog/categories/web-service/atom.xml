@@ -4,7 +4,7 @@
   <title><![CDATA[Category: web service | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/web-service/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-07-20T17:44:23+02:00</updated>
+  <updated>2014-07-20T17:49:33+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -423,7 +423,7 @@ using Newtonsoft.Json.Serialization;</p>
 
 <h2>Done?</h2>
 
-<p>Almost: For the ASP.NET backend to be reachable by the same URL as the other backends (<a href="TODO">NodeJs backend</a> and <a href="TODO">Java backend</a>) we have to change the default port of the application to 8080:</p>
+<p>Almost: For the ASP.NET backend to be reachable by the same URL as the other backends (<a href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/">NodeJs backend</a> and <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">Java backend</a>) we have to change the default port of the application to 8080:</p>
 
 <p><img src="/images/posts/dotnet/dotnet-project-url.PNG"></p>
 
