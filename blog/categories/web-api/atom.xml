@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: TODO | draptik]]></title>
-  <link href="http://draptik.github.io/blog/categories/todo/atom.xml" rel="self"/>
+  <title><![CDATA[Category: web api | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/web-api/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-07-20T13:48:36+02:00</updated>
+  <updated>2014-07-20T17:44:23+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
