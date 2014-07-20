@@ -3,7 +3,7 @@ layout: post
 title: ".NET backend providing REST"
 date: 2014-07-18 18:46:33 +0200
 comments: true
-categories: TODO
+categories: [web service, c#, ioc, asp.net, web api, javascript, nodejs, CORS, angularjs, RESTful]
 ---
 
 # TL;DR
