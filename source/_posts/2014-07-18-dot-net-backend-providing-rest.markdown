@@ -373,7 +373,7 @@ namespace WebService
 
 ## Done?
 
-Almost: For the ASP.NET backend to be reachable by the same URL as the other backends ([NodeJs backend](TODO) and [Java backend](TODO)) we have to change the default port of the application to 8080:
+Almost: For the ASP.NET backend to be reachable by the same URL as the other backends ([NodeJs backend](http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/) and [Java backend](http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/)) we have to change the default port of the application to 8080:
 
 {% img /images/posts/dotnet/dotnet-project-url.PNG %}
 
