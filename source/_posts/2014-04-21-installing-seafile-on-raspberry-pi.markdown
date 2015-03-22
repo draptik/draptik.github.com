@@ -327,6 +327,6 @@ This is the tricky part. (Marko, thanks!)
 
     {% img center /images/posts/seafile_rpi/router_rename_wan_domain.png 'Rename internal LAN DNS zone' %}
 
-2. Rename internal LAN name (static DHCP lease) to `mycould` (replace with your sub domain)
+2. Rename internal LAN name (static DHCP lease) to `mycloud` (replace with your sub domain)
 
     {% img center /images/posts/seafile_rpi/router_dhcp_static_leases.png 'Rename internal LAN name' %}
