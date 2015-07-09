@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)"
+date: 2015-07-09 21:51:12 +0200
+comments: true
+categories: [Raspberry Pi, IoT]
+---
+In the [previous post](TODO) I described how to setup the hardware for measuring temperatures at home.
+This post will use a small python program to record and store the data being created by the temperature sensors.
+
+
