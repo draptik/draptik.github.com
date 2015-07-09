@@ -9,7 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="TL;DR My AngularJS demo app has a new backend implementation using .NET Web API. &hellip; Recap Our goals: server side: minimal working REST API &hellip;">
+  <meta name="description" content="Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi.
+So, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +67,854 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-10T00:11:00+02:00" pubdate data-updated="true">Jul 10<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi.
+So, for starters, I picked something that was useful and only involved sensors (no actors &ndash; yet):</p>
+
+<p>Measuring temperatures at home.</p>
+
+<p>Neither rocket science nor cool IoT &ldquo;coffe is ready when I get out of the shower in the morning&rdquo;, I know.</p>
+
+<p>The sensor(s) should send a signal once an hour, without cable, and run on battery.</p>
+
+<p>As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from <a href="http://shop.ciseco.co.uk/">Ciseco</a> (<a href="http://shop.ciseco.co.uk/about-us/">currently being rebranded to Wireless Things (www.wirelessthings.com)</a>). Affordable and good documentation. And, more important: These people are passionate about their product!</p>
+
+<p>So let&rsquo;s get started:</p>
+
+<ul>
+<li>2 battery powered sensors transmitting temperature data once per hour via radio frequency.</li>
+<li>Raspberry Pi is powered 24/7 and records signals from sensors.</li>
+</ul>
+
+
+<h2>Parts &amp; Costs</h2>
+
+<ul>
+<li>1x 3.90 GBP Slice of Pi <a href="http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/">http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/</a></li>
+<li>2x 8.50 GBP Sensor THERMISTOR <a href="http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/">http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/</a></li>
+<li>3x 11.88 BGP XRF wireless RF radio UART serial data module <a href="http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/">http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/</a></li>
+</ul>
+
+
+<p>Total: 56.54 GBP</p>
+
+<p>If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): 36.16 GBP</p>
+
+<h2>Hardware: Fitting the pieces &amp; soldering</h2>
+
+<p>The official documentation is pretty good. If you know what you&rsquo;re doing.</p>
+
+<ul>
+<li>For the Slice of Pi: <a href="http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf">http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf</a></li>
+<li>For the sensor module(s): <a href="http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide">http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide</a></li>
+</ul>
+
+
+<p>In case you are not really sure what you are doing with the soldering iron: Keep calm. There is a lot of information on the internet. I found the following step-by-step instruction useful:</p>
+
+<p><a href="http://www.pihomeserver.fr/en/2013/07/11/raspberry-pi-assembler-un-emetteur-radio-pour-votre-sonde-de-temperature/">Raspberry Pi &ndash; Assemble your temperature THERMISTOR with an XRF transmitter probe</a></p>
+
+<p>Note: The sensor comes with a box. In case you want to place the sensor inside the box make sure <strong>not to solder the thermistor to close to the board</strong>. You will want to make a hole in the box and have the thermistor stick out. Otherwise the thermistor will be inside the closed box and measure the temperature inside the box (instead of outside the box). Here is a picture illustrating the issue:</p>
+
+<p><img src="/images/posts/rpi_temperatures/sensor.png"></p>
+
+<h2>OS</h2>
+
+<p>This is one of the reasons I picked Ciseco for my simple project: They provide a standard Linux distribution (Raspbian) including their drivers.</p>
+
+<p>This means the &ldquo;Slice of Pi&rdquo; works out of the box.</p>
+
+<p>And the rest of the system behaves like a normal Raspbian system. There is no vendor &ldquo;lock-in&rdquo;.</p>
+
+<p>Ciseco&rsquo;s patched version of Raspbian <a href="http://openmicros.org/Download/">here</a>.
+Currently this is <a href="http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip">http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip</a>.
+I used the slightly older version <a href="http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip">http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip</a>.</p>
+
+<h2>Software (well, actually Firmware)</h2>
+
+<p>All parts are soldered and the RPi has the correct operating system.</p>
+
+<p>Our next steps (from a bird&rsquo;s eye perspective) are:</p>
+
+<ul>
+<li>uploading the correct firmware onto the sensors&#8217; XRF module</li>
+<li>configuring the sensors&#8217; XRF module</li>
+</ul>
+
+
+<p>The following instructions are mostly taken from <a href="http://www.seanlandsman.com/2013/02/the-raspberry-pi-and-wireless-rf-xrf.html">Sean Landsman&rsquo;s excellent tutorial</a>.</p>
+
+<h3>Upload firmware to sensor(s)&lsquo; XRF module</h3>
+
+<p>Why do we have to do this?</p>
+
+<p>The sensor board is generic and can be configured for working with different types of sensors. We&rsquo;re using a thermistor, in case you forgot&hellip; The thing with the antenna is the XRF module. We have 3 XRF modules: 1 for receiving data, 2 for sending data. We&rsquo;ll take care of the sending modules first.</p>
+
+<p>The tool for uploading the appropriate firmware to XRF modules is called <code>xrf_uploader</code>.</p>
+
+<p>Download the <code>xrf_uploader</code> source code from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Uploader">https://github.com/CisecoPlc/XRF-Uploader</a> to the Raspberry Pi.</p>
+
+<p>Then compile the file <code>xrf_uploader.cpp</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>g++ xfr_uploader.cpp -o xrf_uploader
+</span><span class='line'>chmod +x xrf_uploader
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, get a copy of the thermistor firmware from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP">https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP</a>.
+At the time of writing, the most current version of the termistor firmware was <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/blob/master/XRFV2%20ARF%20SRF%20-%20LLAP/llapThermistor-V0.73-24MHz.bin">llapThermistor-V0.73-24MHz.bin</a>.</p>
+
+<ul>
+<li>Shutdown the Raspberry Pi (<code>sudo init 0</code>)</li>
+<li>Connect the first XRF &lsquo;sensor&rsquo; module with the Slice of Pi</li>
+<li>Start the Raspberry Pi again</li>
+</ul>
+
+
+<p>Copy the thermistor firmware into the same folder as the <code>xrf_uploader</code> and upload the firmware to the newly connected XRF module:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: <code>/dev/ttyAMA0</code> is the Raspberry Pi&rsquo;s location of the <a href="http://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter">UART</a>.</p>
+
+<p>The upload should look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pi@raspberrypi ~/xrf_loader <span class="nv">$ </span>./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+</span><span class='line'>Writing new firmware file llapThermistor-V0.50-24MHz.bin to device /dev/ttyAMA0 with baud rate 9600...
+</span><span class='line'>Reading firmware file...
+</span><span class='line'>Read 1300 lines from firmware file
+</span><span class='line'>Opening device...
+</span><span class='line'>Setting serial parameters...
+</span><span class='line'>Waiting <span class="k">for </span>device to settle...
+</span><span class='line'>
+</span><span class='line'>&lt;&gt; Entering <span class="nb">command </span>modus
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATVR
+</span><span class='line'>&lt;- 0.63B XRF
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATPG
+</span><span class='line'>&lt;- OK
+</span><span class='line'>&lt;&gt; Sent 1300 of 1300 lines...
+</span><span class='line'>
+</span><span class='line'>All OK, XRF successfully reprogrammed!
+</span><span class='line'>
+</span><span class='line'>Waiting <span class="k">for </span>device to settle...
+</span><span class='line'>
+</span><span class='line'>&lt;&gt; Entering <span class="nb">command </span>modus
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATVR
+</span><span class='line'>&lt;- 0.50B APTHERM
+</span><span class='line'>&lt;- OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Shutdown the Raspberry Pi</li>
+<li>Detach the freshly configured XRF &lsquo;sensor&rsquo; module and replace it with the XRF module which will be receiving temperature information (this XRF module is called the &lsquo;pass-through&rsquo;).</li>
+<li>Connect the the &lsquo;sensor&rsquo; XRF module used for temperature measurement with thermistor board.</li>
+<li>Do not insert the battery yet!</li>
+<li>Start the Raspberry Pi again.</li>
+</ul>
+
+
+<h3>Configure sensors (XRF modules)</h3>
+
+<p>We now have</p>
+
+<ul>
+<li>fully equipped sensor(s) without battery power</li>
+<li>Raspberry Pi with receiving sensor</li>
+</ul>
+
+
+<p>Again: Do not insert batteries into the sensors yet.</p>
+
+<p>We first have to install a protocol to communicate between the &lsquo;sensor&rsquo; and the &lsquo;pass-through&rsquo; (aka &lsquo;receiving&rsquo;) XRF device.</p>
+
+<p>Download <a href="http://sourceforge.net/projects/pyserial/files/pyserial/2.5/pyserial-2.5.tar.gz/download">pySerial</a> to the Raspberry Pi.</p>
+
+<p>Unpack and install pySerial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tar xvzf pyserial-2.5.tar.gz
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>pyserial-2.5
+</span><span class='line'><span class="nv">$ </span>sudo python setup.py install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Using pySerial/miniterm</h4>
+
+<p>pySerial comes with <code>miniterm.py</code>, a small serial terminal. Attach to the terminal:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Press Ctrl+T, followed by Ctrl+E to enable the echo area. This helps during debugging.</p>
+
+<p>Note: The terminal is not intended for <em>typing</em> commands: Always <em>paste</em> the commands from somewhere else.</p>
+
+<p>Note: Once the battery is inserted it will drain very quickly during debugging. Ensure to unplug the battery if it&rsquo;s not needed.</p>
+
+<h5>miniterm: First contact</h5>
+
+<p>While miniterm is running, insert the battery. The output should look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we are seeing is an example of LLAP (Ciseco&rsquo;s lightweight local automation protocol). A complete documentation of the protocol can be found <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/112-llap">here</a> and <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/297-llap-reference">here</a>.</p>
+
+<p>From Ciseco&rsquo;s documentation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>The message structure
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>...<span class="o">]</span> the message is 12 characters long and in 3 distinct sections. To illustrate the 3 separate parts to the message, see this example:
+</span><span class='line'>
+</span><span class='line'>aXXDDDDDDDD
+</span><span class='line'>1.     <span class="s2">&quot;a&quot;</span> is lower <span class="k">case </span>and shows the start of the message
+</span><span class='line'>
+</span><span class='line'>2.     XX is the device identifier <span class="o">(</span>address A-Z &amp; A-Z<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>3.      DDDDDDDDDD is the data being exchanged.
+</span><span class='line'>
+</span><span class='line'>Note: Only the first <span class="s2">&quot;a&quot;</span> character is lowercase, the remaining message always uses uppercase.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Paste <code>a--HELLO----</code> into the miniterm. In case your wondering: The default identifier is <code>--</code>. We&rsquo;ll change that later.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--HELLO----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the remote device is running and configured correctly the output should immediatly change to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--HELLO----a--HELLO----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note the duplicate <code>a--HELLO----</code> in the last line. The second <code>a--HELLO----</code> is the answer from the remote device.</p>
+
+<h5>miniterm: Change device ID</h5>
+
+<p>Since all devices have the same initial ID, it is a good idea to change the device ID in case you intend to use more than one remote device.</p>
+
+<p>The following code changes the device ID to <code>ZZ</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>a--CHDEVIDZZ
+</span><span class='line'>a--REBOOT---
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The terminal output should look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--CHDEVIDZZ
+</span><span class='line'>a--REBOOT---aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>miniterm: Read temperature</h5>
+
+<p>Assuming the device ID is <code>ZZ</code> reading the temperature is accomplished by <code>aZZTEMP-----</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>aZZTEMP-----aZZTMPA24.21
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above answer from the remote device the temperature is 24.21 degrees Celsius.</p>
+
+<h5>miniterm: Configure measurement interval</h5>
+
+<p>Currently the remote device is contiously sending information. And draining the battery. To preserve battery power the interval can be configured to send information periodically using the command <code>a--INTVL</code>. The interval is defined with a 3 digit number followed by the time period: S(seconds), M(minutes), H(hours), D(days). For example the command <code>aZZINTVL005S</code> would set the interval of the remote device to 5 seconds.</p>
+
+<p>Additionally the device should be sent to sleep in between cylces by issuing the command <code>aZZCYCLE----</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>aZZINTVL001H
+</span><span class='line'>aZZCYCLE----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above example sets the interval to one hour (<code>001H</code>).</p>
+
+<p>Repeat the sensor setup and configuration for each sensor which needs to send data. The &lsquo;pass-through&rsquo; (aka receiving) sensor does not have to be configured.</p>
+
+<p>Part 2 will describe a simple program to monitor the data being produced by this setup.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-10T00:01:12+02:00" pubdate data-updated="true">Jul 10<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
+This post will use a small python program to save the recorded temperatures to a database.</p>
+
+<p>For simplicity&rsquo;s sake we&rsquo;ll be using SQLite3 as our database.</p>
+
+<p>Aside from our (indoor) temperature sensors, we&rsquo;ll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
+
+<p>Note: In case your Raspberry Pi does not have access to the internet you can just exlude the weather underground parts in the code below.</p>
+
+<p>All following code is intended to run on the Raspberry Pi receiving the data.</p>
+
+<h3>Create database (SQLite3)</h3>
+
+<p>The database schema is simple. We need one table to store the temperatures, and another to store sensor information.</p>
+
+<p>Create a new file called <code>templog.db</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>touch templog.db
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There are different ways to interact with SQLite3 (cli (=interactive), script, api).</p>
+
+<p>The goal is to execute the following sql statements:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sensors</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="n">name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">id</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">baudrate</span> <span class="nb">INTEGER</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">port</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">active</span> <span class="nb">INTEGER</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">temps</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="k">timestamp</span> <span class="nb">TEXT</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">temp</span> <span class="nb">REAL</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">ID</span> <span class="nb">TEXT</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Simplest solution is to open the newly created file <code>templog.db</code> with <code>sqlite3</code> (cli/interactive) &hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">sqlite3</span> <span class="n">templog</span><span class="p">.</span><span class="n">db</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and past the previous code block. Should look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">$</span> <span class="n">sqlite3</span> <span class="n">demo</span><span class="p">.</span><span class="n">db</span>
+</span><span class='line'><span class="n">SQLite</span> <span class="k">version</span> <span class="mi">3</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">2</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">20</span> <span class="mi">18</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">19</span>
+</span><span class='line'><span class="n">Enter</span> <span class="ss">&quot;.help&quot;</span> <span class="k">for</span> <span class="k">usage</span> <span class="n">hints</span><span class="p">.</span>
+</span><span class='line'><span class="n">sqlite</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sensors</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">(</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">id</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">baudrate</span> <span class="nb">INTEGER</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">port</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">active</span> <span class="nb">INTEGER</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">);</span>
+</span><span class='line'><span class="n">sqlite</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">temps</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">(</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="k">timestamp</span> <span class="nb">TEXT</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">temp</span> <span class="nb">REAL</span><span class="p">,</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">ID</span> <span class="nb">TEXT</span>
+</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;ve created a database.</p>
+
+<p>The important table is <code>temps</code>: It will contain the measurements.</p>
+
+<p>The other table (<code>sensors</code>) contains informations about the sensors, which are currently only needed for the weather underground &lsquo;sensor&rsquo;. And yes: the column names/types are not optimal.</p>
+
+<p>Note: <code>timestamp TEXT</code> will bite us in the ass, but SQLite3 does NOT have any date type.</p>
+
+<h3>Monitor script</h3>
+
+<p>I found this nice script somewhere on <a href="https://github.com/kal001/temperature">Github</a>. So Thank You <a href="https://github.com/kal001">kal001</a>!</p>
+
+<p>Here&rsquo;s my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
+
+<p>Place this script side-by-side to <code>temps.log</code>.</p>
+
+<p>Save it as <code>monitor.py</code>.</p>
+
+<p>You will probably want to modify the values for <code>dbname</code>, <code>TIMEOUT</code>, <code>debug.txt</code>, etc.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/env python</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">sqlite3</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">threading</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">,</span> <span class="n">strftime</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">serial</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># global variales</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># sqlite database location</span>
+</span><span class='line'><span class="n">dbname</span> <span class="o">=</span> <span class="s">&#39;templog.db&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># serial device</span>
+</span><span class='line'><span class="n">DEVICE</span> <span class="o">=</span> <span class="s">&#39;/dev/ttyAMA0&#39;</span>
+</span><span class='line'><span class="n">BAUD</span> <span class="o">=</span> <span class="mi">9600</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">,</span> <span class="n">BAUD</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># timeout in seconds for waiting to read temperature from sensors</span>
+</span><span class='line'><span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">30</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># weather underground data</span>
+</span><span class='line'><span class="n">WUKEY</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="n">STATION</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+</span><span class='line'><span class="c"># time between weather underground samples in seconds</span>
+</span><span class='line'><span class="n">SAMPLE</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">60</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">log_temperature</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class='line'><span class="sd">    Store the temperature in the database.</span>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">curs</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;INSERT INTO temps values(datetime(&#39;now&#39;, &#39;localtime&#39;), &#39;{0}&#39;, &#39;{1}&#39; )&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_temp</span><span class="p">():</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class='line'><span class="sd">    Retrieves the temperature from the sensor.</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">    Returns -100 on error, or the temperature as a float.</span>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">global</span> <span class="n">ser</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">tempvalue</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
+</span><span class='line'>    <span class="n">deviceid</span> <span class="o">=</span> <span class="s">&#39;??&#39;</span>
+</span><span class='line'>    <span class="n">voltage</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">fim</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">TIMEOUT</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">fim</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">tempvalue</span> <span class="o">==</span> <span class="o">-</span><span class="mi">100</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">n</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">data</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">nb_msg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_msg</span><span class="p">):</span>
+</span><span class='line'>                <span class="n">msg</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">12</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">12</span><span class="p">]</span>
+</span><span class='line'>                <span class="n">deviceid</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;TMPA&quot;</span><span class="p">:</span>
+</span><span class='line'>                    <span class="n">tempvalue</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;BATT&quot;</span><span class="p">:</span>
+</span><span class='line'>                    <span class="n">voltage</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+</span><span class='line'>                    <span class="k">if</span> <span class="n">voltage</span> <span class="o">==</span> <span class="s">&quot;LOW&quot;</span><span class="p">:</span>
+</span><span class='line'>                        <span class="n">voltage</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span><span class="s">&#39;temperature&#39;</span><span class="p">:</span><span class="n">tempvalue</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="n">deviceid</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">get_temp_wu</span><span class="p">():</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class='line'><span class="sd">    Retrieves temperature(s) from weather underground (wu) and stores it to the database</span>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">curs</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span class='line'>        <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;SELECT baudrate, port, id, active FROM sensors WHERE id like &#39;W_&#39;&quot;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">rows</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c">#print(rows)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="n">rows</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[:]:</span>
+</span><span class='line'>                <span class="n">WUKEY</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span class='line'>                <span class="n">STATION</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class='line'>                    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>                        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://api.wunderground.com/api/{0}/conditions/q/{1}.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WUKEY</span><span class="p">,</span> <span class="n">STATION</span><span class="p">)</span>
+</span><span class='line'>                        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span class='line'>                        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span class='line'>                        <span class="n">log_temperature</span><span class="p">({</span><span class="s">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;current_observation&#39;</span><span class="p">][</span><span class="s">&#39;temp_c&#39;</span><span class="p">],</span> <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
+</span><span class='line'>                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span class='line'>                        <span class="k">raise</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">text_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;debug.txt&quot;</span><span class="p">,</span> <span class="s">&quot;a+&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">text_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;{0} ERROR:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">()),</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+</span><span class='line'>        <span class="n">text_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
+</span><span class='line'><span class="sd">    Program starts here.</span>
+</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">get_temp_wu</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">SAMPLE</span><span class="p">,</span> <span class="n">get_temp_wu</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">temperature</span> <span class="o">=</span> <span class="n">get_temp</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="n">temperature</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">100</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">log_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">SAMPLE</span><span class="p">,</span> <span class="n">get_temp_wu</span><span class="p">)</span>
+</span><span class='line'>            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the script. Open another shell, take a look inside the database (new data arriving once an hour?).</p>
+
+<p>Don&rsquo;t forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
+
+<p>Part 3 will provide a UI for the collected data.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2276,1138 +3125,6 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-28T11:15:00+02:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.</p>
-
-<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I&rsquo;ve added a Java based sample at the end of this post.</p>
-
-<h2>Frontend (AngularJS)</h2>
-
-<h3>Views (Partials)</h3>
-
-<p>We will create three views.</p>
-
-<p>The first view will display all users (<code>user-list.html</code>):</p>
-
-<p><img src="/images/posts/angular/userlist.png" width="400" height="400"></p>
-
-<p>The view also provides links to edit (<code>ng-click="editUser(user.id)"</code>) and delete (<code>ng-click="deleteUser(user.id)"</code>) specific users as well as a link to create a new user (<code>ng-click="createUser()"</code>).</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;div class="span6">
-</span><span class='line'>    &lt;table class="table table-striped table-condensed">
-</span><span class='line'>        &lt;thead>
-</span><span class='line'>        &lt;tr>
-</span><span class='line'>            &lt;th style="min-width: 80px;">First name&lt;/th>
-</span><span class='line'>            &lt;th style="min-width: 80px;">Last name&lt;/th>
-</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
-</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
-</span><span class='line'>        &lt;/tr>
-</span><span class='line'>        &lt;/thead>
-</span><span class='line'>        &lt;tbody>
-</span><span class='line'>        &lt;tr ng-repeat="user in users">
-</span><span class='line'>            &lt;td>{{ user.firstName }}&lt;/td>
-</span><span class='line'>            &lt;td>{{ user.lastName }}&lt;/td>
-</span><span class='line'>            &lt;td>&lt;a ng-click="editUser(user.id)" class="btn btn-small btn-primary">edit&lt;/a>&lt;/td>
-</span><span class='line'>            &lt;td>&lt;a ng-click="deleteUser(user.id)" class="btn btn-small btn-danger">delete&lt;/a>&lt;/td>
-</span><span class='line'>        &lt;/tr>
-</span><span class='line'>        &lt;/tbody>
-</span><span class='line'>    &lt;/table>
-</span><span class='line'>    &lt;a ng-click="createNewUser()" class="btn btn-small">create new user&lt;/a>
-</span><span class='line'>&lt;/div></span></code></pre></td></tr></table></div></figure>
-
-
-<p>The second and third view (<code>user-detail.html</code> and <code>user-creation.html</code>) both provide a form for entering the user properties.</p>
-
-<p><img src="/images/posts/angular/usercreationdetail.png" width="600" height="600"></p>
-
-<p>They only differ in the actions provided. These actions (<code>cancel()</code>, <code>updateUser()</code>, <code>createNewUser()</code>) are invoked using <code>ng-click</code>:</p>
-
-<figure class='code'><figcaption><span>user-[detail|creation].html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>User detail<span class="nt">&lt;/h1&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;form</span> <span class="na">novalidate=</span><span class="s">&quot;novalidate&quot;</span> <span class="na">class=</span><span class="s">&quot;form-horizontal&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;control-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;control-label&quot;</span> <span class="na">for=</span><span class="s">&quot;inputFirstName&quot;</span><span class="nt">&gt;</span>First name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;controls&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;inputFirstName&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;user.firstName&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;control-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">&quot;control-label&quot;</span> <span class="na">for=</span><span class="s">&quot;inputLastName&quot;</span><span class="nt">&gt;</span>Last name:<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;controls&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;inputLastName&quot;</span> <span class="na">ng-model=</span><span class="s">&quot;user.lastName&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;control-group&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;controls&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>              <span class="c">&lt;!-- user-detail.html: --&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;a</span> <span class="na">ng-click=</span><span class="s">&quot;cancel()&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-small&quot;</span><span class="nt">&gt;</span>cancel<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;a</span> <span class="na">ng-click=</span><span class="s">&quot;updateUser()&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-small btn-primary&quot;</span><span class="nt">&gt;</span>update user<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'>
-</span><span class='line'>              <span class="c">&lt;!-- user-creation.html: --&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;a</span> <span class="na">ng-click=</span><span class="s">&quot;createNewUser()&quot;</span> <span class="na">class=</span><span class="s">&quot;btn btn-small btn-primary&quot;</span><span class="nt">&gt;</span>create new user<span class="nt">&lt;/a&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/form&gt;</span>
-</span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Controller</h3>
-
-<p>Next we will create three controllers corresponding to the three views.</p>
-
-<h4>UserListCtrl</h4>
-
-<p><code>UserListCtrl</code> provides three functions <code>editUser</code>, <code>deleteUser</code> and <code>createUser</code>.</p>
-
-<ul>
-<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs&rsquo;s <code>$location</code> function.</li>
-<li><code>deleteUser</code> calls the <code>UserFactory</code> service method <code>delete</code> (which we will create shortly).</li>
-</ul>
-
-
-<p>Furthermore the <code>$scope.users</code> is filled with the result from the <code>UsersFactory.query()</code> function.</p>
-
-<p>Note that all required dependencies are injected into the controller&rsquo;s signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
-
-<figure class='code'><figcaption><span>controller.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo.controllers&#39;</span><span class="p">,</span> <span class="p">[]);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;UserListCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;UsersFactory&#39;</span><span class="p">,</span> <span class="s1">&#39;UserFactory&#39;</span><span class="p">,</span> <span class="s1">&#39;$location&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">UsersFactory</span><span class="p">,</span> <span class="nx">UserFactory</span><span class="p">,</span> <span class="nx">$location</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;editUser&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">editUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/user-detail/&#39;</span> <span class="o">+</span> <span class="nx">userId</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;deleteUser&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">deleteUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">UserFactory</span><span class="p">.</span><span class="k">delete</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">userId</span> <span class="p">});</span>
-</span><span class='line'>            <span class="nx">$scope</span><span class="p">.</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">UsersFactory</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;createUser&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">createNewUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/user-creation&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">users</span> <span class="o">=</span> <span class="nx">UsersFactory</span><span class="p">.</span><span class="nx">query</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}]);</span>
-</span><span class='line'>  <span class="cm">/* ... */</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>UserDetailCtrl and UserCreationCtrl</h4>
-
-<p><code>UserDetailCtrl</code> provides the function <code>updateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
-
-<p><code>UserCreationCtrl</code> provides the function <code>createNewUser</code>, calling <code>UsersFactory.create</code>.</p>
-
-<p>Again, both controllers use <code>$location</code> to redirect back to the <code>user-list</code> partial view.</p>
-
-<figure class='code'><figcaption><span>controller.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/* ... */</span>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;UserDetailCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;$routeParams&#39;</span><span class="p">,</span> <span class="s1">&#39;UserFactory&#39;</span><span class="p">,</span> <span class="s1">&#39;$location&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">$routeParams</span><span class="p">,</span> <span class="nx">UserFactory</span><span class="p">,</span> <span class="nx">$location</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;updateUser&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">updateUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">UserFactory</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/user-list&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;cancel&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">cancel</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/user-list&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">UserFactory</span><span class="p">.</span><span class="nx">show</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span> <span class="nx">$routeParams</span><span class="p">.</span><span class="nx">id</span><span class="p">});</span>
-</span><span class='line'>    <span class="p">}]);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">app</span><span class="p">.</span><span class="nx">controller</span><span class="p">(</span><span class="s1">&#39;UserCreationCtrl&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;$scope&#39;</span><span class="p">,</span> <span class="s1">&#39;UsersFactory&#39;</span><span class="p">,</span> <span class="s1">&#39;$location&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="kd">function</span> <span class="p">(</span><span class="nx">$scope</span><span class="p">,</span> <span class="nx">UsersFactory</span><span class="p">,</span> <span class="nx">$location</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// callback for ng-click &#39;createNewUser&#39;:</span>
-</span><span class='line'>        <span class="nx">$scope</span><span class="p">.</span><span class="nx">createNewUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">UsersFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">$scope</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
-</span><span class='line'>            <span class="nx">$location</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="s1">&#39;/user-list&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>    <span class="p">}]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Don&rsquo;t forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
-
-<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngdemo.filters&#39;</span><span class="p">,</span> <span class="s1">&#39;ngdemo.services&#39;</span><span class="p">,</span> <span class="s1">&#39;ngdemo.directives&#39;</span><span class="p">,</span> <span class="s1">&#39;ngdemo.controllers&#39;</span><span class="p">]).</span>
-</span><span class='line'>    <span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$routeProvider&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$routeProvider</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;/user-list&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/user-list.html&#39;</span><span class="p">,</span> <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;UserListCtrl&#39;</span><span class="p">});</span>
-</span><span class='line'>        <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;/user-detail/:id&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/user-detail.html&#39;</span><span class="p">,</span> <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;UserDetailCtrl&#39;</span><span class="p">});</span>
-</span><span class='line'>        <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="s1">&#39;/user-creation&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;partials/user-creation.html&#39;</span><span class="p">,</span> <span class="nx">controller</span><span class="o">:</span> <span class="s1">&#39;UserCreationCtrl&#39;</span><span class="p">});</span>
-</span><span class='line'>        <span class="nx">$routeProvider</span><span class="p">.</span><span class="nx">otherwise</span><span class="p">({</span><span class="nx">redirectTo</span><span class="o">:</span> <span class="s1">&#39;/user-list&#39;</span><span class="p">});</span>
-</span><span class='line'>    <span class="p">}]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h3>Service</h3>
-
-<p>AngularJS can consume the web service using <code>$resource</code>. This module is injected via <code>'ngResource'</code>.</p>
-
-<p>We create two factories:</p>
-
-<ul>
-<li><code>UsersFactory</code> (note the plural s) calls the web service with methods not requiring an id (<code>query</code> and <code>create</code>).</li>
-<li><code>UserFactory</code> calls the web service with methods requiring a user id (<code>show</code>, <code>update</code> and <code>delete</code>).</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>services.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">services</span> <span class="o">=</span> <span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo.services&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ngResource&#39;</span><span class="p">]);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">services</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;UsersFactory&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$resource</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">$resource</span><span class="p">(</span><span class="s1">&#39;/ngdemo/web/users&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nx">isArray</span><span class="o">:</span> <span class="kc">true</span> <span class="p">},</span>
-</span><span class='line'>        <span class="nx">create</span><span class="o">:</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="p">})</span>
-</span><span class='line'><span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">services</span><span class="p">.</span><span class="nx">factory</span><span class="p">(</span><span class="s1">&#39;UserFactory&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$resource</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">$resource</span><span class="p">(</span><span class="s1">&#39;/ngdemo/web/users/:id&#39;</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">show</span><span class="o">:</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;GET&#39;</span> <span class="p">},</span>
-</span><span class='line'>        <span class="nx">update</span><span class="o">:</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;PUT&#39;</span><span class="p">,</span> <span class="nx">params</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;@id&#39;</span><span class="p">}</span> <span class="p">},</span>
-</span><span class='line'>        <span class="k">delete</span><span class="o">:</span> <span class="p">{</span> <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">,</span> <span class="nx">params</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;@id&#39;</span><span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>    <span class="p">})</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Backend (Java)</h2>
-
-<p>Here is an example of a RESTful web service created with Java:</p>
-
-<figure class='code'><figcaption><span>UserRestService.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">rest</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Inject</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.*</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;/users&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRestService</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">UserService</span> <span class="n">userService</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Inject</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="nf">UserRestService</span><span class="o">(</span><span class="n">UserService</span> <span class="n">userService</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">userService</span> <span class="o">=</span> <span class="n">userService</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@GET</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">getAllUsersInJSON</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">getAllUsers</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@GET</span>
-</span><span class='line'>    <span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;{id}&quot;</span><span class="o">)</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getUserById</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">getById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@POST</span>
-</span><span class='line'>    <span class="nd">@Consumes</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">create</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">createNewUser</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@PUT</span>
-</span><span class='line'>    <span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;{id}&quot;</span><span class="o">)</span>
-</span><span class='line'>    <span class="nd">@Consumes</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">update</span><span class="o">(</span><span class="n">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@DELETE</span>
-</span><span class='line'>    <span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;{id}&quot;</span><span class="o">)</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">(</span><span class="nd">@PathParam</span><span class="o">(</span><span class="s">&quot;id&quot;</span><span class="o">)</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">userService</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
-</span><span class='line'><span class="nb">cd </span>angulardemorestful
-</span><span class='line'>git checkout -f step4-angularjs-crud
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud">https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T13:18:00+02:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my two previous posts I gave an introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a> and <a href="http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application/">use Guice in the Java backend</a>.</p>
-
-<p>In this post I will show how to create a unit test for this web service.</p>
-
-<p>Most of this code is inspired by a <a href="https://sites.google.com/a/athaydes.com/renato-athaydes//posts/jersey_guice_rest_api">blog post from Paulo Renato de Athaydes</a>.</p>
-
-<p>We will need to install some new dependencies:</p>
-
-<ul>
-<li><code>jetty-maven-plugin</code></li>
-<li><code>junit</code></li>
-<li><code>jersey-client</code></li>
-<li><code>jersey-grizzly2</code></li>
-</ul>
-
-
-<p><a href="https://grizzly.java.net/">Grizzly</a> will be our web server for testing.</p>
-
-<figure class='code'><figcaption><span>pom.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;name&gt;</span>ngdemo Maven Webapp<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;groupId&gt;</span>ngdemo<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;artifactId&gt;</span>ngdemo<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;packaging&gt;</span>war<span class="nt">&lt;/packaging&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;properties&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;jersey.version&gt;</span>1.17.1<span class="nt">&lt;/jersey.version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;guice.version&gt;</span>3.0<span class="nt">&lt;/guice.version&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/properties&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;build&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;finalName&gt;</span>ngdemo<span class="nt">&lt;/finalName&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;version&gt;</span>3.0<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;source&gt;</span>1.7<span class="nt">&lt;/source&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;target&gt;</span>1.7<span class="nt">&lt;/target&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;groupId&gt;</span>org.mortbay.jetty<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;artifactId&gt;</span>jetty-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;version&gt;</span>8.1.11.v20130520<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;scanIntervalSeconds&gt;</span>10<span class="nt">&lt;/scanIntervalSeconds&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;connectors&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;connector</span> <span class="na">implementation=</span><span class="s">&quot;org.eclipse.jetty.nio.SelectChannelConnector&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;port&gt;</span>8080<span class="nt">&lt;/port&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;maxIdleTime&gt;</span>60000<span class="nt">&lt;/maxIdleTime&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;/connector&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;/connectors&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;stopKey/&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;stopPort/&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/build&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;dependencies&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">&lt;!-- javax: XML binding --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>javax.xml.bind<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jaxb-api<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>2.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">&lt;!-- RESTful web service: Jersey ====================================== --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-server<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-servlet<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-json<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">&lt;!-- Guice ============================================================= --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.google.inject<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>guice<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${guice.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.google.inject.extensions<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>guice-servlet<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${guice.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey.contribs<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-guice<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">&lt;!-- Required for bypassing web.xml via Guice. Used in TestServlet.java --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>javax.servlet-api<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>3.0.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;scope&gt;</span>provided<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">&lt;!-- Unit testing ====================================================== --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>4.11<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-client<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;groupId&gt;</span>com.sun.jersey<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;artifactId&gt;</span>jersey-grizzly2<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;version&gt;</span>${jersey.version}<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/dependencies&gt;</span>
-</span><span class='line'><span class="nt">&lt;/project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Our class under test is <code>UserRestService.java</code>:</p>
-
-<figure class='code'><figcaption><span>UserRestService.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">rest</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Inject</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.GET</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.Path</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.Produces</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Path</span><span class="o">(</span><span class="s">&quot;/users&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRestService</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">UserService</span> <span class="n">userService</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Inject</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="nf">UserRestService</span><span class="o">(</span><span class="n">UserService</span> <span class="n">userService</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">userService</span> <span class="o">=</span> <span class="n">userService</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@GET</span>
-</span><span class='line'>    <span class="nd">@Produces</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getDefaultUserInJSON</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">userService</span><span class="o">.</span><span class="na">getDefaultUser</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is the corresponding unit test class <code>UserRestServiceTest.java</code>:</p>
-
-<figure class='code'><figcaption><span>UserRestServiceTest.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">tests</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Guice</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Injector</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.ServletModule</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.client.Client</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.client.ClientResponse</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.client.WebResource</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.client.config.DefaultClientConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.PackagesResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.core.spi.component.ioc.IoCComponentProviderFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.repositories.contract.UserRepository</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.repositories.impl.UserRepositoryImpl</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.impl.UserServiceImpl</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.glassfish.grizzly.http.server.HttpServer</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.junit.After</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.core.MediaType</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.ws.rs.core.UriBuilder</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">static</span> <span class="n">junit</span><span class="o">.</span><span class="na">framework</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserRestServiceTest</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">static</span> <span class="kd">final</span> <span class="n">URI</span> <span class="n">BASE_URI</span> <span class="o">=</span> <span class="n">getBaseURI</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">HttpServer</span> <span class="n">server</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">URI</span> <span class="nf">getBaseURI</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">UriBuilder</span><span class="o">.</span><span class="na">fromUri</span><span class="o">(</span><span class="s">&quot;http://localhost/&quot;</span><span class="o">).</span><span class="na">port</span><span class="o">(</span><span class="mi">9998</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Before</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">startServer</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Starting grizzly...&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">Injector</span> <span class="n">injector</span> <span class="o">=</span> <span class="n">Guice</span><span class="o">.</span><span class="na">createInjector</span><span class="o">(</span><span class="k">new</span> <span class="n">ServletModule</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>            <span class="nd">@Override</span>
-</span><span class='line'>            <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configureServlets</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>                <span class="n">bind</span><span class="o">(</span><span class="n">UserService</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserServiceImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>                <span class="n">bind</span><span class="o">(</span><span class="n">UserRepository</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserRepositoryImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">ResourceConfig</span> <span class="n">rc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PackagesResourceConfig</span><span class="o">(</span><span class="s">&quot;ngdemo.rest&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">IoCComponentProviderFactory</span> <span class="n">ioc</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GuiceComponentProviderFactory</span><span class="o">(</span><span class="n">rc</span><span class="o">,</span> <span class="n">injector</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">server</span> <span class="o">=</span> <span class="n">GrizzlyServerFactory</span><span class="o">.</span><span class="na">createHttpServer</span><span class="o">(</span><span class="n">BASE_URI</span> <span class="o">+</span> <span class="s">&quot;rest/&quot;</span><span class="o">,</span> <span class="n">rc</span><span class="o">,</span> <span class="n">ioc</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;Jersey app started with WADL available at &quot;</span>
-</span><span class='line'>                <span class="o">+</span> <span class="s">&quot;%srest/application.wadl\nTry out %sngdemo\nHit enter to stop it...&quot;</span><span class="o">,</span>
-</span><span class='line'>                <span class="n">BASE_URI</span><span class="o">,</span> <span class="n">BASE_URI</span><span class="o">));</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@After</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopServer</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">server</span><span class="o">.</span><span class="na">stop</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Test</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetDefaultUser</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">Client</span> <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="k">new</span> <span class="n">DefaultClientConfig</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">WebResource</span> <span class="n">service</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">resource</span><span class="o">(</span><span class="n">getBaseURI</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">ClientResponse</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">path</span><span class="o">(</span><span class="s">&quot;rest&quot;</span><span class="o">).</span><span class="na">path</span><span class="o">(</span><span class="s">&quot;users&quot;</span><span class="o">)</span>
-</span><span class='line'>                <span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-</span><span class='line'>                <span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">ClientResponse</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Got stuff: &quot;</span> <span class="o">+</span> <span class="n">resp</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">String</span> <span class="n">text</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="na">getEntity</span><span class="o">(</span><span class="n">String</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">assertEquals</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span> <span class="n">resp</span><span class="o">.</span><span class="na">getStatus</span><span class="o">());</span>
-</span><span class='line'>        <span class="n">assertEquals</span><span class="o">(</span><span class="s">&quot;{\&quot;firstName\&quot;:\&quot;JonFromREST\&quot;,\&quot;lastName\&quot;:\&quot;DoeFromREST\&quot;}&quot;</span><span class="o">,</span> <span class="n">text</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the <code>startServer</code> method we create an injector for Guice, which we can then pass into the <code>GuiceComponentProviderFactory</code> to create the inversion of control (IoC) container.</p>
-
-<p>Together with the <code>ResourceConfig</code> the IoC container is passed to Grizzly&rsquo;s server factory to create the web server for testing.</p>
-
-<p>Within the actual test method <code>testGetDefaultUser</code> we only have to setup the Jersey <code>Client</code> to retrieve the response (from the Grizzly server).</p>
-
-<p>Here&rsquo;s the test output from Maven:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mvn <span class="nb">test</span>
-</span><span class='line'>...
-</span><span class='line'>-------------------------------------------------------
-</span><span class='line'> T E S T S
-</span><span class='line'>-------------------------------------------------------
-</span><span class='line'>Running ngdemo.tests.UserRestServiceTest
-</span><span class='line'>Starting grizzly...
-</span><span class='line'>Jul 19, 2013 1:50:35 PM com.sun.jersey.api.core.PackagesResourceConfig init
-</span><span class='line'>INFO: Scanning <span class="k">for </span>root resource and provider classes in the packages:
-</span><span class='line'>  ngdemo.rest
-</span><span class='line'>Jul 19, 2013 1:50:35 PM com.sun.jersey.api.core.ScanningResourceConfig logClasses
-</span><span class='line'>INFO: Root resource classes found:
-</span><span class='line'>  class ngdemo.rest.UserRestService
-</span><span class='line'>Jul 19, 2013 1:50:35 PM com.sun.jersey.api.core.ScanningResourceConfig init
-</span><span class='line'>INFO: No provider classes found.
-</span><span class='line'>Jul 19, 2013 1:50:35 PM com.sun.jersey.server.impl.application.WebApplicationImpl _initiate
-</span><span class='line'>INFO: Initiating Jersey application, version <span class="s1">&#39;Jersey: 1.17.1 02/28/2013 12:47 PM&#39;</span>
-</span><span class='line'>Jul 19, 2013 1:50:36 PM com.sun.jersey.guice.spi.container.GuiceComponentProviderFactory getComponentProvider
-</span><span class='line'>INFO: Binding ngdemo.rest.UserRestService to GuiceInstantiatedComponentProvider
-</span><span class='line'>Jul 19, 2013 1:50:37 PM org.glassfish.grizzly.http.server.NetworkListener start
-</span><span class='line'>INFO: Started listener bound to <span class="o">[</span>localhost:9998<span class="o">]</span>
-</span><span class='line'>Jul 19, 2013 1:50:37 PM org.glassfish.grizzly.http.server.HttpServer start
-</span><span class='line'>INFO: <span class="o">[</span>HttpServer<span class="o">]</span> Started.
-</span><span class='line'>Jersey app started with WADL available at http://localhost:9998/rest/application.wadl
-</span><span class='line'>Try out http://localhost:9998/ngdemo
-</span><span class='line'>Hit enter to stop it...
-</span><span class='line'>Got stuff: GET http://localhost:9998/rest/users returned a response status of 200 OK
-</span><span class='line'>Jul 19, 2013 1:50:37 PM org.glassfish.grizzly.http.server.NetworkListener stop
-</span><span class='line'>INFO: Stopped listener bound to <span class="o">[</span>localhost:9998<span class="o">]</span>
-</span><span class='line'>Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.604 sec
-</span><span class='line'>
-</span><span class='line'>Results :
-</span><span class='line'>
-</span><span class='line'>Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> BUILD SUCCESS
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> ------------------------------------------------------------------------
-</span><span class='line'><span class="o">[</span>INFO<span class="o">]</span> Total <span class="nb">time</span>: 6.378s
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Test time is 2.6 sec. Not bad considering we are starting a web server, deploying our app, creating a client, running the test and shutting down the web server.</p>
-
-<p>Running this test from within IntelliJ takes: 0.009 sec&hellip;</p>
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
-</span><span class='line'><span class="nb">cd </span>angulardemorestful
-</span><span class='line'>git checkout -f step3-backend-test
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test">https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3423,6 +3140,14 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
       </li>
     
@@ -3432,14 +3157,6 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
     
       <li class="post">
         <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/01/node-dot-js-backend-providing-rest/">Node.js Backend Providing REST</a>
       </li>
     
   </ul>

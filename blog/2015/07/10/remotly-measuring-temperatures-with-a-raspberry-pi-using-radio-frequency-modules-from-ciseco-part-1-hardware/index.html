@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware) - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi.
+So, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-10T00:11:00+02:00" pubdate data-updated="true">Jul 10<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi.
+So, for starters, I picked something that was useful and only involved sensors (no actors &ndash; yet):</p>
+
+<p>Measuring temperatures at home.</p>
+
+<p>Neither rocket science nor cool IoT &ldquo;coffe is ready when I get out of the shower in the morning&rdquo;, I know.</p>
+
+<p>The sensor(s) should send a signal once an hour, without cable, and run on battery.</p>
+
+<p>As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from <a href="http://shop.ciseco.co.uk/">Ciseco</a> (<a href="http://shop.ciseco.co.uk/about-us/">currently being rebranded to Wireless Things (www.wirelessthings.com)</a>). Affordable and good documentation. And, more important: These people are passionate about their product!</p>
+
+<p>So let&rsquo;s get started:</p>
+
+<ul>
+<li>2 battery powered sensors transmitting temperature data once per hour via radio frequency.</li>
+<li>Raspberry Pi is powered 24/7 and records signals from sensors.</li>
+</ul>
+
+
+<h2>Parts &amp; Costs</h2>
+
+<ul>
+<li>1x 3.90 GBP Slice of Pi <a href="http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/">http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/</a></li>
+<li>2x 8.50 GBP Sensor THERMISTOR <a href="http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/">http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/</a></li>
+<li>3x 11.88 BGP XRF wireless RF radio UART serial data module <a href="http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/">http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/</a></li>
+</ul>
+
+
+<p>Total: 56.54 GBP</p>
+
+<p>If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): 36.16 GBP</p>
+
+<h2>Hardware: Fitting the pieces &amp; soldering</h2>
+
+<p>The official documentation is pretty good. If you know what you&rsquo;re doing.</p>
+
+<ul>
+<li>For the Slice of Pi: <a href="http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf">http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf</a></li>
+<li>For the sensor module(s): <a href="http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide">http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide</a></li>
+</ul>
+
+
+<p>In case you are not really sure what you are doing with the soldering iron: Keep calm. There is a lot of information on the internet. I found the following step-by-step instruction useful:</p>
+
+<p><a href="http://www.pihomeserver.fr/en/2013/07/11/raspberry-pi-assembler-un-emetteur-radio-pour-votre-sonde-de-temperature/">Raspberry Pi &ndash; Assemble your temperature THERMISTOR with an XRF transmitter probe</a></p>
+
+<p>Note: The sensor comes with a box. In case you want to place the sensor inside the box make sure <strong>not to solder the thermistor to close to the board</strong>. You will want to make a hole in the box and have the thermistor stick out. Otherwise the thermistor will be inside the closed box and measure the temperature inside the box (instead of outside the box). Here is a picture illustrating the issue:</p>
+
+<p><img src="/images/posts/rpi_temperatures/sensor.png"></p>
+
+<h2>OS</h2>
+
+<p>This is one of the reasons I picked Ciseco for my simple project: They provide a standard Linux distribution (Raspbian) including their drivers.</p>
+
+<p>This means the &ldquo;Slice of Pi&rdquo; works out of the box.</p>
+
+<p>And the rest of the system behaves like a normal Raspbian system. There is no vendor &ldquo;lock-in&rdquo;.</p>
+
+<p>Ciseco&rsquo;s patched version of Raspbian <a href="http://openmicros.org/Download/">here</a>.
+Currently this is <a href="http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip">http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip</a>.
+I used the slightly older version <a href="http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip">http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip</a>.</p>
+
+<h2>Software (well, actually Firmware)</h2>
+
+<p>All parts are soldered and the RPi has the correct operating system.</p>
+
+<p>Our next steps (from a bird&rsquo;s eye perspective) are:</p>
+
+<ul>
+<li>uploading the correct firmware onto the sensors&#8217; XRF module</li>
+<li>configuring the sensors&#8217; XRF module</li>
+</ul>
+
+
+<p>The following instructions are mostly taken from <a href="http://www.seanlandsman.com/2013/02/the-raspberry-pi-and-wireless-rf-xrf.html">Sean Landsman&rsquo;s excellent tutorial</a>.</p>
+
+<h3>Upload firmware to sensor(s)&lsquo; XRF module</h3>
+
+<p>Why do we have to do this?</p>
+
+<p>The sensor board is generic and can be configured for working with different types of sensors. We&rsquo;re using a thermistor, in case you forgot&hellip; The thing with the antenna is the XRF module. We have 3 XRF modules: 1 for receiving data, 2 for sending data. We&rsquo;ll take care of the sending modules first.</p>
+
+<p>The tool for uploading the appropriate firmware to XRF modules is called <code>xrf_uploader</code>.</p>
+
+<p>Download the <code>xrf_uploader</code> source code from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Uploader">https://github.com/CisecoPlc/XRF-Uploader</a> to the Raspberry Pi.</p>
+
+<p>Then compile the file <code>xrf_uploader.cpp</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>g++ xfr_uploader.cpp -o xrf_uploader
+</span><span class='line'>chmod +x xrf_uploader
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, get a copy of the thermistor firmware from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP">https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP</a>.
+At the time of writing, the most current version of the termistor firmware was <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/blob/master/XRFV2%20ARF%20SRF%20-%20LLAP/llapThermistor-V0.73-24MHz.bin">llapThermistor-V0.73-24MHz.bin</a>.</p>
+
+<ul>
+<li>Shutdown the Raspberry Pi (<code>sudo init 0</code>)</li>
+<li>Connect the first XRF &lsquo;sensor&rsquo; module with the Slice of Pi</li>
+<li>Start the Raspberry Pi again</li>
+</ul>
+
+
+<p>Copy the thermistor firmware into the same folder as the <code>xrf_uploader</code> and upload the firmware to the newly connected XRF module:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note: <code>/dev/ttyAMA0</code> is the Raspberry Pi&rsquo;s location of the <a href="http://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter">UART</a>.</p>
+
+<p>The upload should look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>pi@raspberrypi ~/xrf_loader <span class="nv">$ </span>./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+</span><span class='line'>Writing new firmware file llapThermistor-V0.50-24MHz.bin to device /dev/ttyAMA0 with baud rate 9600...
+</span><span class='line'>Reading firmware file...
+</span><span class='line'>Read 1300 lines from firmware file
+</span><span class='line'>Opening device...
+</span><span class='line'>Setting serial parameters...
+</span><span class='line'>Waiting <span class="k">for </span>device to settle...
+</span><span class='line'>
+</span><span class='line'>&lt;&gt; Entering <span class="nb">command </span>modus
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATVR
+</span><span class='line'>&lt;- 0.63B XRF
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATPG
+</span><span class='line'>&lt;- OK
+</span><span class='line'>&lt;&gt; Sent 1300 of 1300 lines...
+</span><span class='line'>
+</span><span class='line'>All OK, XRF successfully reprogrammed!
+</span><span class='line'>
+</span><span class='line'>Waiting <span class="k">for </span>device to settle...
+</span><span class='line'>
+</span><span class='line'>&lt;&gt; Entering <span class="nb">command </span>modus
+</span><span class='line'>&lt;- OK
+</span><span class='line'>-&gt; ATVR
+</span><span class='line'>&lt;- 0.50B APTHERM
+</span><span class='line'>&lt;- OK
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Shutdown the Raspberry Pi</li>
+<li>Detach the freshly configured XRF &lsquo;sensor&rsquo; module and replace it with the XRF module which will be receiving temperature information (this XRF module is called the &lsquo;pass-through&rsquo;).</li>
+<li>Connect the the &lsquo;sensor&rsquo; XRF module used for temperature measurement with thermistor board.</li>
+<li>Do not insert the battery yet!</li>
+<li>Start the Raspberry Pi again.</li>
+</ul>
+
+
+<h3>Configure sensors (XRF modules)</h3>
+
+<p>We now have</p>
+
+<ul>
+<li>fully equipped sensor(s) without battery power</li>
+<li>Raspberry Pi with receiving sensor</li>
+</ul>
+
+
+<p>Again: Do not insert batteries into the sensors yet.</p>
+
+<p>We first have to install a protocol to communicate between the &lsquo;sensor&rsquo; and the &lsquo;pass-through&rsquo; (aka &lsquo;receiving&rsquo;) XRF device.</p>
+
+<p>Download <a href="http://sourceforge.net/projects/pyserial/files/pyserial/2.5/pyserial-2.5.tar.gz/download">pySerial</a> to the Raspberry Pi.</p>
+
+<p>Unpack and install pySerial:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>tar xvzf pyserial-2.5.tar.gz
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>pyserial-2.5
+</span><span class='line'><span class="nv">$ </span>sudo python setup.py install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Using pySerial/miniterm</h4>
+
+<p>pySerial comes with <code>miniterm.py</code>, a small serial terminal. Attach to the terminal:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Press Ctrl+T, followed by Ctrl+E to enable the echo area. This helps during debugging.</p>
+
+<p>Note: The terminal is not intended for <em>typing</em> commands: Always <em>paste</em> the commands from somewhere else.</p>
+
+<p>Note: Once the battery is inserted it will drain very quickly during debugging. Ensure to unplug the battery if it&rsquo;s not needed.</p>
+
+<h5>miniterm: First contact</h5>
+
+<p>While miniterm is running, insert the battery. The output should look something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we are seeing is an example of LLAP (Ciseco&rsquo;s lightweight local automation protocol). A complete documentation of the protocol can be found <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/112-llap">here</a> and <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/297-llap-reference">here</a>.</p>
+
+<p>From Ciseco&rsquo;s documentation:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>The message structure
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>...<span class="o">]</span> the message is 12 characters long and in 3 distinct sections. To illustrate the 3 separate parts to the message, see this example:
+</span><span class='line'>
+</span><span class='line'>aXXDDDDDDDD
+</span><span class='line'>1.     <span class="s2">&quot;a&quot;</span> is lower <span class="k">case </span>and shows the start of the message
+</span><span class='line'>
+</span><span class='line'>2.     XX is the device identifier <span class="o">(</span>address A-Z &amp; A-Z<span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>3.      DDDDDDDDDD is the data being exchanged.
+</span><span class='line'>
+</span><span class='line'>Note: Only the first <span class="s2">&quot;a&quot;</span> character is lowercase, the remaining message always uses uppercase.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Paste <code>a--HELLO----</code> into the miniterm. In case your wondering: The default identifier is <code>--</code>. We&rsquo;ll change that later.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--HELLO----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the remote device is running and configured correctly the output should immediatly change to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--HELLO----a--HELLO----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note the duplicate <code>a--HELLO----</code> in the last line. The second <code>a--HELLO----</code> is the answer from the remote device.</p>
+
+<h5>miniterm: Change device ID</h5>
+
+<p>Since all devices have the same initial ID, it is a good idea to change the device ID in case you intend to use more than one remote device.</p>
+
+<p>The following code changes the device ID to <code>ZZ</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>a--CHDEVIDZZ
+</span><span class='line'>a--REBOOT---
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The terminal output should look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>a--CHDEVIDZZ
+</span><span class='line'>a--REBOOT---aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>miniterm: Read temperature</h5>
+
+<p>Assuming the device ID is <code>ZZ</code> reading the temperature is accomplished by <code>aZZTEMP-----</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>aZZTEMP-----aZZTMPA24.21
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the above answer from the remote device the temperature is 24.21 degrees Celsius.</p>
+
+<h5>miniterm: Configure measurement interval</h5>
+
+<p>Currently the remote device is contiously sending information. And draining the battery. To preserve battery power the interval can be configured to send information periodically using the command <code>a--INTVL</code>. The interval is defined with a 3 digit number followed by the time period: S(seconds), M(minutes), H(hours), D(days). For example the command <code>aZZINTVL005S</code> would set the interval of the remote device to 5 seconds.</p>
+
+<p>Additionally the device should be sent to sleep in between cylces by issuing the command <code>aZZCYCLE----</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</span><span class='line'>--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+</span><span class='line'>--- Quit: Ctrl+<span class="o">]</span>  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+</span><span class='line'>--- <span class="nb">local echo </span>active ---
+</span><span class='line'>aZZINTVL001H
+</span><span class='line'>aZZCYCLE----
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above example sets the interval to one hour (<code>001H</code>).</p>
+
+<p>Repeat the sensor setup and configuration for each sensor which needs to send data. The &lsquo;pass-through&rsquo; (aka receiving) sensor does not have to be configured.</p>
+
+<p>Part 2 will describe a simple program to monitor the data being produced by this setup.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-10T00:11:00+02:00" pubdate data-updated="true">Jul 10<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/iot/'>IoT</a>, <a class='category' href='/blog/categories/raspberry-pi/'>Raspberry Pi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" title="Previous Post: Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)">&laquo; Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2015 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/';
+        var disqus_url = 'http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
