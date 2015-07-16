@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2015-07-16T22:05:19+02:00</updated>
+  <updated>2015-07-16T22:07:13+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,30 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)]]></title>
-    <link href="http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
-    <updated>2015-07-16T21:07:12+02:00</updated>
-    <id>http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
-    <content type="html"><![CDATA[<p><a href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
-
-<p>In this post I&rsquo;ll describe how to display the data.</p>
-
-<h2>Example website</h2>
-
-<p><a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
-
-<h2>Technologies in a nutshell</h2>
-
-<ul>
-<li>Data (read-only): SQLite3</li>
-<li>Nodejs/Express as web server</li>
-<li>Display logic: Javascript</li>
-</ul>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)]]></title>
@@ -5059,6 +5035,44 @@ The IR remote control <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-F
 
 
 <p>That’s it. Restart Raspberry Pi and the context menu should now work.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pygments and Python]]></title>
+    <link href="http://draptik.github.io/blog/2013/05/24/pygments-and-python/"/>
+    <updated>2013-05-24T21:11:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/05/24/pygments-and-python</id>
+    <content type="html"><![CDATA[<p>Frameworks like <a href="http://octopress.org/">Octopress</a> and <a href="http://jekyllbootstrap.com/">Jekyll</a> use the Python library <a href="http://pygments.org/">Pygments</a> for syntax highlighting.</p>
+
+<p>Currenty (2013-05-23) Pygments does not work flawlessly with Python3
+(see
+<a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> and
+<a href="https://github.com/tmm1/pygments.rb/issues/45">this issue on pygment&rsquo;s issue tracker</a>).</p>
+
+<p>This is a problem because many operating systems already provide Python3 as the default python installation.</p>
+
+<p>To circumvent this issue, I found 2 different solutions:</p>
+
+<ol>
+<li><p><strong>Rewire your system to always use python version X (i.e. 2.7) when python is called</strong>:
+See <a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> for an example solution.</p></li>
+<li><p><strong>Sandbox Python installations</strong>.</p></li>
+</ol>
+
+
+<p>Personally I prefer the approach of having a sandbox system. This way I don&rsquo;t change the system&rsquo;s default setting. Whenever I require a different Python version I can just switch it (this is similar to the <a href="https://rvm.io/">Ruby Version Manager rvm</a>).</p>
+
+<p><a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">This blog post</a> explains some further details on how to install Octopress in Arch Linux.
+It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python_VirtualEnv#Virtualenvwrapper">python-virtualenvwrapper</a> and configuring a new custom environment <code>blog_env</code> which uses Python 2.7:</p>
+
+<div><script src='https://gist.github.com/5638602.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>Paraphrazing the <a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">original post</a>:</p>
+
+<p>To switch to the newly created <code>blog_env</code>, run <code>workon blog_env</code>. To exit a virtualenv, run <code>deactivate</code>.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting. Currenty (2013-05-23) Pygments does not work flawlessly &hellip;">
+  <meta name="description" content="I now have a list of IT book recommendations at GitHub.
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,71 +67,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-24T21:11:00+02:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Frameworks like <a href="http://octopress.org/">Octopress</a> and <a href="http://jekyllbootstrap.com/">Jekyll</a> use the Python library <a href="http://pygments.org/">Pygments</a> for syntax highlighting.</p>
-
-<p>Currenty (2013-05-23) Pygments does not work flawlessly with Python3
-(see
-<a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> and
-<a href="https://github.com/tmm1/pygments.rb/issues/45">this issue on pygment&rsquo;s issue tracker</a>).</p>
-
-<p>This is a problem because many operating systems already provide Python3 as the default python installation.</p>
-
-<p>To circumvent this issue, I found 2 different solutions:</p>
-
-<ol>
-<li><p><strong>Rewire your system to always use python version X (i.e. 2.7) when python is called</strong>:
-See <a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> for an example solution.</p></li>
-<li><p><strong>Sandbox Python installations</strong>.</p></li>
-</ol>
-
-
-<p>Personally I prefer the approach of having a sandbox system. This way I don&rsquo;t change the system&rsquo;s default setting. Whenever I require a different Python version I can just switch it (this is similar to the <a href="https://rvm.io/">Ruby Version Manager rvm</a>).</p>
-
-<p><a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">This blog post</a> explains some further details on how to install Octopress in Arch Linux.
-It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python_VirtualEnv#Virtualenvwrapper">python-virtualenvwrapper</a> and configuring a new custom environment <code>blog_env</code> which uses Python 2.7:</p>
-
-<div><script src='https://gist.github.com/5638602.js'></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-<p>Paraphrazing the <a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">original post</a>:</p>
-
-<p>To switch to the newly created <code>blog_env</code>, run <code>workon blog_env</code>. To exit a virtualenv, run <code>deactivate</code>.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -596,6 +532,82 @@ $ sudo aptitude install hg-fast-export
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/24/app-config-order-matters/">App.Config: Order Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-24T00:09:05+02:00" pubdate data-updated="true">Sep 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Note to self:</p>
+
+<p>Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip;</p>
+
+<p>Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.</p>
+
+<p>Option 1:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This throws: <code>The type initializer for 'System.Windows.Application' threw an exception.</code></p>
+
+<p>Option 2:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fine.</p>
+
+<p>Do I want to read 2.5MB of <code>C:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas\DotNetConfig.xsd</code>? No.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -613,10 +625,6 @@ $ sudo aptitude install hg-fast-export
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
@@ -630,6 +638,10 @@ $ sudo aptitude install hg-fast-export
     
       <li class="post">
         <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
       </li>
     
   </ul>

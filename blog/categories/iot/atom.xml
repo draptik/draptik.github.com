@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IoT | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/iot/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2015-07-16T22:05:19+02:00</updated>
+  <updated>2015-07-16T22:07:13+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,30 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)]]></title>
-    <link href="http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
-    <updated>2015-07-16T21:07:12+02:00</updated>
-    <id>http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
-    <content type="html"><![CDATA[<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
-
-<p>In this post I&rsquo;ll describe how to display the data.</p>
-
-<h2>Example website</h2>
-
-<p><a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
-
-<h2>Technologies in a nutshell</h2>
-
-<ul>
-<li>Data (read-only): SQLite3</li>
-<li>Nodejs/Express as web server</li>
-<li>Display logic: Javascript</li>
-</ul>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)]]></title>
