@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2015-07-10T01:53:21+02:00</updated>
+  <updated>2015-07-16T20:51:22+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -393,7 +393,7 @@ At the time of writing, the most current version of the termistor firmware was <
   <entry>
     <title type="html"><![CDATA[Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)]]></title>
     <link href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/"/>
-    <updated>2015-07-10T00:01:12+02:00</updated>
+    <updated>2015-07-10T00:03:12+02:00</updated>
     <id>http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software</id>
     <content type="html"><![CDATA[<p>In the <a href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
 This post will use a small python program to save the recorded temperatures to a database.</p>
