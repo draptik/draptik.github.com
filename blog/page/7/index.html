@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="If you&rsquo;ve followed my blog on how to install Portable Ubuntu to your USB Stick, you might have noticed people asking &ldquo;how do I access my &hellip;">
+  <meta name="description" content="The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &ldquo;Jaunty Jackalone&rdquo; = JJ) was very smooth. It did NOT screw up the X-Server &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,108 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/29/from-804-lts-to-jaunty-jackalone-ubuntu-904/">From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-29T00:26:03+02:00" pubdate data-updated="true">Apr 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &ldquo;Jaunty Jackalone&rdquo; = JJ) was very smooth. It did NOT screw up the X-Server, SMB, Cups, NFS, SSH, USB, etc.  For me it was about a 3GB download.</p>
+
+<p>The first thing I noticed was that a nasty gdm-login-screen-resolution bug was fixed by upgrading from 8.04 to 8.10.</p>
+
+<p>Since each upgrade changes the default version of ones most used/favorite software, I will list those products I was concerned about most:</p>
+
+<p><strong>Sun Java </strong> (<a href="http://java.sun.com/">http://java.sun.com/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>OK</em>: JJ comes with the current Java JRE and SDK version (1.6_13)</li>
+</ul>
+
+
+<p><strong>Eclipse </strong>(<a href="http://www.eclipse.org/">http://www.eclipse.org/</a>)</p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with version 3.2 (2 years old). The current version is 3.4 (Ganymede). But since you can run Eclipse directly without compiling, this is no big deal.</li>
+</ul>
+
+
+<p><strong>GNU Emacs </strong><a href="http://www.gnu.org/software/emacs/">(http://www.gnu.org/software/emacs/)</a><strong>
+</strong></p>
+
+<ul>
+<li><p><strong><em>GNU Emacs snapshot</em></strong> (=bleeding edge/developer version): <em>OK</em>: installing emacs-snapshot-gtk gives a current developer version  (build from 2009-04-05)</p></li>
+<li><p><strong><em>Emacs stable</em></strong>: <em>Out-of-date</em>: The current Emacs version is 22.3. JJ has Emacs version 22.2, although Emacs 22.3 was released 2008/09.</p></li>
+</ul>
+
+
+<p><strong>AUCTeX </strong>(<a href="http://www.gnu.org/software/auctex/">http://www.gnu.org/software/auctex/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with AUCTeX version 11.84. Version 11.85 was released 2008/02. I&rsquo;ll have to install this manually.</li>
+</ul>
+
+
+<p><strong>R </strong> (<a href="http://www.r-project.org/">http://www.r-project.org/</a>)<strong>
+</strong></p>
+
+<ul>
+<li><em>OK</em>: JJ has 2.9.0. The current version is 2.9.0.</li>
+</ul>
+
+
+<p><strong>TexLive</strong> (<a href="http://www.tug.org/texlive/">http://www.tug.org/texlive/</a>)</p>
+
+<ul>
+<li><em>Out-of-date</em>: JJ comes with texlive-2007&hellip; Just download the current texlive-2008 from the texlive homepage and install it beside the Ubuntu texlive version.</li>
+</ul>
+
+
+<p><strong>Skype-Plugin for Pidgin&rsquo;s Instant Messenger</strong></p>
+
+<ul>
+<li>I&rsquo;ve already written a <a href="http://draptik.wordpress.com/2009/04/09/pidgin-the-multi-plattform-multi-protocol-instant-messenger/">blog</a> on some of the nice Pidgin features. After upgrading to JJ and seeing that Pidgin is used for internal messaging within Ubuntu, I am even more convinced that this is currently THE multi-protocol multi-plattform instant messenger to go with. Get the skype-plugin from <a href="http://eion.robbmob.com/">http://eion.robbmob.com/</a> and install the Debian/Ubuntu skype4pidgin.deb file by executing &ldquo;sudo dpkg -i skype4pidgin.deb&rdquo;</li>
+</ul>
+
+
+<p><strong>GTKtalog </strong>(<a href="http://www.nongnu.org/gtktalog/">http://www.nongnu.org/gtktalog/</a>)<strong>
+</strong></p>
+
+<ul>
+<li>Not present in JJ&rsquo;s repositories. I&rsquo;m very sad about this, because to my knowledge this is the only software for managing a CD/DVD collection which does not require a database. Although its user interface (Tck/Tk) is not-so-stylish-up-to-date, it has many features which I have grown accostumed to and which are lacking even in current high-end Disk-Manager programs.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -401,6 +503,10 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
@@ -414,10 +520,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     
       <li class="post">
         <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
       </li>
     
   </ul>

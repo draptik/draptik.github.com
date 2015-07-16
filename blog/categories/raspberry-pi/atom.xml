@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Raspberry Pi | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/raspberry-pi/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2015-07-16T20:51:22+02:00</updated>
+  <updated>2015-07-16T22:05:19+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
+    <updated>2015-07-16T21:07:12+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/16/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
+
+<p>In this post I&rsquo;ll describe how to display the data.</p>
+
+<h2>Example website</h2>
+
+<p><a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
+
+<h2>Technologies in a nutshell</h2>
+
+<ul>
+<li>Data (read-only): SQLite3</li>
+<li>Nodejs/Express as web server</li>
+<li>Display logic: Javascript</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)]]></title>
@@ -911,115 +935,6 @@ location /media {
 <p>You will have to install CUPS and SAMBA on your Raspberry Pi.</p>
 
 <p>Once your done you can access the printer from any OS (windows, linux, mac) within your network.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RPi/XBMC: Keeping content in sync]]></title>
-    <link href="http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/"/>
-    <updated>2013-05-25T19:24:00+02:00</updated>
-    <id>http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync</id>
-    <content type="html"><![CDATA[<p>If you have multiple <a href="http://www.raspberrypi.org/">Rasperry Pi</a>/<a href="http://xbmc.org/">XBMC</a> clients and want to</p>
-
-<ul>
-<li>keep your &ldquo;history&rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume)</li>
-<li>do not want to individually update every RPi/XBMC client if the content of your data storage changes</li>
-</ul>
-
-
-<p>then this post might be for you.</p>
-
-<p><a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL">The XBMC Wiki decribes this in detail</a>.
-This post just describes an actual implementation using Raspberry Pi clients and server.</p>
-
-<p>To do this you will need a MySQL database on a machine in your network which is always accessible from your Raspberry Pi/XBMC clients (called <code>RPI-Client</code> from now on).
-Since I didn&rsquo;t have a machine like this in my network I decided to buy another RPi for this purpose (referred to as <code>RPi-Server</code> from now on).</p>
-
-<p><strong>The content of the MySQL database only contains metadata for each entry, not the actual data</strong> (information like (a) the file path and (b) the last timestamp within the movie you were watching).</p>
-
-<p>Here is a diagram showing my network setup for two Rasperry Pi clients running XBMC:</p>
-
-<p><code>sh network
-+---+
-|   |   |---------------------------------|
-|   |---| RPi-Client-1 (XBMC living room) |
-|   |   |---------------------------------|
-|   |
-| L |   |------------------------------|
-| A |---| RPi-Client-2 (XBMC bed room) |
-| N |   |------------------------------|
-|   |
-|   |   |-----------------------|
-|   |---| RPi-Server (Raspbian) |
-|   |   |-----------------------|
-|   |
-|   |   |-----|
-|   |---| NAS |
-|   |   |-----|
-+---+
-</code></p>
-
-<ul>
-<li>The clients <code>RPi-Client-X</code> are default <a href="http://openelec.tv/">OpenELEC</a> installations.</li>
-<li>The server <code>RPi-Server</code> is a default <a href="http://www.raspbian.org/">Raspbian</a> installation.</li>
-</ul>
-
-
-<h2>RPi-Server Setup</h2>
-
-<p>The <code>RPi-Server</code> has to provide a MySQL database which can be accessed from each <code>RPi-Client-X</code>.
-Just follow the <a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL/Setting_up_MySQL">simple setup instructions on the XBMC-Wiki</a>.</p>
-
-<p>This is how you can check the status of your MySQL server:</p>
-
-<p><code>
-rpi-server$ sudo /etc/init.d/mysql status
-</code></p>
-
-<h2>RPi-Client Setup</h2>
-
-<p>Each <code>RPi-Client-X</code> needs to be configured to use the <code>RPi-Server</code> database.</p>
-
-<p><code>RPi-Server: 192.168.179.36</code></p>
-
-<p>``` xml advancedsettings.xml
-<advancedsettings>
-  <videodatabase></p>
-
-<pre><code>    &lt;type&gt;mysql&lt;/type&gt;
-    &lt;host&gt;192.168.179.36&lt;/host&gt;
-    &lt;port&gt;3306&lt;/port&gt;
-    &lt;user&gt;xbmc&lt;/user&gt;
-    &lt;pass&gt;xbmc&lt;/pass&gt;
-</code></pre>
-
-<p>  </videodatabase>
-  <musicdatabase></p>
-
-<pre><code>    &lt;type&gt;mysql&lt;/type&gt;
-    &lt;host&gt;192.168.179.36&lt;/host&gt;
-    &lt;port&gt;3306&lt;/port&gt;
-    &lt;user&gt;xbmc&lt;/user&gt;
-    &lt;pass&gt;xbmc&lt;/pass&gt;
-</code></pre>
-
-<p>  </musicdatabase>
-</advancedsettings>
-```</p>
-
-<p>Note:
-The location of the file <code>advancedsettings.xml</code> might very depending on your XBMC installation.
-For OpenELEC the file is located at <code>/storage/.xbmc/userdata/advancedsettings.xml</code>.</p>
-
-<h2>XBMC Library Update (optional)</h2>
-
-<p>Once the above setup works you can install the <a href="http://wiki.xbmc.org/index.php?title=Add-on:XBMC_Library_Auto_Update">XBMC Addon:Library Auto Update</a>.
-This plugin provides a GUI to setup a cron job to sync the content your <code>RPi-Client-X</code> has acces to (i.e. your NAS) with your MySQL database.
-Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
-
-<h2>MySQL Backup (optional)</h2>
-
-<p>A bit overkill, but I also backup the MySQL Database from the <code>RPi-Server</code> to my NAS using <a href="http://sourceforge.net/projects/automysqlbackup/">automysqlbackup</a>.</p>
 ]]></content>
   </entry>
   
