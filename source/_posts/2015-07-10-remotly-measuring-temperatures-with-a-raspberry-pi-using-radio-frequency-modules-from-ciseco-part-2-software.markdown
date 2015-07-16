@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)"
-date: 2015-07-10 00:01:12 +0200
+date: 2015-07-10 00:03:12 +0200
 comments: true
 categories: [Raspberry Pi, IoT]
 ---
