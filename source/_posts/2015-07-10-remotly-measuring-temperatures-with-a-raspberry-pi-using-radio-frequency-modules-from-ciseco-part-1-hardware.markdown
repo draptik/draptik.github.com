@@ -270,6 +270,6 @@ The above example sets the interval to one hour (`001H`).
 
 Repeat the sensor setup and configuration for each sensor which needs to send data. The 'pass-through' (aka receiving) sensor does not have to be configured.
 
-Part 2 will describe a simple program to monitor the data being produced by this setup.
+[Part 2](/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/) describes a simple program to monitor the data being produced by this setup.
 
 
