@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="If you&rsquo;re developing Rails with Emacs and using Rinari here are two more extensions you might like: http://cx4a.org/software/auto-complete/ and &hellip;">
+  <meta name="description" content="Note to self: Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip; Example: Create a plain WPF application from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/24/app-config-order-matters/">App.Config: Order Matters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-24T00:09:05+02:00" pubdate data-updated="true">Sep 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Note to self:</p>
+
+<p>Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip;</p>
+
+<p>Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.</p>
+
+<p>Option 1:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This throws: <code>The type initializer for 'System.Windows.Application' threw an exception.</code></p>
+
+<p>Option 2:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Fine.</p>
+
+<p>Do I want to read 2.5MB of <code>C:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas\DotNetConfig.xsd</code>? No.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -506,64 +582,6 @@ ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/11/03/emacs-murrine_style_draw_box-assertion-height-1-failed/">Emacs: Murrine_style_draw_box: Assertion `height >= -1&#8217; Failed</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-03T00:59:09+01:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs</p>
-
-<p><code>murrine_style_draw_box: assertion</code>height >= -1&#8217; failed`</p>
-
-<p>after <em>every action</em> within Emacs.</p>
-
-<p>The solution is simple, but has not been integrated in the Ubuntu repository yet.</p>
-
-<p>Here it is:</p>
-
-<p>In the file</p>
-
-<p><code>/usr/share/themes/Ambiance/gtk-2.0/gtkrc</code></p>
-
-<p>change</p>
-
-<p><code>GtkRange::trough-under-steppers = 0</code></p>
-
-<p>to</p>
-
-<p><code>GtkRange::trough-under-steppers = 1</code></p>
-
-<p>For details see <a href="https://bugs.launchpad.net/ubuntu/+source/emacs23/+bug/538541">Bug #538541</a>, <a href="https://bugs.launchpad.net/ubuntu/+source/emacs-snapshot/+bug/550532">Bug #550532</a> and ﻿<a href="http://thehacklist.blogspot.com/2010/06/resolving-murrinestyledrawbox-assertion.html">Resolving &ldquo;murrine_style_draw_box: assertion `height >= -1&#8217;&rdquo;</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -581,11 +599,15 @@ ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
+        <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
       <li class="post">
@@ -594,10 +616,6 @@ ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
     
       <li class="post">
         <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
       </li>
     
   </ul>

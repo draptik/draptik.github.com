@@ -104,6 +104,10 @@ So, for starters, I picked something that was useful and only involved sensors (
 
 <p>As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from <a href="http://shop.ciseco.co.uk/">Ciseco</a> (<a href="http://shop.ciseco.co.uk/about-us/">currently being rebranded to Wireless Things (www.wirelessthings.com)</a>). Affordable and good documentation. And, more important: These people are passionate about their product!</p>
 
+<p>Before we get started here is a quick preview of what we want to accomplish (for details about the UI see <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">part3</a>): <a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
+
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
+
 <p>So let&rsquo;s get started:</p>
 
 <ul>
@@ -115,15 +119,41 @@ So, for starters, I picked something that was useful and only involved sensors (
 <h2>Parts &amp; Costs</h2>
 
 <ul>
-<li>1x 3.90 GBP Slice of Pi <a href="http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/">http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/</a></li>
-<li>2x 8.50 GBP Sensor THERMISTOR <a href="http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/">http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/</a></li>
-<li>3x 11.88 BGP XRF wireless RF radio UART serial data module <a href="http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/">http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/</a></li>
+<li>1x &pound;3.90 Slice of Pi <a href="http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/">http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/</a></li>
+<li>2x &pound;8.50 Sensor THERMISTOR <a href="http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/">http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/</a></li>
+<li>3x &pound;11.88 XRF wireless RF radio UART serial data module <a href="http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/">http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/</a></li>
 </ul>
 
 
-<p>Total: 56.54 GBP</p>
+<p>Total: &pound;56.54</p>
 
-<p>If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): 36.16 GBP</p>
+<p>If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): &pound;36.16</p>
+
+<h2>Setup overview</h2>
+
+<p><img src="/images/posts/rpi_temperatures/overview.png"></p>
+
+<ul>
+<li>On the left is the Raspberry Pi with an XRF module mounted to the Slice of Pi.
+
+<ul>
+<li>The Slice of Pi acts as a breakout board.</li>
+<li>The XRF module will receive data.</li>
+<li>The Raspberry Pi will be continously monitoring input and storing the information locally to an SQLite3 database. See <a href="(/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> for details.</li>
+</ul>
+</li>
+<li>On the right are two sensors with XRF modules.
+
+<ul>
+<li>These modules will send temperature data once per hour to the Raspberry Pi.</li>
+<li>These modules run on battery power.</li>
+<li>You can have as many of these sensors as you want.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Each XRF module requires a unique id (&lsquo;XRF ID&rsquo; in the image above).</p>
 
 <h2>Hardware: Fitting the pieces &amp; soldering</h2>
 
@@ -461,7 +491,7 @@ At the time of writing, the most current version of the termistor firmware was <
 
 <p>Repeat the sensor setup and configuration for each sensor which needs to send data. The &lsquo;pass-through&rsquo; (aka receiving) sensor does not have to be configured.</p>
 
-<p>Part 2 will describe a simple program to monitor the data being produced by this setup.</p>
+<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Part 2</a> describes a simple program to monitor the data being produced by this setup.</p>
 </div>
 
 
@@ -505,8 +535,10 @@ At the time of writing, the most current version of the termistor firmware was <
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" title="Previous Post: Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)">&laquo; Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</a>
+        <a class="basic-alignment left" href="/blog/2014/07/18/dot-net-backend-providing-rest/" title="Previous Post: .NET backend providing REST">&laquo; .NET backend providing REST</a>
       
+      
+        <a class="basic-alignment right" href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" title="Next Post: Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)">Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software) &raquo;</a>
       
     </p>
   </footer>
@@ -527,11 +559,15 @@ At the time of writing, the most current version of the termistor firmware was <
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
+        <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
       <li class="post">
         <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
       <li class="post">
@@ -540,10 +576,6 @@ At the time of writing, the most current version of the termistor firmware was <
     
       <li class="post">
         <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/21/installing-seafile-on-raspberry-pi/">Installing Seafile on Raspberry Pi</a>
       </li>
     
   </ul>
