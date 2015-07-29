@@ -16,6 +16,11 @@ The sensor(s) should send a signal once an hour, without cable, and run on batte
 
 As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from [Ciseco](http://shop.ciseco.co.uk/) ([currently being rebranded to Wireless Things (www.wirelessthings.com)](http://shop.ciseco.co.uk/about-us/)). Affordable and good documentation. And, more important: These people are passionate about their product!
 
+Before we get started here is a quick preview of what we want to accomplish (for details about the UI see [part3](/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/)): [http://rpi-temperatures-website-demo.divshot.io/](http://rpi-temperatures-website-demo.divshot.io/)
+
+{% img /images/posts/rpi_temperatures/screenshot-demo.png %}
+
+
 So let's get started:
 
 - 2 battery powered sensors transmitting temperature data once per hour via radio frequency.
@@ -23,14 +28,28 @@ So let's get started:
 
 ## Parts & Costs
 
-- 1x 3.90 GBP Slice of Pi http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/
-- 2x 8.50 GBP Sensor THERMISTOR http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/
-- 3x 11.88 BGP XRF wireless RF radio UART serial data module http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/
+- 1x &pound;3.90 Slice of Pi http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/
+- 2x &pound;8.50 Sensor THERMISTOR http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/
+- 3x &pound;11.88 XRF wireless RF radio UART serial data module http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/
 
-Total: 56.54 GBP
+Total: &pound;56.54
 
-If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): 36.16 GBP
+If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): &pound;36.16
 
+## Setup overview
+
+{%img /images/posts/rpi_temperatures/overview.png %}
+
+- On the left is the Raspberry Pi with an XRF module mounted to the Slice of Pi.
+  * The Slice of Pi acts as a breakout board.
+  * The XRF module will receive data.
+  * The Raspberry Pi will be continously monitoring input and storing the information locally to an SQLite3 database. See [part 2]((/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/) for details.
+- On the right are two sensors with XRF modules.
+  * These modules will send temperature data once per hour to the Raspberry Pi.
+  * These modules run on battery power.
+  * You can have as many of these sensors as you want.
+
+Each XRF module requires a unique id ('XRF ID' in the image above).
 
 ## Hardware: Fitting the pieces & soldering
 

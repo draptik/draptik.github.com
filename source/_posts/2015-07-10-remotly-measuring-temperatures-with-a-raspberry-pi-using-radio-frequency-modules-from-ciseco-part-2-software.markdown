@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)"
-date: 2015-07-10 00:03:12 +0200
+date: 2015-07-10 00:13:12 +0200
 comments: true
 categories: [Raspberry Pi, IoT]
 ---
@@ -240,4 +240,4 @@ Run the script. Open another shell, take a look inside the database (new data ar
 
 Don't forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).
 
-Part 3 will provide a UI for the collected data.
+[Part 3](/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/) will provide a UI for the collected data.
