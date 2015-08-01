@@ -62,6 +62,16 @@ In case you are not really sure what you are doing with the soldering iron: Keep
 
 [Raspberry Pi - Assemble your temperature THERMISTOR with an XRF transmitter probe](http://www.pihomeserver.fr/en/2013/07/11/raspberry-pi-assembler-un-emetteur-radio-pour-votre-sonde-de-temperature/)
 
+Here is what the assembled sensor looks like:
+{%img /images/posts/rpi_temperatures/assembled_sensor_notes.jpg %}
+
+Here is a picture of the sensor in the box. You have to create the holes in the top of the box yourself. I just used the soldering iron to melt both holes, which is probably not considered best practice ;-)
+
+{%img /images/posts/rpi_temperatures/boxed_sensor_notes.jpg %}
+
+And here is a picture of the Raspberry Pi with an XRF module mounted on the Slice of Pi:
+{%img /images/posts/rpi_temperatures/rpi_notes.jpg %}
+
 Note: The sensor comes with a box. In case you want to place the sensor inside the box make sure **not to solder the thermistor to close to the board**. You will want to make a hole in the box and have the thermistor stick out. Otherwise the thermistor will be inside the closed box and measure the temperature inside the box (instead of outside the box). Here is a picture illustrating the issue:
 
 {% img /images/posts/rpi_temperatures/sensor.png %}
