@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: IoT | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/iot/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2015-07-29T23:54:08+02:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
+    <updated>2015-07-30T00:07:12+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
+
+<p>In this post I&rsquo;ll describe how to display the data.</p>
+
+<h2>TL;DR</h2>
+
+<ul>
+<li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
+<li><code>npm install</code></li>
+<li><code>bower install</code></li>
+<li>(for deployment in LAN: Configure <code>baseUrl</code> in <code>app.js</code>)</li>
+<li>(for deployment in LAN: Configure <code>dbLocation</code> in <code>app_api/models/db.js</code>)</li>
+<li>(for deployment in LAN: <code>export SET_ENV=production</code>)</li>
+<li><code>npm start</code></li>
+</ul>
+
+
+<p>Should be similar to <a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a>.</p>
+
+<h2>Choosing the right technology stack</h2>
+
+<p>This really depends on your individual needs. Here are some points to consider:</p>
+
+<ul>
+<li>How many people will be accessing the site?</li>
+<li>Do you have to access the site from outside of your LAN? Do you need a login mechanism?</li>
+<li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
+<li>Database interaction possible (this demo uses SQLite3)?</li>
+</ul>
+
+
+<p>If you know that you&rsquo;ll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
+
+<p>Otherwhise, the RPi is a good choice for a web server.</p>
+
+<p>Some of the technology stacks available on the RPi are:</p>
+
+<ul>
+<li>JVM: Java, Scala</li>
+<li>.NET/Mono: C#, F#</li>
+<li>Python</li>
+<li>JS: <a href="https://nodejs.org/">Node.js</a></li>
+</ul>
+
+
+<p>Since I only want to display data in my LAN I decided to use Javascript: <a href="https://nodejs.org/">Node.js</a> in combination with the <a href="http://expressjs.com/">Express framework</a> provides all possible features and is very lightweight.</p>
+
+<p>No matter which stack you choose:
+Running the web site on the same RPi as the temperature recording from the previous posts saves you the hassle of installing software on a different machine. And it obviously saves energy, since the RPi is running 24/7 anyway recording temperature data.</p>
+
+<h2>User Interface</h2>
+
+<p>My primary goal was <em>explorative data visualization</em>. For this purpose I decided to show 2 plots:</p>
+
+<ul>
+<li>an overview plot showing the past 14 days</li>
+<li>and a detail plot, showing the selection of the overview plot</li>
+</ul>
+
+
+<p>You can test the website with some sample data at
+<a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
+
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
+
+<p>Some of the UI features:</p>
+
+<ul>
+<li>The detail plot can be dragged and the overview plot has a selection region which can be resized and dragged.</li>
+<li>Changes to either plot are reflected in the other.</li>
+<li>Mouse movement in the detail plot updates the legend.</li>
+</ul>
+
+
+<p>All charting features are implemented using <a href="http://www.flotcharts.org/">Flot</a>.</p>
+
+<h2>Prerequisites: Node.js</h2>
+
+<p>Here is a very concise manual on how to install Node.js on the RPi (this
+gives you a more up to date version of Node.js than default Raspbian does):
+<a href="http://weworkweplay.com/play/raspberry-pi-nodejs/">http://weworkweplay.com/play/raspberry-pi-nodejs/</a></p>
+
+<h2>Installation</h2>
+
+<p>All further instructions are expected to be executed on the RPi.</p>
+
+<p>Download and unzip the source code from</p>
+
+<p><a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></p>
+
+<p><code>
+cd ~
+mkdir website &amp;&amp; cd website
+wget https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip
+unzip *.zip
+cd rpi*
+</code></p>
+
+<p>Install backend packages (node packages are defined in <code>packages.json</code>):</p>
+
+<p><code>
+npm install
+</code></p>
+
+<p>Node.js packages are installed to folder <code>node_modules</code>.</p>
+
+<ul>
+<li>the folder <code>app_server</code> contains the basic web site.</li>
+<li>the folder <code>app_api</code> provides the REST backend.</li>
+</ul>
+
+
+<p>Install frontend packages (bower packages are defined in <code>bower.json</code>):</p>
+
+<p><code>
+bower install
+</code></p>
+
+<p>Bower packages are installed to folder <code>public/vendor/bower</code>.</p>
+
+<p>You should now be able to start the application (using the provided sample data in folder <code>sample_data</code>):</p>
+
+<p><code>
+npm start
+</code></p>
+
+<h2>Configuration (development vs production)</h2>
+
+<p>The application uses a single switch between development mode and production mode:</p>
+
+<p><code>NODE_ENV</code></p>
+
+<p>This information is currently used in the following places in the application:</p>
+
+<h3>REST URL</h3>
+
+<p>Setting the URL for the REST service (in <code>app.js</code>):
+<code>
+var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
+</code></p>
+
+<p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
+
+<p>And in case you&rsquo;re not familiar with the syntax</p>
+
+<p><code>
+var result = someCondition ? 'string1' : 'string2';
+</code></p>
+
+<p>It&rsquo;s just a shorthand for</p>
+
+<p><code>
+var result;
+if (someCondition) {
+  result = 'string1';
+} else {
+  result = 'string2';
+}
+</code></p>
+
+<h3>Database location</h3>
+
+<p>Setting the database location (in <code>app_api/models/db.js</code>):
+<code>
+var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
+</code></p>
+
+<h3>Usage</h3>
+
+<p>Once you&rsquo;ve configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
+
+<p><code>
+export NODE_ENV=production
+npm start
+</code></p>
+
+<h3>Customizing</h3>
+
+<p>You will probably want to customize the UI, as my design skills are limited at best. ;&ndash;)</p>
+
+<p>Here&rsquo;s an overview of the project, so you know where to change things:</p>
+
+<p><code>
+├── app_api                     //  REST API
+│   ├── controllers
+│   │   └── temperatures.js
+│   ├── models
+│   │   ├── db.js               //  DATABASE
+│   └── routes
+│       └── index.js
+├── app.js                      //  MAIN ENTRY POINT FOR THE APPLICATION
+├── app_server                  //  web server (express.js)
+│   ├── controllers
+│   │   ├── main.js
+│   │   └── temperatures.js
+│   ├── models
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── temperatures.js
+│   └── views
+│       ├── error.jade
+│       ├── index.jade
+│       ├── layout.jade
+│       └── temperatures-list.jade
+├── bower.json                  //  Bower configuration (frontend)
+├── node_modules                //  Location of node modules
+├── nodemon.json                //  nodemon configuration
+├── package.json                //  node configuration
+├── public                      //  frontend stuff...
+│   ├── images                  //  images
+│   ├── scripts                 //  Javascript code
+│   │   ├── chart.js            //  This file includes all charting code
+│   │   ├── rest.js             //  wrapper code to access REST API
+│   │   └── suncalc.js          //  calc sunrise/sunset on the fly
+│   ├── stylesheets             //  ...
+│   │   ├── app.css
+│   │   ├── chart.css
+│   └── vendor                  //  3rd party libraries
+│       ├── bower               //  ...installed via bower
+│       └── custom              //  ...other 3rd party libraries
+├── sample_data                 //  sample data
+│   └── templog.db              //  sqlite3 sample data set
+</code></p>
+
+<p>That&rsquo;s it. Have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/"/>
+    <updated>2015-07-10T00:13:12+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software</id>
+    <content type="html"><![CDATA[<p>In the <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
+This post will use a small python program to save the recorded temperatures to a database.</p>
+
+<p>For simplicity&rsquo;s sake we&rsquo;ll be using SQLite3 as our database.</p>
+
+<p>Aside from our (indoor) temperature sensors, we&rsquo;ll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
+
+<p>Note: In case your Raspberry Pi does not have access to the internet you can just exlude the weather underground parts in the code below.</p>
+
+<p>All following code is intended to run on the Raspberry Pi receiving the data.</p>
+
+<h3>Create database (SQLite3)</h3>
+
+<p>The database schema is simple. We need one table to store the temperatures, and another to store sensor information.</p>
+
+<p>Create a new file called <code>templog.db</code>:</p>
+
+<p><code>sh
+$ touch templog.db
+</code></p>
+
+<p>There are different ways to interact with SQLite3 (cli (=interactive), script, api).</p>
+
+<p>The goal is to execute the following sql statements:</p>
+
+<p>``` sql
+CREATE TABLE sensors
+(</p>
+
+<pre><code>name TEXT NOT NULL,
+id TEXT NOT NULL,
+baudrate INTEGER,
+port TEXT NOT NULL,
+active INTEGER
+</code></pre>
+
+<p>);
+CREATE TABLE temps
+(</p>
+
+<pre><code>timestamp TEXT,
+temp REAL,
+ID TEXT
+</code></pre>
+
+<p>);
+<code>``
+Simplest solution is to open the newly created file</code>templog.db<code>with</code>sqlite3` (cli/interactive) &hellip;</p>
+
+<p><code>
+sqlite3 templog.db
+</code>
+&hellip;and past the previous code block. Should look like this:</p>
+
+<p><code>
+$ sqlite3 demo.db
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite&gt; CREATE TABLE sensors
+   ...&gt; (
+   ...&gt;     name TEXT NOT NULL,
+   ...&gt;     id TEXT NOT NULL,
+   ...&gt;     baudrate INTEGER,
+   ...&gt;     port TEXT NOT NULL,
+   ...&gt;     active INTEGER
+   ...&gt; );
+sqlite&gt; CREATE TABLE temps
+   ...&gt; (
+   ...&gt;     timestamp TEXT,
+   ...&gt;     temp REAL,
+   ...&gt;     ID TEXT
+   ...&gt; );
+</code></p>
+
+<p>We&rsquo;ve created a database.</p>
+
+<p>The important table is <code>temps</code>: It will contain the measurements.</p>
+
+<p>The other table (<code>sensors</code>) contains informations about the sensors, which are currently only needed for the weather underground &lsquo;sensor&rsquo;. And yes: the column names/types are not optimal.</p>
+
+<p>Note: <code>timestamp TEXT</code> will bite us in the ass, but SQLite3 does NOT have any date type.</p>
+
+<h3>Monitor script</h3>
+
+<p>I found this nice script somewhere on <a href="https://github.com/kal001/temperature">Github</a>. So Thank You <a href="https://github.com/kal001">kal001</a>!</p>
+
+<p>Here&rsquo;s my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
+
+<p>Place this script side-by-side to <code>temps.log</code>.</p>
+
+<p>Save it as <code>monitor.py</code>.</p>
+
+<p>You will probably want to modify the values for <code>dbname</code>, <code>TIMEOUT</code>, <code>debug.txt</code>, etc.</p>
+
+<p>``` python</p>
+
+<h1>!/usr/bin/env python</h1>
+
+<p>import sqlite3
+import threading
+from time import time, sleep, gmtime, strftime</p>
+
+<p>import serial
+import requests</p>
+
+<h1>global variales</h1>
+
+<h1>sqlite database location</h1>
+
+<p>dbname = &lsquo;templog.db&rsquo;</p>
+
+<h1>serial device</h1>
+
+<p>DEVICE = &lsquo;/dev/ttyAMA0&rsquo;
+BAUD = 9600</p>
+
+<p>ser = serial.Serial(DEVICE, BAUD)</p>
+
+<h1>timeout in seconds for waiting to read temperature from sensors</h1>
+
+<p>TIMEOUT = 30</p>
+
+<h1>weather underground data</h1>
+
+<p>WUKEY = &lsquo;&rsquo;
+STATION = &lsquo;&rsquo;</p>
+
+<h1>time between weather underground samples in seconds</h1>
+
+<p>SAMPLE = 30 * 60</p>
+
+<p>def log_temperature(temp):</p>
+
+<pre><code>"""
+Store the temperature in the database.
+"""
+
+conn = sqlite3.connect(dbname)
+curs = conn.cursor()
+
+curs.execute("INSERT INTO temps values(datetime('now', 'localtime'), '{0}', '{1}' )".format(temp['temperature'], temp['id']))
+
+conn.commit()
+conn.close()
+</code></pre>
+
+<p>def get_temp():</p>
+
+<pre><code>"""
+Retrieves the temperature from the sensor.
+
+Returns -100 on error, or the temperature as a float.
+"""
+
+global ser
+
+tempvalue = -100
+deviceid = '??'
+voltage = 0
+
+fim = time() + TIMEOUT
+
+while (time() &lt; fim) and (tempvalue == -100):
+    n = ser.inWaiting()
+    if n != 0:
+        data = ser.read(n)
+        nb_msg = len(data) / 12
+        for i in range(0, nb_msg):
+            msg = data[i*12:(i+1)*12]
+            deviceid = msg[1:3]
+
+            if msg[3:7] == "TMPA":
+                tempvalue = msg[7:]
+
+            if msg[3:7] == "BATT":
+                voltage = msg[7:11]
+                if voltage == "LOW":
+                    voltage = 0
+    else:
+        sleep(5)
+
+return {'temperature':tempvalue, 'id':deviceid}
+</code></pre>
+
+<p>def get_temp_wu():</p>
+
+<pre><code>"""
+Retrieves temperature(s) from weather underground (wu) and stores it to the database
+"""
+
+try:
+    conn = sqlite3.connect(dbname)
+    curs = conn.cursor()
+    query = "SELECT baudrate, port, id, active FROM sensors WHERE id like 'W_'"
+
+    curs.execute(query)
+    rows = curs.fetchall()
+
+    #print(rows)
+
+    conn.close()
+
+    if rows != None:
+        for row in rows[:]:
+            WUKEY = row[1]
+            STATION = row[0]
+
+            if int(row[3]) &gt; 0:
+                try:
+                    url = "http://api.wunderground.com/api/{0}/conditions/q/{1}.json".format(WUKEY, STATION)
+                    r = requests.get(url)
+                    data = r.json()
+                    log_temperature({'temperature': data['current_observation']['temp_c'], 'id': row[2]})
+                except Exception as e:
+                    raise
+
+except Exception as e:
+    text_file = open("debug.txt", "a+")
+    text_file.write("{0} ERROR:\n{1}\n".format(strftime("%Y-%m-%d %H:%M:%S", gmtime()), str(e)))
+    text_file.close()
+</code></pre>
+
+<p>def main():</p>
+
+<pre><code>"""
+Program starts here.
+"""
+
+get_temp_wu()
+t = threading.Timer(SAMPLE, get_temp_wu)
+t.start()
+
+while True:
+    temperature = get_temp()
+
+    if temperature['temperature'] != -100:
+        log_temperature(temperature)
+
+    if t.is_alive() == False:
+        t = threading.Timer(SAMPLE, get_temp_wu)
+        t.start()
+</code></pre>
+
+<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&rdquo;:</p>
+
+<pre><code>main()
+</code></pre>
+
+<p>```</p>
+
+<p>Run the script. Open another shell, take a look inside the database (new data arriving once an hour?).</p>
+
+<p>Don&rsquo;t forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
+
+<p><a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Part 3</a> will provide a UI for the collected data.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/"/>
+    <updated>2015-07-10T00:11:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware</id>
+    <content type="html"><![CDATA[<p>Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi.
+So, for starters, I picked something that was useful and only involved sensors (no actors &ndash; yet):</p>
+
+<p>Measuring temperatures at home.</p>
+
+<p>Neither rocket science nor cool IoT &ldquo;coffe is ready when I get out of the shower in the morning&rdquo;, I know.</p>
+
+<p>The sensor(s) should send a signal once an hour, without cable, and run on battery.</p>
+
+<p>As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from <a href="http://shop.ciseco.co.uk/">Ciseco</a> (<a href="http://shop.ciseco.co.uk/about-us/">currently being rebranded to Wireless Things (www.wirelessthings.com)</a>). Affordable and good documentation. And, more important: These people are passionate about their product!</p>
+
+<p>Before we get started here is a quick preview of what we want to accomplish (for details about the UI see <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">part3</a>): <a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
+
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
+
+<p>So let&rsquo;s get started:</p>
+
+<ul>
+<li>2 battery powered sensors transmitting temperature data once per hour via radio frequency.</li>
+<li>Raspberry Pi is powered 24/7 and records signals from sensors.</li>
+</ul>
+
+
+<h2>Parts &amp; Costs</h2>
+
+<ul>
+<li>1x &pound;3.90 Slice of Pi <a href="http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/">http://shop.ciseco.co.uk/slice-of-pi-add-on-for-raspberry-pi/</a></li>
+<li>2x &pound;8.50 Sensor THERMISTOR <a href="http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/">http://shop.ciseco.co.uk/temperature-xrf-development-sensor-thermistor/</a></li>
+<li>3x &pound;11.88 XRF wireless RF radio UART serial data module <a href="http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/">http://shop.ciseco.co.uk/xrf-wireless-rf-radio-uart-serial-data-module-xbee-shaped/</a></li>
+</ul>
+
+
+<p>Total: &pound;56.54</p>
+
+<p>If you only want a single sensor (1 Slice of Pi, 1 Sensor, 2 XRF modules): &pound;36.16</p>
+
+<h2>Setup overview</h2>
+
+<p><img src="/images/posts/rpi_temperatures/overview.png"></p>
+
+<ul>
+<li>On the left is the Raspberry Pi with an XRF module mounted to the Slice of Pi.
+
+<ul>
+<li>The Slice of Pi acts as a breakout board.</li>
+<li>The XRF module will receive data.</li>
+<li>The Raspberry Pi will be continously monitoring input and storing the information locally to an SQLite3 database. See <a href="(/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> for details.</li>
+</ul>
+</li>
+<li>On the right are two sensors with XRF modules.
+
+<ul>
+<li>These modules will send temperature data once per hour to the Raspberry Pi.</li>
+<li>These modules run on battery power.</li>
+<li>You can have as many of these sensors as you want.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Each XRF module requires a unique id (&lsquo;XRF ID&rsquo; in the image above).</p>
+
+<h2>Hardware: Fitting the pieces &amp; soldering</h2>
+
+<p>The official documentation is pretty good. If you know what you&rsquo;re doing.</p>
+
+<ul>
+<li>For the Slice of Pi: <a href="http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf">http://openmicros.org/GSG/Slice%20of%20Pi%20-%20v1-1%20getting%20started%20guide.pdf</a></li>
+<li>For the sensor module(s): <a href="http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide">http://openmicros.org/index.php/articles/88-ciseco-product-documentation/211-ccb-coin-cell-board-pictorial-build-guide</a></li>
+</ul>
+
+
+<p>In case you are not really sure what you are doing with the soldering iron: Keep calm. There is a lot of information on the internet. I found the following step-by-step instruction useful:</p>
+
+<p><a href="http://www.pihomeserver.fr/en/2013/07/11/raspberry-pi-assembler-un-emetteur-radio-pour-votre-sonde-de-temperature/">Raspberry Pi &ndash; Assemble your temperature THERMISTOR with an XRF transmitter probe</a></p>
+
+<p>Note: The sensor comes with a box. In case you want to place the sensor inside the box make sure <strong>not to solder the thermistor to close to the board</strong>. You will want to make a hole in the box and have the thermistor stick out. Otherwise the thermistor will be inside the closed box and measure the temperature inside the box (instead of outside the box). Here is a picture illustrating the issue:</p>
+
+<p><img src="/images/posts/rpi_temperatures/sensor.png"></p>
+
+<h2>OS</h2>
+
+<p>This is one of the reasons I picked Ciseco for my simple project: They provide a standard Linux distribution (Raspbian) including their drivers.</p>
+
+<p>This means the &ldquo;Slice of Pi&rdquo; works out of the box.</p>
+
+<p>And the rest of the system behaves like a normal Raspbian system. There is no vendor &ldquo;lock-in&rdquo;.</p>
+
+<p>Ciseco&rsquo;s patched version of Raspbian <a href="http://openmicros.org/Download/">here</a>.
+Currently this is <a href="http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip">http://openmicros.org/Download/2015-05-05-raspbain-wheezy-raswik-shrunk.img.zip</a>.
+I used the slightly older version <a href="http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip">http://openmicros.org/Download/2014-12-24-wheezy-raspbian-ciseco-shrunk.img.zip</a>.</p>
+
+<h2>Software (well, actually Firmware)</h2>
+
+<p>All parts are soldered and the RPi has the correct operating system.</p>
+
+<p>Our next steps (from a bird&rsquo;s eye perspective) are:</p>
+
+<ul>
+<li>uploading the correct firmware onto the sensors' XRF module</li>
+<li>configuring the sensors' XRF module</li>
+</ul>
+
+
+<p>The following instructions are mostly taken from <a href="http://www.seanlandsman.com/2013/02/the-raspberry-pi-and-wireless-rf-xrf.html">Sean Landsman&rsquo;s excellent tutorial</a>.</p>
+
+<h3>Upload firmware to sensor(s)&lsquo; XRF module</h3>
+
+<p>Why do we have to do this?</p>
+
+<p>The sensor board is generic and can be configured for working with different types of sensors. We&rsquo;re using a thermistor, in case you forgot&hellip; The thing with the antenna is the XRF module. We have 3 XRF modules: 1 for receiving data, 2 for sending data. We&rsquo;ll take care of the sending modules first.</p>
+
+<p>The tool for uploading the appropriate firmware to XRF modules is called <code>xrf_uploader</code>.</p>
+
+<p>Download the <code>xrf_uploader</code> source code from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Uploader">https://github.com/CisecoPlc/XRF-Uploader</a> to the Raspberry Pi.</p>
+
+<p>Then compile the file <code>xrf_uploader.cpp</code>:</p>
+
+<p><code>sh
+g++ xfr_uploader.cpp -o xrf_uploader
+chmod +x xrf_uploader
+</code></p>
+
+<p>Next, get a copy of the thermistor firmware from Ciseco&rsquo;s Github page at <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP">https://github.com/CisecoPlc/XRF-Firmware-downloads/tree/master/XRFV2%20ARF%20SRF%20-%20LLAP</a>.
+At the time of writing, the most current version of the termistor firmware was <a href="https://github.com/CisecoPlc/XRF-Firmware-downloads/blob/master/XRFV2%20ARF%20SRF%20-%20LLAP/llapThermistor-V0.73-24MHz.bin">llapThermistor-V0.73-24MHz.bin</a>.</p>
+
+<ul>
+<li>Shutdown the Raspberry Pi (<code>sudo init 0</code>)</li>
+<li>Connect the first XRF &lsquo;sensor&rsquo; module with the Slice of Pi</li>
+<li>Start the Raspberry Pi again</li>
+</ul>
+
+
+<p>Copy the thermistor firmware into the same folder as the <code>xrf_uploader</code> and upload the firmware to the newly connected XRF module:</p>
+
+<p><code>sh
+./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+</code></p>
+
+<p>Note: <code>/dev/ttyAMA0</code> is the Raspberry Pi&rsquo;s location of the <a href="http://en.wikipedia.org/wiki/Universal_asynchronous_receiver/transmitter">UART</a>.</p>
+
+<p>The upload should look something like this:</p>
+
+<p>``` sh
+pi@raspberrypi ~/xrf_loader $ ./xrf_uploader -d /dev/ttyAMA0 -f llapThermistor-V0.73-24MHz.bin
+Writing new firmware file llapThermistor-V0.50-24MHz.bin to device /dev/ttyAMA0 with baud rate 9600&hellip;
+Reading firmware file&hellip;
+Read 1300 lines from firmware file
+Opening device&hellip;
+Setting serial parameters&hellip;
+Waiting for device to settle&hellip;</p>
+
+<p>&lt;> Entering command modus
+&lt;&ndash; OK
+&ndash;> ATVR
+&lt;&ndash; 0.63B XRF
+&lt;&ndash; OK
+&ndash;> ATPG
+&lt;&ndash; OK
+&lt;> Sent 1300 of 1300 lines&hellip;</p>
+
+<p>All OK, XRF successfully reprogrammed!</p>
+
+<p>Waiting for device to settle&hellip;</p>
+
+<p>&lt;> Entering command modus
+&lt;&ndash; OK
+&ndash;> ATVR
+&lt;&ndash; 0.50B APTHERM
+&lt;&ndash; OK
+```</p>
+
+<ul>
+<li>Shutdown the Raspberry Pi</li>
+<li>Detach the freshly configured XRF &lsquo;sensor&rsquo; module and replace it with the XRF module which will be receiving temperature information (this XRF module is called the &lsquo;pass-through&rsquo;).</li>
+<li>Connect the the &lsquo;sensor&rsquo; XRF module used for temperature measurement with thermistor board.</li>
+<li>Do not insert the battery yet!</li>
+<li>Start the Raspberry Pi again.</li>
+</ul>
+
+
+<h3>Configure sensors (XRF modules)</h3>
+
+<p>We now have</p>
+
+<ul>
+<li>fully equipped sensor(s) without battery power</li>
+<li>Raspberry Pi with receiving sensor</li>
+</ul>
+
+
+<p>Again: Do not insert batteries into the sensors yet.</p>
+
+<p>We first have to install a protocol to communicate between the &lsquo;sensor&rsquo; and the &lsquo;pass-through&rsquo; (aka &lsquo;receiving&rsquo;) XRF device.</p>
+
+<p>Download <a href="http://sourceforge.net/projects/pyserial/files/pyserial/2.5/pyserial-2.5.tar.gz/download">pySerial</a> to the Raspberry Pi.</p>
+
+<p>Unpack and install pySerial:
+<code>sh
+$ tar xvzf pyserial-2.5.tar.gz
+$ cd pyserial-2.5
+$ sudo python setup.py install
+</code></p>
+
+<h4>Using pySerial/miniterm</h4>
+
+<p>pySerial comes with <code>miniterm.py</code>, a small serial terminal. Attach to the terminal:
+<code>sh
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+</code></p>
+
+<p>Press Ctrl+T, followed by Ctrl+E to enable the echo area. This helps during debugging.</p>
+
+<p>Note: The terminal is not intended for <em>typing</em> commands: Always <em>paste</em> the commands from somewhere else.</p>
+
+<p>Note: Once the battery is inserted it will drain very quickly during debugging. Ensure to unplug the battery if it&rsquo;s not needed.</p>
+
+<h5>miniterm: First contact</h5>
+
+<p>While miniterm is running, insert the battery. The output should look something like this:
+<code>
+a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--
+</code></p>
+
+<p>What we are seeing is an example of LLAP (Ciseco&rsquo;s lightweight local automation protocol). A complete documentation of the protocol can be found <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/112-llap">here</a> and <a href="http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/297-llap-reference">here</a>.</p>
+
+<p>From Ciseco&rsquo;s documentation:
+```
+The message structure</p>
+
+<p>[&hellip;] the message is 12 characters long and in 3 distinct sections. To illustrate the 3 separate parts to the message, see this example:</p>
+
+<p>aXXDDDDDDDD
+1.     &ldquo;a&rdquo; is lower case and shows the start of the message</p>
+
+<ol>
+<li><p>   XX is the device identifier (address A-Z &amp; A-Z)</p></li>
+<li><pre><code>DDDDDDDDDD is the data being exchanged.
+</code></pre></li>
+</ol>
+
+
+<p>Note: Only the first &ldquo;a&rdquo; character is lowercase, the remaining message always uses uppercase.
+```</p>
+
+<p>Paste <code>a--HELLO----</code> into the miniterm. In case your wondering: The default identifier is <code>--</code>. We&rsquo;ll change that later.</p>
+
+<p><code>sh
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+--- Quit: Ctrl+]  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+--- local echo active ---
+a--HELLO----
+</code></p>
+
+<p>If the remote device is running and configured correctly the output should immediatly change to:
+<code>sh
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+--- Quit: Ctrl+]  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+--- local echo active ---
+a--HELLO----a--HELLO----
+</code></p>
+
+<p>Note the duplicate <code>a--HELLO----</code> in the last line. The second <code>a--HELLO----</code> is the answer from the remote device.</p>
+
+<h5>miniterm: Change device ID</h5>
+
+<p>Since all devices have the same initial ID, it is a good idea to change the device ID in case you intend to use more than one remote device.</p>
+
+<p>The following code changes the device ID to <code>ZZ</code>:
+<code>
+a--CHDEVIDZZ
+a--REBOOT---
+</code></p>
+
+<p>The terminal output should look like this:
+<code>
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+--- Quit: Ctrl+]  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+--- local echo active ---
+a--CHDEVIDZZ
+a--REBOOT---aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--
+</code></p>
+
+<h5>miniterm: Read temperature</h5>
+
+<p>Assuming the device ID is <code>ZZ</code> reading the temperature is accomplished by <code>aZZTEMP-----</code>:
+<code>
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+--- Quit: Ctrl+]  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+--- local echo active ---
+aZZTEMP-----aZZTMPA24.21
+</code></p>
+
+<p>In the above answer from the remote device the temperature is 24.21 degrees Celsius.</p>
+
+<h5>miniterm: Configure measurement interval</h5>
+
+<p>Currently the remote device is contiously sending information. And draining the battery. To preserve battery power the interval can be configured to send information periodically using the command <code>a--INTVL</code>. The interval is defined with a 3 digit number followed by the time period: S(seconds), M(minutes), H(hours), D(days). For example the command <code>aZZINTVL005S</code> would set the interval of the remote device to 5 seconds.</p>
+
+<p>Additionally the device should be sent to sleep in between cylces by issuing the command <code>aZZCYCLE----</code>:
+<code>
+$ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
+--- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
+--- Quit: Ctrl+]  |  Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H ---
+--- local echo active ---
+aZZINTVL001H
+aZZCYCLE----
+</code></p>
+
+<p>The above example sets the interval to one hour (<code>001H</code>).</p>
+
+<p>Repeat the sensor setup and configuration for each sensor which needs to send data. The &lsquo;pass-through&rsquo; (aka receiving) sensor does not have to be configured.</p>
+
+<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Part 2</a> describes a simple program to monitor the data being produced by this setup.</p>
+]]></content>
+  </entry>
+  
+</feed>

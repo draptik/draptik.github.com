@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-01-03T22:44:56+01:00</updated>
+  <updated>2015-07-29T23:54:08+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,760 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
+    <updated>2015-07-30T00:07:12+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
+
+<p>In this post I&rsquo;ll describe how to display the data.</p>
+
+<h2>TL;DR</h2>
+
+<ul>
+<li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
+<li><code>npm install</code></li>
+<li><code>bower install</code></li>
+<li>(for deployment in LAN: Configure <code>baseUrl</code> in <code>app.js</code>)</li>
+<li>(for deployment in LAN: Configure <code>dbLocation</code> in <code>app_api/models/db.js</code>)</li>
+<li>(for deployment in LAN: <code>export SET_ENV=production</code>)</li>
+<li><code>npm start</code></li>
+</ul>
+
+
+<p>Should be similar to <a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a>.</p>
+
+<h2>Choosing the right technology stack</h2>
+
+<p>This really depends on your individual needs. Here are some points to consider:</p>
+
+<ul>
+<li>How many people will be accessing the site?</li>
+<li>Do you have to access the site from outside of your LAN? Do you need a login mechanism?</li>
+<li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
+<li>Database interaction possible (this demo uses SQLite3)?</li>
+</ul>
+
+
+<p>If you know that you&rsquo;ll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
+
+<p>Otherwhise, the RPi is a good choice for a web server.</p>
+
+<p>Some of the technology stacks available on the RPi are:</p>
+
+<ul>
+<li>JVM: Java, Scala</li>
+<li>.NET/Mono: C#, F#</li>
+<li>Python</li>
+<li>JS: <a href="https://nodejs.org/">Node.js</a></li>
+</ul>
+
+
+<p>Since I only want to display data in my LAN I decided to use Javascript: <a href="https://nodejs.org/">Node.js</a> in combination with the <a href="http://expressjs.com/">Express framework</a> provides all possible features and is very lightweight.</p>
+
+<p>No matter which stack you choose:
+Running the web site on the same RPi as the temperature recording from the previous posts saves you the hassle of installing software on a different machine. And it obviously saves energy, since the RPi is running 24/7 anyway recording temperature data.</p>
+
+<h2>User Interface</h2>
+
+<p>My primary goal was <em>explorative data visualization</em>. For this purpose I decided to show 2 plots:</p>
+
+<ul>
+<li>an overview plot showing the past 14 days</li>
+<li>and a detail plot, showing the selection of the overview plot</li>
+</ul>
+
+
+<p>You can test the website with some sample data at
+<a href="http://rpi-temperatures-website-demo.divshot.io/">http://rpi-temperatures-website-demo.divshot.io/</a></p>
+
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
+
+<p>Some of the UI features:</p>
+
+<ul>
+<li>The detail plot can be dragged and the overview plot has a selection region which can be resized and dragged.</li>
+<li>Changes to either plot are reflected in the other.</li>
+<li>Mouse movement in the detail plot updates the legend.</li>
+</ul>
+
+
+<p>All charting features are implemented using <a href="http://www.flotcharts.org/">Flot</a>.</p>
+
+<h2>Prerequisites: Node.js</h2>
+
+<p>Here is a very concise manual on how to install Node.js on the RPi (this
+gives you a more up to date version of Node.js than default Raspbian does):
+<a href="http://weworkweplay.com/play/raspberry-pi-nodejs/">http://weworkweplay.com/play/raspberry-pi-nodejs/</a></p>
+
+<h2>Installation</h2>
+
+<p>All further instructions are expected to be executed on the RPi.</p>
+
+<p>Download and unzip the source code from</p>
+
+<p><a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></p>
+
+<p><code>
+cd ~
+mkdir website &amp;&amp; cd website
+wget https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip
+unzip *.zip
+cd rpi*
+</code></p>
+
+<p>Install backend packages (node packages are defined in <code>packages.json</code>):</p>
+
+<p><code>
+npm install
+</code></p>
+
+<p>Node.js packages are installed to folder <code>node_modules</code>.</p>
+
+<ul>
+<li>the folder <code>app_server</code> contains the basic web site.</li>
+<li>the folder <code>app_api</code> provides the REST backend.</li>
+</ul>
+
+
+<p>Install frontend packages (bower packages are defined in <code>bower.json</code>):</p>
+
+<p><code>
+bower install
+</code></p>
+
+<p>Bower packages are installed to folder <code>public/vendor/bower</code>.</p>
+
+<p>You should now be able to start the application (using the provided sample data in folder <code>sample_data</code>):</p>
+
+<p><code>
+npm start
+</code></p>
+
+<h2>Configuration (development vs production)</h2>
+
+<p>The application uses a single switch between development mode and production mode:</p>
+
+<p><code>NODE_ENV</code></p>
+
+<p>This information is currently used in the following places in the application:</p>
+
+<h3>REST URL</h3>
+
+<p>Setting the URL for the REST service (in <code>app.js</code>):
+<code>
+var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
+</code></p>
+
+<p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
+
+<p>And in case you&rsquo;re not familiar with the syntax</p>
+
+<p><code>
+var result = someCondition ? 'string1' : 'string2';
+</code></p>
+
+<p>It&rsquo;s just a shorthand for</p>
+
+<p><code>
+var result;
+if (someCondition) {
+  result = 'string1';
+} else {
+  result = 'string2';
+}
+</code></p>
+
+<h3>Database location</h3>
+
+<p>Setting the database location (in <code>app_api/models/db.js</code>):
+<code>
+var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
+</code></p>
+
+<h3>Usage</h3>
+
+<p>Once you&rsquo;ve configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
+
+<p><code>
+export NODE_ENV=production
+npm start
+</code></p>
+
+<h3>Customizing</h3>
+
+<p>You will probably want to customize the UI, as my design skills are limited at best. ;&ndash;)</p>
+
+<p>Here&rsquo;s an overview of the project, so you know where to change things:</p>
+
+<p><code>
+├── app_api                     //  REST API
+│   ├── controllers
+│   │   └── temperatures.js
+│   ├── models
+│   │   ├── db.js               //  DATABASE
+│   └── routes
+│       └── index.js
+├── app.js                      //  MAIN ENTRY POINT FOR THE APPLICATION
+├── app_server                  //  web server (express.js)
+│   ├── controllers
+│   │   ├── main.js
+│   │   └── temperatures.js
+│   ├── models
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── temperatures.js
+│   └── views
+│       ├── error.jade
+│       ├── index.jade
+│       ├── layout.jade
+│       └── temperatures-list.jade
+├── bower.json                  //  Bower configuration (frontend)
+├── node_modules                //  Location of node modules
+├── nodemon.json                //  nodemon configuration
+├── package.json                //  node configuration
+├── public                      //  frontend stuff...
+│   ├── images                  //  images
+│   ├── scripts                 //  Javascript code
+│   │   ├── chart.js            //  This file includes all charting code
+│   │   ├── rest.js             //  wrapper code to access REST API
+│   │   └── suncalc.js          //  calc sunrise/sunset on the fly
+│   ├── stylesheets             //  ...
+│   │   ├── app.css
+│   │   ├── chart.css
+│   └── vendor                  //  3rd party libraries
+│       ├── bower               //  ...installed via bower
+│       └── custom              //  ...other 3rd party libraries
+├── sample_data                 //  sample data
+│   └── templog.db              //  sqlite3 sample data set
+</code></p>
+
+<p>That&rsquo;s it. Have fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[.NET backend providing REST]]></title>
+    <link href="http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest/"/>
+    <updated>2014-07-18T18:46:33+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest</id>
+    <content type="html"><![CDATA[<h2>TL;DR</h2>
+
+<p>My <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> has a new backend implementation using <a href="http://www.asp.net/web-api">.NET Web API</a>.</p>
+
+<h1>&hellip;</h1>
+
+<h2>Recap</h2>
+
+<p>Our goals:</p>
+
+<ul>
+<li>server side: minimal working REST API providing
+
+<ul>
+<li>GET <code>dummy</code></li>
+<li>CRUD <code>users</code></li>
+</ul>
+</li>
+<li>client side (angular): communicate with server side</li>
+</ul>
+
+
+<h2>Setup</h2>
+
+<p>Creating a Web API project is straightforward: Just follow the instructions at</p>
+
+<ul>
+<li><a href="http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api">Getting Started with ASP.NET Web API 2</a></li>
+<li><a href="http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api">Enabling Cross-Origin Requests in ASP.NET Web API</a></li>
+<li><a href="http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver">Dependency Injection for Web API Controllers</a></li>
+</ul>
+
+
+<p>The final project structure will look like this:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-structure.PNG"></p>
+
+<h2>Adding Models</h2>
+
+<p>Create two new POCOs for <code>User</code> and <code>Dummy</code>:</p>
+
+<p>``` csharp Models/Dummy.cs
+namespace WebService.Models
+{</p>
+
+<pre><code>public class Dummy
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Models/User.cs
+namespace WebService.Models
+{</p>
+
+<pre><code>public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Adding Service Layer</h2>
+
+<p>Create a new folder <code>Service</code> and add a <code>UserService</code> with corresponding interface <code>IUserService</code>.</p>
+
+<p>``` csharp Service/IUserService.cs
+using System.Collections.Generic;
+using WebService.Models;</p>
+
+<p>namespace WebService.Service
+{</p>
+
+<pre><code>public interface IUserService
+{
+    ICollection&lt;User&gt; GetAllUsers();
+    User GetById(int userId);
+    User UpdateUser(User user);
+    User CreateNewUser(User user);
+    void RemoveUserById(int userId);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Service/UserService.cs
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using WebService.Models;</p>
+
+<p>namespace WebService.Service
+{</p>
+
+<pre><code>public class UserService : IUserService
+{
+    public UserService()
+    {
+        this.Users = new Collection&lt;User&gt;();
+        this.CreateUsers();
+    }
+
+    private ICollection&lt;User&gt; Users { get; set; }
+
+    public ICollection&lt;User&gt; GetAllUsers()
+    {
+        return this.Users;
+    }
+
+    public User GetById(int userId)
+    {
+        return this.Users.SingleOrDefault(x =&gt; x.Id.Equals(userId));
+    }
+
+    public User UpdateUser(User user)
+    {
+        var u = this.Users.SingleOrDefault(x =&gt; x.Id.Equals(user.Id));
+        if (u != null) {
+            u.FirstName = user.FirstName;
+            u.LastName = user.LastName;
+        }
+        return u;
+    }
+
+    public User CreateNewUser(User user)
+    {
+        var newUser = new User
+        {
+            Id = this.Users.Max(x =&gt; x.Id) + 1,
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        };
+
+        this.Users.Add(newUser);
+
+        return newUser;
+    }
+
+    public void RemoveUserById(int userId)
+    {
+        this.Users.Remove(this.Users.SingleOrDefault(x =&gt; x.Id.Equals(userId)));
+    }
+
+    private void CreateUsers()
+    {
+        const int numberOfUsers = 10;
+        for (int id = 1; id &lt;= numberOfUsers; id++) {
+            this.Users.Add(new User {Id = id, FirstName = "Foo" + id, LastName = "Bar" + id});
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note: This is just a quick and dirty setup to get a working REST API without much overhead. In a real application the service will probably be a bit more fine grained. For example: In this demo app the users are simply stored in memory and not persisted to a database.</p>
+
+<h2>Adding IoC for Web API</h2>
+
+<p>Add inversion of control (IoC) to Web API:</p>
+
+<p>``` csharp IoC/UnityResolver.cs
+using System;
+using System.Collections.Generic;
+using System.Web.Http.Dependencies;
+using Microsoft.Practices.Unity;</p>
+
+<p>namespace WebService.IoC
+{</p>
+
+<pre><code>/// &lt;summary&gt;
+/// http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver
+/// &lt;/summary&gt;
+public class UnityResolver : IDependencyResolver
+{
+    private readonly IUnityContainer container;
+
+    public UnityResolver(IUnityContainer container)
+    {
+        if (container == null) {
+            throw new ArgumentNullException("container");
+        }
+        this.container = container;
+    }
+
+    public void Dispose()
+    {
+        this.container.Dispose();
+    }
+
+    public object GetService(Type serviceType)
+    {
+        try {
+            return this.container.Resolve(serviceType);
+        }
+        catch (ResolutionFailedException) {
+            return null;
+        }
+    }
+
+    public IEnumerable&lt;object&gt; GetServices(Type serviceType)
+    {
+        try {
+            return this.container.ResolveAll(serviceType);
+        }
+        catch (ResolutionFailedException) {
+            return new List&lt;object&gt;();
+        }
+    }
+
+    public IDependencyScope BeginScope()
+    {
+        var child = this.container.CreateChildContainer();
+        return new UnityResolver(child);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Adding Controllers</h2>
+
+<p>Create controllers <code>UsersController</code> and <code>DummyController</code>:</p>
+
+<p>``` csharp Controllers/Dummy.cs
+using System.Web.Http;
+using System.Web.Http.Cors;
+using WebService.Models;</p>
+
+<p>namespace WebService.Controllers
+{</p>
+
+<pre><code>[EnableCors(origins: "http://localhost:9000", headers: "*", methods: "*")]
+public class DummyController : ApiController
+{
+    public Dummy Get()
+    {
+        return new Dummy
+        {
+            Id = 0, 
+            FirstName = "JonFromREST", 
+            LastName = "Doe"
+        };
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Controllers/UsersController.cs
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using WebService.Models;
+using WebService.Service;</p>
+
+<p>namespace WebService.Controllers
+{</p>
+
+<pre><code>[EnableCors(origins: "http://localhost:9000", headers: "*", methods: "*")]
+public class UsersController : ApiController
+{
+    private readonly IUserService userService;
+
+    public UsersController(IUserService userService)
+    {
+        this.userService = userService;
+    }
+
+    public ICollection&lt;User&gt; Get()
+    {
+        return this.userService.GetAllUsers();
+    }
+
+    public User Get(int id)
+    {
+        return this.userService.GetById(id);
+    }
+
+    public User Put(User user)
+    {
+        return this.userService.UpdateUser(user);
+    }
+
+    public User Post(User user)
+    {
+        return this.userService.CreateNewUser(user);
+    }
+
+    public void Delete(int id)
+    {
+        this.userService.RemoveUserById(id);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Putting the pieces together</h3>
+
+<p>Within <code>WebApiConfig.cs</code>:</p>
+
+<ul>
+<li>configure the IoC container</li>
+<li>activate CORS</li>
+<li>return JSON</li>
+<li>configure routes</li>
+</ul>
+
+
+<p>``` csharp App_Start/WebApiConfig.cs
+using System.Net.Http.Headers;
+using System.Web.Http;
+using Microsoft.Practices.Unity;
+using WebService.IoC;
+using WebService.Service;</p>
+
+<p>namespace WebService
+{</p>
+
+<pre><code>public static class WebApiConfig
+{
+    public static void Register(HttpConfiguration config)
+    {
+        // IoC container
+        //
+        // http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver
+        var container = new UnityContainer();
+        // Note: for this demo we want the user service to be a singleton ('ContainerControlledLifetimeManager' in Unity syntax)
+        container.RegisterType&lt;IUserService, UserService&gt;(new ContainerControlledLifetimeManager());
+        config.DependencyResolver = new UnityResolver(container);
+
+        // Web API configuration and services
+
+        config.EnableCors();
+
+        // Return JSON instead of XML http://stackoverflow.com/a/13277616/1062607
+        config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
+        // Web API routes
+        config.MapHttpAttributeRoutes();
+
+        const string baseUrl = "ngdemo/web";
+
+        config.Routes.MapHttpRoute(
+            name: "DefaultApi",
+            routeTemplate: baseUrl + "/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+        );
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Returning Lower Case JSON from .NET Web API</h2>
+
+<p>C# uses upper case property names by default. JavaScript uses lower case property names by default.</p>
+
+<p>To automatically convert between both worlds you can add a <code>ContractResolver</code> to your <code>Global.asax.cs</code>:</p>
+
+<p>``` csharp Global.asax.cs
+using System.Web;
+using System.Web.Http;
+using Newtonsoft.Json.Serialization;</p>
+
+<p>namespace WebService
+{</p>
+
+<pre><code>public class WebApiApplication : HttpApplication
+{
+    protected void Application_Start()
+    {
+        GlobalConfiguration.Configure(WebApiConfig.Register);
+
+        // lower case property names in serialized JSON: http://stackoverflow.com/a/22130487/1062607
+        GlobalConfiguration.Configuration
+            .Formatters
+            .JsonFormatter
+            .SerializerSettings
+            .ContractResolver = new CamelCasePropertyNamesContractResolver();
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Done?</h2>
+
+<p>Almost: For the ASP.NET backend to be reachable by the same URL as the other backends (<a href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/">NodeJs backend</a> and <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">Java backend</a>) we have to change the default port of the application to 8080:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-url.PNG"></p>
+
+<p>Now we can start the Web API backend from Visual Studio (F5).</p>
+
+<p>In the newly openend browser, check the URL <a href="http:localhost:8080/nodedemo/web/dummy/">http:localhost:8080/nodedemo/web/dummy/</a>. The dummy JSON object should be visible:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-browser00.PNG"></p>
+
+<h2>Check the API</h2>
+
+<h3>Start the backend</h3>
+
+<p>Start the Web API backend from Visual Studio.</p>
+
+<h3>Start the frontend</h3>
+
+<p>Note: For setting up the frontend, you will need to install <a href="http://nodejs.org/">NodeJS</a> and <a href="http://gruntjs.com/">Grunt</a>. Please have a look at the <a href="https://github.com/draptik/angulardemorestful/blob/master/frontend/README.md">README.md file in the frontend folder</a> for further details.</p>
+
+<p>Open a command prompt and navigate to the <code>frontend</code> folder.</p>
+
+<p>Run <code>grunt server</code>.</p>
+
+<p>``` sh</p>
+
+<blockquote><p>grunt server
+Running &ldquo;server&rdquo; task</p></blockquote>
+
+<p>Running &ldquo;clean:server&rdquo; (clean) task
+Cleaning .tmp&hellip;OK</p>
+
+<p>Running &ldquo;concurrent:server&rdquo; (concurrent) task</p>
+
+<p>Running &ldquo;coffee:dist&rdquo; (coffee) task</p>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;copy:styles&rdquo; (copy) task</p>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;compass:server&rdquo; (compass) task
+directory .tmp/styles/</p>
+
+<pre><code>   create .tmp/styles/main.css (1.718s)
+Compilation took 1.802s
+</code></pre>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;autoprefixer:dist&rdquo; (autoprefixer) task
+File &ldquo;.tmp/styles/main.css&rdquo; created.</p>
+
+<p>Running &ldquo;connect:livereload&rdquo; (connect) task
+Started connect web server on localhost:9000.</p>
+
+<p>Running &ldquo;open:server&rdquo; (open) task</p>
+
+<p>Running &ldquo;watch&rdquo; task
+Waiting&hellip;
+```</p>
+
+<p>Visit URL <a href="http://localhost:9000/#/dummy">http://localhost:9000/#/dummy</a>:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-browser01.PNG"></p>
+
+<p>That&rsquo;s it.</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step7-aspnet-webapi-backend
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step7-aspnet-webapi-backend">https://github.com/draptik/angulardemorestful/releases/tag/step7-aspnet-webapi-backend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #3]]></title>
+    <link href="http://draptik.github.io/blog/2014/01/03/link-collection-number-3/"/>
+    <updated>2014-01-03T23:30:00+01:00</updated>
+    <id>http://draptik.github.io/blog/2014/01/03/link-collection-number-3</id>
+    <content type="html"><![CDATA[<p>JavaScript stuff:</p>
+
+<ul>
+<li>Basics of NodeJS and ExpressJS: <a href="http://blog.modulus.io/nodejs-and-express-create-rest-api">REST</a>, <a href="http://blog.modulus.io/nodejs-and-express-basic-authentication">Authentication</a>, <a href="http://blog.modulus.io/nodejs-and-express-sessions">Sessions</a></li>
+<li>Another great tutorial on SPAs: <a href="https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs">Authentication in Single Page Applications</a></li>
+<li>If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: <a href="http://mean.io/">mean.io</a> (Template for MongoDB, ExpressJS, AngularJS and NodeJS)</li>
+<li>and here&rsquo;s a great <a href="http://www.thinkster.io/pick/GUIDJbpIie/angularjs-tutorial-learn-to-build-modern-web-apps">Tutorial on MEAN</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li>This <a href="http://www.youtube.com/watch?v=9ZSbuwCmwuc">video by Roy Osherove</a> shows how to introduce seams into brownfield projects (start at approx. 45min into the video if you want to skip the book recommendations and the intro to the SOLID principle). I learned how to introduce seams into static c# classes and methods using virtual&hellip;</li>
+<li>C# psychology <a href="http://de.slideshare.net/Coverity/the-psychology-of-c-analysis-24025354">by Eric Lippert&hellip;</a></li>
+<li>NHibernate turbo? (untested, but from the man himself: <a href="http://ayende.com/blog/164353/nhibernate-runfaster-secret-toggle?Key=587fe66e-0bcb-4146-96a6-cdb6e2df7df5&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+AyendeRahien+%28Ayende+%40+Rahien%29">pimping NHibernate by Ayende</a>)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Node.js backend providing REST]]></title>
@@ -429,683 +1183,6 @@ git checkout -f step5-split-frontend-backend-cors
 </code></p>
 
 <p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors">https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RESTful CRUD with AngularJS]]></title>
-    <link href="http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/"/>
-    <updated>2013-07-28T11:15:00+02:00</updated>
-    <id>http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs</id>
-    <content type="html"><![CDATA[<p>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.</p>
-
-<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I&rsquo;ve added a Java based sample at the end of this post.</p>
-
-<h2>Frontend (AngularJS)</h2>
-
-<h3>Views (Partials)</h3>
-
-<p>We will create three views.</p>
-
-<p>The first view will display all users (<code>user-list.html</code>):</p>
-
-<p><img src="/images/posts/angular/userlist.png" width="400" height="400"></p>
-
-<p>The view also provides links to edit (<code>ng-click="editUser(user.id)"</code>) and delete (<code>ng-click="deleteUser(user.id)"</code>) specific users as well as a link to create a new user (<code>ng-click="createUser()"</code>).</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;div class="span6">
-</span><span class='line'>    &lt;table class="table table-striped table-condensed">
-</span><span class='line'>        &lt;thead>
-</span><span class='line'>        &lt;tr>
-</span><span class='line'>            &lt;th style="min-width: 80px;">First name&lt;/th>
-</span><span class='line'>            &lt;th style="min-width: 80px;">Last name&lt;/th>
-</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
-</span><span class='line'>            &lt;th style="width:20px;">&nbsp;&lt;/th>
-</span><span class='line'>        &lt;/tr>
-</span><span class='line'>        &lt;/thead>
-</span><span class='line'>        &lt;tbody>
-</span><span class='line'>        &lt;tr ng-repeat="user in users">
-</span><span class='line'>            &lt;td>{{ user.firstName }}&lt;/td>
-</span><span class='line'>            &lt;td>{{ user.lastName }}&lt;/td>
-</span><span class='line'>            &lt;td>&lt;a ng-click="editUser(user.id)" class="btn btn-small btn-primary">edit&lt;/a>&lt;/td>
-</span><span class='line'>            &lt;td>&lt;a ng-click="deleteUser(user.id)" class="btn btn-small btn-danger">delete&lt;/a>&lt;/td>
-</span><span class='line'>        &lt;/tr>
-</span><span class='line'>        &lt;/tbody>
-</span><span class='line'>    &lt;/table>
-</span><span class='line'>    &lt;a ng-click="createNewUser()" class="btn btn-small">create new user&lt;/a>
-</span><span class='line'>&lt;/div>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>The second and third view (<code>user-detail.html</code> and <code>user-creation.html</code>) both provide a form for entering the user properties.</p>
-
-<p><img src="/images/posts/angular/usercreationdetail.png" width="600" height="600"></p>
-
-<p>They only differ in the actions provided. These actions (<code>cancel()</code>, <code>updateUser()</code>, <code>createNewUser()</code>) are invoked using <code>ng-click</code>:</p>
-
-<p>``` xml user-[detail|creation].html</p>
-
-<div class="container">
-    <h1>User detail</h1>
-
-    <form novalidate="novalidate" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="inputFirstName">First name:</label>
-            <div class="controls">
-                <input type="text" id="inputFirstName" ng-model="user.firstName"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="inputLastName">Last name:</label>
-            <div class="controls">
-                <input type="text" id="inputLastName" ng-model="user.lastName"/>
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <!-- user-detail.html: -->
-                <a ng-click="cancel()" class="btn btn-small">cancel</a>
-                <a ng-click="updateUser()" class="btn btn-small btn-primary">update user</a>
-
-                <!-- user-creation.html: -->
-                <a ng-click="createNewUser()" class="btn btn-small btn-primary">create new user</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-
-<p>```</p>
-
-<h3>Controller</h3>
-
-<p>Next we will create three controllers corresponding to the three views.</p>
-
-<h4>UserListCtrl</h4>
-
-<p><code>UserListCtrl</code> provides three functions <code>editUser</code>, <code>deleteUser</code> and <code>createUser</code>.</p>
-
-<ul>
-<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs&rsquo;s <code>$location</code> function.</li>
-<li><code>deleteUser</code> calls the <code>UserFactory</code> service method <code>delete</code> (which we will create shortly).</li>
-</ul>
-
-
-<p>Furthermore the <code>$scope.users</code> is filled with the result from the <code>UsersFactory.query()</code> function.</p>
-
-<p>Note that all required dependencies are injected into the controller&rsquo;s signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
-
-<p>``` javascript controller.js
-var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
-
-<p>app.controller(&lsquo;UserListCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UsersFactory&rsquo;, &lsquo;UserFactory&rsquo;, &lsquo;$location&rsquo;,</p>
-
-<pre><code>function ($scope, UsersFactory, UserFactory, $location) {
-
-    // callback for ng-click 'editUser':
-    $scope.editUser = function (userId) {
-        $location.path('/user-detail/' + userId);
-    };
-
-    // callback for ng-click 'deleteUser':
-    $scope.deleteUser = function (userId) {
-        UserFactory.delete({ id: userId });
-        $scope.users = UsersFactory.query();
-    };
-
-    // callback for ng-click 'createUser':
-    $scope.createNewUser = function () {
-        $location.path('/user-creation');
-    };
-
-    $scope.users = UsersFactory.query();
-}]);
-/* ... */
-</code></pre>
-
-<p>```</p>
-
-<h4>UserDetailCtrl and UserCreationCtrl</h4>
-
-<p><code>UserDetailCtrl</code> provides the function <code>updateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
-
-<p><code>UserCreationCtrl</code> provides the function <code>createNewUser</code>, calling <code>UsersFactory.create</code>.</p>
-
-<p>Again, both controllers use <code>$location</code> to redirect back to the <code>user-list</code> partial view.</p>
-
-<p>``` javascript controller.js
-/<em> &hellip; </em>/
-app.controller(&lsquo;UserDetailCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;$routeParams&rsquo;, &lsquo;UserFactory&rsquo;, &lsquo;$location&rsquo;,</p>
-
-<pre><code>function ($scope, $routeParams, UserFactory, $location) {
-
-    // callback for ng-click 'updateUser':
-    $scope.updateUser = function () {
-        UserFactory.update($scope.user);
-        $location.path('/user-list');
-    };
-
-    // callback for ng-click 'cancel':
-    $scope.cancel = function () {
-        $location.path('/user-list');
-    };
-
-    $scope.user = UserFactory.show({id: $routeParams.id});
-}]);
-</code></pre>
-
-<p>app.controller(&lsquo;UserCreationCtrl&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UsersFactory&rsquo;, &lsquo;$location&rsquo;,</p>
-
-<pre><code>function ($scope, UsersFactory, $location) {
-
-    // callback for ng-click 'createNewUser':
-    $scope.createNewUser = function () {
-        UsersFactory.create($scope.user);
-        $location.path('/user-list');
-    }
-}]);    
-</code></pre>
-
-<p>```</p>
-
-<p>Don&rsquo;t forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
-
-<p>``` javascript app.js
-angular.module(&lsquo;ngdemo&rsquo;, [&lsquo;ngdemo.filters&rsquo;, &lsquo;ngdemo.services&rsquo;, &lsquo;ngdemo.directives&rsquo;, &lsquo;ngdemo.controllers&rsquo;]).</p>
-
-<pre><code>config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/user-list', {templateUrl: 'partials/user-list.html', controller: 'UserListCtrl'});
-    $routeProvider.when('/user-detail/:id', {templateUrl: 'partials/user-detail.html', controller: 'UserDetailCtrl'});
-    $routeProvider.when('/user-creation', {templateUrl: 'partials/user-creation.html', controller: 'UserCreationCtrl'});
-    $routeProvider.otherwise({redirectTo: '/user-list'});
-}]);
-</code></pre>
-
-<p>```</p>
-
-<h3>Service</h3>
-
-<p>AngularJS can consume the web service using <code>$resource</code>. This module is injected via <code>'ngResource'</code>.</p>
-
-<p>We create two factories:</p>
-
-<ul>
-<li><code>UsersFactory</code> (note the plural s) calls the web service with methods not requiring an id (<code>query</code> and <code>create</code>).</li>
-<li><code>UserFactory</code> calls the web service with methods requiring a user id (<code>show</code>, <code>update</code> and <code>delete</code>).</li>
-</ul>
-
-
-<p>``` javascript services.js
-var services = angular.module(&lsquo;ngdemo.services&rsquo;, [&lsquo;ngResource&rsquo;]);</p>
-
-<p>services.factory(&lsquo;UsersFactory&rsquo;, function ($resource) {</p>
-
-<pre><code>return $resource('/ngdemo/web/users', {}, {
-    query: { method: 'GET', isArray: true },
-    create: { method: 'POST' }
-})
-</code></pre>
-
-<p>});</p>
-
-<p>services.factory(&lsquo;UserFactory&rsquo;, function ($resource) {</p>
-
-<pre><code>return $resource('/ngdemo/web/users/:id', {}, {
-    show: { method: 'GET' },
-    update: { method: 'PUT', params: {id: '@id'} },
-    delete: { method: 'DELETE', params: {id: '@id'} }
-})
-</code></pre>
-
-<p>});
-```</p>
-
-<h2>Backend (Java)</h2>
-
-<p>Here is an example of a RESTful web service created with Java:</p>
-
-<p>``` java UserRestService.java
-package ngdemo.web.rest;</p>
-
-<p>import com.google.inject.Inject;
-import ngdemo.domain.User;
-import ngdemo.service.contract.UserService;</p>
-
-<p>import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.List;</p>
-
-<p>@Path(&ldquo;/users&rdquo;)
-public class UserRestService {</p>
-
-<pre><code>private final UserService userService;
-
-@Inject
-public UserRestService(UserService userService) {
-    this.userService = userService;
-}
-
-@GET
-@Produces(MediaType.APPLICATION_JSON)
-public List&lt;User&gt; getAllUsersInJSON() {
-    return userService.getAllUsers();
-}
-
-@GET
-@Path("{id}")
-@Produces(MediaType.APPLICATION_JSON)
-public User getUserById(@PathParam("id") int id) {
-    return userService.getById(id);
-}
-
-@POST
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public User create(User user) {
-    return userService.createNewUser(user);
-}
-
-@PUT
-@Path("{id}")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public User update(User user) {
-    return userService.update(user);
-}
-
-@DELETE
-@Path("{id}")
-@Produces(MediaType.APPLICATION_JSON)
-public void remove(@PathParam("id") int id) {
-    userService.remove(id);
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<p><code>sh
-git clone git@github.com:draptik/angulardemorestful.git
-cd angulardemorestful
-git checkout -f step4-angularjs-crud
-</code></p>
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud">https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[AngularJS example using a Java RESTful web service]]></title>
-    <link href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/"/>
-    <updated>2013-07-13T20:12:00+02:00</updated>
-    <id>http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service</id>
-    <content type="html"><![CDATA[<p><a href="http://angularjs.org/">AngularJS</a> is the current MVV-Whatever JavaScript framework by Google.
-Among other things, it provides bidirectional data binding.</p>
-
-<p>Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:</p>
-
-<ol>
-<li><p>Java backend provides a RESTful web service.</p></li>
-<li><p>AngularJS consumes the web service.</p></li>
-</ol>
-
-
-<p>That&rsquo;s it.</p>
-
-<h1>Project structure</h1>
-
-<p>I intentionally put the backend and frontend code in the same project to simplify the example. In a real project you probably want to have seperate projects for front- and backend.</p>
-
-<p><code>sh
-+---------------------------------------------------+
-| demo project                                      |
-|                                                   |
-| +----------------+              +---------------+ |
-| | backend (Java) | &lt; -(REST)- &gt; | frontend (JS) | |
-| +----------------+              +---------------+ |
-|                                                   |
-+---------------------------------------------------+
-</code></p>
-
-<p>Since the backend is Java based, I used a Maven default structure (<code>maven-archetype-site-simple</code>):</p>
-
-<p>``` sh project structure
-├── _documentation
-│   └── readme.txt
-├── ngdemo.iml
-├── pom.xml
-└── src</p>
-
-<pre><code>└── main
-    ├── java
-    │   └── ngdemo
-    │       ├── domain
-    │       │   └── User.java
-    │       ├── rest
-    │       │   └── UserRestService.java
-    │       └── service
-    │           └── UserService.java
-    └── webapp
-        ├── css
-        │   └── app.css
-        ├── img
-        ├── index-async.html
-        ├── index.html
-        ├── index.jsp
-        ├── js
-        │   ├── app.js
-        │   ├── controllers.js
-        │   ├── directives.js
-        │   ├── filters.js
-        │   └── services.js
-        ├── lib
-        │   └── angular
-        │       ├── angular-cookies.js
-        │       ├── angular-cookies.min.js
-        │       ├── angular.js
-        │       ├── angular-loader.js
-        │       ├── angular-loader.min.js
-        │       ├── angular.min.js
-        │       ├── angular-resource.js
-        │       ├── angular-resource.min.js
-        │       ├── angular-sanitize.js
-        │       ├── angular-sanitize.min.js
-        │       └── version.txt
-        ├── partials
-        │   └── partial1.html
-        └── WEB-INF
-            └── web.xml
-</code></pre>
-
-<p>```</p>
-
-<p><code>src/main/java</code> is the backend.</p>
-
-<p><code>src/main/webapp/js</code> is the frontend.</p>
-
-<p><code>src/main/webapp/</code> also includes a copy of angular-seed.</p>
-
-<h1>RESTful web service (backend)</h1>
-
-<p><a href="https://jersey.java.net/">Jersey</a> is the Java reference implementation for providing REST.</p>
-
-<p>Install the following dependencies in your <code>pom.xml</code>:</p>
-
-<p>``` xml pom.xml</p>
-
-<!-- .. -->
-
-
-<!-- RESTful web service: Jersey -->
-
-
-<p><dependency></p>
-
-<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
-&lt;artifactId&gt;jersey-server&lt;/artifactId&gt;
-&lt;version&gt;1.17.1&lt;/version&gt;
-</code></pre>
-
-<p></dependency>
-<dependency></p>
-
-<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
-&lt;artifactId&gt;jersey-servlet&lt;/artifactId&gt;
-&lt;version&gt;1.17.1&lt;/version&gt;
-</code></pre>
-
-<p></dependency>
-<dependency></p>
-
-<pre><code>&lt;groupId&gt;com.sun.jersey&lt;/groupId&gt;
-&lt;artifactId&gt;jersey-json&lt;/artifactId&gt;
-&lt;version&gt;1.17.1&lt;/version&gt;
-</code></pre>
-
-<p></dependency></p>
-
-<!-- .. -->
-
-
-<p>```</p>
-
-<p>Add the following servlet snippet to your <code>web.xml</code>:</p>
-
-<p>``` html web.xml</p>
-
-<!-- .. -->
-
-
-<p><servlet></p>
-
-<pre><code>&lt;servlet-name&gt;jersey-serlvet&lt;/servlet-name&gt;
-
-&lt;servlet-class&gt;
-    com.sun.jersey.spi.container.servlet.ServletContainer
-&lt;/servlet-class&gt;
-
-&lt;init-param&gt;
-    &lt;param-name&gt;com.sun.jersey.config.property.packages&lt;/param-name&gt;
-    &lt;param-value&gt;ngdemo.rest&lt;/param-value&gt;
-&lt;/init-param&gt;
-
-&lt;init-param&gt;
-    &lt;param-name&gt;com.sun.jersey.api.json.POJOMappingFeature&lt;/param-name&gt;
-    &lt;param-value&gt;true&lt;/param-value&gt;
-&lt;/init-param&gt;
-
-&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
-</code></pre>
-
-<p></servlet></p>
-
-<p>&lt;servlet-mapping></p>
-
-<pre><code>&lt;servlet-name&gt;jersey-serlvet&lt;/servlet-name&gt;
-&lt;url-pattern&gt;/rest/*&lt;/url-pattern&gt;
-</code></pre>
-
-<p>&lt;/servlet-mapping></p>
-
-<!-- .. -->
-
-
-<p>```</p>
-
-<p>Enough configuration for now: Create a simple <code>User</code> object&hellip;</p>
-
-<p>``` java User.java
-package ngdemo.domain;</p>
-
-<p>import javax.xml.bind.annotation.XmlRootElement;</p>
-
-<p>@XmlRootElement
-public class User {</p>
-
-<pre><code>private String firstName;
-private String lastName;
-
-public String getFirstName() {
-    return firstName;
-}
-
-public void setFirstName(String firstName) {
-    this.firstName = firstName;
-}
-
-public String getLastName() {
-    return lastName;
-}
-
-public void setLastName(String lastName) {
-    this.lastName = lastName;
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>&hellip;and a service class&hellip;</p>
-
-<p>``` java UserService.java
-package ngdemo.service;</p>
-
-<p>import ngdemo.domain.User;</p>
-
-<p>public class UserService {</p>
-
-<pre><code>public User getDefaultUser() {
-    User user = new User();
-    user.setFirstName("JonFromREST");
-    user.setLastName("DoeFromREST");
-    return user;
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>&hellip;and finally the RESTful Service&hellip;:</p>
-
-<p>``` java UserRestService.java
-package ngdemo.rest;</p>
-
-<p>import ngdemo.domain.User;
-import ngdemo.service.UserService;
-import ngdemo.service.UserServiceImpl;</p>
-
-<p>import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;</p>
-
-<p>@Path(&ldquo;/users&rdquo;)
-public class UserRestService {</p>
-
-<pre><code>@GET
-@Produces(MediaType.APPLICATION_JSON)
-public User getDefaultUserInJSON() {
-    UserService userService = new UserServiceImpl();
-    return userService.getDefaultUser();
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Converting the <code>User</code> object to JSON via <code>@Produces(MediaType.APPLICATION_JSON)</code> requires jersey-json in <code>web.xml</code> (<code>POJOMappingFeature</code>).</p>
-
-<h1>Consuming web service from AngularJS (frontend)</h1>
-
-<p>Don&rsquo;t forget to add <code>angular-resources.js</code> to your <code>index.html</code>&hellip;</p>
-
-<p>Consuming the web service:</p>
-
-<p>``` javascript services.js
-var services = angular.module(&lsquo;ngdemo.services&rsquo;, [&lsquo;ngResource&rsquo;]);</p>
-
-<p>services.factory(&lsquo;UserFactory&rsquo;, function ($resource) {</p>
-
-<pre><code>return $resource('/ngdemo/rest/users', {}, {
-    query: {
-        method: 'GET',
-        params: {},
-        isArray: false
-    }
-})
-</code></pre>
-
-<p>});
-```</p>
-
-<p>Usage in controller:</p>
-
-<p>``` javascript controller.js
-var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
-
-<p>app.controller(&lsquo;MyCtrl1&rsquo;, [&lsquo;$scope&rsquo;, &lsquo;UserFactory&rsquo;, function ($scope, UserFactory) {</p>
-
-<pre><code>UserFactory.get({}, function (userFactory) {
-    $scope.firstname = userFactory.firstName;
-})
-</code></pre>
-
-<p>}]);
-```</p>
-
-<p>Usage in view:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;div>
-</span><span class='line'>    &lt;p>
-</span><span class='line'>        Result from RESTful service is: {{ firstname }}
-</span><span class='line'>    &lt;/p>
-</span><span class='line'>&lt;/div>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Et voila:</p>
-
-<p><img src="/images/posts/angular/browser_screenshot.png"></p>
-
-<p>Update (2013-07-18):</p>
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<p><code>sh
-git clone git@github.com:draptik/angulardemorestful.git
-cd angulardemorestful
-git checkout -f step1
-</code></p>
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step1">https://github.com/draptik/angulardemorestful/releases/tag/step1</a></p>
 ]]></content>
   </entry>
   

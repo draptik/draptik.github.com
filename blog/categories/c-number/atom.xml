@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c# | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/c-number/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2014-01-03T22:44:56+01:00</updated>
+  <updated>2015-07-29T23:54:08+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,593 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[.NET backend providing REST]]></title>
+    <link href="http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest/"/>
+    <updated>2014-07-18T18:46:33+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest</id>
+    <content type="html"><![CDATA[<h2>TL;DR</h2>
+
+<p>My <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> has a new backend implementation using <a href="http://www.asp.net/web-api">.NET Web API</a>.</p>
+
+<h1>&hellip;</h1>
+
+<h2>Recap</h2>
+
+<p>Our goals:</p>
+
+<ul>
+<li>server side: minimal working REST API providing
+
+<ul>
+<li>GET <code>dummy</code></li>
+<li>CRUD <code>users</code></li>
+</ul>
+</li>
+<li>client side (angular): communicate with server side</li>
+</ul>
+
+
+<h2>Setup</h2>
+
+<p>Creating a Web API project is straightforward: Just follow the instructions at</p>
+
+<ul>
+<li><a href="http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api">Getting Started with ASP.NET Web API 2</a></li>
+<li><a href="http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api">Enabling Cross-Origin Requests in ASP.NET Web API</a></li>
+<li><a href="http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver">Dependency Injection for Web API Controllers</a></li>
+</ul>
+
+
+<p>The final project structure will look like this:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-structure.PNG"></p>
+
+<h2>Adding Models</h2>
+
+<p>Create two new POCOs for <code>User</code> and <code>Dummy</code>:</p>
+
+<p>``` csharp Models/Dummy.cs
+namespace WebService.Models
+{</p>
+
+<pre><code>public class Dummy
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Models/User.cs
+namespace WebService.Models
+{</p>
+
+<pre><code>public class User
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Adding Service Layer</h2>
+
+<p>Create a new folder <code>Service</code> and add a <code>UserService</code> with corresponding interface <code>IUserService</code>.</p>
+
+<p>``` csharp Service/IUserService.cs
+using System.Collections.Generic;
+using WebService.Models;</p>
+
+<p>namespace WebService.Service
+{</p>
+
+<pre><code>public interface IUserService
+{
+    ICollection&lt;User&gt; GetAllUsers();
+    User GetById(int userId);
+    User UpdateUser(User user);
+    User CreateNewUser(User user);
+    void RemoveUserById(int userId);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Service/UserService.cs
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using WebService.Models;</p>
+
+<p>namespace WebService.Service
+{</p>
+
+<pre><code>public class UserService : IUserService
+{
+    public UserService()
+    {
+        this.Users = new Collection&lt;User&gt;();
+        this.CreateUsers();
+    }
+
+    private ICollection&lt;User&gt; Users { get; set; }
+
+    public ICollection&lt;User&gt; GetAllUsers()
+    {
+        return this.Users;
+    }
+
+    public User GetById(int userId)
+    {
+        return this.Users.SingleOrDefault(x =&gt; x.Id.Equals(userId));
+    }
+
+    public User UpdateUser(User user)
+    {
+        var u = this.Users.SingleOrDefault(x =&gt; x.Id.Equals(user.Id));
+        if (u != null) {
+            u.FirstName = user.FirstName;
+            u.LastName = user.LastName;
+        }
+        return u;
+    }
+
+    public User CreateNewUser(User user)
+    {
+        var newUser = new User
+        {
+            Id = this.Users.Max(x =&gt; x.Id) + 1,
+            FirstName = user.FirstName,
+            LastName = user.LastName
+        };
+
+        this.Users.Add(newUser);
+
+        return newUser;
+    }
+
+    public void RemoveUserById(int userId)
+    {
+        this.Users.Remove(this.Users.SingleOrDefault(x =&gt; x.Id.Equals(userId)));
+    }
+
+    private void CreateUsers()
+    {
+        const int numberOfUsers = 10;
+        for (int id = 1; id &lt;= numberOfUsers; id++) {
+            this.Users.Add(new User {Id = id, FirstName = "Foo" + id, LastName = "Bar" + id});
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Note: This is just a quick and dirty setup to get a working REST API without much overhead. In a real application the service will probably be a bit more fine grained. For example: In this demo app the users are simply stored in memory and not persisted to a database.</p>
+
+<h2>Adding IoC for Web API</h2>
+
+<p>Add inversion of control (IoC) to Web API:</p>
+
+<p>``` csharp IoC/UnityResolver.cs
+using System;
+using System.Collections.Generic;
+using System.Web.Http.Dependencies;
+using Microsoft.Practices.Unity;</p>
+
+<p>namespace WebService.IoC
+{</p>
+
+<pre><code>/// &lt;summary&gt;
+/// http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver
+/// &lt;/summary&gt;
+public class UnityResolver : IDependencyResolver
+{
+    private readonly IUnityContainer container;
+
+    public UnityResolver(IUnityContainer container)
+    {
+        if (container == null) {
+            throw new ArgumentNullException("container");
+        }
+        this.container = container;
+    }
+
+    public void Dispose()
+    {
+        this.container.Dispose();
+    }
+
+    public object GetService(Type serviceType)
+    {
+        try {
+            return this.container.Resolve(serviceType);
+        }
+        catch (ResolutionFailedException) {
+            return null;
+        }
+    }
+
+    public IEnumerable&lt;object&gt; GetServices(Type serviceType)
+    {
+        try {
+            return this.container.ResolveAll(serviceType);
+        }
+        catch (ResolutionFailedException) {
+            return new List&lt;object&gt;();
+        }
+    }
+
+    public IDependencyScope BeginScope()
+    {
+        var child = this.container.CreateChildContainer();
+        return new UnityResolver(child);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Adding Controllers</h2>
+
+<p>Create controllers <code>UsersController</code> and <code>DummyController</code>:</p>
+
+<p>``` csharp Controllers/Dummy.cs
+using System.Web.Http;
+using System.Web.Http.Cors;
+using WebService.Models;</p>
+
+<p>namespace WebService.Controllers
+{</p>
+
+<pre><code>[EnableCors(origins: "http://localhost:9000", headers: "*", methods: "*")]
+public class DummyController : ApiController
+{
+    public Dummy Get()
+    {
+        return new Dummy
+        {
+            Id = 0, 
+            FirstName = "JonFromREST", 
+            LastName = "Doe"
+        };
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>``` csharp Controllers/UsersController.cs
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using WebService.Models;
+using WebService.Service;</p>
+
+<p>namespace WebService.Controllers
+{</p>
+
+<pre><code>[EnableCors(origins: "http://localhost:9000", headers: "*", methods: "*")]
+public class UsersController : ApiController
+{
+    private readonly IUserService userService;
+
+    public UsersController(IUserService userService)
+    {
+        this.userService = userService;
+    }
+
+    public ICollection&lt;User&gt; Get()
+    {
+        return this.userService.GetAllUsers();
+    }
+
+    public User Get(int id)
+    {
+        return this.userService.GetById(id);
+    }
+
+    public User Put(User user)
+    {
+        return this.userService.UpdateUser(user);
+    }
+
+    public User Post(User user)
+    {
+        return this.userService.CreateNewUser(user);
+    }
+
+    public void Delete(int id)
+    {
+        this.userService.RemoveUserById(id);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>Putting the pieces together</h3>
+
+<p>Within <code>WebApiConfig.cs</code>:</p>
+
+<ul>
+<li>configure the IoC container</li>
+<li>activate CORS</li>
+<li>return JSON</li>
+<li>configure routes</li>
+</ul>
+
+
+<p>``` csharp App_Start/WebApiConfig.cs
+using System.Net.Http.Headers;
+using System.Web.Http;
+using Microsoft.Practices.Unity;
+using WebService.IoC;
+using WebService.Service;</p>
+
+<p>namespace WebService
+{</p>
+
+<pre><code>public static class WebApiConfig
+{
+    public static void Register(HttpConfiguration config)
+    {
+        // IoC container
+        //
+        // http://www.asp.net/web-api/overview/extensibility/using-the-web-api-dependency-resolver
+        var container = new UnityContainer();
+        // Note: for this demo we want the user service to be a singleton ('ContainerControlledLifetimeManager' in Unity syntax)
+        container.RegisterType&lt;IUserService, UserService&gt;(new ContainerControlledLifetimeManager());
+        config.DependencyResolver = new UnityResolver(container);
+
+        // Web API configuration and services
+
+        config.EnableCors();
+
+        // Return JSON instead of XML http://stackoverflow.com/a/13277616/1062607
+        config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+
+        // Web API routes
+        config.MapHttpAttributeRoutes();
+
+        const string baseUrl = "ngdemo/web";
+
+        config.Routes.MapHttpRoute(
+            name: "DefaultApi",
+            routeTemplate: baseUrl + "/{controller}/{id}",
+            defaults: new { id = RouteParameter.Optional }
+        );
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Returning Lower Case JSON from .NET Web API</h2>
+
+<p>C# uses upper case property names by default. JavaScript uses lower case property names by default.</p>
+
+<p>To automatically convert between both worlds you can add a <code>ContractResolver</code> to your <code>Global.asax.cs</code>:</p>
+
+<p>``` csharp Global.asax.cs
+using System.Web;
+using System.Web.Http;
+using Newtonsoft.Json.Serialization;</p>
+
+<p>namespace WebService
+{</p>
+
+<pre><code>public class WebApiApplication : HttpApplication
+{
+    protected void Application_Start()
+    {
+        GlobalConfiguration.Configure(WebApiConfig.Register);
+
+        // lower case property names in serialized JSON: http://stackoverflow.com/a/22130487/1062607
+        GlobalConfiguration.Configuration
+            .Formatters
+            .JsonFormatter
+            .SerializerSettings
+            .ContractResolver = new CamelCasePropertyNamesContractResolver();
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Done?</h2>
+
+<p>Almost: For the ASP.NET backend to be reachable by the same URL as the other backends (<a href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/">NodeJs backend</a> and <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">Java backend</a>) we have to change the default port of the application to 8080:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-url.PNG"></p>
+
+<p>Now we can start the Web API backend from Visual Studio (F5).</p>
+
+<p>In the newly openend browser, check the URL <a href="http:localhost:8080/nodedemo/web/dummy/">http:localhost:8080/nodedemo/web/dummy/</a>. The dummy JSON object should be visible:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-browser00.PNG"></p>
+
+<h2>Check the API</h2>
+
+<h3>Start the backend</h3>
+
+<p>Start the Web API backend from Visual Studio.</p>
+
+<h3>Start the frontend</h3>
+
+<p>Note: For setting up the frontend, you will need to install <a href="http://nodejs.org/">NodeJS</a> and <a href="http://gruntjs.com/">Grunt</a>. Please have a look at the <a href="https://github.com/draptik/angulardemorestful/blob/master/frontend/README.md">README.md file in the frontend folder</a> for further details.</p>
+
+<p>Open a command prompt and navigate to the <code>frontend</code> folder.</p>
+
+<p>Run <code>grunt server</code>.</p>
+
+<p>``` sh</p>
+
+<blockquote><p>grunt server
+Running &ldquo;server&rdquo; task</p></blockquote>
+
+<p>Running &ldquo;clean:server&rdquo; (clean) task
+Cleaning .tmp&hellip;OK</p>
+
+<p>Running &ldquo;concurrent:server&rdquo; (concurrent) task</p>
+
+<p>Running &ldquo;coffee:dist&rdquo; (coffee) task</p>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;copy:styles&rdquo; (copy) task</p>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;compass:server&rdquo; (compass) task
+directory .tmp/styles/</p>
+
+<pre><code>   create .tmp/styles/main.css (1.718s)
+Compilation took 1.802s
+</code></pre>
+
+<p>Done, without errors.</p>
+
+<p>Running &ldquo;autoprefixer:dist&rdquo; (autoprefixer) task
+File &ldquo;.tmp/styles/main.css&rdquo; created.</p>
+
+<p>Running &ldquo;connect:livereload&rdquo; (connect) task
+Started connect web server on localhost:9000.</p>
+
+<p>Running &ldquo;open:server&rdquo; (open) task</p>
+
+<p>Running &ldquo;watch&rdquo; task
+Waiting&hellip;
+```</p>
+
+<p>Visit URL <a href="http://localhost:9000/#/dummy">http://localhost:9000/#/dummy</a>:</p>
+
+<p><img src="/images/posts/dotnet/dotnet-project-browser01.PNG"></p>
+
+<p>That&rsquo;s it.</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+
+<p>To checkout the correct version for this demo, use the following code:</p>
+
+<p><code>sh
+git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step7-aspnet-webapi-backend
+</code></p>
+
+<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step7-aspnet-webapi-backend">https://github.com/draptik/angulardemorestful/releases/tag/step7-aspnet-webapi-backend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #4]]></title>
+    <link href="http://draptik.github.io/blog/2014/04/21/link-collection-number-4/"/>
+    <updated>2014-04-21T03:24:32+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/04/21/link-collection-number-4</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a bit behind on this section, I know. Here&rsquo;s the first batch:</p>
+
+<p>currently reading:</p>
+
+<ul>
+<li><a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=la_B002O21DQW_1_1?s=books&amp;ie=UTF8&amp;qid=1398046597&amp;sr=1-1">Growing Object-Oriented Software, Guided by Tests</a></li>
+<li><a href="http://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon-ebook/dp/B00BCLEBN8/ref=la_B0096T71SA_1_1?s=books&amp;ie=UTF8&amp;qid=1398046585&amp;sr=1-1">Implementing Domain-Driven Design</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/21389283/mark-seemanns-conflicting-statements-about-bastard-injection-need-some-clarifi/21428909?stw=2#21428909">Mark Seemann&rsquo;s on Bastard Injection</a></li>
+<li><a href="http://blogs.msdn.com/b/ericlippert/archive/2009/05/18/foreach-vs-foreach.aspx">foreach vs ForEach</a></li>
+</ul>
+
+
+<p>sql stuff:</p>
+
+<ul>
+<li><a href="http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/?utm_content=bufferaf1ce&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">SQL Joins explained</a></li>
+<li><a href="http://security.stackexchange.com/questions/25684/how-can-i-explain-sql-injection-without-technical-jargon/25710#25710">SQL explained</a></li>
+</ul>
+
+
+<p>meta:</p>
+
+<ul>
+<li><a href="http://highscalability.com/blog/2014/3/17/intuitively-showing-how-to-scale-a-web-application-using-a-c.html">scaling web apps (decribed as comic)</a></li>
+<li><a href="http://carnotaurus.philipcarney.com/post/3010984357/classes-versus-prototypes-some-philosophical-and">Classes versus Prototypes: A &lsquo;nerd&rsquo; paper from 1997</a></li>
+</ul>
+
+
+<p>&lsquo;Important&rsquo; images/quotes:</p>
+
+<ul>
+<li><a href="http://pbs.twimg.com/media/BhWAOVoIgAA_Tjb.jpg">Askhole</a></li>
+<li><a href="http://pbs.twimg.com/media/BhFyrJbIQAAt2Wb.png">Bugfixing</a></li>
+<li><a href="http://cultureby.com/2011/05/douglas-adams-on-generational-rhythms-in-the-adoption-of-tech.html">Douglas Adams on generations and technology</a></li>
+</ul>
+
+
+<p>other fun stuff:</p>
+
+<ul>
+<li><a href="http://www.mymodernmet.com/profiles/blogs/3d-gifs">Incredible 3D GIFs Created with a Simple Visual Effect</a></li>
+</ul>
+
+
+<p>not so fun:</p>
+
+<ul>
+<li><a href="http://pando.com/2013/10/26/i-challenged-hackers-to-investigate-me-and-what-they-found-out-is-chilling/?utm_content=buffer3a5a4&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">I challenged hackers to investigate me and what they found out is chilling</a></li>
+</ul>
+
+
+<p>And the best tv show I&rsquo;ve seen in ages is called <a href="http://www.imdb.com/title/tt2356777/">True Detective</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #3]]></title>
+    <link href="http://draptik.github.io/blog/2014/01/03/link-collection-number-3/"/>
+    <updated>2014-01-03T23:30:00+01:00</updated>
+    <id>http://draptik.github.io/blog/2014/01/03/link-collection-number-3</id>
+    <content type="html"><![CDATA[<p>JavaScript stuff:</p>
+
+<ul>
+<li>Basics of NodeJS and ExpressJS: <a href="http://blog.modulus.io/nodejs-and-express-create-rest-api">REST</a>, <a href="http://blog.modulus.io/nodejs-and-express-basic-authentication">Authentication</a>, <a href="http://blog.modulus.io/nodejs-and-express-sessions">Sessions</a></li>
+<li>Another great tutorial on SPAs: <a href="https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs">Authentication in Single Page Applications</a></li>
+<li>If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: <a href="http://mean.io/">mean.io</a> (Template for MongoDB, ExpressJS, AngularJS and NodeJS)</li>
+<li>and here&rsquo;s a great <a href="http://www.thinkster.io/pick/GUIDJbpIie/angularjs-tutorial-learn-to-build-modern-web-apps">Tutorial on MEAN</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li>This <a href="http://www.youtube.com/watch?v=9ZSbuwCmwuc">video by Roy Osherove</a> shows how to introduce seams into brownfield projects (start at approx. 45min into the video if you want to skip the book recommendations and the intro to the SOLID principle). I learned how to introduce seams into static c# classes and methods using virtual&hellip;</li>
+<li>C# psychology <a href="http://de.slideshare.net/Coverity/the-psychology-of-c-analysis-24025354">by Eric Lippert&hellip;</a></li>
+<li>NHibernate turbo? (untested, but from the man himself: <a href="http://ayende.com/blog/164353/nhibernate-runfaster-secret-toggle?Key=587fe66e-0bcb-4146-96a6-cdb6e2df7df5&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+AyendeRahien+%28Ayende+%40+Rahien%29">pimping NHibernate by Ayende</a>)</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ReorderList demo for AjaxControlToolkit]]></title>
