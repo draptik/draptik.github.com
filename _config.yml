@@ -99,7 +99,7 @@ disqus_short_name: draptik
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-65991503-1
 
 # Facebook Like
 facebook_like: false
