@@ -198,20 +198,18 @@ public class UserService {
 }
 ```
 
-...and finally the RESTful Service...:
+...and finally the RESTful Service... (Update 2015-08-07 small fix, thanks Jason):
 
 ``` java UserRestService.java
 package ngdemo.rest;
 
 import ngdemo.domain.User;
 import ngdemo.service.UserService;
-import ngdemo.service.UserServiceImpl;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
 
 @Path("/users")
 public class UserRestService {
@@ -219,7 +217,7 @@ public class UserRestService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public User getDefaultUserInJSON() {
-        UserService userService = new UserServiceImpl();
+        UserService userService = new UserService();
         return userService.getDefaultUser();
     }
 }
