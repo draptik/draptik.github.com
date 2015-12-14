@@ -19,7 +19,7 @@ In this post I'll describe how to display the data.
 - (for deployment in LAN: `export SET_ENV=production`)
 - `npm start`
 
-Should be similar to [http://rpi-temperatures-website-demo.divshot.io/](http://rpi-temperatures-website-demo.divshot.io/).
+Should be similar to [http://rpi-temperatures-website-demo.firebaseapp.com/](http://rpi-temperatures-website-demo.firebaseapp.com/).
 
 ## Choosing the right technology stack
 
@@ -54,7 +54,7 @@ My primary goal was *explorative data visualization*. For this purpose I decided
 - and a detail plot, showing the selection of the overview plot
 
 You can test the website with some sample data at 
-[http://rpi-temperatures-website-demo.divshot.io/](http://rpi-temperatures-website-demo.divshot.io/)
+[http://rpi-temperatures-website-demo.firebaseapp.com/](http://rpi-temperatures-website-demo.firebaseapp.com/)
 
 {% img /images/posts/rpi_temperatures/screenshot-demo.png %}
 

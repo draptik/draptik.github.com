@@ -16,7 +16,7 @@ The sensor(s) should send a signal once an hour, without cable, and run on batte
 
 As the whole IoT thing is still relatively new, there are no standards yet. I picked the product line from [Ciseco](http://shop.ciseco.co.uk/) ([currently being rebranded to Wireless Things (www.wirelessthings.com)](http://shop.ciseco.co.uk/about-us/)). Affordable and good documentation. And, more important: These people are passionate about their product!
 
-Before we get started here is a quick preview of what we want to accomplish (for details about the UI see [part3](/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/)): [http://rpi-temperatures-website-demo.divshot.io/](http://rpi-temperatures-website-demo.divshot.io/)
+Before we get started here is a quick preview of what we want to accomplish (for details about the UI see [part3](/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/)): [http://rpi-temperatures-website-demo.firebaseapp.com/](http://rpi-temperatures-website-demo.firebaseapp.com/)
 
 {% img /images/posts/rpi_temperatures/screenshot-demo.png %}
 
