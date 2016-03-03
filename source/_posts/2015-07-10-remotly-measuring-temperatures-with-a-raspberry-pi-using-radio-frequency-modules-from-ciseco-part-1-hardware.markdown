@@ -182,6 +182,7 @@ We first have to install a protocol to communicate between the 'sensor' and the 
 Download [pySerial](http://sourceforge.net/projects/pyserial/files/pyserial/2.5/pyserial-2.5.tar.gz/download) to the Raspberry Pi.
 
 Unpack and install pySerial:
+
 ``` sh
 $ tar xvzf pyserial-2.5.tar.gz
 $ cd pyserial-2.5
@@ -191,6 +192,7 @@ $ sudo python setup.py install
 #### Using pySerial/miniterm
 
 pySerial comes with `miniterm.py`, a small serial terminal. Attach to the terminal:
+
 ``` sh
 $ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
 ```
@@ -204,6 +206,7 @@ Note: Once the battery is inserted it will drain very quickly during debugging. 
 ##### miniterm: First contact
 
 While miniterm is running, insert the battery. The output should look something like this:
+
 ```
 a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--
 ```
@@ -211,6 +214,7 @@ a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--a--STARTED--
 What we are seeing is an example of LLAP (Ciseco's lightweight local automation protocol). A complete documentation of the protocol can be found [here](http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/112-llap) and [here](http://openmicros.org/index.php/articles/85-llap-lightweight-local-automation-protocol/297-llap-reference).
 
 From Ciseco's documentation:
+
 ```
 The message structure
 
@@ -237,6 +241,7 @@ a--HELLO----
 ```
 
 If the remote device is running and configured correctly the output should immediatly change to:
+
 ``` sh
 $ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
 --- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
@@ -253,12 +258,14 @@ Note the duplicate `a--HELLO----` in the last line. The second `a--HELLO----` is
 Since all devices have the same initial ID, it is a good idea to change the device ID in case you intend to use more than one remote device.
 
 The following code changes the device ID to `ZZ`:
+
 ```
 a--CHDEVIDZZ
 a--REBOOT---
 ```
 
 The terminal output should look like this:
+
 ```
 $ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
 --- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
@@ -271,6 +278,7 @@ a--REBOOT---aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTARTED--aZZSTART
 ##### miniterm: Read temperature
 
 Assuming the device ID is `ZZ` reading the temperature is accomplished by `aZZTEMP-----`:
+
 ```
 $ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
 --- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---
@@ -286,6 +294,7 @@ In the above answer from the remote device the temperature is 24.21 degrees Cels
 Currently the remote device is contiously sending information. And draining the battery. To preserve battery power the interval can be configured to send information periodically using the command `a--INTVL`. The interval is defined with a 3 digit number followed by the time period: S(seconds), M(minutes), H(hours), D(days). For example the command `aZZINTVL005S` would set the interval of the remote device to 5 seconds.
 
 Additionally the device should be sent to sleep in between cylces by issuing the command `aZZCYCLE----`:
+
 ```
 $ python ~/pyserial-2.5/examples/miniterm.py /dev/ttyAMA0
 --- Miniterm on /dev/ttyAMA0: 9600,8,N,1 ---

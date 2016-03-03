@@ -124,6 +124,7 @@ This information is currently used in the following places in the application:
 ### REST URL
 
 Setting the URL for the REST service (in `app.js`):
+
 ```
 var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
 ```
@@ -150,6 +151,7 @@ if (someCondition) {
 ### Database location
 
 Setting the database location (in `app_api/models/db.js`):
+
 ```
 var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
 ```

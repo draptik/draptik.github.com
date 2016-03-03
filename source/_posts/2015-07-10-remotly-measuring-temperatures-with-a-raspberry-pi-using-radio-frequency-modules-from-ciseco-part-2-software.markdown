@@ -46,11 +46,13 @@ CREATE TABLE temps
     ID TEXT
 );
 ```
+
 Simplest solution is to open the newly created file `templog.db` with `sqlite3` (cli/interactive) ...
 
 ```
 sqlite3 templog.db
 ```
+
 ...and past the previous code block. Should look like this:
 
 ```

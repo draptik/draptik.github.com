@@ -200,6 +200,7 @@ IMPORTANT: Do not run steps 7 to 11 as user `seafile`. Use the default `pi` user
 `sudo aptitude install nginx`
 
 Patching nginx for Raspberry Pi:
+
 ``` sh
 sudo sed -i "s/worker_processes 4;/worker_processes 1;/g" /etc/nginx/nginx.conf
 sudo sed -i "s/worker_connections 768;/worker_connections 128;/g" /etc/nginx/nginx.conf
