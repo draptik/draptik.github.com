@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Just stumbled across this error while trying to compile a simple Java Maven project: Maven Error: generics are not supported in source 1.3 It turns &hellip;">
+  <meta name="description" content="If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your /etc/vmware/config: /etc/vmware/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/07/29/vmware-keyboard-mapping-issues-alt-gr-solved/">VMware Keyboard Mapping Issues (Alt Gr) Solved</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-29T00:27:22+02:00" pubdate data-updated="true">Jul 29<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your <code>/etc/vmware/config</code>:</p>
+
+<figure class='code'><figcaption><span>/etc/vmware/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>xkeymap.keycode.108 <span class="o">=</span> 0x138 <span class="c"># Alt_R</span>
+</span><span class='line'>xkeymap.keycode.106 <span class="o">=</span> 0x135 <span class="c"># KP_Divide</span>
+</span><span class='line'>xkeymap.keycode.104 <span class="o">=</span> 0x11c <span class="c"># KP_Enter</span>
+</span><span class='line'>xkeymap.keycode.111 <span class="o">=</span> 0x148 <span class="c"># Up</span>
+</span><span class='line'>xkeymap.keycode.116 <span class="o">=</span> 0x150 <span class="c"># Down</span>
+</span><span class='line'>xkeymap.keycode.113 <span class="o">=</span> 0x14b <span class="c"># Left</span>
+</span><span class='line'>xkeymap.keycode.114 <span class="o">=</span> 0x14d <span class="c"># Right</span>
+</span><span class='line'>xkeymap.keycode.105 <span class="o">=</span> 0x11d <span class="c"># Control_R</span>
+</span><span class='line'>xkeymap.keycode.118 <span class="o">=</span> 0x152 <span class="c"># Insert</span>
+</span><span class='line'>xkeymap.keycode.119 <span class="o">=</span> 0x153 <span class="c"># Delete</span>
+</span><span class='line'>xkeymap.keycode.110 <span class="o">=</span> 0x147 <span class="c"># Home</span>
+</span><span class='line'>xkeymap.keycode.115 <span class="o">=</span> 0x14f <span class="c"># End</span>
+</span><span class='line'>xkeymap.keycode.112 <span class="o">=</span> 0x149 <span class="c"># Prior</span>
+</span><span class='line'>xkeymap.keycode.117 <span class="o">=</span> 0x151 <span class="c"># Next</span>
+</span><span class='line'>xkeymap.keycode.78 <span class="o">=</span> 0x46 <span class="c"># Scroll_Lock</span>
+</span><span class='line'>xkeymap.keycode.127 <span class="o">=</span> 0x100 <span class="c"># Pause</span>
+</span><span class='line'>xkeymap.keycode.133 <span class="o">=</span> 0x15b <span class="c"># Meta_L</span>
+</span><span class='line'>xkeymap.keycode.134 <span class="o">=</span> 0x15c <span class="c"># Meta_R</span>
+</span><span class='line'>xkeymap.keycode.135 <span class="o">=</span> 0x15d <span class="c"># Menu</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I found this solution on the <a href="http://forum.ubuntuusers.de/topic/vmware-alt-gr-und-andere-tastaturproblem-unte/">German Ubuntu forum</a>.</p>
+
+<p>This worked with VMware-server-2.0.1-156745 in combination with host OS Ubuntu 9.04 and guest OS Windows XP SP3.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -908,58 +989,6 @@ sudo patch --backup -p0 &lt; vmware-patch.txt</code></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/">Maven2 Heap Overflow in JUnit Test Cases: Howto Increase Memory</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T20:47:51+02:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For the past few days I was wondering why Maven&rsquo;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &ldquo;-Xmx512m&rdquo; to the JVM through Eclipse and from the command line. All to no avail.</p>
-
-<p>Then I found this <a href="http://www.keith-chapman.org/2008/06/increasing-memory-of-junit-testcases-in.html">blog entry</a> by Keith Chapman. And it worked! Here&rsquo;s the solution in short:</p>
-
-<p>The JUnit tests ignore the environment variable MAVEN_OPTS. You have to tell Maven&rsquo;s surefire plugin to increase memory. Add this to your pom.xml file:
-[sourcecode language=&lsquo;xml&rsquo;]</p>
-
-<p>  org.apache.maven.plugins
-  maven-surefire-plugin</p>
-
-<pre><code>pertest
--Xms512m -Xmx512m
-false
-false
-</code></pre>
-
-<p>[/sourcecode]</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -977,6 +1006,10 @@ false
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/03/herbstcampus-2013/">Herbstcampus 2013</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
       </li>
     
@@ -990,10 +1023,6 @@ false
     
       <li class="post">
         <a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
       </li>
     
   </ul>
