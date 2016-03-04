@@ -24,17 +24,30 @@
   <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-65991503-1']);
+	_gaq.push(['_setDomainName','github.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
-<body   >
+<body    class="collapse-sidebar sidebar-footer" >
   <header role="banner"><hgroup>
   <h1><a href="/">draptik</a></h1>
   
@@ -173,7 +186,10 @@ Since the frontend code (JS, CSS, HTML templates) was previously located in <cod
 
 <p>Cross-origin resource sharing (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support">Wikipedia for details</a>).</p>
 
-<p>CORS can be configured on the server and/or the client side. The following example demonstrates both approaches.</p>
+<p><strong>2014-01-03</strong>
+<del>CORS can be configured on the server and/or the client side.</del>
+CORS must be configured on the server <strong>and</strong> the client side (Thanks to Richard for the pointer!).
+The following example demonstrates <del>both approaches</del> this.</p>
 
 <h3>Server side configuration example (Java)</h3>
 
@@ -418,6 +434,8 @@ Since the frontend code (JS, CSS, HTML templates) was previously located in <cod
         <a class="basic-alignment left" href="/blog/2013/08/05/link-collection-1/" title="Previous Post: link collection #1">&laquo; link collection #1</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/09/16/link-collection-2/" title="Next Post: link collection #2">link collection #2 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -437,23 +455,23 @@ Since the frontend code (JS, CSS, HTML templates) was previously located in <cod
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+        <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a>
+        <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
+        <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
       </li>
     
   </ul>
@@ -483,7 +501,7 @@ Since the frontend code (JS, CSS, HTML templates) was previously located in <cod
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

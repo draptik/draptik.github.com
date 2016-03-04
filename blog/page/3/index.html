@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="since most NuGet packages related to NHibernate come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding uNhAddIns ( &hellip;">
+  <meta name="description" content="Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting. Currenty (2013-05-23) Pygments does not work flawlessly &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,17 +24,30 @@
   <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-65991503-1']);
+	_gaq.push(['_setDomainName','github.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
-<body   >
+<body    class="collapse-sidebar sidebar-footer" >
   <header role="banner"><hgroup>
   <h1><a href="/">draptik</a></h1>
   
@@ -66,6 +79,487 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/24/pygments-and-python/">Pygments and Python</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-24T21:11:00+02:00" pubdate data-updated="true">May 24<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Frameworks like <a href="http://octopress.org/">Octopress</a> and <a href="http://jekyllbootstrap.com/">Jekyll</a> use the Python library <a href="http://pygments.org/">Pygments</a> for syntax highlighting.</p>
+
+<p>Currenty (2013-05-23) Pygments does not work flawlessly with Python3
+(see
+<a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> and
+<a href="https://github.com/tmm1/pygments.rb/issues/45">this issue on pygment&rsquo;s issue tracker</a>).</p>
+
+<p>This is a problem because many operating systems already provide Python3 as the default python installation.</p>
+
+<p>To circumvent this issue, I found 2 different solutions:</p>
+
+<ol>
+<li><p><strong>Rewire your system to always use python version X (i.e. 2.7) when python is called</strong>:
+See <a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> for an example solution.</p></li>
+<li><p><strong>Sandbox Python installations</strong>.</p></li>
+</ol>
+
+
+<p>Personally I prefer the approach of having a sandbox system. This way I don&rsquo;t change the system&rsquo;s default setting. Whenever I require a different Python version I can just switch it (this is similar to the <a href="https://rvm.io/">Ruby Version Manager rvm</a>).</p>
+
+<p><a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">This blog post</a> explains some further details on how to install Octopress in Arch Linux.
+It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python_VirtualEnv#Virtualenvwrapper">python-virtualenvwrapper</a> and configuring a new custom environment <code>blog_env</code> which uses Python 2.7:</p>
+
+<div><script src='https://gist.github.com/5638602.js'></script>
+<noscript><pre><code># pacman -S python-virtualenvwrapper
+$ echo &#39;WORKON_HOME=$HOME/.virtualenvs&#39; &gt;&gt; ~/.bashrc
+$ . ~/.bashrc
+$ mkdir -p $WORKON_HOME
+$ echo &#39;source /usr/bin/virtualenvwrapper.sh&#39; &gt; ~/.bashrc
+$ . ~/.bashrc
+$ mkvirtualenv -p python2.7 --distribute blog_env</code></pre></noscript></div>
+
+
+<p>Paraphrazing the <a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">original post</a>:</p>
+
+<p>To switch to the newly created <code>blog_env</code>, run <code>workon blog_env</code>. To exit a virtualenv, run <code>deactivate</code>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/15/it-book-recommendations/">IT Book Recommendations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-15T01:17:20+01:00" pubdate data-updated="true">Dec 15<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I now have a list of IT book recommendations at <a href="https://github.com/draptik/reader/blob/master/README.md">GitHub</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/">Why I Switched From Ubuntu to Arch Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-16T03:35:34+02:00" pubdate data-updated="true">Oct 16<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntu is a great GNU/Linux distribution. I have been using it since 2004, and except for one LTS (long term support) upgrade a couple years back everything was fine. That LTS upgrade a couple years back screwed up the X system, leaving me with the bash shell. Don&rsquo;t get me wrong: I enjoy dabling with my Linux system, but an LTS upgrade should be safe.</p>
+
+<p>Well, this was years ago.</p>
+
+<p>After upgrading from Ubuntu 11.10 to 12.04 the same thing happened again: No X system.</p>
+
+<p>I have a cheap Nvidia card with dual head setup (dual head means you can plug in 2 monitors). Worked fine with Ubuntu since 2009. So I upgraded to Ubuntu 12.04. And I&rsquo;m back to: No X system.</p>
+
+<p>I was not amused.</p>
+
+<p>It was not a hardware problem: The old OS (Ubuntu 11.10) worked fine. It was not the fault of Nvidia. I am talking about a video card for 20-50 bucks! Not one of those high-end video cards.</p>
+
+<p>Instead of switching to another deb or rpm based system I decided to switch to one of those &ldquo;rolling&rdquo; distributions like Gentoo or Arch. I picked the later and have so far not regrated the decision.</p>
+
+<p>Arch Linux is my home production system of choice.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/">Impressions During Developing My First Application With Mono and Gtk# (GtkSharp)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-30T02:57:56+02:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Why Mono? Why Gtk?</h2>
+
+<p>Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.</p>
+
+<p>That answers the first question: Mono gives me C# and the .NET stack.</p>
+
+<p>On the other hand I have been using linux as a desktop environment on my home machine for over a decade. I am comfortable with using linux as my primary OS.</p>
+
+<p>That answers the second question: Mono gives me access to Gtk, the graphics library of gnome, which is the default &ldquo;desktop&rdquo; in many linux distributions.</p>
+
+<h2>The App</h2>
+
+<p>I want to synchronize different Git repositories semi-automatically using a Gui.</p>
+
+<ul>
+<li><p>Default behaviour of the automation can be loaded via a Json file.</p></li>
+<li><p>Each entry describes a repository set to be synchronized.</p></li>
+</ul>
+
+
+<p>The app is located at <a href="https://github.com/draptik/RepoSync">https://github.com/draptik/RepoSync</a><a href="https://github.com/draptik/RepoSync">
+</a></p>
+
+<p>I also published a small demo application for gtk# and treeview: <a href="https://github.com/draptik/GtkSharpTreeViewDemo">https://github.com/draptik/GtkSharpTreeViewDemo</a></p>
+
+<h2>Impressions</h2>
+
+<h5>Monodevelop vs Visual Studio</h5>
+
+<p>I&rsquo;ll keep it brief: If you&rsquo;re used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
+
+<h5>Gtk# API</h5>
+
+<p>The Gtk# API is not your typical .NET library. You will very soon notice that the origins are C/C++. This takes some getting used to if you have a .NET background.</p>
+
+<p>Typically there are no return values. Instead Gtk# methods very often use the &ldquo;out&rdquo; keyword in .NET because that comes closer to the C++ implementation using pointers.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span>Mono Gtk# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="kt">bool</span> <span class="n">someBool</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">listStore</span><span class="p">.</span><span class="n">GetIterFirst</span> <span class="p">(</span><span class="k">out</span> <span class="n">iter</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">do</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">someBool</span> <span class="p">=</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="n">listStore</span><span class="p">.</span><span class="n">GetValue</span> <span class="p">(</span><span class="n">iter</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">someBool</span> <span class="p">&amp;&amp;</span> <span class="n">listStore</span><span class="p">.</span><span class="n">IterNext</span> <span class="p">(</span><span class="k">ref</span> <span class="n">iter</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="n">someBool</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Pseudo-C# Code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">return</span> <span class="n">listStore</span><span class="p">.</span><span class="n">ToList</span><span class="p">().</span><span class="n">Any</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">MyBoolProp</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>From the .NET side, I don&rsquo;t like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;&ndash;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/20/ps1-prompt/">PS1 Prompt</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-20T23:31:20+02:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Here&rsquo;s my current PS1 prompt for bash with optional git support: <a href="https://gist.github.com/3324534">https://gist.github.com/3324534</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/">GNU/Emacs: Desktop Save With &#8220;Lazy Loading&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-27T22:33:18+02:00" pubdate data-updated="true">Mar 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When using <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html">desktop-save-mode</a> using <code>desktop-restore-eager</code> is a must:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">custom-set-variables</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-save-mode</span> <span class="nv">t</span><span class="p">)</span>
+</span><span class='line'>  <span class="o">&#39;</span><span class="p">(</span><span class="nv">desktop-restore-eager</span> <span class="mi">5</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>desktop-save-mode</code> will load your last session. Setting <code>desktop-restore-eager</code> to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/07/converting-a-mercurial-repository-to-git/">Converting a Mercurial Repository to Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-07T01:40:01+01:00" pubdate data-updated="true">Feb 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Note to self:</p>
+
+<p>Converting Hg repos to git using hg-fast-export.</p>
+
+<p>Installation:</p>
+
+<p><code>
+$ sudo aptitude install hg-fast-export
+</code></p>
+
+<p>Usage:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>new_git_dir
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>git init
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>hg-fast-export -r &lt;hg-repo&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Works with:</p>
+
+<p>git version 1.7.5.4</p>
+
+<p>hg version 2.1</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/07/converting-a-subversion-repository-to-git/">Converting a Subversion Repository to Git</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-07T00:10:21+01:00" pubdate data-updated="true">Feb 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Just discovered this:</p>
+
+<p><a href="http://john.albin.net/">John Albin</a> wrote an excellent article on how to convert a <a href="http://en.wikipedia.org/wiki/Apache_Subversion">subversion</a> repository to <a href="http://en.wikipedia.org/wiki/Git_(software">git</a>):</p>
+
+<p><a href="http://john.albin.net/git/convert-subversion-to-git">http://john.albin.net/git/convert-subversion-to-git</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/09/nhibernate-3-2/">NHibernate 3.2 Upgrades</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-09T01:10:15+01:00" pubdate data-updated="true">Nov 9<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Trying Google Plus for blogging&hellip;
+<a href="https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3">https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -121,473 +615,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/24/app-config-order-matters/">App.Config: Order Matters</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-24T00:09:05+02:00" pubdate data-updated="true">Sep 24<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Note to self:</p>
-
-<p>Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip;</p>
-
-<p>Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.</p>
-
-<p>Option 1:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
-</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This throws: <code>The type initializer for 'System.Windows.Application' threw an exception.</code></p>
-
-<p>Option 2:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
-</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;configSections</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;startup&gt;&lt;supportedRuntime</span> <span class="na">version=</span><span class="s">&quot;v4.0&quot;</span> <span class="na">sku=</span><span class="s">&quot;.NETFramework,Version=v4.0&quot;</span><span class="nt">/&gt;&lt;/startup&gt;</span>
-</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Fine.</p>
-
-<p>Do I want to read 2.5MB of <code>C:\Program Files (x86)\Microsoft Visual Studio 10.0\Xml\Schemas\DotNetConfig.xsd</code>? No.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/17/rails-and-emacs-rsense-and-auto-complete/">Rails and Emacs: Rsense and Auto-Complete</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-17T06:24:23+02:00" pubdate data-updated="true">Jul 17<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you&rsquo;re developing Rails with <a href="http://www.gnu.org/software/emacs/">Emacs</a> and using <a href="http://rinari.rubyforge.org/">Rinari</a> here are two more extensions you might like:</p>
-
-<p><a href="http://cx4a.org/software/auto-complete/">http://cx4a.org/software/auto-complete/</a></p>
-
-<p>and</p>
-
-<p><a href="http://cx4a.org/software/rsense/">http://cx4a.org/software/rsense/</a></p>
-
-<p>Installation. Just  as described. Code completion for ruby-on-rails with emacs!</p>
-
-<p>And the package is written in Java(!), Very cool!</p>
-
-<p>I am impressed!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/">Antivir Regression Bug Makes Visual Studio 2010 Unusable</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-09T03:04:48+02:00" pubdate data-updated="true">Jul 9<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The current version of <a href="http://www.avira.com/en/for-home">Antivir Personal</a> slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications.</p>
-
-<p>Debugging with active Antivir: appr. <strong>5min</strong> for an empty Default.aspx page to display.</p>
-
-<p>Debugging with deactivated Antivir: <strong>a few seconds</strong> for an empty Default.aspx page to display.</p>
-
-<p>Until Antivir fixes this bug I will give <a href="http://www.microsoft.com/security_essentials/default.aspx?mkt=de-de">Microsoft Security Essentials</a> a try.</p>
-
-<p>Regression because this has been addressed and fixed in December 2010:</p>
-
-<p><a href="http://www.avira.com/en/support-for-free-faq-detail/faqid/805">Antivir FAQ (English)</a></p>
-
-<p><a href="http://www.avira.com/de/support-for-free-faq-detail/faqid/805">Antivir FAQ (Deutsch)</a></p>
-
-<p>This applies to the following version of Antivir:</p>
-
-<pre><code>Produktversion 10.2.0.696 29.06.2011
-Suchengine 8.02.06.04 06.07.2011
-Virendefinitionsdatei 7.11.11.27 07.07.2011
-Control Center 10.00.12.31 28.06.2011
-Config Center 10.00.13.20 28.06.2011
-Luke Filewalker 10.03.00.07 28.06.2011
-AntiVir Guard 10.00.01.59 28.06.2011
-Filter 10.00.26.09 28.06.2011
-AntiVir WebGuard 10.01.09.00 28.06.2011
-Planer 10.00.00.21 02.05.2011
-Updater 10.00.00.39 21.06.2011
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/">Workaround for VirtualBox 4.0.8 Regression Bug</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-25T22:35:29+02:00" pubdate data-updated="true">May 25<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><del>The current version of Oracle&rsquo;s VirtualBox (4.0.8) has</del> Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</p>
-
-<p>Here is the summary of the workaround posted as <a href="http://www.virtualbox.org/ticket/8948">VirtualBox Ticket 8948</a>:</p>
-
-<ol>
-<li><p> Edit the settings file to allow the VM to start again (Replace control characters in line 315 with 4.0.8).</p></li>
-<li><p> Start the Windows guest</p></li>
-<li><p> Run <code>regedit</code></p></li>
-<li><p> Go to <code>HKLM\SOFTWARE\Oracle\VirtualBox Guest Additions</code></p></li>
-<li><p> Create a string key <code>VersionEx</code> (use exactly this spelling)</p></li>
-<li><p> Give it a reasonable value (ie 4.0.8)</p></li>
-<li><p> Shut down the VM.</p></li>
-<li><p> Repeat step 1</p></li>
-<li><p> Restart and shutdown windows guest again</p></li>
-</ol>
-
-
-<p>That&rsquo;s it.</p>
-
-<p>Edit: This bug has been fixed in version 4.0.10 (released 2011-06-27).</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/">Adding Truecrypt to Ubuntu&#8217;s Unity Panel</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-09T21:55:56+02:00" pubdate data-updated="true">May 9<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>To add applications like Truecrypt to Ubuntu&rsquo;s Unity panel the application has to be &ldquo;white listed&rdquo;.</p>
-
-<ol>
-<li><p> Install dconf-editor (ie <code>sudo aptitude install dconf-editor</code>)</p></li>
-<li><p> Go to section desktop | unity | panel and add &lsquo;Truecrypt&rsquo; to the systray-whitelist variable</p></li>
-<li><p> Restart Unity (or log out and back in again)</p></li>
-</ol>
-
-
-<p>That&rsquo;s it. Found this solution <a href="http://askubuntu.com/questions/35076/how-do-i-whitelist-truecrypt-to-work-under-unity">here</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/04/12/nhibernate-simple-setup/">NHibernate Simple Setup</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-12T00:50:05+02:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My simple NHibernate 3 setup under GitHub: <a href="https://github.com/draptik/nhibernate-nunit">https://github.com/draptik/nhibernate-nunit</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/">Snippet for Adding Unknown Files/dirs to Subversion (Command Line)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-29T21:58:31+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>svn add `svn st | grep "^?" | awk '{print $2}'`</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/">Installing SQL Server Management Studio 2008 Express After Installing Visual Studio 2010</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-17T23:48:06+01:00" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Visual Studio 2010 comes with its own version of SQL Server Express.</p>
-
-<p>If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards and run into trouble, take a look at this <a href="http://blog.alexonasp.net/post/2010/01/07/SQL-Server-2008-Management-Studio-Express-nachtraglich-installieren.aspx">post by Alexander Zeitler</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/">Configure VirtualBox Windows Guest System to Use 2 Monitors</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-01T22:13:43+01:00" pubdate data-updated="true">Jan 1<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2><strong>﻿Purpose</strong></h2>
-
-<p>Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.<br/>
-This solution should work for all Linux distributions supported by VirtualBox4.</p>
-
-<h2><strong>﻿Required software</strong></h2>
-
-<ul>
-<li><p><a href="http://www.ubuntu.com/">Ubuntu 10.10</a> (aka Maverick) as host for VirtualBox4</p></li>
-<li><p><a href="http://www.virtualbox.org/">VirtualBox 4</a></p></li>
-<li><p>VirtualBox guest sytem: Windows XP (incl. VirtualBox guest additions)</p></li>
-</ul>
-
-
-<h2><strong>Configuration</strong></h2>
-
-<ol>
-<li> Setup virtual guest machine (windows) within vm host system (GNU/Linux) to use two monitors:</li>
-</ol>
-
-
-<p>[caption id=&ldquo;attachment_378&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Setting up virtualbox 4 to use 2 monitors for windows xp guest&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png"><img src="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png?w=300" alt="virtualbox-host-ubuntu-10.10" /></a>[/caption]</p>
-
-<ol>
-<li> Within virtual guest (windows): Configure dual monitor setup:</li>
-</ol>
-
-
-<p>[caption id=&ldquo;attachment_379&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;263&rdquo; caption=&ldquo;Setup within virtualbox guest system (windows)&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png"><img src="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png?w=263" alt="virtualbox_dualmonitor_windows_config" /></a>[/caption]</p>
-
-<h2>Side note</h2>
-
-<p>Upgrading from VirtualBox owned by Sun to VirtualBox owned by Oracle was very smooth. Even for Linux host systems. Oracle, thanks for that!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -605,23 +632,23 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a>
+        <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/08/05/link-collection-1/">Link Collection #1</a>
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/28/restful-crud-with-angularjs/">RESTful CRUD With AngularJS</a>
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/19/unit-testing-restful-services/">Unit Testing RESTful Services</a>
+        <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/18/guice-in-java-web-application/">Guice in Java Web Application</a>
+        <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
       </li>
     
   </ul>
@@ -647,7 +674,7 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>

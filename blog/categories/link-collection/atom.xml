@@ -4,7 +4,7 @@
   <title><![CDATA[Category: link-collection | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/link-collection/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-03-04T00:24:07+01:00</updated>
+  <updated>2016-03-04T01:23:58+01:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #4]]></title>
+    <link href="http://draptik.github.io/blog/2014/04/21/link-collection-number-4/"/>
+    <updated>2014-04-21T03:24:32+02:00</updated>
+    <id>http://draptik.github.io/blog/2014/04/21/link-collection-number-4</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a bit behind on this section, I know. Here&rsquo;s the first batch:</p>
+
+<p>currently reading:</p>
+
+<ul>
+<li><a href="http://www.amazon.com/Growing-Object-Oriented-Software-Guided-Tests/dp/0321503627/ref=la_B002O21DQW_1_1?s=books&amp;ie=UTF8&amp;qid=1398046597&amp;sr=1-1">Growing Object-Oriented Software, Guided by Tests</a></li>
+<li><a href="http://www.amazon.com/Implementing-Domain-Driven-Design-Vaughn-Vernon-ebook/dp/B00BCLEBN8/ref=la_B0096T71SA_1_1?s=books&amp;ie=UTF8&amp;qid=1398046585&amp;sr=1-1">Implementing Domain-Driven Design</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/21389283/mark-seemanns-conflicting-statements-about-bastard-injection-need-some-clarifi/21428909?stw=2#21428909">Mark Seemann&rsquo;s on Bastard Injection</a></li>
+<li><a href="http://blogs.msdn.com/b/ericlippert/archive/2009/05/18/foreach-vs-foreach.aspx">foreach vs ForEach</a></li>
+</ul>
+
+
+<p>sql stuff:</p>
+
+<ul>
+<li><a href="http://blog.codinghorror.com/a-visual-explanation-of-sql-joins/?utm_content=bufferaf1ce&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">SQL Joins explained</a></li>
+<li><a href="http://security.stackexchange.com/questions/25684/how-can-i-explain-sql-injection-without-technical-jargon/25710#25710">SQL explained</a></li>
+</ul>
+
+
+<p>meta:</p>
+
+<ul>
+<li><a href="http://highscalability.com/blog/2014/3/17/intuitively-showing-how-to-scale-a-web-application-using-a-c.html">scaling web apps (decribed as comic)</a></li>
+<li><a href="http://carnotaurus.philipcarney.com/post/3010984357/classes-versus-prototypes-some-philosophical-and">Classes versus Prototypes: A &lsquo;nerd&rsquo; paper from 1997</a></li>
+</ul>
+
+
+<p>&lsquo;Important&rsquo; images/quotes:</p>
+
+<ul>
+<li><a href="http://pbs.twimg.com/media/BhWAOVoIgAA_Tjb.jpg">Askhole</a></li>
+<li><a href="http://pbs.twimg.com/media/BhFyrJbIQAAt2Wb.png">Bugfixing</a></li>
+<li><a href="http://cultureby.com/2011/05/douglas-adams-on-generational-rhythms-in-the-adoption-of-tech.html">Douglas Adams on generations and technology</a></li>
+</ul>
+
+
+<p>other fun stuff:</p>
+
+<ul>
+<li><a href="http://www.mymodernmet.com/profiles/blogs/3d-gifs">Incredible 3D GIFs Created with a Simple Visual Effect</a></li>
+</ul>
+
+
+<p>not so fun:</p>
+
+<ul>
+<li><a href="http://pando.com/2013/10/26/i-challenged-hackers-to-investigate-me-and-what-they-found-out-is-chilling/?utm_content=buffer3a5a4&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">I challenged hackers to investigate me and what they found out is chilling</a></li>
+</ul>
+
+
+<p>And the best tv show I&rsquo;ve seen in ages is called <a href="http://www.imdb.com/title/tt2356777/">True Detective</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #3]]></title>
+    <link href="http://draptik.github.io/blog/2014/01/03/link-collection-number-3/"/>
+    <updated>2014-01-03T23:30:00+01:00</updated>
+    <id>http://draptik.github.io/blog/2014/01/03/link-collection-number-3</id>
+    <content type="html"><![CDATA[<p>JavaScript stuff:</p>
+
+<ul>
+<li>Basics of NodeJS and ExpressJS: <a href="http://blog.modulus.io/nodejs-and-express-create-rest-api">REST</a>, <a href="http://blog.modulus.io/nodejs-and-express-basic-authentication">Authentication</a>, <a href="http://blog.modulus.io/nodejs-and-express-sessions">Sessions</a></li>
+<li>Another great tutorial on SPAs: <a href="https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs">Authentication in Single Page Applications</a></li>
+<li>If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: <a href="http://mean.io/">mean.io</a> (Template for MongoDB, ExpressJS, AngularJS and NodeJS)</li>
+<li>and here&rsquo;s a great <a href="http://www.thinkster.io/pick/GUIDJbpIie/angularjs-tutorial-learn-to-build-modern-web-apps">Tutorial on MEAN</a></li>
+</ul>
+
+
+<p>c# stuff:</p>
+
+<ul>
+<li>This <a href="http://www.youtube.com/watch?v=9ZSbuwCmwuc">video by Roy Osherove</a> shows how to introduce seams into brownfield projects (start at approx. 45min into the video if you want to skip the book recommendations and the intro to the SOLID principle). I learned how to introduce seams into static c# classes and methods using virtual&hellip;</li>
+<li>C# psychology <a href="http://de.slideshare.net/Coverity/the-psychology-of-c-analysis-24025354">by Eric Lippert&hellip;</a></li>
+<li>NHibernate turbo? (untested, but from the man himself: <a href="http://ayende.com/blog/164353/nhibernate-runfaster-secret-toggle?Key=587fe66e-0bcb-4146-96a6-cdb6e2df7df5&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+AyendeRahien+%28Ayende+%40+Rahien%29">pimping NHibernate by Ayende</a>)</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #2]]></title>
+    <link href="http://draptik.github.io/blog/2013/09/16/link-collection-2/"/>
+    <updated>2013-09-16T21:58:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/09/16/link-collection-2</id>
+    <content type="html"><![CDATA[<p>I attended the <a href="http://www.herbstcampus.de/">Herbstcampus 2013</a> this month. As usual, a very good conference.</p>
+
+<p>Here is some fun stuff I learned:</p>
+
+<ul>
+<li><a href="http://nancyfx.org/">NancyFx</a> is to <a href="http://www.asp.net/">ASP.NET</a> as <a href="http://www.sinatrarb.com/">Sinatra</a> is to <a href="http://rubyonrails.org/">Ruby-on-Rails</a>.</li>
+<li><a href="https://github.com/markrendle/Simple.Data">Simple.Data</a> is a leightweight, convention-based database access abstraction for prototyping</li>
+<li><a href="http://signalr.net/">SignalR</a> is cool</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[link collection #1]]></title>

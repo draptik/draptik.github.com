@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CRUD | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/crud/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-03-04T00:24:07+01:00</updated>
+  <updated>2016-03-04T01:23:58+01:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -177,7 +177,7 @@ var app = angular.module(&lsquo;ngdemo.controllers&rsquo;, []);</p>
 
 <h4>UserDetailCtrl and UserCreationCtrl</h4>
 
-<p><code>UserDetailCtrl</code> provides the function <code>udateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
+<p><code>UserDetailCtrl</code> provides the function <code>updateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
 
 <p><code>UserCreationCtrl</code> provides the function <code>createNewUser</code>, calling <code>UsersFactory.create</code>.</p>
 

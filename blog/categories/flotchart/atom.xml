@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: flotchart | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/flotchart/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2016-03-04T01:23:58+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)]]></title>
+    <link href="http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/"/>
+    <updated>2015-07-30T00:07:12+02:00</updated>
+    <id>http://draptik.github.io/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui</id>
+    <content type="html"><![CDATA[<p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
+
+<p>In this post I&rsquo;ll describe how to display the data.</p>
+
+<h2>TL;DR</h2>
+
+<ul>
+<li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
+<li><code>npm install</code></li>
+<li><code>bower install</code></li>
+<li>(for deployment in LAN: Configure <code>baseUrl</code> in <code>app.js</code>)</li>
+<li>(for deployment in LAN: Configure <code>dbLocation</code> in <code>app_api/models/db.js</code>)</li>
+<li>(for deployment in LAN: <code>export SET_ENV=production</code>)</li>
+<li><code>npm start</code></li>
+</ul>
+
+
+<p>Should be similar to <a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a>.</p>
+
+<h2>Choosing the right technology stack</h2>
+
+<p>This really depends on your individual needs. Here are some points to consider:</p>
+
+<ul>
+<li>How many people will be accessing the site?</li>
+<li>Do you have to access the site from outside of your LAN? Do you need a login mechanism?</li>
+<li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
+<li>Database interaction possible (this demo uses SQLite3)?</li>
+</ul>
+
+
+<p>If you know that you&rsquo;ll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
+
+<p>Otherwhise, the RPi is a good choice for a web server.</p>
+
+<p>Some of the technology stacks available on the RPi are:</p>
+
+<ul>
+<li>JVM: Java, Scala</li>
+<li>.NET/Mono: C#, F#</li>
+<li>Python</li>
+<li>JS: <a href="https://nodejs.org/">Node.js</a></li>
+</ul>
+
+
+<p>Since I only want to display data in my LAN I decided to use Javascript: <a href="https://nodejs.org/">Node.js</a> in combination with the <a href="http://expressjs.com/">Express framework</a> provides all possible features and is very lightweight.</p>
+
+<p>No matter which stack you choose:
+Running the web site on the same RPi as the temperature recording from the previous posts saves you the hassle of installing software on a different machine. And it obviously saves energy, since the RPi is running 24/7 anyway recording temperature data.</p>
+
+<h2>User Interface</h2>
+
+<p>My primary goal was <em>explorative data visualization</em>. For this purpose I decided to show 2 plots:</p>
+
+<ul>
+<li>an overview plot showing the past 14 days</li>
+<li>and a detail plot, showing the selection of the overview plot</li>
+</ul>
+
+
+<p>You can test the website with some sample data at
+<a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a></p>
+
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
+
+<p>Some of the UI features:</p>
+
+<ul>
+<li>The detail plot can be dragged and the overview plot has a selection region which can be resized and dragged.</li>
+<li>Changes to either plot are reflected in the other.</li>
+<li>Mouse movement in the detail plot updates the legend.</li>
+</ul>
+
+
+<p>All charting features are implemented using <a href="http://www.flotcharts.org/">Flot</a>.</p>
+
+<h2>Prerequisites: Node.js</h2>
+
+<p>Here is a very concise manual on how to install Node.js on the RPi (this
+gives you a more up to date version of Node.js than default Raspbian does):
+<a href="http://weworkweplay.com/play/raspberry-pi-nodejs/">http://weworkweplay.com/play/raspberry-pi-nodejs/</a></p>
+
+<h2>Installation</h2>
+
+<p>All further instructions are expected to be executed on the RPi.</p>
+
+<p>Download and unzip the source code from</p>
+
+<p><a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></p>
+
+<p><code>
+cd ~
+mkdir website &amp;&amp; cd website
+wget https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip
+unzip *.zip
+cd rpi*
+</code></p>
+
+<p>Install backend packages (node packages are defined in <code>packages.json</code>):</p>
+
+<p><code>
+npm install
+</code></p>
+
+<p>Node.js packages are installed to folder <code>node_modules</code>.</p>
+
+<ul>
+<li>the folder <code>app_server</code> contains the basic web site.</li>
+<li>the folder <code>app_api</code> provides the REST backend.</li>
+</ul>
+
+
+<p>Install frontend packages (bower packages are defined in <code>bower.json</code>):</p>
+
+<p><code>
+bower install
+</code></p>
+
+<p>Bower packages are installed to folder <code>public/vendor/bower</code>.</p>
+
+<p>You should now be able to start the application (using the provided sample data in folder <code>sample_data</code>):</p>
+
+<p><code>
+npm start
+</code></p>
+
+<h2>Configuration (development vs production)</h2>
+
+<p>The application uses a single switch between development mode and production mode:</p>
+
+<p><code>NODE_ENV</code></p>
+
+<p>This information is currently used in the following places in the application:</p>
+
+<h3>REST URL</h3>
+
+<p>Setting the URL for the REST service (in <code>app.js</code>):</p>
+
+<p><code>
+var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
+</code></p>
+
+<p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
+
+<p>And in case you&rsquo;re not familiar with the syntax</p>
+
+<p><code>
+var result = someCondition ? 'string1' : 'string2';
+</code></p>
+
+<p>It&rsquo;s just a shorthand for</p>
+
+<p><code>
+var result;
+if (someCondition) {
+  result = 'string1';
+} else {
+  result = 'string2';
+}
+</code></p>
+
+<h3>Database location</h3>
+
+<p>Setting the database location (in <code>app_api/models/db.js</code>):</p>
+
+<p><code>
+var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
+</code></p>
+
+<h3>Usage</h3>
+
+<p>Once you&rsquo;ve configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
+
+<p><code>
+export NODE_ENV=production
+npm start
+</code></p>
+
+<h3>Customizing</h3>
+
+<p>You will probably want to customize the UI, as my design skills are limited at best. ;&ndash;)</p>
+
+<p>Here&rsquo;s an overview of the project, so you know where to change things:</p>
+
+<p><code>
+├── app_api                     //  REST API
+│   ├── controllers
+│   │   └── temperatures.js
+│   ├── models
+│   │   ├── db.js               //  DATABASE
+│   └── routes
+│       └── index.js
+├── app.js                      //  MAIN ENTRY POINT FOR THE APPLICATION
+├── app_server                  //  web server (express.js)
+│   ├── controllers
+│   │   ├── main.js
+│   │   └── temperatures.js
+│   ├── models
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── temperatures.js
+│   └── views
+│       ├── error.jade
+│       ├── index.jade
+│       ├── layout.jade
+│       └── temperatures-list.jade
+├── bower.json                  //  Bower configuration (frontend)
+├── node_modules                //  Location of node modules
+├── nodemon.json                //  nodemon configuration
+├── package.json                //  node configuration
+├── public                      //  frontend stuff...
+│   ├── images                  //  images
+│   ├── scripts                 //  Javascript code
+│   │   ├── chart.js            //  This file includes all charting code
+│   │   ├── rest.js             //  wrapper code to access REST API
+│   │   └── suncalc.js          //  calc sunrise/sunset on the fly
+│   ├── stylesheets             //  ...
+│   │   ├── app.css
+│   │   ├── chart.css
+│   └── vendor                  //  3rd party libraries
+│       ├── bower               //  ...installed via bower
+│       └── custom              //  ...other 3rd party libraries
+├── sample_data                 //  sample data
+│   └── templog.db              //  sqlite3 sample data set
+</code></p>
+
+<p>That&rsquo;s it. Have fun!</p>
+]]></content>
+  </entry>
+  
+</feed>

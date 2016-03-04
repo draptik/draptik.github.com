@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nancyfx | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/nancyfx/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2016-03-04T01:23:58+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[link collection #2]]></title>
+    <link href="http://draptik.github.io/blog/2013/09/16/link-collection-2/"/>
+    <updated>2013-09-16T21:58:00+02:00</updated>
+    <id>http://draptik.github.io/blog/2013/09/16/link-collection-2</id>
+    <content type="html"><![CDATA[<p>I attended the <a href="http://www.herbstcampus.de/">Herbstcampus 2013</a> this month. As usual, a very good conference.</p>
+
+<p>Here is some fun stuff I learned:</p>
+
+<ul>
+<li><a href="http://nancyfx.org/">NancyFx</a> is to <a href="http://www.asp.net/">ASP.NET</a> as <a href="http://www.sinatrarb.com/">Sinatra</a> is to <a href="http://rubyonrails.org/">Ruby-on-Rails</a>.</li>
+<li><a href="https://github.com/markrendle/Simple.Data">Simple.Data</a> is a leightweight, convention-based database access abstraction for prototyping</li>
+<li><a href="http://signalr.net/">SignalR</a> is cool</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

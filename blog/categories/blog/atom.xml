@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-03-04T00:24:07+01:00</updated>
+  <updated>2016-03-04T01:23:58+01:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -42,7 +42,13 @@ See <a href="http://nonsenseby.me/blog/2013/04/13/arch-linux/">this post</a> for
 It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python_VirtualEnv#Virtualenvwrapper">python-virtualenvwrapper</a> and configuring a new custom environment <code>blog_env</code> which uses Python 2.7:</p>
 
 <p><div><script src='https://gist.github.com/5638602.js'></script>
-<noscript><pre><code></code></pre></noscript></div>
+<noscript><pre><code># pacman -S python-virtualenvwrapper
+$ echo &#39;WORKON_HOME=$HOME/.virtualenvs&#39; &gt;&gt; ~/.bashrc
+$ . ~/.bashrc
+$ mkdir -p $WORKON_HOME
+$ echo &#39;source /usr/bin/virtualenvwrapper.sh&#39; &gt; ~/.bashrc
+$ . ~/.bashrc
+$ mkvirtualenv -p python2.7 --distribute blog_env</code></pre></noscript></div>
 </p>
 
 <p>Paraphrazing the <a href="http://www.wongdev.com/blog/2013/01/16/octopress-on-archlinux/">original post</a>:</p>
