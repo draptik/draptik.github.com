@@ -126,7 +126,8 @@ public void Given_Customer_Should_ConvertTo_Person_With_CurrentProperties()
     var customer = new Customer
     {
         FirstName = firstname,
-        LastName = lastname
+        LastName = lastname,
+        Email = "foo@bar.com"
     };
 
     MyMapping.Init();
@@ -161,7 +162,8 @@ public void Given_Customer_Should_ConvertTo_Person_With_CurrentProperties_Exclud
     var customer = new Customer
     {
         FirstName = firstname,
-        LastName = lastname
+        LastName = lastname,
+        Email = "foo@bar.com"
     };
 
     MyMapping.Init();
