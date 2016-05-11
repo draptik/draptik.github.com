@@ -9,7 +9,13 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information. In this post I&rsquo;ll describe how to &hellip;">
+  <meta name="description" content="Sometimes you want to ensure that 2 unrelated objects share a set of properties &mdash; without using an interface. Here is an example: 1
+2
+3
+4
+5
+6
+7 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +85,353 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-05-09T19:25:17+02:00" pubdate data-updated="true">May 9<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes you want to ensure that 2 unrelated objects share a set of properties &mdash; without using an interface.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First thought for C# developers: <a href="http://automapper.org/">AutoMapper</a></p>
+
+<p>Let&rsquo;s do that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">AutoMapper</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyMapping</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">static</span> <span class="n">IMapper</span> <span class="n">Mapper</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Init</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">cfg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MapperConfiguration</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">x</span><span class="p">.</span><span class="n">CreateMap</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;();</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>            <span class="n">Mapper</span> <span class="p">=</span> <span class="n">cfg</span><span class="p">.</span><span class="n">CreateMapper</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can write a unit test to see if we can convert a Customer to a Person:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">SomeTests</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'><span class="na">        [Fact]</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// Arrange</span>
+</span><span class='line'>            <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>                <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Act</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Assert</span>
+</span><span class='line'>            <span class="n">person</span><span class="p">.</span><span class="n">FirstName</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">firstname</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">person</span><span class="p">.</span><span class="n">LastName</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">lastname</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This test passes.</p>
+
+<p>But what happens when we want to ensure that a new Customer property (for example <code>Email</code>) is reflected in the Person object?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">Email</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// &lt;-- new property</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our unit test still passes. &#9785;</p>
+
+<p><strong>Wouldn&rsquo;t it be nice to have our unit test fail if the classes are not in sync?</strong></p>
+
+<p>Here is where <a href="http://www.fluentassertions.com/">FluentAssertions</a> <code>ShouldBeEquivalentTo</code> comes in handy:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[Fact]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person_With_CurrentProperties</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Arrange</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Act</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="n">person</span><span class="p">.</span><span class="n">ShouldBeEquivalentTo</span><span class="p">(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/posts/dotnet/equivalentto_result.png"></p>
+
+<p><code>Subject has a member  Email that the other object does not have.</code></p>
+
+<p>Cool: This is the kind of message I want to have from a unit test!</p>
+
+<p><code>ShouldBeEquivalentTo</code> also takes an optional Lambda expression in case you need more fine grained control which properties are included in the comparison. Here is an example where we exlude the <code>Email</code> property on purpose:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[Fact]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person_With_CurrentProperties_Excluding_Email</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Arrange</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Act</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="n">customer</span><span class="p">.</span><span class="n">ShouldBeEquivalentTo</span><span class="p">(</span><span class="n">person</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">options</span> <span class="p">=&gt;</span>
+</span><span class='line'>            <span class="n">options</span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Email</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This test passes.</p>
+
+<p>The complete documentation for FluentAssertions&#8217; <code>ShouldBeEquivalentTo</code> method can be found <a href="https://github.com/dennisdoomen/fluentassertions/wiki#object-graph-comparison">here</a>.</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/blog-demo-shouldbeequivalentto">https://github.com/draptik/blog-demo-shouldbeequivalentto</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/draptik/blog-demo-shouldbeequivalentto.git
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3117,324 +3470,6 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/19/angularjs-and-cors/">AngularJS and CORS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-19T18:47:00+02:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>TL;DR</h2>
-
-<p>While splitting my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</p>
-
-<h2>&hellip;</h2>
-
-<p>This post describes how I split the backend and frontend of my <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> into separate applications.</p>
-
-<p>Hopefully this will simplify switching the used backend technology in the future (i.e. replacing Java with .NET or Node.JS).</p>
-
-<h2>New directory structure</h2>
-
-<p>To begin with I created two new top level folders: <code>backend/java-backend</code> and <code>frontend</code>.
-Then I moved all Java code (including Java IDE settings, pom.xml, etc.) to the new <code>java-backend</code> folder.
-Since the frontend code (JS, CSS, HTML templates) was previously located in <code>src/main/webapp</code> I moved it to the new frontend folder.</p>
-
-<p>The Java project folder <code>webapp</code> now only contains the following minimal setup:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>backend/java-backend/src/main/webapp
-</span><span class='line'>├── index.jsp
-</span><span class='line'>└── WEB-INF
-</span><span class='line'>    └── web.xml
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>frontend</code> folder now has the following (simplified) structure:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>frontend/
-</span><span class='line'>├── css
-</span><span class='line'>├── frontend-web-server.js
-</span><span class='line'>├── index.html
-</span><span class='line'>├── js
-</span><span class='line'>│   ├── app.js
-</span><span class='line'>│   ├── bootstrap
-</span><span class='line'>│   ├── controllers.js
-</span><span class='line'>│   ├── directives.js
-</span><span class='line'>│   ├── filters.js
-</span><span class='line'>│   ├── jquery
-</span><span class='line'>│   └── services.js
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Frontend web server</h2>
-
-<p>Not knowing anything about node.js (yet), I just copied the simple <a href="https://github.com/angular/angular-phonecat/blob/master/scripts/web-server.js">web server from Google&rsquo;s AngularJS demo application PhoneCat</a> to <code>frontend/frontend-web-server.js</code>. For this server to run you will have to install node.js on your system. The frontend server will be running on <em>port 8000</em>.</p>
-
-<figure class='code'><figcaption><span>frontend-web-server.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>// ...
-</span><span class='line'>var <span class="nv">DEFAULT_PORT</span> <span class="o">=</span> 8000; // &lt;-- frontend port
-</span><span class='line'>// ...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We can start/stop the frontend web server using the scripts <code>start_frontend_server.sh</code> and <code>stop_frontend_server.sh</code>.</p>
-
-<h2>Backend web server</h2>
-
-<p>The backend server is Tomcat. We can start/stop the backend web server using the scripts <code>start_java_backend.sh</code> and <code>stop_java_backend.sh</code>. The backend server will be running on <em>port 8080</em>.</p>
-
-<h2>CORS configuration</h2>
-
-<p>Cross-origin resource sharing (<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>) allows Javascript to make requests to other domains. Compared to JSONP which only allows the GET HTTP verb, CORS allows all HTTP verbs (GET, POST, PUT, DELETE), making it an ideal candidate for RESTful services. The only drawback: CORS requires a modern browser (see <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing#Browser_support">Wikipedia for details</a>).</p>
-
-<p><strong>2014-01-03</strong>
-<del>CORS can be configured on the server and/or the client side.</del>
-CORS must be configured on the server <strong>and</strong> the client side (Thanks to Richard for the pointer!).
-The following example demonstrates <del>both approaches</del> this.</p>
-
-<h3>Server side configuration example (Java)</h3>
-
-<p>The basic idea is to add additional header information to the different <code>Access-Control-Allow-*</code> properties of the HTTP response.</p>
-
-<figure class='code'><figcaption><span>ResponseCorsFilter.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">web</span><span class="o">.</span><span class="na">rest</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Singleton</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.servlet.*</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">/*</span>
-</span><span class='line'><span class="cm">    Allow CORS requests.</span>
-</span><span class='line'><span class="cm"> */</span>
-</span><span class='line'><span class="nd">@Singleton</span>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ResponseCorsFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">FilterConfig</span> <span class="n">filterConfig</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span> <span class="o">{</span> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span> <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doFilter</span><span class="o">(</span><span class="n">ServletRequest</span> <span class="n">servletRequest</span><span class="o">,</span> <span class="n">ServletResponse</span> <span class="n">servletResponse</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">filterChain</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">servletResponse</span> <span class="k">instanceof</span> <span class="n">HttpServletResponse</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">HttpServletResponse</span> <span class="n">alteredResponse</span> <span class="o">=</span> <span class="o">((</span><span class="n">HttpServletResponse</span><span class="o">)</span> <span class="n">servletResponse</span><span class="o">);</span>
-</span><span class='line'>            <span class="n">addHeadersFor200Response</span><span class="o">(</span><span class="n">alteredResponse</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">filterChain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">servletRequest</span><span class="o">,</span> <span class="n">servletResponse</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">addHeadersFor200Response</span><span class="o">(</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&quot;Access-Control-Allow-Origin&quot;</span><span class="o">,</span> <span class="s">&quot;*&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&quot;Access-Control-Allow-Methods&quot;</span><span class="o">,</span> <span class="s">&quot;Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">response</span><span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">&quot;Access-Control-Allow-Headers&quot;</span><span class="o">,</span> <span class="s">&quot;GET, PUT, OPTIONS, X-XSRF-TOKEN&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above filter is used in the Guice configuration via the <code>filter(...).through(...)</code> method:</p>
-
-<figure class='code'><figcaption><span>NgDemoApplicationSetup.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">infrastructure</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Guice</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Injector</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Scopes</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.GuiceServletContextListener</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.ServletModule</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.PackagesResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.web.rest.ResponseCorsFilter</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.codehaus.jackson.jaxrs.JacksonJsonProvider</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NgDemoApplicationSetup</span> <span class="kd">extends</span> <span class="n">GuiceServletContextListener</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">protected</span> <span class="n">Injector</span> <span class="nf">getInjector</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">Guice</span><span class="o">.</span><span class="na">createInjector</span><span class="o">(</span><span class="k">new</span> <span class="n">ServletModule</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nd">@Override</span>
-</span><span class='line'>            <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configureServlets</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>                <span class="kd">super</span><span class="o">.</span><span class="na">configureServlets</span><span class="o">();</span>
-</span><span class='line'>                <span class="n">ResourceConfig</span> <span class="n">resourceConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PackagesResourceConfig</span><span class="o">(</span><span class="s">&quot;ngdemo/web&quot;</span><span class="o">);</span>
-</span><span class='line'>                <span class="k">for</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">resource</span> <span class="o">:</span> <span class="n">resourceConfig</span><span class="o">.</span><span class="na">getClasses</span><span class="o">())</span> <span class="o">{</span>
-</span><span class='line'>                    <span class="n">bind</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
-</span><span class='line'>                <span class="o">}</span>
-</span><span class='line'>                <span class="n">bind</span><span class="o">(</span><span class="n">JacksonJsonProvider</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">in</span><span class="o">(</span><span class="n">Scopes</span><span class="o">.</span><span class="na">SINGLETON</span><span class="o">);</span>
-</span><span class='line'>                <span class="n">serve</span><span class="o">(</span><span class="s">&quot;/web/*&quot;</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="n">GuiceContainer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">// CORS filter:</span>
-</span><span class='line'>                <span class="n">filter</span><span class="o">(</span><span class="s">&quot;/web/*&quot;</span><span class="o">).</span><span class="na">through</span><span class="o">(</span><span class="n">ResponseCorsFilter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">});</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Client side configuration example (Javascript)</h3>
-
-<p>The opposite approach, configuring the client instead of the server, works by (1) setting the <code>useXDomain</code> property to true and (2) removing header properties.</p>
-
-<figure class='code'><figcaption><span>app.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">&#39;ngdemo&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="p">.</span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;$httpProvider&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">$httpProvider</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// ...</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// delete header from client:</span>
-</span><span class='line'>        <span class="c1">// http://stackoverflow.com/questions/17289195/angularjs-post-data-to-external-rest-api</span>
-</span><span class='line'>        <span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">useXDomain</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span><span class='line'>        <span class="k">delete</span> <span class="nx">$httpProvider</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">common</span><span class="p">[</span><span class="s1">&#39;X-Requested-With&#39;</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}]);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Source code for this post</h2>
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
-</span><span class='line'><span class="nb">cd </span>angulardemorestful
-</span><span class='line'>git checkout -f step5-split-frontend-backend-cors
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors">https://github.com/draptik/angulardemorestful/releases/tag/step5-split-frontend-backend-cors</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3450,6 +3485,10 @@ The following example demonstrates <del>both approaches</del> this.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
@@ -3463,10 +3502,6 @@ The following example demonstrates <del>both approaches</del> this.</p>
     
       <li class="post">
         <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/21/link-collection-number-4/">Link Collection #4</a>
       </li>
     
   </ul>

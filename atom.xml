@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-03-04T01:23:58+01:00</updated>
+  <updated>2016-05-11T21:44:59+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,326 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Testing That Different Objects Have the Same Properties]]></title>
+    <link href="http://draptik.github.io/blog/2016/05/09/testing-objects-have-same-properties/"/>
+    <updated>2016-05-09T19:25:17+02:00</updated>
+    <id>http://draptik.github.io/blog/2016/05/09/testing-objects-have-same-properties</id>
+    <content type="html"><![CDATA[<p>Sometimes you want to ensure that 2 unrelated objects share a set of properties &mdash; without using an interface.</p>
+
+<p>Here is an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First thought for C# developers: <a href="http://automapper.org/">AutoMapper</a></p>
+
+<p>Let&rsquo;s do that:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">AutoMapper</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyMapping</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">static</span> <span class="n">IMapper</span> <span class="n">Mapper</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Init</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">cfg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MapperConfiguration</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">x</span><span class="p">.</span><span class="n">CreateMap</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;();</span>
+</span><span class='line'>            <span class="p">});</span>
+</span><span class='line'>            <span class="n">Mapper</span> <span class="p">=</span> <span class="n">cfg</span><span class="p">.</span><span class="n">CreateMapper</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can write a unit test to see if we can convert a Customer to a Person:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">SomeTests</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'><span class="na">        [Fact]</span>
+</span><span class='line'>        <span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person</span><span class="p">()</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// Arrange</span>
+</span><span class='line'>            <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>                <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>            <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Act</span>
+</span><span class='line'>            <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// Assert</span>
+</span><span class='line'>            <span class="n">person</span><span class="p">.</span><span class="n">FirstName</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">firstname</span><span class="p">);</span>
+</span><span class='line'>            <span class="n">person</span><span class="p">.</span><span class="n">LastName</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="n">lastname</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>  
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This test passes.</p>
+
+<p>But what happens when we want to ensure that a new Customer property (for example <code>Email</code>) is reflected in the Person object?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">Demo</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">Email</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// &lt;-- new property</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>        <span class="k">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Our unit test still passes. &#9785;</p>
+
+<p><strong>Wouldn&rsquo;t it be nice to have our unit test fail if the classes are not in sync?</strong></p>
+
+<p>Here is where <a href="http://www.fluentassertions.com/">FluentAssertions</a> <code>ShouldBeEquivalentTo</code> comes in handy:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[Fact]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person_With_CurrentProperties</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Arrange</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Act</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="n">person</span><span class="p">.</span><span class="n">ShouldBeEquivalentTo</span><span class="p">(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://draptik.github.io/images/posts/dotnet/equivalentto_result.png"></p>
+
+<p><code>Subject has a member  Email that the other object does not have.</code></p>
+
+<p>Cool: This is the kind of message I want to have from a unit test!</p>
+
+<p><code>ShouldBeEquivalentTo</code> also takes an optional Lambda expression in case you need more fine grained control which properties are included in the comparison. Here is an example where we exlude the <code>Email</code> property on purpose:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
+</span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="na">[Fact]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">Given_Customer_Should_ConvertTo_Person_With_CurrentProperties_Excluding_Email</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">//Arrange</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">firstname</span> <span class="p">=</span> <span class="s">&quot;foo&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">const</span> <span class="kt">string</span> <span class="n">lastname</span> <span class="p">=</span> <span class="s">&quot;bar&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Act</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">person</span> <span class="p">=</span> <span class="n">MyMapping</span><span class="p">.</span><span class="n">Mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Customer</span><span class="p">,</span> <span class="n">Person</span><span class="p">&gt;(</span><span class="n">customer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="n">customer</span><span class="p">.</span><span class="n">ShouldBeEquivalentTo</span><span class="p">(</span><span class="n">person</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">options</span> <span class="p">=&gt;</span>
+</span><span class='line'>            <span class="n">options</span><span class="p">.</span><span class="n">Excluding</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Email</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This test passes.</p>
+
+<p>The complete documentation for FluentAssertions&#8217; <code>ShouldBeEquivalentTo</code> method can be found <a href="https://github.com/dennisdoomen/fluentassertions/wiki#object-graph-comparison">here</a>.</p>
+
+<h2>Source code for this post</h2>
+
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/blog-demo-shouldbeequivalentto">https://github.com/draptik/blog-demo-shouldbeequivalentto</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone https://github.com/draptik/blog-demo-shouldbeequivalentto.git
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)]]></title>
@@ -5220,140 +5540,6 @@ Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
 <h2>MySQL Backup (optional)</h2>
 
 <p>A bit overkill, but I also backup the MySQL Database from the <code>RPi-Server</code> to my NAS using <a href="http://sourceforge.net/projects/automysqlbackup/">automysqlbackup</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mapping Missing Context Menu in OpenELEC With Remote Control HAMA MCE]]></title>
-    <link href="http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/"/>
-    <updated>2013-05-24T21:27:00+02:00</updated>
-    <id>http://draptik.github.io/blog/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce</id>
-    <content type="html"><![CDATA[<p><img class="right" src="http://draptik.github.io/images/posts/Hama_mce_remote.jpg" width="150" height="150" title="Remote control HAMA MCE" alt="Remote control HAMA MCE">
-The IR remote control <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> works out of the box with <a href="http://xbmc.org">XBMC</a>. Except that XBMC&rsquo;s context menu is not mapped to any key.</p>
-
-<p>An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent <a href="https://play.google.com/store/apps/details?id=org.leetzone.android.yatsewidgetfree&amp;hl=en">Yatse app</a>.</p>
-
-<h2>Setup</h2>
-
-<ul>
-<li><a href="http://en.wikipedia.org/wiki/Raspberry_Pi">Raspberry Pi</a> with <a href="http://www.openelec.tv/">OpenELEC</a></li>
-<li>Remote control: <a href="http://www.amazon.de/Hama-MCE-Remote-Control-PC-Fernbedienung/dp/B000X1EL4W/ref%3Dsr_1_1?ie%3DUTF8&amp;amp;qid%3D1363942117&amp;amp;sr%3D8-1">HAMA MCE</a> (~20EUR)</li>
-</ul>
-
-
-<h2>Problem</h2>
-
-<p>Remote control does not have a key which is mapped to the context menu.</p>
-
-<h2>For the impatient</h2>
-
-<ul>
-<li>Login to your Raspberry Pi with SSH</li>
-<li>Create file <code>/storage/.xbmc/userdata/Lircmap.xml</code>.</li>
-<li>Add following content:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>/storage/.xbmc/userdata/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>  <span class="nt">&lt;lircmap&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;remote</span> <span class="na">device=</span><span class="s">&quot;devinput&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;title&gt;</span>KEY_INFO<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/remote&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/lircmap&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Restart Raspberry Pi</li>
-</ul>
-
-
-<h2>Solution</h2>
-
-<h3>File locations</h3>
-
-<ul>
-<li>OpenELEC’s system location for keymap related configs are located here: <code>/usr/share/xbmc/system/</code> (I found this information in the <a href="http://openelec.tv/forum/103-infared-remotes/37369-why-is-the-lircmap-xml-in-read-only-mode#37369">openelec forum</a>)</li>
-<li>System default keymaps folder: <code>/usr/share/xbmc/system/keymaps/</code></li>
-<li>System default Lircmap.xml: <code>/usr/share/xbmc/system/Lircmap.xml</code></li>
-<li>Root user’s keymaps folder (empty by default): <code>/storage/.xbmc/userdata/keymaps/</code></li>
-<li>Root user’s Lircmap.xml does not exist by default. It has to be created: <code>/storage/.xbmc/userdata/Lircmap.xml</code></li>
-</ul>
-
-
-<h3>Workflow</h3>
-
-<h4>Get device name and name of desired button on remote control (‘irw’)</h4>
-
-<ul>
-<li>Adapted from <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">Guide To Test a Remote and Remap Keys</a></li>
-<li>Login via SSH</li>
-<li>Type command <code>irw</code></li>
-<li>Press the button on remote control where you would like to map the context menu (I pressed the button with the ‘right mouse click’ symbol). This will output something like:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>root# irw
-</span><span class='line'>17b 0 KEY_INFO devinput
-</span><span class='line'>17b 0 KEY_INFO_UP devinput
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>KEY_INFO</code> is the <strong>key name</strong>, <code>devinput</code> is the <strong>device name</strong>.</p>
-
-<p>The next sentence in the <a href="http://wiki.openelec.tv/index.php?title=Guide_To_Test_a_Remote_and_Remap_Keys">guide</a> was not clear to me (<em>userdata SMB share</em> is <code>/usr/share/xbmc/system/</code>…):</p>
-
-<blockquote><p>Make sure you have a proper remote.xml in your keymaps folder which is inside your userdata SMB share (or located at /storage/.xbmc/userdata/keymaps/remote.xml)</p></blockquote>
-
-<p>With OpenELEC the location of <em>userdata SMB share</em> is <code>/usr/share/xbmc/system/Lircmap.xml</code>.</p>
-
-<h4>Get function name for context menu</h4>
-
-<p>The function name can be read from <code>/usr/share/xbmc/system/Lircmap.xml</code>. Search for <code>ContextMenu</code>. This should look like:</p>
-
-<figure class='code'><figcaption><span>/usr/share/xbmc/system/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
-</span><span class='line'><span class="nt">&lt;title&gt;</span>ContextMenu<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The function name for context menu is <code>title</code>.</p>
-
-<h4>Create customized Lircmap.xml</h4>
-
-<p>Create <code>/storage/.xbmc/userdata/Lircmap.xml</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nano /storage/.xbmc/userdata/Lircmap.xml
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and add the following content (adapt to your needs):</p>
-
-<figure class='code'><figcaption><span>/storage/.xbmc/userdata/Lircmap.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;lircmap&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;remote</span> <span class="na">device=</span><span class="s">”devinput”</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;title&gt;</span>KEY_INFO<span class="nt">&lt;/title&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/remote&gt;</span>
-</span><span class='line'><span class="nt">&lt;/lircmap&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That’s it. Restart Raspberry Pi and the context menu should now work.</p>
 ]]></content>
   </entry>
   
