@@ -324,6 +324,7 @@
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
+<span class='line-number'>25</span>
 </pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
 </span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
 </span><span class='line'>
@@ -337,7 +338,8 @@
 </span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Email</span> <span class="p">=</span> <span class="s">&quot;foo@bar.com&quot;</span>
 </span><span class='line'>    <span class="p">};</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
@@ -385,6 +387,7 @@
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
+<span class='line-number'>27</span>
 </pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">using</span> <span class="nn">FluentAssertions</span><span class="p">;</span>
 </span><span class='line'><span class="k">using</span> <span class="nn">Xunit</span><span class="p">;</span>
 </span><span class='line'>
@@ -398,7 +401,8 @@
 </span><span class='line'>    <span class="kt">var</span> <span class="n">customer</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Customer</span>
 </span><span class='line'>    <span class="p">{</span>
 </span><span class='line'>        <span class="n">FirstName</span> <span class="p">=</span> <span class="n">firstname</span><span class="p">,</span>
-</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span>
+</span><span class='line'>        <span class="n">LastName</span> <span class="p">=</span> <span class="n">lastname</span><span class="p">,</span>
+</span><span class='line'>        <span class="n">Email</span> <span class="p">=</span> <span class="s">&quot;foo@bar.com&quot;</span>
 </span><span class='line'>    <span class="p">};</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">MyMapping</span><span class="p">.</span><span class="n">Init</span><span class="p">();</span>
