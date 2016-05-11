@@ -135,7 +135,7 @@ public void Given_Customer_Should_ConvertTo_Person_With_CurrentProperties()
     var person = MyMapping.Mapper.Map<Customer, Person>(customer);
 
     // Assert
-    person.ShouldBeEquivalentTo(customer);
+    customer.ShouldBeEquivalentTo(person);
 }
 ```
 
