@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-05-11T21:44:59+02:00</updated>
+  <updated>2016-05-11T22:25:13+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -161,7 +161,7 @@ MyMapping.Init();
 var person = MyMapping.Mapper.Map&lt;Customer, Person&gt;(customer);
 
 // Assert
-person.ShouldBeEquivalentTo(customer);
+customer.ShouldBeEquivalentTo(person);
 </code></pre>
 
 <p>}
