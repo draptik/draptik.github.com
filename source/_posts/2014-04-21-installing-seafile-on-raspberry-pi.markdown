@@ -53,7 +53,7 @@ Install dependencies required by Seafile:
 
 For security reasons we'll create a separate user for running Seafile. The user will be called `seafile` and will not require a password, since we will never be accessing this user directly through SSH.
 
-`$ sudo adduser seafile --disabled-password`
+`$ sudo adduser seafile --disabled-login` (CHANGE 2016-09-14 the parameter `--disable-password` was a typo: Thanks to Raphi111 for the pointer)
 
 Switch to being `seafile` user:
 
