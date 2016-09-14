@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-05-11T22:43:40+02:00</updated>
+  <updated>2016-09-15T00:05:56+02:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -43,10 +43,10 @@ It comes down to installing <a href="https://wiki.archlinux.org/index.php/Python
 
 <p><div><script src='https://gist.github.com/5638602.js'></script>
 <noscript><pre><code># pacman -S python-virtualenvwrapper
-$ echo &#39;WORKON_HOME=$HOME/.virtualenvs&#39; &gt;&gt; ~/.bashrc
+$ echo 'WORKON_HOME=$HOME/.virtualenvs' &gt;&gt; ~/.bashrc
 $ . ~/.bashrc
 $ mkdir -p $WORKON_HOME
-$ echo &#39;source /usr/bin/virtualenvwrapper.sh&#39; &gt; ~/.bashrc
+$ echo 'source /usr/bin/virtualenvwrapper.sh' &gt; ~/.bashrc
 $ . ~/.bashrc
 $ mkvirtualenv -p python2.7 --distribute blog_env</code></pre></noscript></div>
 </p>

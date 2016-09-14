@@ -155,7 +155,7 @@
 
 <p>For security reasons we&rsquo;ll create a separate user for running Seafile. The user will be called <code>seafile</code> and will not require a password, since we will never be accessing this user directly through SSH.</p>
 
-<p><code>$ sudo adduser seafile --disabled-password</code></p>
+<p><code>$ sudo adduser seafile --disabled-login</code> (CHANGE 2016-09-14 the parameter <code>--disable-password</code> was a typo: Thanks to Raphi111 for the pointer)</p>
 
 <p>Switch to being <code>seafile</code> user:</p>
 
