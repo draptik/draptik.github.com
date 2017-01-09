@@ -9,13 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Sometimes you want to ensure that 2 unrelated objects share a set of properties &mdash; without using an interface. Here is an example: 1
-2
-3
-4
-5
-6
-7 &hellip;">
+  <meta name="description" content="Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders: autocd
+autojump Neither of these features is new. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +80,132 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/10/bash-tricks/">Bash Tricks</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-10T00:22:02+01:00" pubdate data-updated="true">Jan 10<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:</p>
+
+<ul>
+<li><code>autocd</code></li>
+<li><code>autojump</code></li>
+</ul>
+
+
+<p>Neither of these features is new.</p>
+
+<h2>autocd</h2>
+
+<p><code>autocd</code> is very simple: It&rsquo;s a built-in bash feature which prepends <code>cd</code> in case you enter a valid path.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /etc
+</span><span class='line'><span class="nv">$ </span>/etc <span class="c"># the same</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Setup</h3>
+
+<p>Add this to your <code>~/.bashrc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">shopt</span> -s autocd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autojump</h2>
+
+<blockquote><p>A cd command that learns &ndash; easily navigate directories from the command line</p></blockquote>
+
+<p>Directly from the source at <a href="https://github.com/wting/autojump">autojump</a>:</p>
+
+<p>Usage:</p>
+
+<p><code>j</code> is a convenience wrapper function around <code>autojump</code>. Any option that can be used with <code>autojump</code> can be used with <code>j</code> and vice versa.</p>
+
+<p>Jump To A Directory That Contains <code>foo</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>j foo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jump To A Child Directory:</p>
+
+<p>Sometimes it&rsquo;s convenient to jump to a child directory (sub-directory of current directory) rather than typing out the full name.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jc bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open File Manager To Directories (instead of jumping):</p>
+
+<p>Instead of jumping to a directory, you can open a file explorer window (Mac Finder, Windows Explorer, GNOME Nautilus, etc.) to the directory instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jo music
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Opening a file manager to a child directory is also supported:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jco images
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using Multiple Arguments:</p>
+
+<p>Let&rsquo;s assume the following database:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>30   /home/user/mail/inbox
+</span><span class='line'>10   /home/user/work/inbox
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>j</code> in would jump into <code>/home/user/mail/inbox</code> as the higher weighted entry. However you can pass multiple arguments to <code>autojump</code> to prefer a different entry. In the above example, <code>j w in</code> would then change directory to <code>/home/user/work/inbox</code>.</p>
+
+<p>For more options refer to help:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>autojump --help
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3429,51 +3550,6 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/16/link-collection-2/">Link Collection #2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-16T21:58:00+02:00" pubdate data-updated="true">Sep 16<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I attended the <a href="http://www.herbstcampus.de/">Herbstcampus 2013</a> this month. As usual, a very good conference.</p>
-
-<p>Here is some fun stuff I learned:</p>
-
-<ul>
-<li><a href="http://nancyfx.org/">NancyFx</a> is to <a href="http://www.asp.net/">ASP.NET</a> as <a href="http://www.sinatrarb.com/">Sinatra</a> is to <a href="http://rubyonrails.org/">Ruby-on-Rails</a>.</li>
-<li><a href="https://github.com/markrendle/Simple.Data">Simple.Data</a> is a leightweight, convention-based database access abstraction for prototyping</li>
-<li><a href="http://signalr.net/">SignalR</a> is cool</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3487,6 +3563,10 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/10/bash-tricks/">Bash Tricks</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
@@ -3504,10 +3584,6 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
         <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 1: Hardware)</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2014/07/18/dot-net-backend-providing-rest/">.NET Backend Providing REST</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -3517,7 +3593,7 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2009 - 2016 - Patrick Drechsler  
+  Copyright &copy; 2009 - 2017 - Patrick Drechsler  
 </p>
 
 </footer>

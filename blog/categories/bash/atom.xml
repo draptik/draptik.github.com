@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bash | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2017-01-10T00:29:24+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bash tricks]]></title>
+    <link href="http://draptik.github.io/blog/2017/01/10/bash-tricks/"/>
+    <updated>2017-01-10T00:22:02+01:00</updated>
+    <id>http://draptik.github.io/blog/2017/01/10/bash-tricks</id>
+    <content type="html"><![CDATA[<p>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:</p>
+
+<ul>
+<li><code>autocd</code></li>
+<li><code>autojump</code></li>
+</ul>
+
+
+<p>Neither of these features is new.</p>
+
+<h2>autocd</h2>
+
+<p><code>autocd</code> is very simple: It&rsquo;s a built-in bash feature which prepends <code>cd</code> in case you enter a valid path.</p>
+
+<p><code>bash
+$ cd /etc
+$ /etc # the same
+</code></p>
+
+<h3>Setup</h3>
+
+<p>Add this to your <code>~/.bashrc</code>:
+<code>bash
+shopt -s autocd
+</code></p>
+
+<h2>autojump</h2>
+
+<blockquote><p>A cd command that learns &ndash; easily navigate directories from the command line</p></blockquote>
+
+<p>Directly from the source at <a href="https://github.com/wting/autojump">autojump</a>:</p>
+
+<p>Usage:</p>
+
+<p><code>j</code> is a convenience wrapper function around <code>autojump</code>. Any option that can be used with <code>autojump</code> can be used with <code>j</code> and vice versa.</p>
+
+<p>Jump To A Directory That Contains <code>foo</code>:</p>
+
+<p><code>bash
+j foo
+</code></p>
+
+<p>Jump To A Child Directory:</p>
+
+<p>Sometimes it&rsquo;s convenient to jump to a child directory (sub-directory of current directory) rather than typing out the full name.
+<code>bash
+jc bar
+</code>
+Open File Manager To Directories (instead of jumping):</p>
+
+<p>Instead of jumping to a directory, you can open a file explorer window (Mac Finder, Windows Explorer, GNOME Nautilus, etc.) to the directory instead.
+<code>bash
+jo music
+</code>
+Opening a file manager to a child directory is also supported:
+<code>bash
+jco images
+</code>
+Using Multiple Arguments:</p>
+
+<p>Let&rsquo;s assume the following database:
+<code>bash
+30   /home/user/mail/inbox
+10   /home/user/work/inbox
+</code>
+<code>j</code> in would jump into <code>/home/user/mail/inbox</code> as the higher weighted entry. However you can pass multiple arguments to <code>autojump</code> to prefer a different entry. In the above example, <code>j w in</code> would then change directory to <code>/home/user/work/inbox</code>.</p>
+
+<p>For more options refer to help:
+<code>bash
+autojump --help
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

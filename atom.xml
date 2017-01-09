@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2016-09-15T00:05:56+02:00</updated>
+  <updated>2017-01-10T00:29:24+01:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Bash Tricks]]></title>
+    <link href="http://draptik.github.io/blog/2017/01/10/bash-tricks/"/>
+    <updated>2017-01-10T00:22:02+01:00</updated>
+    <id>http://draptik.github.io/blog/2017/01/10/bash-tricks</id>
+    <content type="html"><![CDATA[<p>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:</p>
+
+<ul>
+<li><code>autocd</code></li>
+<li><code>autojump</code></li>
+</ul>
+
+
+<p>Neither of these features is new.</p>
+
+<h2>autocd</h2>
+
+<p><code>autocd</code> is very simple: It&rsquo;s a built-in bash feature which prepends <code>cd</code> in case you enter a valid path.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /etc
+</span><span class='line'><span class="nv">$ </span>/etc <span class="c"># the same</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Setup</h3>
+
+<p>Add this to your <code>~/.bashrc</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">shopt</span> -s autocd
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>autojump</h2>
+
+<blockquote><p>A cd command that learns &ndash; easily navigate directories from the command line</p></blockquote>
+
+<p>Directly from the source at <a href="https://github.com/wting/autojump">autojump</a>:</p>
+
+<p>Usage:</p>
+
+<p><code>j</code> is a convenience wrapper function around <code>autojump</code>. Any option that can be used with <code>autojump</code> can be used with <code>j</code> and vice versa.</p>
+
+<p>Jump To A Directory That Contains <code>foo</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>j foo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Jump To A Child Directory:</p>
+
+<p>Sometimes it&rsquo;s convenient to jump to a child directory (sub-directory of current directory) rather than typing out the full name.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jc bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open File Manager To Directories (instead of jumping):</p>
+
+<p>Instead of jumping to a directory, you can open a file explorer window (Mac Finder, Windows Explorer, GNOME Nautilus, etc.) to the directory instead.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jo music
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Opening a file manager to a child directory is also supported:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jco images
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using Multiple Arguments:</p>
+
+<p>Let&rsquo;s assume the following database:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>30   /home/user/mail/inbox
+</span><span class='line'>10   /home/user/work/inbox
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>j</code> in would jump into <code>/home/user/mail/inbox</code> as the higher weighted entry. However you can pass multiple arguments to <code>autojump</code> to prefer a different entry. In the above example, <code>j w in</code> would then change directory to <code>/home/user/work/inbox</code>.</p>
+
+<p>For more options refer to help:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>autojump --help
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Testing That Different Objects Have the Same Properties]]></title>
@@ -5408,142 +5507,6 @@ provides drag and drop functionality within a list.</p>
 <p>You will have to install CUPS and SAMBA on your Raspberry Pi.</p>
 
 <p>Once your done you can access the printer from any OS (windows, linux, mac) within your network.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RPi/XBMC: Keeping Content in Sync]]></title>
-    <link href="http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync/"/>
-    <updated>2013-05-25T19:24:00+02:00</updated>
-    <id>http://draptik.github.io/blog/2013/05/25/rpi-xbmc-sync</id>
-    <content type="html"><![CDATA[<p>If you have multiple <a href="http://www.raspberrypi.org/">Rasperry Pi</a>/<a href="http://xbmc.org/">XBMC</a> clients and want to</p>
-
-<ul>
-<li>keep your &ldquo;history&rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume)</li>
-<li>do not want to individually update every RPi/XBMC client if the content of your data storage changes</li>
-</ul>
-
-
-<p>then this post might be for you.</p>
-
-<p><a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL">The XBMC Wiki decribes this in detail</a>.
-This post just describes an actual implementation using Raspberry Pi clients and server.</p>
-
-<p>To do this you will need a MySQL database on a machine in your network which is always accessible from your Raspberry Pi/XBMC clients (called <code>RPI-Client</code> from now on).
-Since I didn&rsquo;t have a machine like this in my network I decided to buy another RPi for this purpose (referred to as <code>RPi-Server</code> from now on).</p>
-
-<p><strong>The content of the MySQL database only contains metadata for each entry, not the actual data</strong> (information like (a) the file path and (b) the last timestamp within the movie you were watching).</p>
-
-<p>Here is a diagram showing my network setup for two Rasperry Pi clients running XBMC:</p>
-
-<figure class='code'><figcaption><span>network</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>+---+
-</span><span class='line'>|   |   |---------------------------------|
-</span><span class='line'>|   |---| RPi-Client-1 <span class="o">(</span>XBMC living room<span class="o">)</span> |
-</span><span class='line'>|   |   |---------------------------------|
-</span><span class='line'>|   |
-</span><span class='line'>| L |   |------------------------------|
-</span><span class='line'>| A |---| RPi-Client-2 <span class="o">(</span>XBMC bed room<span class="o">)</span> |
-</span><span class='line'>| N |   |------------------------------|
-</span><span class='line'>|   |
-</span><span class='line'>|   |   |-----------------------|
-</span><span class='line'>|   |---| RPi-Server <span class="o">(</span>Raspbian<span class="o">)</span> |
-</span><span class='line'>|   |   |-----------------------|
-</span><span class='line'>|   |
-</span><span class='line'>|   |   |-----|
-</span><span class='line'>|   |---| NAS |
-</span><span class='line'>|   |   |-----|
-</span><span class='line'>+---+
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>The clients <code>RPi-Client-X</code> are default <a href="http://openelec.tv/">OpenELEC</a> installations.</li>
-<li>The server <code>RPi-Server</code> is a default <a href="http://www.raspbian.org/">Raspbian</a> installation.</li>
-</ul>
-
-
-<h2>RPi-Server Setup</h2>
-
-<p>The <code>RPi-Server</code> has to provide a MySQL database which can be accessed from each <code>RPi-Client-X</code>.
-Just follow the <a href="http://wiki.xbmc.org/index.php?title=HOW-TO:Share_libraries_using_MySQL/Setting_up_MySQL">simple setup instructions on the XBMC-Wiki</a>.</p>
-
-<p>This is how you can check the status of your MySQL server:</p>
-
-<p><code>
-rpi-server$ sudo /etc/init.d/mysql status
-</code></p>
-
-<h2>RPi-Client Setup</h2>
-
-<p>Each <code>RPi-Client-X</code> needs to be configured to use the <code>RPi-Server</code> database.</p>
-
-<p><code>RPi-Server: 192.168.179.36</code></p>
-
-<figure class='code'><figcaption><span>advancedsettings.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;advancedsettings&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;videodatabase&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;type&gt;</span>mysql<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;host&gt;</span>192.168.179.36<span class="nt">&lt;/host&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;port&gt;</span>3306<span class="nt">&lt;/port&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;user&gt;</span>xbmc<span class="nt">&lt;/user&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;pass&gt;</span>xbmc<span class="nt">&lt;/pass&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/videodatabase&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;musicdatabase&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;type&gt;</span>mysql<span class="nt">&lt;/type&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;host&gt;</span>192.168.179.36<span class="nt">&lt;/host&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;port&gt;</span>3306<span class="nt">&lt;/port&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;user&gt;</span>xbmc<span class="nt">&lt;/user&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;pass&gt;</span>xbmc<span class="nt">&lt;/pass&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/musicdatabase&gt;</span>
-</span><span class='line'><span class="nt">&lt;/advancedsettings&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note:
-The location of the file <code>advancedsettings.xml</code> might very depending on your XBMC installation.
-For OpenELEC the file is located at <code>/storage/.xbmc/userdata/advancedsettings.xml</code>.</p>
-
-<h2>XBMC Library Update (optional)</h2>
-
-<p>Once the above setup works you can install the <a href="http://wiki.xbmc.org/index.php?title=Add-on:XBMC_Library_Auto_Update">XBMC Addon:Library Auto Update</a>.
-This plugin provides a GUI to setup a cron job to sync the content your <code>RPi-Client-X</code> has acces to (i.e. your NAS) with your MySQL database.
-Just install it on <em>one</em> of your <code>RPi-Client-X</code>.</p>
-
-<h2>MySQL Backup (optional)</h2>
-
-<p>A bit overkill, but I also backup the MySQL Database from the <code>RPi-Server</code> to my NAS using <a href="http://sourceforge.net/projects/automysqlbackup/">automysqlbackup</a>.</p>
 ]]></content>
   </entry>
   
