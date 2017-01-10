@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pi Hole - Simple Ad Blocker for Your Network - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-65991503-1']);
+	_gaq.push(['_setDomainName','github.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Pi Hole - Simple Ad Blocker for Your Network</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-11T00:01:24+01:00" pubdate data-updated="true">Jan 11<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. <a href="https://en.wikipedia.org/wiki/Troy_Hunt">Troy Hunt</a> recently wrote a <a href="https://www.troyhunt.com/ad-blockers-are-part-of-the-problem/">nice post on the subject</a>.</p>
+
+<p>Most <strong>desktop browsers</strong> provide &ldquo;ad blockers&rdquo; as plugins. These plugins normally also have configurable whitelists (whitelist: a list of sites exluded from being blocked) &#8212; which you should use for those sites which (a) provide high quality content and (b) rely on advertisements for a living.</p>
+
+<p>Other devices in our home network also communicate with the web:</p>
+
+<ul>
+<li>cell/smart phones (f.ex. iPhone, Android)</li>
+<li>smart TVs (f.ex. <a href="https://www.cnet.com/news/samsungs-warning-our-smart-tvs-record-your-living-room-chatter/">Samsung</a>)</li>
+<li>and all those new IoT devices (IoT: Internet of Things): those &ldquo;smart&rdquo; home automation devices that communicate with &ldquo;the cloud&rdquo; and your &ldquo;smart phone&rdquo;</li>
+</ul>
+
+
+<p>We can&rsquo;t install &ldquo;ad blockers&rdquo; on these devices.</p>
+
+<p>Here is where <a href="https://github.com/pi-hole/pi-hole">Pi Hole</a> comes into play: We can plug a Raspberry Pi straight into our router!</p>
+
+<p>My experience:</p>
+
+<p>On my phone (an old Galaxy-S4) web pages load a <strong>hell of a lot faster</strong> when I&rsquo;m in my home network compared to outside of my home network.</p>
+
+<p>The Pi Hole web interface looks like this:</p>
+
+<p><img src="/images/posts/pi-hole/screenshot-pi-hole-25-percent-blocked-requests.png"></p>
+
+<p>As you can see in the screenshot: ~20% traffic is blocked (!) and you can configure whitelists just like with those browser plugins. <strong>Nobody in my household noticed that 20% traffic was blocked</strong>.</p>
+
+<p>Installing the software on your Raspberry Pi is straightforward: Just follow the instructions on the <a href="https://github.com/pi-hole/pi-hole">Pi Hole</a> website.</p>
+
+<p>Configuring your router is another beast: OpenWRT and DD-WRT router instructions are available (<a href="https://www.youtube.com/watch?v=TzFLJqUeirA">example &ndash; short youtube promo</a>).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-01-11T00:01:24+01:00" pubdate data-updated="true">Jan 11<span>th</span>, 2017</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ad-blocker/'>ad blocker</a>, <a class='category' href='/blog/categories/dd-wrt/'>dd-wrt</a>, <a class='category' href='/blog/categories/iot/'>iot</a>, <a class='category' href='/blog/categories/open-wrt/'>open-wrt</a>, <a class='category' href='/blog/categories/pi-hole/'>pi hole</a>, <a class='category' href='/blog/categories/raspberry-pi/'>raspberry pi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/01/10/bash-tricks/" title="Previous Post: Bash tricks">&laquo; Bash tricks</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/">Pi Hole - Simple Ad Blocker for Your Network</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/10/bash-tricks/">Bash Tricks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2017 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/';
+        var disqus_url = 'http://draptik.github.io/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
