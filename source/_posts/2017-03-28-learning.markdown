@@ -1,0 +1,82 @@
+---
+layout: post
+title: "Learning by meeting people"
+date: 2017-03-28 17:01:33 +0000
+comments: true
+categories: [java, jvm, consul, ribbon, hystrix, graphite, elk, scala, mocking, arduino, learning, people, laerning]
+---
+In my day job I'm a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight) and visiting conferences. Lately I started to expand my horizon by meeting people face to face. This turned out to be very rewarding.
+
+These kind of meetups, which often take place in your spare time, are a very efficient way of learning to think outside the box. Meeting other developers in person -- in an informal setting -- enables me to interact directly: Asking questions, as soon as they pop into my mind (Everything from "Stop, what was that keyboard shortcut?" to "Stop, I did not understand what a monad is").
+
+Here is a short resume of some the meetings I've been to in the last couple of weeks.
+
+### Softwerkskammer - Mocking Frameworks
+
+[https://www.softwerkskammer.org/](https://www.softwerkskammer.org/)
+
+- Open for all: yes
+- Audience: Software developers (PHP, Java, .NET, Ruby, Python)
+- Audience size: 10-15
+- Time: 3h
+- Action: Code Kata
+
+I learned: [Object Calistenics](https://gist.github.com/bobuss/6534934); cool and simple kata; Cool croud!
+
+### Make Night - Arduino 101
+
+[Health Hackers Erlangen](https://www.meetup.com/de-DE/HealthhackersER/)
+
+- Open for all: yes
+- Audience: Nice mix of medical researchers, a few physicists, some software developers
+- Audience size: ~20
+- Time: 3h
+- Action: Arduino basics with different sensors, organizer provided kits for everybody
+
+I learned: The organizers want to accomplish something. Real medical research supported by "hackers" (RPi, Arduino, etc). Very interdisciplinary! 
+
+### JUG Nuernberg - Dropwizard
+
+[JUG Nuernberg](http://www.jug-n.de/)
+
+- Open for all: yes
+- Audience: Software developers
+- Audience size: ~10
+- Time: 2h
+- Action: presentation & discussion
+
+I learned:  Wow, very impressive framework. I was really fascinated by the so called devops features (healthchecks, logging, etc)! Wish there was something similar in .NET!
+
+### Hackerkegeln DATEV - Scala Kata
+
+- Open for all: no (internal company event)
+- Audience: Software developers (C/C++, JS, Java, .NET, COBOL, etc)
+- Audience size: ~10
+- Time: 4h
+- Action: interactive Kata in Scala
+
+I learned: Scala is a cool language! Learned pattern matching (now also available in C# 7). Very relaxed audience ;-)
+
+Thanks to Latti for the invitation!
+
+### MATHEMA Freitag - Microservices
+
+- Open for all: no (internal company event)
+- Audience: Software developers
+- Audience size: ~20
+- Time: 6h
+- Action: presentations, discussions, interactive microservice setup
+
+I learned: incredible cool tooling: Consul, Ribbon, Hystrix, Graphite, ELK
+
+## How to act
+
+First time at such an event? Ask a lot of questions. It might be that you are the expert! If not: you are likely to find an expert. Or somebody will point you to a local expert. Basically you can not do anything wrong at these meetings, other than not voicing your opinion.
+
+## How to find meetings in your area
+
+- google `<your technology>` `user group <your town>` for example `java` `user group london`
+- Meetup is a plattform for meeting people face to face. Try it: https://www.meetup.com/
+- google `Software Craftsmanship <your town>`
+- Germany: [Softwerkskammer](https://www.softwerkskammer.org/)
+- google `Unconference` or `BarCamp` in `<your town>`
