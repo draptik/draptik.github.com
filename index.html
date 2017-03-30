@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a &hellip;">
+  <meta name="description" content="I have been watching the docker space for a while and finally found a private use-case: This blog uses Octopress, which is a ruby-based convenience- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,387 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/11/docker-and-octopress/">Docker and Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2017-02-11T23:51:01+01:00" pubdate data-updated="true">Feb 11<span>th</span>, 2017</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have been watching the <a href="https://www.docker.com/">docker</a> space for a while and finally found a private use-case:</p>
+
+<p>This blog uses <a href="http://octopress.org/">Octopress</a>, which is a ruby-based convenience-wrapper around Jekyll.
+<a href="https://jekyllrb.com/">Jekyll</a> is a static web-site generator provided by <a href="https://github.com/jekyll/jekyll">GitHub</a>.
+Octopress currently (2017-02) requires some old libs: Ruby 1.9.3, Python 2.7, and nodejs.</p>
+
+<p>So, to use Octopress on any machine, I have to either:</p>
+
+<ul>
+<li>use version managers for Ruby, Python and NodeJs (f.ex. <a href="https://rvm.io/"><code>rvm</code></a>, <a href="http://fgimian.github.io/blog/2012/12/08/setting-up-virtual-development-environments-for-python/"><code>virtualenv</code></a>, <a href="https://github.com/creationix/nvm"><code>nvm</code></a>). Works.</li>
+<li>use a virtual machine. Works.</li>
+<li>Or, I could use docker</li>
+</ul>
+
+
+<p>Let&rsquo;s try docker.</p>
+
+<p><strong>My goal was to be able to blog from any machine running docker.</strong></p>
+
+<p>From the birds-eye view:</p>
+
+<ul>
+<li>install a docker image on any machine</li>
+<li>and run a docker container with my blog content mounted as shared folder (so I can edit the content on the host system)</li>
+</ul>
+
+
+<h2>Docker 01: base image</h2>
+
+<p>Since I couldn&rsquo;t find a simple Ruby image of 1.9.3 at docker hub I decided to create my own.</p>
+
+<p>Knowing my use-case (Octopress), I also installed Python2.7 and NodeJs for my <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs/">base docker image</a>.</p>
+
+<p>That was the easy part. Since it is only easy after understanding&hellip; Here is the <code>Dockerfile</code>:</p>
+
+<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM debian:jessie
+</span><span class='line'>
+</span><span class='line'><span class="c"># Get the dependencies for Octopress page generation</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## Notes:</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'><span class="c">## - Python 2.7 is required for using pygments gem.</span>
+</span><span class='line'><span class="c">## - NodeJs is required for execjs Gem</span>
+</span><span class='line'><span class="c">##</span>
+</span><span class='line'>RUN apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    apt-get --no-install-recommends -y install <span class="se">\</span>
+</span><span class='line'>    autoconf <span class="se">\</span>
+</span><span class='line'>    bison <span class="se">\</span>
+</span><span class='line'>    build-essential <span class="se">\</span>
+</span><span class='line'>    libssl-dev <span class="se">\</span>
+</span><span class='line'>    libyaml-dev <span class="se">\</span>
+</span><span class='line'>    locales <span class="se">\</span>
+</span><span class='line'>    libreadline6-dev <span class="se">\</span>
+</span><span class='line'>    zlib1g-dev <span class="se">\</span>
+</span><span class='line'>    libncurses5-dev <span class="se">\</span>
+</span><span class='line'>    libffi-dev <span class="se">\</span>
+</span><span class='line'>    libgdbm3 <span class="se">\</span>
+</span><span class='line'>    libgdbm-dev <span class="se">\</span>
+</span><span class='line'>    nodejs <span class="se">\</span>
+</span><span class='line'>    python2.7 <span class="se">\</span>
+</span><span class='line'>    wget <span class="se">\</span>
+</span><span class='line'>    ca-certificates <span class="se">\</span>
+</span><span class='line'>    curl <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    apt-get clean <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+</span><span class='line'>
+</span><span class='line'><span class="c"># Set LOCALE to UTF8</span>
+</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt; /etc/locale.gen <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    locale-gen en_US.UTF-8 <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    dpkg-reconfigure --frontend<span class="o">=</span>noninteractive locales <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    /usr/sbin/update-locale <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+</span><span class='line'>ENV LANG en_US.UTF-8
+</span><span class='line'>ENV LC_ALL en_US.UTF-8
+</span><span class='line'>
+</span><span class='line'><span class="c"># Install ruby (adopted from https://hub.docker.com/r/liaisonintl/ruby-1.9.3/~/dockerfile/)</span>
+</span><span class='line'>ENV <span class="nv">RUBY_MAJOR</span><span class="o">=</span>1.9 <span class="se">\</span>
+</span><span class='line'>    <span class="nv">RUBY_VERSION</span><span class="o">=</span>1.9.3-p551 <span class="se">\</span>
+</span><span class='line'>    <span class="nv">RUBY_DOWNLOAD_SHA256</span><span class="o">=</span>bb5be55cd1f49c95bb05b6f587701376b53d310eb1bb7c76fbd445a1c75b51e8 <span class="se">\</span>
+</span><span class='line'>    <span class="nv">RUBYGEMS_VERSION</span><span class="o">=</span>2.6.6 <span class="se">\</span>
+</span><span class='line'>    <span class="nv">PATH</span><span class="o">=</span>/usr/local/bundle/bin:<span class="nv">$PATH</span>
+</span><span class='line'>RUN <span class="nb">set</span> -ex <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    curl -SL -o ruby.tar.gz <span class="s2">&quot;http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$RUBY_DOWNLOAD_SHA256 ruby.tar.gz&quot;</span> | sha256sum -c - <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    mkdir -p /usr/src/ruby <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components<span class="o">=</span>1 <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    rm -f ruby.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    <span class="nb">cd</span> /usr/src/ruby <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    autoconf <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    ./configure --disable-install-doc --sysconfdir<span class="o">=</span>/etc/ <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    make <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    make install <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    gem update --system <span class="nv">$RUBYGEMS_VERSION</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+</span><span class='line'>    rm -rf /usr/src/ruby
+</span><span class='line'>
+</span><span class='line'><span class="c"># Create soft link for python</span>
+</span><span class='line'>RUN ln -s /usr/bin/python2.7 /usr/bin/python
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;and the build file (<code>docker run...</code>):</p>
+
+<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>docker build -t draptik/ruby1.9.3-python2.7-nodejs:0.1 .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Docker 02: user</h2>
+
+<p>Here is where things start getting difficult. Sharing a folder from the host system with docker. And keeking permissions/users in sync&hellip;</p>
+
+<h3>Some things to know about sharing a volume in docker</h3>
+
+<p>Sharing data between host and docker container is normally accomplished by <code>docker run -v host-location/folder:container-location/folder</code>. Be aware, though:</p>
+
+<ul>
+<li>The volume will be owned by the container</li>
+<li>The container is root (UID/GID 1)!</li>
+<li>The container will change the UID/GID on the host system!</li>
+</ul>
+
+
+<h3>My workaround</h3>
+
+<p>I found this <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post</a>. In short, the post proposes to use docker&rsquo;s <code>ENTRYPOINT</code> to pipe all <code>RUN</code> commands through the <code>ENTRYPOINT</code>. Which in turn is a bash script, creating a new user, and executing all docker commands as user. This is where I start walking on very thin ice&hellip; Nevertheless, I created another <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs-user/">docker image</a>.</p>
+
+<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM draptik/ruby1.9.3-python2.7-nodejs:0.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># For details see https://denibertovic.com/posts/handling-permissions-with-docker-volumes/</span>
+</span><span class='line'>
+</span><span class='line'>RUN apt-get update <span class="o">&amp;&amp;</span> apt-get -y --no-install-recommends install <span class="se">\</span>
+</span><span class='line'>    ca-certificates <span class="se">\</span>
+</span><span class='line'>    curl
+</span><span class='line'>
+</span><span class='line'>RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+</span><span class='line'>RUN curl -o /usr/local/bin/gosu -SL <span class="s2">&quot;https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture)&quot;</span> <span class="se">\</span>
+</span><span class='line'>    <span class="o">&amp;&amp;</span> curl -o /usr/local/bin/gosu.asc -SL <span class="s2">&quot;https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture).asc&quot;</span> <span class="se">\</span>
+</span><span class='line'>    <span class="o">&amp;&amp;</span> gpg --verify /usr/local/bin/gosu.asc <span class="se">\</span>
+</span><span class='line'>    <span class="o">&amp;&amp;</span> rm /usr/local/bin/gosu.asc <span class="se">\</span>
+</span><span class='line'>    <span class="o">&amp;&amp;</span> chmod +x /usr/local/bin/gosu
+</span><span class='line'>
+</span><span class='line'>COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+</span><span class='line'>
+</span><span class='line'>ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/usr/local/bin/entrypoint.sh&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>entrypoint.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Add local user</span>
+</span><span class='line'><span class="c"># Either use the LOCAL_USER_ID if passed in at runtime or</span>
+</span><span class='line'><span class="c"># fallback</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">USER_ID</span><span class="o">=</span><span class="k">${</span><span class="nv">LOCAL_USER_ID</span><span class="k">:-</span><span class="nv">9001</span><span class="k">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Starting with UID : $USER_ID&quot;</span>
+</span><span class='line'>useradd --shell /bin/bash -u <span class="nv">$USER_ID</span> -o -c <span class="s2">&quot;&quot;</span> -m user
+</span><span class='line'><span class="nb">export </span><span class="nv">HOME</span><span class="o">=</span>/home/user
+</span><span class='line'>
+</span><span class='line'><span class="nb">exec</span> /usr/local/bin/gosu user <span class="s2">&quot;$@&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>docker build -t draptik/ruby1.9.3-python2.7-nodejs-user:0.1 .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Docker 03: octopress</h2>
+
+<p>Because, in addition to mounting the content of my blog, I also mount the blog-engine itself (using <code>docker run -v &lt;orig-location&gt;:&lt;container-location&gt;</code>)
+I also have to execute an initial script within the mounted folder to setup the blog-engine.
+For this purpose I mount another file from the <code>docker run</code> script (<code>post-install.sh</code>), which must be executed from within the container.</p>
+
+<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM draptik/ruby1.9.3-python2.7-nodejs-user:0.1
+</span><span class='line'>
+</span><span class='line'><span class="c"># I am not really sure why this is needed, because we have an ENTRYPOINT in the parent image.</span>
+</span><span class='line'>RUN useradd -ms /bin/bash user
+</span><span class='line'>
+</span><span class='line'><span class="c"># Setup ruby/bundler to work with non-admin user</span>
+</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;gem: --user-install&quot;</span> &gt; /home/user/.gemrc <span class="o">&amp;&amp;</span> chown user:user /home/user/.gemrc
+</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;PATH=\&quot;/home/user/.gem/ruby/1.9.1/bin:$PATH\&quot;&quot;</span> &gt;&gt; /home/user/.bashrc <span class="o">&amp;&amp;</span> chown user:user /home/user/.bashrc
+</span><span class='line'>
+</span><span class='line'>WORKDIR /octopress
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>docker build -t draptik/octopress:0.1 .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The following script starts the docker container:</p>
+
+<figure class='code'><figcaption><span>run-container.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>docker run <span class="se">\</span>
+</span><span class='line'>    --rm <span class="se">\</span>
+</span><span class='line'>    -it <span class="se">\</span>
+</span><span class='line'>    -e <span class="nv">LOCAL_USER_ID</span><span class="o">=</span><span class="sb">`</span>id -u <span class="nv">$USER</span><span class="sb">`</span> <span class="se">\</span>
+</span><span class='line'>    -p 4001:4001 <span class="se">\</span>
+</span><span class='line'>    -v <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/../share/octopress:/octopress <span class="se">\</span>
+</span><span class='line'>    -v <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/post-install.sh:/home/user/post-install.sh <span class="se">\</span>
+</span><span class='line'>    draptik/octopress:0.1 <span class="se">\</span>
+</span><span class='line'>    /bin/bash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the post install script which must be run from within the container:</p>
+
+<figure class='code'><figcaption><span>post-install.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>gem install bundler execjs
+</span><span class='line'>
+</span><span class='line'><span class="nb">cd</span> /octopress
+</span><span class='line'><span class="c"># Important: use `--path...`!</span>
+</span><span class='line'>bundle install --path <span class="nv">$HOME</span>/.gem
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3191,59 +3572,6 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/03/link-collection-number-3/">Link Collection #3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-03T23:30:00+01:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>JavaScript stuff:</p>
-
-<ul>
-<li>Basics of NodeJS and ExpressJS: <a href="http://blog.modulus.io/nodejs-and-express-create-rest-api">REST</a>, <a href="http://blog.modulus.io/nodejs-and-express-basic-authentication">Authentication</a>, <a href="http://blog.modulus.io/nodejs-and-express-sessions">Sessions</a></li>
-<li>Another great tutorial on SPAs: <a href="https://vickev.com/#!/article/authentication-in-single-page-applications-node-js-passportjs-angularjs">Authentication in Single Page Applications</a></li>
-<li>If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: <a href="http://mean.io/">mean.io</a> (Template for MongoDB, ExpressJS, AngularJS and NodeJS)</li>
-<li>and here&rsquo;s a great <a href="http://www.thinkster.io/pick/GUIDJbpIie/angularjs-tutorial-learn-to-build-modern-web-apps">Tutorial on MEAN</a></li>
-</ul>
-
-
-<p>c# stuff:</p>
-
-<ul>
-<li>This <a href="http://www.youtube.com/watch?v=9ZSbuwCmwuc">video by Roy Osherove</a> shows how to introduce seams into brownfield projects (start at approx. 45min into the video if you want to skip the book recommendations and the intro to the SOLID principle). I learned how to introduce seams into static c# classes and methods using virtual&hellip;</li>
-<li>C# psychology <a href="http://de.slideshare.net/Coverity/the-psychology-of-c-analysis-24025354">by Eric Lippert&hellip;</a></li>
-<li>NHibernate turbo? (untested, but from the man himself: <a href="http://ayende.com/blog/164353/nhibernate-runfaster-secret-toggle?Key=587fe66e-0bcb-4146-96a6-cdb6e2df7df5&amp;utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+AyendeRahien+%28Ayende+%40+Rahien%29">pimping NHibernate by Ayende</a>)</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3259,6 +3587,10 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/02/11/docker-and-octopress/">Docker and Octopress</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/">Pi Hole - Simple Ad Blocker for Your Network</a>
       </li>
     
@@ -3272,10 +3604,6 @@ Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
     
       <li class="post">
         <a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a>
       </li>
     
   </ul>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: docker | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/docker/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2017-02-13T23:43:49+01:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Docker and Octopress]]></title>
+    <link href="http://draptik.github.io/blog/2017/02/11/docker-and-octopress/"/>
+    <updated>2017-02-11T23:51:01+01:00</updated>
+    <id>http://draptik.github.io/blog/2017/02/11/docker-and-octopress</id>
+    <content type="html"><![CDATA[<p>I have been watching the <a href="https://www.docker.com/">docker</a> space for a while and finally found a private use-case:</p>
+
+<p>This blog uses <a href="http://octopress.org/">Octopress</a>, which is a ruby-based convenience-wrapper around Jekyll.
+<a href="https://jekyllrb.com/">Jekyll</a> is a static web-site generator provided by <a href="https://github.com/jekyll/jekyll">GitHub</a>.
+Octopress currently (2017-02) requires some old libs: Ruby 1.9.3, Python 2.7, and nodejs.</p>
+
+<p>So, to use Octopress on any machine, I have to either:</p>
+
+<ul>
+<li>use version managers for Ruby, Python and NodeJs (f.ex. <a href="https://rvm.io/"><code>rvm</code></a>, <a href="http://fgimian.github.io/blog/2012/12/08/setting-up-virtual-development-environments-for-python/"><code>virtualenv</code></a>, <a href="https://github.com/creationix/nvm"><code>nvm</code></a>). Works.</li>
+<li>use a virtual machine. Works.</li>
+<li>Or, I could use docker</li>
+</ul>
+
+
+<p>Let&rsquo;s try docker.</p>
+
+<p><strong>My goal was to be able to blog from any machine running docker.</strong></p>
+
+<p>From the birds-eye view:</p>
+
+<ul>
+<li>install a docker image on any machine</li>
+<li>and run a docker container with my blog content mounted as shared folder (so I can edit the content on the host system)</li>
+</ul>
+
+
+<h2>Docker 01: base image</h2>
+
+<p>Since I couldn&rsquo;t find a simple Ruby image of 1.9.3 at docker hub I decided to create my own.</p>
+
+<p>Knowing my use-case (Octopress), I also installed Python2.7 and NodeJs for my <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs/">base docker image</a>.</p>
+
+<p>That was the easy part. Since it is only easy after understanding&hellip; Here is the <code>Dockerfile</code>:</p>
+
+<p>```sh Dockerfile
+FROM debian:jessie</p>
+
+<h1>Get the dependencies for Octopress page generation</h1>
+
+<h1>#</h1>
+
+<h2>Notes:</h2>
+
+<h1>#</h1>
+
+<h2>&ndash; Python 2.7 is required for using pygments gem.</h2>
+
+<h2>&ndash; NodeJs is required for execjs Gem</h2>
+
+<h1>#</h1>
+
+<p>RUN apt-get update &amp;&amp; \</p>
+
+<pre><code>apt-get --no-install-recommends -y install \
+autoconf \
+bison \
+build-essential \
+libssl-dev \
+libyaml-dev \
+locales \
+libreadline6-dev \
+zlib1g-dev \
+libncurses5-dev \
+libffi-dev \
+libgdbm3 \
+libgdbm-dev \
+nodejs \
+python2.7 \
+wget \
+ca-certificates \
+curl &amp;&amp; \
+apt-get clean &amp;&amp; \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+</code></pre>
+
+<h1>Set LOCALE to UTF8</h1>
+
+<p>RUN echo &ldquo;en_US.UTF-8 UTF-8&rdquo; > /etc/locale.gen &amp;&amp; \</p>
+
+<pre><code>locale-gen en_US.UTF-8 &amp;&amp; \
+dpkg-reconfigure --frontend=noninteractive locales &amp;&amp; \
+/usr/sbin/update-locale LANG=en_US.UTF-8
+</code></pre>
+
+<p>ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8</p>
+
+<h1>Install ruby (adopted from <a href="https://hub.docker.com/r/liaisonintl/ruby-1.9.3/~/dockerfile/">https://hub.docker.com/r/liaisonintl/ruby-1.9.3/~/dockerfile/</a>)</h1>
+
+<p>ENV RUBY_MAJOR=1.9 \</p>
+
+<pre><code>RUBY_VERSION=1.9.3-p551 \
+RUBY_DOWNLOAD_SHA256=bb5be55cd1f49c95bb05b6f587701376b53d310eb1bb7c76fbd445a1c75b51e8 \
+RUBYGEMS_VERSION=2.6.6 \
+PATH=/usr/local/bundle/bin:$PATH
+</code></pre>
+
+<p>RUN set -ex &amp;&amp; \</p>
+
+<pre><code>curl -SL -o ruby.tar.gz "http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz" &amp;&amp; \
+echo "$RUBY_DOWNLOAD_SHA256 ruby.tar.gz" | sha256sum -c - &amp;&amp; \
+mkdir -p /usr/src/ruby &amp;&amp; \
+tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components=1 &amp;&amp; \
+rm -f ruby.tar.gz &amp;&amp; \
+cd /usr/src/ruby &amp;&amp; \
+autoconf &amp;&amp; \
+./configure --disable-install-doc --sysconfdir=/etc/ &amp;&amp; \
+make &amp;&amp; \
+make install &amp;&amp; \
+gem update --system $RUBYGEMS_VERSION &amp;&amp; \
+rm -rf /usr/src/ruby
+</code></pre>
+
+<h1>Create soft link for python</h1>
+
+<p>RUN ln -s /usr/bin/python2.7 /usr/bin/python
+```</p>
+
+<p>&hellip;and the build file (<code>docker run...</code>):</p>
+
+<p>```sh build-image.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>docker build -t draptik/ruby1.9.3-python2.7-nodejs:0.1 .
+```</p>
+
+<h2>Docker 02: user</h2>
+
+<p>Here is where things start getting difficult. Sharing a folder from the host system with docker. And keeking permissions/users in sync&hellip;</p>
+
+<h3>Some things to know about sharing a volume in docker</h3>
+
+<p>Sharing data between host and docker container is normally accomplished by <code>docker run -v host-location/folder:container-location/folder</code>. Be aware, though:</p>
+
+<ul>
+<li>The volume will be owned by the container</li>
+<li>The container is root (UID/GID 1)!</li>
+<li>The container will change the UID/GID on the host system!</li>
+</ul>
+
+
+<h3>My workaround</h3>
+
+<p>I found this <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post</a>. In short, the post proposes to use docker&rsquo;s <code>ENTRYPOINT</code> to pipe all <code>RUN</code> commands through the <code>ENTRYPOINT</code>. Which in turn is a bash script, creating a new user, and executing all docker commands as user. This is where I start walking on very thin ice&hellip; Nevertheless, I created another <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs-user/">docker image</a>.</p>
+
+<p>```sh Dockerfile
+FROM draptik/ruby1.9.3-python2.7-nodejs:0.1</p>
+
+<h1>For details see <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">https://denibertovic.com/posts/handling-permissions-with-docker-volumes/</a></h1>
+
+<p>RUN apt-get update &amp;&amp; apt-get -y &mdash;no-install-recommends install \</p>
+
+<pre><code>ca-certificates \
+curl
+</code></pre>
+
+<p>RUN gpg &mdash;keyserver ha.pool.sks-keyservers.net &mdash;recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN curl -o /usr/local/bin/gosu -SL &ldquo;<a href="https://github.com/tianon/gosu/releases/download/1.10/gosu-$">https://github.com/tianon/gosu/releases/download/1.10/gosu-$</a>(dpkg &mdash;print-architecture)&rdquo; \</p>
+
+<pre><code>&amp;&amp; curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture).asc" \
+&amp;&amp; gpg --verify /usr/local/bin/gosu.asc \
+&amp;&amp; rm /usr/local/bin/gosu.asc \
+&amp;&amp; chmod +x /usr/local/bin/gosu
+</code></pre>
+
+<p>COPY entrypoint.sh /usr/local/bin/entrypoint.sh</p>
+
+<p>ENTRYPOINT [&ldquo;/usr/local/bin/entrypoint.sh&rdquo;]
+```</p>
+
+<p>```sh entrypoint.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>Add local user</h1>
+
+<h1>Either use the LOCAL_USER_ID if passed in at runtime or</h1>
+
+<h1>fallback</h1>
+
+<p>USER_ID=${LOCAL_USER_ID:-9001}</p>
+
+<p>echo &ldquo;Starting with UID : $USER_ID&rdquo;
+useradd &mdash;shell /bin/bash -u $USER_ID -o -c &ldquo;&rdquo; -m user
+export HOME=/home/user</p>
+
+<p>exec /usr/local/bin/gosu user &ldquo;$@&rdquo;
+```</p>
+
+<p>```sh build-image.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>docker build -t draptik/ruby1.9.3-python2.7-nodejs-user:0.1 .
+```</p>
+
+<h2>Docker 03: octopress</h2>
+
+<p>Because, in addition to mounting the content of my blog, I also mount the blog-engine itself (using <code>docker run -v &lt;orig-location&gt;:&lt;container-location&gt;</code>)
+I also have to execute an initial script within the mounted folder to setup the blog-engine.
+For this purpose I mount another file from the <code>docker run</code> script (<code>post-install.sh</code>), which must be executed from within the container.</p>
+
+<p>```sh Dockerfile
+FROM draptik/ruby1.9.3-python2.7-nodejs-user:0.1</p>
+
+<h1>I am not really sure why this is needed, because we have an ENTRYPOINT in the parent image.</h1>
+
+<p>RUN useradd -ms /bin/bash user</p>
+
+<h1>Setup ruby/bundler to work with non-admin user</h1>
+
+<p>RUN echo &ldquo;gem: &mdash;user-install&rdquo; > /home/user/.gemrc &amp;&amp; chown user:user /home/user/.gemrc
+RUN echo &ldquo;PATH=\&rdquo;/home/user/.gem/ruby/1.9.1/bin:$PATH\&ldquo;&rdquo; >> /home/user/.bashrc &amp;&amp; chown user:user /home/user/.bashrc</p>
+
+<p>WORKDIR /octopress
+```</p>
+
+<p>```sh build-image.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>docker build -t draptik/octopress:0.1 .
+```</p>
+
+<p>The following script starts the docker container:</p>
+
+<p>```sh run-container.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>docker run \</p>
+
+<pre><code>--rm \
+-it \
+-e LOCAL_USER_ID=`id -u $USER` \
+-p 4001:4001 \
+-v ${PWD}/../share/octopress:/octopress \
+-v ${PWD}/post-install.sh:/home/user/post-install.sh \
+draptik/octopress:0.1 \
+/bin/bash
+</code></pre>
+
+<p>```</p>
+
+<p>Here is the post install script which must be run from within the container:
+```sh post-install.sh</p>
+
+<h1>!/bin/bash</h1>
+
+<p>gem install bundler execjs</p>
+
+<p>cd /octopress</p>
+
+<h1>Important: use <code>--path...</code>!</h1>
+
+<p>bundle install &mdash;path $HOME/.gem
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
