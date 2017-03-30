@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nodejs | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/nodejs/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[.NET backend providing REST]]></title>
     <link href="http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest/"/>
-    <updated>2014-07-18T18:46:33+02:00</updated>
+    <updated>2014-07-18T16:46:33+00:00</updated>
     <id>http://draptik.github.io/blog/2014/07/18/dot-net-backend-providing-rest</id>
     <content type="html"><![CDATA[<h2>TL;DR</h2>
 
@@ -511,7 +511,7 @@ git checkout -f step7-aspnet-webapi-backend
   <entry>
     <title type="html"><![CDATA[link collection #3]]></title>
     <link href="http://draptik.github.io/blog/2014/01/03/link-collection-number-3/"/>
-    <updated>2014-01-03T23:30:00+01:00</updated>
+    <updated>2014-01-03T23:30:00+00:00</updated>
     <id>http://draptik.github.io/blog/2014/01/03/link-collection-number-3</id>
     <content type="html"><![CDATA[<p>JavaScript stuff:</p>
 
@@ -537,7 +537,7 @@ git checkout -f step7-aspnet-webapi-backend
   <entry>
     <title type="html"><![CDATA[Node.js backend providing REST]]></title>
     <link href="http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest/"/>
-    <updated>2013-10-01T21:25:00+02:00</updated>
+    <updated>2013-10-01T21:25:00+00:00</updated>
     <id>http://draptik.github.io/blog/2013/10/01/node-dot-js-backend-providing-rest</id>
     <content type="html"><![CDATA[<h1>TL;DR</h1>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tdd | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Testing that different objects have the same properties]]></title>
     <link href="http://draptik.github.io/blog/2016/05/09/testing-objects-have-same-properties/"/>
-    <updated>2016-05-09T19:25:17+02:00</updated>
+    <updated>2016-05-09T17:25:17+00:00</updated>
     <id>http://draptik.github.io/blog/2016/05/09/testing-objects-have-same-properties</id>
     <content type="html"><![CDATA[<p>Sometimes you want to ensure that 2 unrelated objects share a set of properties &mdash; without using an interface.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: open-wrt | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/open-wrt/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Pi Hole - simple ad blocker for your network]]></title>
-    <link href="http://draptik.github.io/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/"/>
-    <updated>2017-01-11T00:01:24+01:00</updated>
-    <id>http://draptik.github.io/blog/2017/01/11/pi-hole-simple-ad-blocker-for-your-network</id>
+    <link href="http://draptik.github.io/blog/2017/01/10/pi-hole-simple-ad-blocker-for-your-network/"/>
+    <updated>2017-01-10T23:01:24+00:00</updated>
+    <id>http://draptik.github.io/blog/2017/01/10/pi-hole-simple-ad-blocker-for-your-network</id>
     <content type="html"><![CDATA[<p>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. <a href="https://en.wikipedia.org/wiki/Troy_Hunt">Troy Hunt</a> recently wrote a <a href="https://www.troyhunt.com/ad-blockers-are-part-of-the-problem/">nice post on the subject</a>.</p>
 
 <p>Most <strong>desktop browsers</strong> provide &ldquo;ad blockers&rdquo; as plugins. These plugins normally also have configurable whitelists (whitelist: a list of sites exluded from being blocked) &#8212; which you should use for those sites which (a) provide high quality content and (b) rely on advertisements for a living.</p>

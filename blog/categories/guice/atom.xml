@@ -4,7 +4,7 @@
   <title><![CDATA[Category: guice | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/guice/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Guice in Java Web Application]]></title>
     <link href="http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application/"/>
-    <updated>2013-07-18T21:36:00+02:00</updated>
+    <updated>2013-07-18T21:36:00+00:00</updated>
     <id>http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application</id>
     <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google&rsquo;s Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
 

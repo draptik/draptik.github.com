@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jersey | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/jersey/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS example using a Java RESTful web service]]></title>
     <link href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/"/>
-    <updated>2013-07-13T20:12:00+02:00</updated>
+    <updated>2013-07-13T20:12:00+00:00</updated>
     <id>http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service</id>
     <content type="html"><![CDATA[<p><a href="http://angularjs.org/">AngularJS</a> is the current MVV-Whatever JavaScript framework by Google.
 Among other things, it provides bidirectional data binding.</p>

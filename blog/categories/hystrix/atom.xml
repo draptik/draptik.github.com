@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hystrix | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/hystrix/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2017-03-30T22:58:07+00:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Learning by meeting people]]></title>
+    <link href="http://draptik.github.io/blog/2017/03/30/learning/"/>
+    <updated>2017-03-30T17:01:33+00:00</updated>
+    <id>http://draptik.github.io/blog/2017/03/30/learning</id>
+    <content type="html"><![CDATA[<p>In my day job I&rsquo;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences. Lately I started to expand my horizon by meeting people face to face. This turned out to be very rewarding.</p>
+
+<p>These kind of meetups, which often take place in your spare time, are a very efficient way of learning to think outside the box. Meeting other developers in person &mdash; in an informal setting &mdash; enables me to interact directly: Asking questions, as soon as they pop into my mind (everything from &ldquo;what was that keyboard shortcut?&rdquo; to &ldquo;Stop, I did not understand what a monad is&rdquo;).</p>
+
+<p>Here is a short resume of some the meetings I&rsquo;ve been to in the last couple of weeks.</p>
+
+<h3>Softwerkskammer &ndash; Mocking Frameworks</h3>
+
+<p><a href="https://www.softwerkskammer.org/">https://www.softwerkskammer.org/</a></p>
+
+<ul>
+<li>Open for all: yes</li>
+<li>Audience: Software developers (PHP, Java, .NET, Ruby, Python, etc)</li>
+<li>Audience size: 10-15</li>
+<li>Time: 3h</li>
+<li>Action: Code Kata</li>
+</ul>
+
+
+<p>I learned: <a href="https://gist.github.com/bobuss/6534934">Object Calistenics</a>; cool and simple kata; Cool croud!</p>
+
+<h3>Make Night &ndash; Arduino 101</h3>
+
+<p><a href="https://www.meetup.com/de-DE/HealthhackersER/">Health Hackers Erlangen</a></p>
+
+<ul>
+<li>Open for all: yes</li>
+<li>Audience: Nice mix of medical researchers, a few physicists, some software developers</li>
+<li>Audience size: ~20</li>
+<li>Time: 3h</li>
+<li>Action: Arduino basics with different sensors, organizer provided kits for everybody</li>
+</ul>
+
+
+<p>I learned: The organizers want to accomplish something. Real medical research supported by &ldquo;hackers&rdquo; (RPi, Arduino, etc). Very interdisciplinary!</p>
+
+<h3>JUG Nuernberg &ndash; Dropwizard</h3>
+
+<p><a href="http://www.jug-n.de/">JUG Nuernberg</a></p>
+
+<ul>
+<li>Open for all: yes</li>
+<li>Audience: Software developers</li>
+<li>Audience size: ~10</li>
+<li>Time: 2h</li>
+<li>Action: presentation &amp; discussion</li>
+</ul>
+
+
+<p>I learned:  Wow, very impressive framework. I was really fascinated by the so called devops features (healthchecks, logging, etc)! Wish there was something similar in .NET!</p>
+
+<h3>Hackerkegeln DATEV &ndash; Scala Kata</h3>
+
+<ul>
+<li>Open for all: no (internal company event)</li>
+<li>Audience: Software developers (C/C++, JS, Java, .NET, COBOL, etc)</li>
+<li>Audience size: ~10</li>
+<li>Time: 4h</li>
+<li>Action: interactive Kata in Scala</li>
+</ul>
+
+
+<p>I learned: Scala is a cool language! Learned pattern matching (now also available in <a href="https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/">C# 7</a>). Very relaxed audience ;&ndash;)</p>
+
+<p>Thanks to Latti for the invitation!</p>
+
+<h3>MATHEMA Freitag &ndash; Microservices</h3>
+
+<ul>
+<li>Open for all: no (internal company event)</li>
+<li>Audience: Software developers</li>
+<li>Audience size: ~20</li>
+<li>Time: 6h</li>
+<li>Action: presentations, discussions, interactive microservice setup</li>
+</ul>
+
+
+<p>I learned: incredible cool tooling: Consul, Ribbon, Hystrix, Graphite, ELK</p>
+
+<h2>What to expect?</h2>
+
+<p>First time at such an event? Ask a lot of questions. It might be that you are the expert! If not: you are likely to find an expert. Or somebody will point you to a local expert.</p>
+
+<p>One of the main differences between these local user group meetings and big conferences is that the audience size is a lot smaller. Everybody wants to share and/or gain knowledge at these meetings. The format is often very open: Sometimes there is no official topic for the event. Instead, people decide on the spot: &ldquo;I have no idea how X works. Can somedody explain it?&rdquo; &mdash; &ldquo;Sure&rdquo;. And then the knowledge transfer starts&hellip;</p>
+
+<h2>How to find meetings in your area</h2>
+
+<ul>
+<li>google <code>&lt;your technology&gt;</code> <code>user group &lt;your town&gt;</code> for example <code>java</code> <code>user group london</code></li>
+<li>Meetup is a plattform for meeting people face to face. Try it: <a href="https://www.meetup.com/">https://www.meetup.com/</a></li>
+<li>google <code>Software Craftsmanship &lt;your town&gt;</code></li>
+<li>Germany: <a href="https://www.softwerkskammer.org/">Softwerkskammer</a></li>
+<li>google <code>Unconference</code> or <code>BarCamp</code> in <code>&lt;your town&gt;</code></li>
+</ul>
+
+
+<p>What do you do to learn new technologies and stay up-to-date?</p>
+]]></content>
+  </entry>
+  
+</feed>

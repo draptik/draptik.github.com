@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cloud | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/cloud/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-02-13T23:43:49+01:00</updated>
+  <updated>2017-03-30T22:58:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Installing Seafile on Raspberry Pi]]></title>
     <link href="http://draptik.github.io/blog/2014/04/21/installing-seafile-on-raspberry-pi/"/>
-    <updated>2014-04-21T00:23:00+02:00</updated>
+    <updated>2014-04-21T00:23:00+00:00</updated>
     <id>http://draptik.github.io/blog/2014/04/21/installing-seafile-on-raspberry-pi</id>
     <content type="html"><![CDATA[<p>With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to <a href="http://www.dropbox.com">Dropbox</a> for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi.</p>
 
