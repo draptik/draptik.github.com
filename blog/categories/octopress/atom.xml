@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2017-04-04T20:48:03+00:00</updated>
+  <updated>2017-04-04T20:59:58+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -435,7 +435,7 @@ execjs
 <p>bundle install &mdash;path $HOME/.gem</p>
 
 <p>git config &mdash;global user.name &ldquo;FirstName LastName&rdquo;
-git config &mdash;global user.email &ldquo;<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#121;&#111;&#117;&#x72;&#64;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#111;&#x75;&#x72;&#x40;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;
+git config &mdash;global user.email &ldquo;<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x79;&#x6f;&#117;&#114;&#x40;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#x6f;&#117;&#114;&#64;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>&rdquo;
 ```</p>
 
 <h2>Final usage for Octopress users</h2>
@@ -455,7 +455,7 @@ git config &mdash;global user.email &ldquo;<a href="&#109;&#97;&#105;&#108;&#x74
 <p><code>sh
 git clone -b source &lt;octopress-git-repo&gt; octopress
 cd octopress
-git clone &lt;octopress-git-repo&gt; _deploy
+git clone -b master &lt;octopress-git-repo&gt; _deploy
 </code></p>
 
 <p>Then, run the <code>run-container.sh</code> script.</p>
