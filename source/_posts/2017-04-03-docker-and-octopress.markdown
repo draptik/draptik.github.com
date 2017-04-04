@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Docker and Octopress"
-date: 2017-04-03 18:41:51 +0000
+date: 2017-04-04 18:41:51 +0000
 comments: true
 categories: [docker, octopress, linux]
 ---
-**TL/DR;** This post describes how I created my first customized docker image(s).
+This post describes how I created my first customized docker image(s).
 
 I have been watching the [docker](https://www.docker.com/) space for a while and finally found a private use-case: This blog uses [Octopress](http://octopress.org/), which is a ruby-based convenience-wrapper around Jekyll. 
 [Jekyll](https://jekyllrb.com/) is a static web-site generator provided by [GitHub](https://github.com/jekyll/jekyll). 
@@ -315,12 +315,13 @@ docker run \
 Some notes about the `docker run` options:
 
 - `--rm` ensures that the docker container is removed once exited
+- `-it` runs an interactive terminal as soon as the container starts
 - `-e LOCAL_USER...` sets the host user's ID within the docker container
 - `-p ...` maps the port numbers
 - `-v ${PWD}/../share/octopress:/octopress` mounts the blog volume
 - `-v ${PWD}/post-install.sh:/home/user/post-install.sh` mounts the post install script
 
-Mounting volumes in docker using `docker-machine` on windows requires some extra path-tweaking. I intend to add these tweaks in the future...
+Mounting volumes in docker using `docker-machine` or `Docker for Windows` on windows requires some extra path-tweaking. I intend to add these tweaks in the future...
 
 #### post-install
 
@@ -364,10 +365,20 @@ cd octopress
 git clone <octopress-git-repo> _deploy
 ```
 
-Finally, run the `run-container.sh` script.
+Then, run the `run-container.sh` script.
 
-# Summary
+From within the newly created docker container, follow the steps from the post-install section above.
 
-This post is not very eloquant or to the point, but I thought it might be useful for other people banging their heads against the wall why docker is so difficult sometimes.
+You should now be able to use Octopress from within the docker container (i.e. `rake new_post["test"]`, `rake generate`, `rake preview`, `rake deploy`, etc.) while being able to edit your posts on the host machine.
+
+## Summary
+
+It helps if you have a linux background, since all docker images are linux based. Setting up a customized docker image can be a bit tedious (especially configuring user privileges and mounting host folders), but once the image works you have an automated and reproducable environment. I think this makes it worth the effort. 
+
+Obviously I am just starting with docker, so take my example above with a grain of salt. But maybe the example gives you a starting point for your own docker experiments.
 
 As always: Thankful for feedback!
+
+## Sources at Github
+
+You can find the complete source code at Github here: [https://github.com/draptik/octopress-docker](https://github.com/draptik/octopress-docker)
