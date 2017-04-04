@@ -373,12 +373,14 @@ You should now be able to use Octopress from within the docker container (i.e. `
 
 ## Summary
 
-It helps if you have a linux background, since all docker images are linux based. Setting up a customized docker image can be a bit tedious (especially configuring user privileges and mounting host folders), but once the image works you have an automated and reproducable environment. I think this makes it worth the effort. 
+It helps if you have a linux background, since all docker images are linux based. Setting up a customized docker image can be a bit tedious (especially configuring user privileges and mounting host folders), but once the image works you have an automated and reproducible environment. I think this makes it worth the effort.
 
 Obviously I am just starting with docker, so take my example above with a grain of salt. But maybe the example gives you a starting point for your own docker experiments.
 
 As always: Thankful for feedback!
 
-## Sources at Github
+## Links
 
 You can find the complete source code at Github here: [https://github.com/draptik/octopress-docker](https://github.com/draptik/octopress-docker)
+
+The docker images are hosted at Docker Hub: [https://hub.docker.com/u/draptik/](https://hub.docker.com/u/draptik/)
