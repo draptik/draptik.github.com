@@ -362,7 +362,7 @@ Initially clone octopress in `share` folder:
 ```sh
 git clone -b source <octopress-git-repo> octopress
 cd octopress
-git clone <octopress-git-repo> _deploy
+git clone -b master <octopress-git-repo> _deploy
 ```
 
 Then, run the `run-container.sh` script.
