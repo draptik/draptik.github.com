@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="After resurrecting an old VMware installation (I started with the first freely available version of VMware.. version 1) and upgrading successfully ( &hellip;">
+  <meta name="description" content="Intel&rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/">NAS-Box SS4000-E Ignores Partition Table of Plugged-in External Harddrive</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-26T23:54:45+00:00" pubdate data-updated="true">May 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Intel&rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</p>
+
+<p>This is not reflected by the &ldquo;mount&rdquo; command:
+<code>
+ root# mount
+   ...snipped some lines...
+/dev/sdf1 on /nas/usbdisk1 type vfat  (rw,nodiratime,gid=11578,fmask=0000,dmask=0000)
+</code></p>
+
+<p>I&rsquo;ll have to copy the data via intranet (slower than via USB).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -861,73 +906,9 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/04/09/fixing-cygwins-gnu-screen-program/">Fixing Cygwin&#8217;s GNU Screen Program</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-09T12:57:47+00:00" pubdate data-updated="true">Apr 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>After years of ignorance I discovered the wonderful GNU screen program on my GNU/Linux system. Basically screen is a window manager for terminals or terminal sessions. But after installing the Cygwin package on my Windows box I ended up with this error message after trying to invoke screen:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>C:\&gt;screen
-</span><span class='line'>Cannot find terminfo entry for 'cygwin'.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is unlikely to help others, but I&rsquo;ll keep it as a reference&hellip; The culprit was a messed up installation. I had the following directories:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/usr/share/tabset       # &lt;- this folder was empty
-</span><span class='line'>/usr/share/tabset(2)
-</span><span class='line'>/usr/share/terminfo     # &lt;- this folder was empty
-</span><span class='line'>/usr/share/terminfo(2)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I just had to delete the empty directories and rename tabset(2) and terminfo(2)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rmdir /usr/share/tabset /usr/share/terminfo
-</span><span class='line'>$ mv /usr/share/tabset\(2\) /usr/share/tabset
-</span><span class='line'>$ mv /usr/share/terminfo\(2\) /usr/share/terminfo</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and now screen works just fine with Cygwin.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/8/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -940,6 +921,10 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2017/03/30/learning/">Learning by Meeting People</a>
@@ -955,10 +940,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     
       <li class="post">
         <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/29/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
   </ul>

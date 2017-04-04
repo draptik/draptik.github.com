@@ -9,8 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="1
-svn add `svn st | grep "^?" | awk '{print $2}'` ">
+  <meta name="description" content="My simple NHibernate 3 setup under GitHub: https://github.com/draptik/nhibernate-nunit
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +80,42 @@ svn add `svn st | grep "^?" | awk '{print $2}'` ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/04/11/nhibernate-simple-setup/">NHibernate Simple Setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-11T22:50:05+00:00" pubdate data-updated="true">Apr 11<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My simple NHibernate 3 setup under GitHub: <a href="https://github.com/draptik/nhibernate-nunit">https://github.com/draptik/nhibernate-nunit</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -574,141 +610,6 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/">Executing a Script After Mounting a TrueCrypt Partition on Ubuntu 9.10 (Karmic Koala)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-08T00:18:40+00:00" pubdate data-updated="true">Dec 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>Goal: </strong>Automatically run a script/program of your choice after mounting a TrueCrypt partition on Ubuntu 9.10.</p>
-
-<p><strong>Background info on udev (very short)</strong></p>
-
-<ul>
-<li><p>UDEV listens to certain events. Depending on the event, a certain &ldquo;rule&rdquo; can be executed.</p></li>
-<li><p>To see some of the default rules, visit <code>lib/udev/rules.d</code> and study those examples.</p></li>
-<li><p>Many current GNU/Linux distros use the udev system to manage actions that should happen after automounting.</p></li>
-</ul>
-
-
-<p><strong>Setup</strong></p>
-
-<p>My setup</p>
-
-<p>Your setup might differ! I have a USB stick. Amongst other things, it includes a TrueCrypt partition. I am able to (un)mount the TrueCrypt partition using the TrueCrypt program.</p>
-
-<p>Info required for udev</p>
-
-<p>udev needs a way of identifying your partition. We can use udevadm info (this corresponds to udevinfo in older tutorials) to get this info. I know that my truecrypt partition is always mounted to /media/truecryt1. This is mapped from /dev/mapper/truecrypt1 (have a look at the output of the &ldquo;mount&rdquo; command after mounting truecrypt to see these details).</p>
-
-<p>We need unique infos about the truecrypt partition for udev. To aquire this info, use:
-<code>
-$ udevadm info -a -p $(udevadm info -q path -n /dev/mapper/truecrypt1)
-</code></p>
-
-<p>On my system the output is:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>udevadm info -a -p <span class="k">$(</span>udevadm info -q path -n /dev/mapper/truecrypt1<span class="k">)</span>
-</span><span class='line'>Udevadm info starts with the device specified by the devpath and <span class="k">then</span>
-</span><span class='line'>walks up the chain of parent devices. It prints <span class="k">for </span>every device
-</span><span class='line'>found, all possible attributes in the udev rules key format.
-</span><span class='line'>A rule to match, can be composed by the attributes of the device
-</span><span class='line'>and the attributes from one single parent device.
-</span><span class='line'>
-</span><span class='line'>looking at device <span class="s1">&#39;/devices/virtual/block/dm-0&#39;</span>:
-</span><span class='line'><span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;dm-0&quot;</span>
-</span><span class='line'><span class="nv">SUBSYSTEM</span><span class="o">==</span><span class="s2">&quot;block&quot;</span>
-</span><span class='line'><span class="nv">DRIVER</span><span class="o">==</span><span class="s2">&quot;&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>range<span class="o">}==</span><span class="s2">&quot;1&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>extrange<span class="o">}==</span><span class="s2">&quot;1&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>removable<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>ro<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>size<span class="o">}==</span><span class="s2">&quot;6290941&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>alignmentoffset<span class="o">}==</span><span class="s2">&quot;0&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>capability<span class="o">}==</span><span class="s2">&quot;10&quot;</span>
-</span><span class='line'>ATTR<span class="o">{</span>stat<span class="o">}==</span><span class="s2">&quot;    6521        0     7172     5870        1        0     1        0        0       70     5870&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Not much unique stuff there. The only thing that looks unique is <code>ATTR{size}=="6290941"</code>. Let&rsquo;s take that.</p>
-
-<p><strong>udev rule</strong></p>
-
-<ul>
-<li><p>Go to <code>etc/udev/rules.d</code></p></li>
-<li><p>Create a new file <code>85-myrules.rules</code></p></li>
-<li><p>Add the following line (adapted to your needs) 
-<code>sh
-ACTION=="add", KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", ATTR{size}=="6290941", RUN+="/usr/bin/touch /home/your-user-name-here/testcrypt.txt"
-</code></p></li>
-<li><p>Some notes:</p>
-
-<ul>
-<li><p><code>==</code> corresponds to a &ldquo;check&rdquo; (ie check if kernel equals dm-.., check if subsystem equals block, check if attribute-size equals 6290941)</p></li>
-<li><p><code>=</code>  corresponds to an assignment</p></li>
-<li><p><code>+=</code> corresponds to an assignment</p></li>
-</ul>
-</li>
-</ul>
-
-
-<p><strong>Test</strong></p>
-
-<ul>
-<li><p>Unmount your TrueCrypt volume</p></li>
-<li><p>Reload udev: <code>sudo reload udev</code></p></li>
-<li><p>Mount your TrueCrypt volume</p></li>
-<li><p>Check your home directory: It should now contain a file testcrypt.txt</p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -726,6 +627,10 @@ ACTION=="add", KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", ATTR{size}=="6290941", R
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/03/30/learning/">Learning by Meeting People</a>
       </li>
     
@@ -739,10 +644,6 @@ ACTION=="add", KERNEL=="dm-[0-9]*", SUBSYSTEM=="block", ATTR{size}=="6290941", R
     
       <li class="post">
         <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/29/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a>
       </li>
     
   </ul>
