@@ -189,7 +189,7 @@ debian              jessie              e5599115b6a6        4 weeks ago         
 
 ## Docker 01: user
 
-Here is where things start getting difficult. Sharing a folder from the host system with docker. And keeking permissions/users in sync... 
+Here is where things start getting difficult. Sharing a folder from the host system with docker. And keeping permissions/users in sync... 
 
 ### Some things to know about sharing a volume in docker
 
