@@ -19,6 +19,44 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 - ...often a documentation of my trial and error approach to get something up and running
 - ...and sometimes a source of knowledge
 
+## Previous talks
+
+### 2018
+
+- Functional Programming for OO Developers - A gentle introduction
+  - [Softwerkskammer Nürnberg](https://www.softwerkskammer.org/activities/Treffen_52_SWK_Nuernberg_Mock_Heuristiken_FP_Fuer_OO_Entwickler), Feb. 1 2018
+- Paket - an alternative to NuGet?
+  - [Hackerkegeln @ DATEV](https://www.datev.de/web/de/m/karriere/arbeitgeber-datev/arbeiten-in-der-softwareentwicklung/software-craftsmanship-community/), Jan. 17 2018
+
+### 2017
+
+- Railway Oriented Programming
+  - [Software Engineering Camp 2017](https://swe-camp.de/), Nov. 18 2017
+- Railway Oriented Programming
+  - [Softwerkskammer Nürnberg](https://www.softwerkskammer.org/activities/Treffen_50_SWK_Nuernberg), Oct. 5 2017
+- Railway Oriented Programming
+  - [Herbstcampus 2017](https://www.herbstcampus.de), Sep. 5 2017
+- Railway Oriented Programming
+  - [Hackerkegeln @ DATEV](https://www.datev.de/web/de/m/karriere/arbeitgeber-datev/arbeiten-in-der-softwareentwicklung/software-craftsmanship-community/), Jul. 12 2017
+- Value Objects
+  - [Hackerkegeln @ DATEV](https://www.datev.de/web/de/m/karriere/arbeitgeber-datev/arbeiten-in-der-softwareentwicklung/software-craftsmanship-community/), May 10, 2017
+- Value Objects & Specification Pattern
+  - [MATHEMA Campus 2017](https://www.mathema.de/veranstaltungen/mathema-campus), Apr. 28 2017
+
+### 2016
+
+- Value Objects & Specification Pattern
+  - [Software Engineering Camp 2016](https://swe-camp.de/), Nov. 19 2016
+- Railway Oriented Programming with C#
+  - [Software Engineering Camp 2016](https://swe-camp.de/), Nov. 20 2016
+- Domain Driven Design: Q & A (Comoderator)
+  - [Software Engineering Camp 2016](https://swe-camp.de/), Nov. 19 2016
+- Value Objects & Specification Pattern
+  - [MATHEMA Freitag](https://www.mathema.de) (Inhouse Training)
+- PlantUML
+  - [MATHEMA Freitag](https://www.mathema.de) (Inhouse Training)
+
+
 ## Contact me
  
 - [@drechsler on twitter](https://twitter.com/drechsler)
