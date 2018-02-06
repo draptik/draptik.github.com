@@ -228,3 +228,5 @@ let Generate i = "one"
 Running `dotnet test` should now confirm 1 passing test.
 
 Have fun with F# on Linux!
+
+Get the source code here: git@github.com:draptik/blog-fsharp-fizzbuzz-setup.git
