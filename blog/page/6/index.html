@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Goal: Automatically run a script/program of your choice after mounting a TrueCrypt partition on Ubuntu 9.10. Background info on udev (very short) &hellip;">
+  <meta name="description" content="Summary: Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/">Using Basic Emacs Keybindings in Gnome-Terminal</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-01-15T22:00:10+00:00" pubdate data-updated="true">Jan 15<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>Summary:</strong> Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people familiar with Emacs.</p>
+
+<p>This is so simple that I almost afraid to post it&hellip;</p>
+
+<p>&hellip;One of those things that has been bothering you for years(!), but was never urgent enough to invest time figuring out how to fix&hellip;</p>
+
+<p><strong>Problem: </strong></p>
+
+<p>You&rsquo;re used to Emacs shortcuts. Bash (and many other shells) support Emacs keybindings out of the box. But your default terminal comes with a stupid menu bar. So you press <code>M-d</code> (Emacs&#8217; &ldquo;kill-word&rdquo;; for non-Emacs users: this corresponds to the key sequence <code>Alt-d</code>) and end up calling the &ldquo;File&rdquo; menu entry of the Gnome-Terminal (File is called &ldquo;<strong>D</strong>atei&rdquo; in German, which is my LOCAL). If you your LOCAL settings are English, you will have the same problem with the Emacs shortcut <code>M-f</code> (in Emacs this is &ldquo;word-forward&rdquo;): The Gnome-Terminal will grap the key sequence and open the &ldquo;<strong>F</strong>ile&rdquo; menu.</p>
+
+<p><strong>Solution:</strong></p>
+
+<ol>
+<li><p> Open your Gnome-Terminal</p></li>
+<li><p> Edit &ndash;> Keyboard shortcuts &ndash;> DISABLE ALL MENU ACCESS KEYS (If you have German settings the menu entry is called: &ldquo;Bearbeiten &ndash;> Tastenkombinationen &ndash;> Alle Menükürzel aktivieren&rdquo;. Disable the checkbox..)</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1137,60 +1191,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/">Porting Phone Book From Nokia 6230i to Samsung S7220</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-30T03:04:17+00:00" pubdate data-updated="true">May 30<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There must be a smarter way to do this&hellip; But I&rsquo;ll describe my combersome way anyway. It depends on having windows somewhere.</p>
-
-<p>Old phone: Nokia 6230i</p>
-
-<p>New phone: Samsung S7220</p>
-
-<p><strong>Goal</strong>: Get all phone contacts from old phone to new phone.</p>
-
-<p><strong>Solution</strong>:</p>
-
-<ol>
-<li><p> Install Nokia phone software on windows</p></li>
-<li><p> Sync phone content with Outlook-Express (make sure Outlook-Express has an emtpy address book before)</p></li>
-<li><p> Export the address book from Outlook-Express as vcf or wab to a file</p></li>
-<li><p> Install Samsung phone software on windows (does not work with wine)</p></li>
-<li><p> Import address book from vcf/wab</p></li>
-<li><p> Synchronize with new phone using Windows software from Samsung</p></li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1208,6 +1208,10 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
       </li>
     
@@ -1221,10 +1225,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
     
       <li class="post">
         <a href="/blog/2017/01/09/bash-tricks/">Bash Tricks</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/05/09/testing-objects-have-same-properties/">Testing That Different Objects Have the Same Properties</a>
       </li>
     
   </ul>
