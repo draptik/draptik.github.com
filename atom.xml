@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-02-06T01:54:16+00:00</updated>
+  <updated>2018-02-06T02:34:22+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -395,6 +395,8 @@
 <p>Running <code>dotnet test</code> should now confirm 1 passing test.</p>
 
 <p>Have fun with F# on Linux!</p>
+
+<p>Get the source code here: git@github.com:draptik/blog-fsharp-fizzbuzz-setup.git</p>
 ]]></content>
   </entry>
   

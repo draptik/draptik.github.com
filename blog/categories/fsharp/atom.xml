@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fsharp | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/fsharp/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2018-02-06T02:34:22+00:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[F# Setup Linux: FizzBuzz]]></title>
+    <link href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/"/>
+    <updated>2018-02-05T22:31:04+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz</id>
+    <content type="html"><![CDATA[<p>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.</p>
+
+<h2>Prerequisite: .NET Core with Linux</h2>
+
+<p>I won&rsquo;t go into setting up .NET Core for linux. This should be straightforward either by following <a href="https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x">Microsoft instructions</a> or, in my case, the <a href="https://wiki.archlinux.org/index.php/.NET_Core">Arch Linux homepage</a>. <code>dotnet --info</code> should return something similar to:</p>
+
+<p>```
+.NET Command Line Tools (2.1.3)</p>
+
+<p>Product Information:
+ Version:            2.1.3
+ Commit SHA-1 hash:  a0ca411ca5</p>
+
+<p>Runtime Environment:
+ OS Name:     arch
+ OS Version:
+ OS Platform: Linux
+ RID:         linux-x64
+ Base Path:   /opt/dotnet/sdk/2.1.3/</p>
+
+<p>Microsoft .NET Core Shared Framework Host</p>
+
+<p>  Version  : 2.0.5
+  Build    : 17373eb129b3b05aa18ece963f8795d65ef8ea54
+```</p>
+
+<h2>Creating a Kata</h2>
+
+<p>Let&rsquo;s create a project for the FizzBuzz Kata.</p>
+
+<p><code>
+mkdir fsharp-kata-fizzbuzz
+cd fsharp-kata-fizzbuzz
+dotnet new classlib -lang f# -o FizzBuzz
+dotnet new xunit -lang f# -o FizzBuzz.Tests
+cd FizzBuzz.Tests
+dotnet add reference ../FizzBuzz/FizzBuzz.fsproj
+cd ..
+dotnet new sln
+dotnet sln add FizzBuzz/FizzBuzz.fsproj
+dotnet sln add FizzBuzz.Tests/FizzBuzz.Tests.fsproj
+</code></p>
+
+<p>(I really love this new &ldquo;CLI first&rdquo; approach! It makes live so much easier for DevOps)</p>
+
+<p>This is our project structure after templating:</p>
+
+<p><code>
+tree . -L 4
+.
+├── FizzBuzz
+│   ├── bin
+│   │   └── Debug
+│   │       └── netstandard2.0
+│   ├── FizzBuzz.fsproj
+│   ├── Library.fs
+│   └── obj
+│       ├── Debug
+│       │   └── netstandard2.0
+│       ├── FizzBuzz.fsproj.nuget.cache
+│       ├── FizzBuzz.fsproj.nuget.g.props
+│       ├── FizzBuzz.fsproj.nuget.g.targets
+│       └── project.assets.json
+├── FizzBuzz.Tests
+│   ├── bin
+│   │   └── Debug
+│   │       └── netcoreapp2.0
+│   ├── FizzBuzz.Tests.fsproj
+│   ├── obj
+│   │   ├── Debug
+│   │   │   └── netcoreapp2.0
+│   │   ├── FizzBuzz.Tests.fsproj.nuget.cache
+│   │   ├── FizzBuzz.Tests.fsproj.nuget.g.props
+│   │   ├── FizzBuzz.Tests.fsproj.nuget.g.targets
+│   │   └── project.assets.json
+│   ├── Program.fs
+│   └── Tests.fs
+└── fsharp-kata-fizzbuzz.sln
+</code></p>
+
+<p>The 3 project files (top &ndash; down)&hellip;</p>
+
+<p><code>fsharp-kata-fizzbuzz.sln</code> (nothing new here)
+```
+Microsoft Visual Studio Solution File, Format Version 12.00</p>
+
+<h1>Visual Studio 15</h1>
+
+<p>VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project(&ldquo;{F2A71F9B-5D33-465A-A702-920D77279786}&rdquo;) = &ldquo;FizzBuzz&rdquo;, &ldquo;FizzBuzz\FizzBuzz.fsproj&rdquo;, &ldquo;{C64F3370-DE54-4D58-BDD4-33C4B02F7290}&rdquo;
+EndProject
+Project(&ldquo;{F2A71F9B-5D33-465A-A702-920D77279786}&rdquo;) = &ldquo;FizzBuzz.Tests&rdquo;, &ldquo;FizzBuzz.Tests\FizzBuzz.Tests.fsproj&rdquo;, &ldquo;{4AA6DACD-EA0E-4938-BB41-7B055A9A0C8C}&rdquo;
+EndProject
+[&hellip;]
+```</p>
+
+<p><code>FizzBuzz/FizzBuzz.fsproj</code> (not relevant here, but keep in mind that fsharp files have to be in the correct order):
+```xml
+<Project Sdk="Microsoft.NET.Sdk"></p>
+
+<p>  <PropertyGroup></p>
+
+<pre><code>&lt;TargetFramework&gt;netstandard2.0&lt;/TargetFramework&gt;
+</code></pre>
+
+<p>  </PropertyGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;Compile Include="Library.fs" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p></Project>
+```</p>
+
+<p><code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code>:
+```xml
+<Project Sdk="Microsoft.NET.Sdk"></p>
+
+<p>  <PropertyGroup></p>
+
+<pre><code>&lt;TargetFramework&gt;netcoreapp2.0&lt;/TargetFramework&gt;
+
+&lt;IsPackable&gt;false&lt;/IsPackable&gt;
+</code></pre>
+
+<p>  </PropertyGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;Compile Include="Tests.fs" /&gt;
+&lt;Compile Include="Program.fs" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" /&gt;
+&lt;PackageReference Include="xunit" Version="2.3.1" /&gt;
+&lt;PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" /&gt;
+&lt;DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;ProjectReference Include="..\FizzBuzz\FizzBuzz.fsproj" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p></Project>
+```</p>
+
+<p>Running <code>dotnet test</code> returns</p>
+
+<p>```
+$ dotnet test
+Build started, please wait&hellip;
+Build started, please wait&hellip;
+Build completed.</p>
+
+<p>Test run for /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz/bin/Debug/netstandard2.0/FizzBuzz.dll(.NETStandard,Version=v2.0)
+Microsoft &reg; Test Execution Command Line Tool Version 15.5.0
+Copyright &copy; Microsoft Corporation.  All rights reserved.</p>
+
+<p>Starting test execution, please wait&hellip;
+No test is available in /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz/bin/Debug/netstandard2.0/FizzBuzz.dll. Make sure test project has a nuget reference of package &ldquo;Microsoft.NET.Test.Sdk&rdquo; and framework version settings are appropriate and try again.</p>
+
+<p>Test Run Aborted.
+Build completed.</p>
+
+<p>Test run for /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll(.NETCoreApp,Version=v2.0)
+Microsoft &reg; Test Execution Command Line Tool Version 15.5.0
+Copyright &copy; Microsoft Corporation.  All rights reserved.</p>
+
+<p>Starting test execution, please wait&hellip;
+[xUnit.net 00:00:00.9263576]   Discovering: FizzBuzz.Tests
+[xUnit.net 00:00:01.0646319]   Discovered:  FizzBuzz.Tests
+[xUnit.net 00:00:01.0733357]   Starting:    FizzBuzz.Tests
+[xUnit.net 00:00:01.2961789]   Finished:    FizzBuzz.Tests</p>
+
+<p>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 2.5956 Seconds
+```</p>
+
+<p>Ok, <code>dotnet test</code> does not recognize which project actually contains tests. But it runs all tests!</p>
+
+<p>Let&rsquo;s add a test.</p>
+
+<p>The file <code>FizzBuzz.Tests/Tests.fs</code> (generated by <code>dotnet new xunit...</code>) looks like this:
+```fsharp
+module Tests</p>
+
+<p>open System
+open Xunit</p>
+
+<p>[<Fact>]
+let <code>My test</code> () =</p>
+
+<pre><code>Assert.True(true)
+</code></pre>
+
+<p>```</p>
+
+<p>TDD approach: We will create a failing test first, then implement something.</p>
+
+<p>Replace the content of <code>FizzBuzz.Tests/Tests.fs</code> with</p>
+
+<p>```fsharp
+module Tests</p>
+
+<p>open System
+open Xunit
+open FizzBuzz</p>
+
+<p>[<Fact>]
+let <code>Array with Number 1 returns 'one'</code> () =</p>
+
+<pre><code>let result = FizzBuzz.Generate [1]
+Assert.Equal(result, "one")
+</code></pre>
+
+<p>```</p>
+
+<p>We verify 2 aspects:</p>
+
+<ul>
+<li>we are invoking another library (<code>FizzBuzz</code>) from our test class</li>
+<li>we are learning to use the test library</li>
+</ul>
+
+
+<p>This does not compile. Let&rsquo;s implement the simplest solution:</p>
+
+<p>Replace <code>FizzBuzz/Library.fs</code> with
+```
+module FizzBuzz</p>
+
+<p>let Generate i = &ldquo;one&rdquo;
+```</p>
+
+<p>Running <code>dotnet test</code> should now confirm 1 passing test.</p>
+
+<p>Have fun with F# on Linux!</p>
+
+<p>Get the source code here: git@github.com:draptik/blog-fsharp-fizzbuzz-setup.git</p>
+]]></content>
+  </entry>
+  
+</feed>
