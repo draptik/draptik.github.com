@@ -3,7 +3,7 @@ layout: post
 title: "F# Setup Linux: FizzBuzz"
 date: 2018-02-05 22:31:04 +0000
 comments: true
-categories: 
+categories: [linux, fsharp, kata, fizzbuzz]
 ---
 One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
 
