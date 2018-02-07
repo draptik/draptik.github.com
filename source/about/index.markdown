@@ -19,10 +19,12 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 - ...often a documentation of my trial and error approach to get something up and running
 - ...and sometimes a source of knowledge
 
-## Previous talks
+## Upcoming & previous talks
 
 ### 2018
 
+- Value objects on steroids
+  - [Developer Week 2018](https://www.developer-week.de/), Jun. 25 2018
 - Functional Programming for OO Developers - A gentle introduction
   - [Softwerkskammer Nürnberg](https://www.softwerkskammer.org/activities/Treffen_52_SWK_Nuernberg_Mock_Heuristiken_FP_Fuer_OO_Entwickler), Feb. 1 2018
 - Paket - an alternative to NuGet?
