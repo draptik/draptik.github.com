@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fizzbuzz | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/fizzbuzz/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-02-07T20:26:13+00:00</updated>
+  <updated>2018-02-07T23:39:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,169 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[F# Test Setup for FizzBuzz]]></title>
+    <link href="http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/"/>
+    <updated>2018-02-07T20:53:43+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz</id>
+    <content type="html"><![CDATA[<p>In my <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> we setup a basic F# project in Linux.</p>
+
+<p>In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</p>
+
+<h4>Side note for people unfamiliar with .NET</h4>
+
+<p>Actually, it&rsquo;s not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
+
+<p>We have 2 projects (<code>FizzBuzz</code> and <code>FizzBuzz.Tests</code>), each with a <code>*.fsproj</code> file. The <code>FizzBuzz.Tests.fsproj</code> references the <code>FizzBuzz.fsproj</code> file (see the <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> for details):
+<code>
+.
+├── FizzBuzz
+│   ├── FizzBuzz.fsproj
+│   ├── ...
+├── FizzBuzz.Tests
+│   ├── FizzBuzz.Tests.fsproj
+│   ├── ...
+└── fsharp-kata-fizzbuzz.sln
+</code></p>
+
+<h3>Current state</h3>
+
+<p>This is the current state of our test:
+<code>`fsharp
+[&lt;Fact&gt;]
+let</code>Array with Number 1 returns &lsquo;one&rsquo;`` () =</p>
+
+<pre><code>let result = FizzBuzz.Generate [1]
+Assert.Equal(result, "one")
+</code></pre>
+
+<p>```</p>
+
+<ul>
+<li><code>[&lt;Fact&gt;]</code>: this is F#&rsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
+<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
+<li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
+</ul>
+
+
+<h3>FsUnit: Idiomatic assertions</h3>
+
+<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages on concept is preferred over the other.</p>
+
+<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
+
+<p>Example:
+```fsharp
+// instead of
+Assert.Equal(1 + 1, 2)</p>
+
+<p>// idiomatic F# (using pipe) with FsUnit:
+1 + 1 |> should equal 2
+```</p>
+
+<h4>Installing FsUnit</h4>
+
+<p><code>sh
+cd FizzBuzz.Tests
+dotnet add package FsUnit.Xunit
+</code></p>
+
+<p>File <code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code> should now look like this (plus/minus some version numbers):
+```xml
+<Project Sdk="Microsoft.NET.Sdk"></p>
+
+<p>  <PropertyGroup></p>
+
+<pre><code>&lt;TargetFramework&gt;netcoreapp2.0&lt;/TargetFramework&gt;
+
+&lt;IsPackable&gt;false&lt;/IsPackable&gt;
+</code></pre>
+
+<p>  </PropertyGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;Compile Include="Tests.fs" /&gt;
+&lt;Compile Include="Program.fs" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;PackageReference Include="FsUnit.Xunit" Version="3.0.0" /&gt;
+&lt;PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" /&gt;
+&lt;PackageReference Include="xunit" Version="2.3.1" /&gt;
+&lt;PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" /&gt;
+&lt;DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p>  <ItemGroup></p>
+
+<pre><code>&lt;ProjectReference Include="..\FizzBuzz\FizzBuzz.fsproj" /&gt;
+</code></pre>
+
+<p>  </ItemGroup></p>
+
+<p></Project>
+```</p>
+
+<p>Note the line <code>&lt;PackageReference Include="FsUnit.Xunit" Version="3.0.0" /&gt;</code> (your version number might differ).</p>
+
+<h4>Using FsUnit</h4>
+
+<p>Modify the test file <code>FizzBuzz.Tests/Tests.fs</code> to look like this:
+```fsharp
+module Tests</p>
+
+<p>open System
+open FsUnit.Xunit // &lt;&mdash; add FsUnit.Xunit
+open Xunit
+open FizzBuzz</p>
+
+<p>[<Fact>]
+let <code>Array with Number 1 returns 'one'</code> () =</p>
+
+<pre><code>FizzBuzz.Generate [1] 
+|&gt; should equal "one" // using "|&gt;" and "should" syntax
+</code></pre>
+
+<p>```</p>
+
+<p>Running the unit tests within the test folder:</p>
+
+<p>```sh
+dotnet test
+Build started, please wait&hellip;
+Build completed.</p>
+
+<p>Test run for /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll(.NETCoreApp,Version=v2.0)
+Microsoft &reg; Test Execution Command Line Tool Version 15.5.0
+Copyright &copy; Microsoft Corporation.  All rights reserved.</p>
+
+<p>Starting test execution, please wait&hellip;
+[xUnit.net 00:00:00.7436128]   Discovering: FizzBuzz.Tests
+[xUnit.net 00:00:00.8627111]   Discovered:  FizzBuzz.Tests
+[xUnit.net 00:00:00.8695487]   Starting:    FizzBuzz.Tests
+[xUnit.net 00:00:01.1888259]   Finished:    FizzBuzz.Tests</p>
+
+<p>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+Test Run Successful.
+Test execution time: 2.4787 Seconds
+```</p>
+
+<h3>Summary</h3>
+
+<p>We can now write unit tests in an F# way (&ldquo;idiomatic&rdquo;) by using the library <code>FsUnit</code>.</p>
+
+<p>Have fun with F# and linux!</p>
+
+<p>Get the source code <a href="https://github.com/draptik/blog-fsharp-fizzbuzz-setup">here</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[F# Setup Linux: FizzBuzz]]></title>

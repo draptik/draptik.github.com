@@ -4,7 +4,7 @@
   <title><![CDATA[draptik]]></title>
   <link href="http://draptik.github.io/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-02-07T20:26:13+00:00</updated>
+  <updated>2018-02-07T23:39:07+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,228 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[F# Test Setup for FizzBuzz]]></title>
+    <link href="http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/"/>
+    <updated>2018-02-07T20:53:43+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz</id>
+    <content type="html"><![CDATA[<p>In my <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> we setup a basic F# project in Linux.</p>
+
+<p>In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</p>
+
+<h4>Side note for people unfamiliar with .NET</h4>
+
+<p>Actually, it&rsquo;s not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
+
+<p>We have 2 projects (<code>FizzBuzz</code> and <code>FizzBuzz.Tests</code>), each with a <code>*.fsproj</code> file. The <code>FizzBuzz.Tests.fsproj</code> references the <code>FizzBuzz.fsproj</code> file (see the <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> for details):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.
+</span><span class='line'>├── FizzBuzz
+</span><span class='line'>│   ├── FizzBuzz.fsproj
+</span><span class='line'>│   ├── ...
+</span><span class='line'>├── FizzBuzz.Tests
+</span><span class='line'>│   ├── FizzBuzz.Tests.fsproj
+</span><span class='line'>│   ├── ...
+</span><span class='line'>└── fsharp-kata-fizzbuzz.sln</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Current state</h3>
+
+<p>This is the current state of our test:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="s2">&quot;one&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>[&lt;Fact&gt;]</code>: this is F#&rsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
+<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
+<li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
+</ul>
+
+
+<h3>FsUnit: Idiomatic assertions</h3>
+
+<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages on concept is preferred over the other.</p>
+
+<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
+
+<p>Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="c1">// instead of</span>
+</span><span class='line'><span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// idiomatic F# (using pipe) with FsUnit:</span>
+</span><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Installing FsUnit</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd </span>FizzBuzz.Tests
+</span><span class='line'>dotnet add package FsUnit.Xunit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>File <code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code> should now look like this (plus/minus some version numbers):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;PropertyGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.0<span class="nt">&lt;/TargetFramework&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;IsPackable&gt;</span>false<span class="nt">&lt;/IsPackable&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/PropertyGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Tests.fs&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Program.fs&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;FsUnit.Xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.0.0&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Microsoft.NET.Test.Sdk&quot;</span> <span class="na">Version=</span><span class="s">&quot;15.5.0&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit.runner.visualstudio&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;DotNetCliToolReference</span> <span class="na">Include=</span><span class="s">&quot;dotnet-xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ProjectReference</span> <span class="na">Include=</span><span class="s">&quot;..\FizzBuzz\FizzBuzz.fsproj&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/Project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note the line <code>&lt;PackageReference Include="FsUnit.Xunit" Version="3.0.0" /&gt;</code> (your version number might differ).</p>
+
+<h4>Using FsUnit</h4>
+
+<p>Modify the test file <code>FizzBuzz.Tests/Tests.fs</code> to look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">Tests</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">open</span> <span class="nc">System</span>
+</span><span class='line'><span class="k">open</span> <span class="nn">FsUnit</span><span class="p">.</span><span class="nc">Xunit</span> <span class="c1">// &lt;-- add FsUnit.Xunit</span>
+</span><span class='line'><span class="k">open</span> <span class="nc">Xunit</span>
+</span><span class='line'><span class="k">open</span> <span class="nc">FizzBuzz</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="s2">&quot;one&quot;</span> <span class="c1">// using &quot;|&gt;&quot; and &quot;should&quot; syntax</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the unit tests within the test folder:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>dotnet <span class="nb">test</span>
+</span><span class='line'>Build started, please wait...
+</span><span class='line'>Build completed.
+</span><span class='line'>
+</span><span class='line'>Test run <span class="k">for</span> /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll<span class="o">(</span>.NETCoreApp,Version<span class="o">=</span>v2.0<span class="o">)</span>
+</span><span class='line'>Microsoft <span class="o">(</span>R<span class="o">)</span> Test Execution Command Line Tool Version 15.5.0
+</span><span class='line'>Copyright <span class="o">(</span>c<span class="o">)</span> Microsoft Corporation.  All rights reserved.
+</span><span class='line'>
+</span><span class='line'>Starting <span class="nb">test </span>execution, please wait...
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.7436128<span class="o">]</span>   Discovering: FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8627111<span class="o">]</span>   Discovered:  FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8695487<span class="o">]</span>   Starting:    FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:01.1888259<span class="o">]</span>   Finished:    FizzBuzz.Tests
+</span><span class='line'>
+</span><span class='line'>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+</span><span class='line'>Test Run Successful.
+</span><span class='line'>Test execution <span class="nb">time</span>: 2.4787 Seconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Summary</h3>
+
+<p>We can now write unit tests in an F# way (&ldquo;idiomatic&rdquo;) by using the library <code>FsUnit</code>.</p>
+
+<p>Have fun with F# and linux!</p>
+
+<p>Get the source code <a href="https://github.com/draptik/blog-fsharp-fizzbuzz-setup">here</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[F# Setup Linux: FizzBuzz]]></title>
@@ -5727,299 +5949,6 @@ An alternative folder/file structure for AngularJS projects compared to <a href=
 
 
 <p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test">https://github.com/draptik/angulardemorestful/releases/tag/step3-backend-test</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Guice in Java Web Application]]></title>
-    <link href="http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application/"/>
-    <updated>2013-07-18T21:36:00+00:00</updated>
-    <id>http://draptik.github.io/blog/2013/07/18/guice-in-java-web-application</id>
-    <content type="html"><![CDATA[<p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google&rsquo;s Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
-
-<p>Advantages compared to <a href="http://en.wikipedia.org/wiki/Spring_Framework">Spring</a>:</p>
-
-<ul>
-<li>Spring is much more than an IoC container, and therefore overkill for many projects.</li>
-<li>Configuration by code. <em>NO XML</em>.</li>
-</ul>
-
-
-<p>Based on my <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">previous post showing how to use AngularJS with a Java RESTful backend</a> I extended the simple demo application to use Guice.</p>
-
-<p>Let&rsquo;s say we have a <code>UserServiceImpl</code> class which depends on a <code>UserFactory</code> interface. The <code>UserFactory</code> interface is injected into the constructor of the <code>UserServiceImpl</code> class.</p>
-
-<p>The only thing we have to do is add the <code>@Inject</code> annotation to the constructor so that Guice can do its job.</p>
-
-<figure class='code'><figcaption><span>UserServiceImpl.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">service</span><span class="o">.</span><span class="na">impl</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Inject</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Singleton</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.domain.User</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserServiceImpl</span> <span class="kd">implements</span> <span class="n">UserService</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="kd">final</span> <span class="n">UserFactory</span> <span class="n">userFactory</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Inject</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="nf">UserServiceImpl</span><span class="o">(</span><span class="n">UserFactory</span> <span class="n">userFactory</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span> <span class="o">=</span> <span class="n">userFactory</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="nf">getDefaultUsers</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span><span class="o">.</span><span class="na">createUsers</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="n">User</span> <span class="nf">getDefaultUser</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">userFactory</span><span class="o">.</span><span class="na">createUser</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For the IoC container to know which implementation to inject we have to create a Guice <em>Module</em> which derives from <code>AbstractModule</code>:</p>
-
-<figure class='code'><figcaption><span>UserModule.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">infrastructure</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.AbstractModule</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserFactory</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.contract.UserService</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.impl.UserFactoryImpl</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">ngdemo.service.impl.UserServiceImpl</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserModule</span> <span class="kd">extends</span> <span class="n">AbstractModule</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">bind</span><span class="o">(</span><span class="n">UserFactory</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserFactoryImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">bind</span><span class="o">(</span><span class="n">UserService</span><span class="o">.</span><span class="na">class</span><span class="o">).</span><span class="na">to</span><span class="o">(</span><span class="n">UserServiceImpl</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>UserModule</code> class demonstrates the advantage of Guice vs. Spring: <em>NO XML</em>. When using Spring you normally would have to create Spring beans in an XML file like this:</p>
-
-<figure class='code'><figcaption><span>applicationContext.xml (pseudo code)</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-</span><span class='line'><span class="nt">&lt;beans</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.springframework.org/schema/beans&quot;</span>
-</span><span class='line'>  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;userService&quot;</span> <span class="na">class=</span><span class="s">&quot;ngdemo.service.impl.UserServiceImpl&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">&quot;userFactory&quot;</span><span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/bean&gt;</span>
-</span><span class='line'>  
-</span><span class='line'>  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;userFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;ngdemo.service.impl.UserFactoryImpl&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>      
-</span><span class='line'><span class="nt">&lt;/beans&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next we have to create a replacement for the servlets required by the servlet container:</p>
-
-<figure class='code'><figcaption><span>ngdemo.infrastructure.NgDemoApplicationSetup.java</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">ngdemo</span><span class="o">.</span><span class="na">infrastructure</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Guice</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.Injector</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.GuiceServletContextListener</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.inject.servlet.ServletModule</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.PackagesResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.api.core.ResourceConfig</span><span class="o">;</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.sun.jersey.guice.spi.container.servlet.GuiceContainer</span><span class="o">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NgDemoApplicationSetup</span> <span class="kd">extends</span> <span class="n">GuiceServletContextListener</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kd">protected</span> <span class="n">Injector</span> <span class="nf">getInjector</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">return</span> <span class="n">Guice</span><span class="o">.</span><span class="na">createInjector</span><span class="o">(</span><span class="k">new</span> <span class="n">ServletModule</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>            <span class="nd">@Override</span>
-</span><span class='line'>            <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configureServlets</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="kd">super</span><span class="o">.</span><span class="na">configureServlets</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="c1">// Configuring Jersey via Guice:</span>
-</span><span class='line'>                <span class="n">ResourceConfig</span> <span class="n">resourceConfig</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PackagesResourceConfig</span><span class="o">(</span><span class="s">&quot;ngdemo/rest&quot;</span><span class="o">);</span>
-</span><span class='line'>                <span class="k">for</span> <span class="o">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">resource</span> <span class="o">:</span> <span class="n">resourceConfig</span><span class="o">.</span><span class="na">getClasses</span><span class="o">())</span> <span class="o">{</span>
-</span><span class='line'>                    <span class="n">bind</span><span class="o">(</span><span class="n">resource</span><span class="o">);</span>
-</span><span class='line'>                <span class="o">}</span>
-</span><span class='line'>                <span class="n">serve</span><span class="o">(</span><span class="s">&quot;/rest/*&quot;</span><span class="o">).</span><span class="na">with</span><span class="o">(</span><span class="n">GuiceContainer</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">},</span> <span class="k">new</span> <span class="n">UserModule</span><span class="o">());</span> <span class="c1">// &lt;-- Adding other Guice Dependency Injection Modules</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And finally the file <code>web.xml</code>:</p>
-
-<figure class='code'><figcaption><span>web.xml </span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;!DOCTYPE web-app PUBLIC</span>
-</span><span class='line'><span class="cp">        &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</span>
-</span><span class='line'><span class="cp">        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot; &gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;web-app</span> <span class="na">id=</span><span class="s">&quot;WebApp_ID&quot;</span> <span class="na">version=</span><span class="s">&quot;2.4&quot;</span>
-</span><span class='line'>         <span class="na">xmlns=</span><span class="s">&quot;http://java.sun.com/xml/ns/j2ee&quot;</span>
-</span><span class='line'>         <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>         <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://java.sun.com/xml/ns/j2ee</span>
-</span><span class='line'><span class="s">  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;display-name&gt;</span>Restful Web Application<span class="nt">&lt;/display-name&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;filter&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;filter-name&gt;</span>guiceFilter<span class="nt">&lt;/filter-name&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;filter-class&gt;</span>com.google.inject.servlet.GuiceFilter<span class="nt">&lt;/filter-class&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/filter&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;filter-mapping&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;filter-name&gt;</span>guiceFilter<span class="nt">&lt;/filter-name&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;url-pattern&gt;</span>/*<span class="nt">&lt;/url-pattern&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/filter-mapping&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;listener&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;listener-class&gt;</span>ngdemo.infrastructure.NgDemoApplicationSetup<span class="nt">&lt;/listener-class&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/listener&gt;</span>
-</span><span class='line'><span class="nt">&lt;/web-app&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The file <code>web.xml</code> is now free of any <code>&lt;servlet&gt;</code> tags. The only thing that has to be configured in XML is the <code>&lt;listener-class&gt;</code>. The value of the <code>&lt;listener-class&gt;</code> is our Java class <code>NgDemoApplicationSetup</code>, so all further configuration can be defined in a type safe manner.</p>
-
-<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
-
-<p>To checkout the correct version for this demo, use the following code:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:draptik/angulardemorestful.git
-</span><span class='line'><span class="nb">cd </span>angulardemorestful
-</span><span class='line'>git checkout -f step2-guice
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step2-guice">https://github.com/draptik/angulardemorestful/releases/tag/step2-guice</a></p>
 ]]></content>
   </entry>
   

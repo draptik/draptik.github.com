@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="To add applications like Truecrypt to Ubuntu&rsquo;s Unity panel the application has to be &ldquo;white listed&rdquo;. Install dconf-editor (ie sudo &hellip;">
+  <meta name="description" content="The current version of Oracle&rsquo;s VirtualBox (4.0.8) has Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/">Workaround for VirtualBox 4.0.8 Regression Bug</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-25T20:35:29+00:00" pubdate data-updated="true">May 25<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><del>The current version of Oracle&rsquo;s VirtualBox (4.0.8) has</del> Version 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</p>
+
+<p>Here is the summary of the workaround posted as <a href="http://www.virtualbox.org/ticket/8948">VirtualBox Ticket 8948</a>:</p>
+
+<ol>
+<li><p> Edit the settings file to allow the VM to start again (Replace control characters in line 315 with 4.0.8).</p></li>
+<li><p> Start the Windows guest</p></li>
+<li><p> Run <code>regedit</code></p></li>
+<li><p> Go to <code>HKLM\SOFTWARE\Oracle\VirtualBox Guest Additions</code></p></li>
+<li><p> Create a string key <code>VersionEx</code> (use exactly this spelling)</p></li>
+<li><p> Give it a reasonable value (ie 4.0.8)</p></li>
+<li><p> Shut down the VM.</p></li>
+<li><p> Repeat step 1</p></li>
+<li><p> Restart and shutdown windows guest again</p></li>
+</ol>
+
+
+<p>That&rsquo;s it.</p>
+
+<p>Edit: This bug has been fixed in version 4.0.10 (released 2011-06-27).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -539,67 +594,6 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/">Using a Different Minor-mode-prefix With Rinari (Emacs Rails)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-27T20:40:27+00:00" pubdate data-updated="true">Apr 27<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://rinari.rubyforge.org/">Rinari</a> is a Ruby on Rails Minor Mode for GNU/Emacs.</p>
-
-<p><strong>Problem:</strong> Most key mappings / keyboard shortcuts rely on the hard coded strings <code>;</code> and <code>'</code> (I.e. <code>C-; f c</code> &ndash;> <code>rinari-find-controller</code>). These prefixes are difficult to access on a German keyboard because they require the shift modifier.</p>
-
-<p><strong>Solution:</strong> The following code adds a comma to the list of rinari-prefix strings. Add it to your GNU/Emacs configuration file (i.e. <code>~/.emacs</code>):</p>
-
-<figure class='code'><figcaption><span>~/.emacs</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='scheme'><span class='line'><span class="p">(</span><span class="nf">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&quot;~/your-path-to-rinari-source-code/rinari&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="err">﻿</span><span class="c1">;; This patch must appear before the line &quot;(require &#39;rinari)&quot;!</span>
-</span><span class='line'><span class="p">(</span><span class="nf">defvar</span> <span class="nv">rinari-minor-mode-prefixes</span>
-</span><span class='line'><span class="p">(</span><span class="nb">list </span><span class="s">&quot;;&quot;</span> <span class="s">&quot;&#39;&quot;</span> <span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="c1">;; CHANGE Added comma to prefix list</span>
-</span><span class='line'>     <span class="s">&quot;List of characters, each of which will be bound (with C-c) as a rinari-minor-mode keymap prefix.&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;rinari</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Result: </strong>We can now access the command <code>rinari-find-controller</code> with the key sequence <code>C-c , f c</code>.</p>
-
-<p><strong>Side note:</strong> I&rsquo;m all ears for more Emacs-Lispy solutions to this problem. ;&ndash;)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -617,6 +611,10 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a>
       </li>
     
@@ -630,10 +628,6 @@ copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
     
       <li class="post">
         <a href="/blog/2017/01/10/pi-hole-simple-ad-blocker-for-your-network/">Pi Hole - Simple Ad Blocker for Your Network</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/01/09/bash-tricks/">Bash Tricks</a>
       </li>
     
   </ul>

@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>F# Test Setup for FizzBuzz - draptik</title>
+  <meta name="author" content="Patrick Drechsler">
+
+  
+  <meta name="description" content="In my previous post we setup a basic F# project in Linux. In this post I would like to show how to setup an idiomatic F# testing environment using &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-65991503-1']);
+	_gaq.push(['_setDomainName','github.io']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">draptik</a></h1>
+  
+    <h2>mostly tech stuff</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:draptik.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">F# Test Setup for FizzBuzz</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-02-07T20:53:43+00:00" pubdate data-updated="true">Feb 7<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In my <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> we setup a basic F# project in Linux.</p>
+
+<p>In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</p>
+
+<h4>Side note for people unfamiliar with .NET</h4>
+
+<p>Actually, it&rsquo;s not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
+
+<p>We have 2 projects (<code>FizzBuzz</code> and <code>FizzBuzz.Tests</code>), each with a <code>*.fsproj</code> file. The <code>FizzBuzz.Tests.fsproj</code> references the <code>FizzBuzz.fsproj</code> file (see the <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> for details):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.
+</span><span class='line'>├── FizzBuzz
+</span><span class='line'>│   ├── FizzBuzz.fsproj
+</span><span class='line'>│   ├── ...
+</span><span class='line'>├── FizzBuzz.Tests
+</span><span class='line'>│   ├── FizzBuzz.Tests.fsproj
+</span><span class='line'>│   ├── ...
+</span><span class='line'>└── fsharp-kata-fizzbuzz.sln</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Current state</h3>
+
+<p>This is the current state of our test:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="s2">&quot;one&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><code>[&lt;Fact&gt;]</code>: this is F#&rsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
+<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
+<li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
+</ul>
+
+
+<h3>FsUnit: Idiomatic assertions</h3>
+
+<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages on concept is preferred over the other.</p>
+
+<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
+
+<p>Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="c1">// instead of</span>
+</span><span class='line'><span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// idiomatic F# (using pipe) with FsUnit:</span>
+</span><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Installing FsUnit</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd </span>FizzBuzz.Tests
+</span><span class='line'>dotnet add package FsUnit.Xunit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>File <code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code> should now look like this (plus/minus some version numbers):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;PropertyGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.0<span class="nt">&lt;/TargetFramework&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;IsPackable&gt;</span>false<span class="nt">&lt;/IsPackable&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/PropertyGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Tests.fs&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Program.fs&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;FsUnit.Xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.0.0&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Microsoft.NET.Test.Sdk&quot;</span> <span class="na">Version=</span><span class="s">&quot;15.5.0&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit.runner.visualstudio&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;DotNetCliToolReference</span> <span class="na">Include=</span><span class="s">&quot;dotnet-xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;ProjectReference</span> <span class="na">Include=</span><span class="s">&quot;..\FizzBuzz\FizzBuzz.fsproj&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/Project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note the line <code>&lt;PackageReference Include="FsUnit.Xunit" Version="3.0.0" /&gt;</code> (your version number might differ).</p>
+
+<h4>Using FsUnit</h4>
+
+<p>Modify the test file <code>FizzBuzz.Tests/Tests.fs</code> to look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">Tests</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">open</span> <span class="nc">System</span>
+</span><span class='line'><span class="k">open</span> <span class="nn">FsUnit</span><span class="p">.</span><span class="nc">Xunit</span> <span class="c1">// &lt;-- add FsUnit.Xunit</span>
+</span><span class='line'><span class="k">open</span> <span class="nc">Xunit</span>
+</span><span class='line'><span class="k">open</span> <span class="nc">FizzBuzz</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
+</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
+</span><span class='line'>    <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="s2">&quot;one&quot;</span> <span class="c1">// using &quot;|&gt;&quot; and &quot;should&quot; syntax</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the unit tests within the test folder:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>dotnet <span class="nb">test</span>
+</span><span class='line'>Build started, please wait...
+</span><span class='line'>Build completed.
+</span><span class='line'>
+</span><span class='line'>Test run <span class="k">for</span> /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll<span class="o">(</span>.NETCoreApp,Version<span class="o">=</span>v2.0<span class="o">)</span>
+</span><span class='line'>Microsoft <span class="o">(</span>R<span class="o">)</span> Test Execution Command Line Tool Version 15.5.0
+</span><span class='line'>Copyright <span class="o">(</span>c<span class="o">)</span> Microsoft Corporation.  All rights reserved.
+</span><span class='line'>
+</span><span class='line'>Starting <span class="nb">test </span>execution, please wait...
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.7436128<span class="o">]</span>   Discovering: FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8627111<span class="o">]</span>   Discovered:  FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8695487<span class="o">]</span>   Starting:    FizzBuzz.Tests
+</span><span class='line'><span class="o">[</span>xUnit.net 00:00:01.1888259<span class="o">]</span>   Finished:    FizzBuzz.Tests
+</span><span class='line'>
+</span><span class='line'>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
+</span><span class='line'>Test Run Successful.
+</span><span class='line'>Test execution <span class="nb">time</span>: 2.4787 Seconds
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Summary</h3>
+
+<p>We can now write unit tests in an F# way (&ldquo;idiomatic&rdquo;) by using the library <code>FsUnit</code>.</p>
+
+<p>Have fun with F# and linux!</p>
+
+<p>Get the source code <a href="https://github.com/draptik/blog-fsharp-fizzbuzz-setup">here</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Patrick Drechsler</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-02-07T20:53:43+00:00" pubdate data-updated="true">Feb 7<span>th</span>, 2018</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/dot-net/'>.NET</a>, <a class='category' href='/blog/categories/dotnetcore/'>dotnetcore</a>, <a class='category' href='/blog/categories/fizzbuzz/'>fizzbuzz</a>, <a class='category' href='/blog/categories/fsharp/'>fsharp</a>, <a class='category' href='/blog/categories/kata/'>kata</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>, <a class='category' href='/blog/categories/test/'>test</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/" title="Previous Post: F# Setup Linux: FizzBuzz">&laquo; F# Setup Linux: FizzBuzz</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/03/30/learning/">Learning by Meeting People</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/10/pi-hole-simple-ad-blocker-for-your-network/">Pi Hole - Simple Ad Blocker for Your Network</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2009 - 2018 - Patrick Drechsler  
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'draptik';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/';
+        var disqus_url = 'http://draptik.github.io/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
