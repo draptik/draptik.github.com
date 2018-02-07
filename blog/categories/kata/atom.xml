@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kata | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/kata/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-02-07T23:39:07+00:00</updated>
+  <updated>2018-02-07T23:51:18+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -60,7 +60,7 @@ Assert.Equal(result, "one")
 
 <h3>FsUnit: Idiomatic assertions</h3>
 
-<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages on concept is preferred over the other.</p>
+<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile if you don&rsquo;t comply to these conventions, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages one concept is preferred over the other.</p>
 
 <p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
 
