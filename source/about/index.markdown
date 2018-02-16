@@ -25,6 +25,10 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 
 - Value objects on steroids
   - [Developer Week 2018](https://www.developer-week.de/), Jun. 25 2018
+- Funktionale Programmierung für OO-Programmierer
+  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr 20 2018
+- Railway Oriented Programming - Komplexe Orchestrierung wartbar machen 
+  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr 21 2018
 - Functional Programming for OO Developers - A gentle introduction
   - [Softwerkskammer Nürnberg](https://www.softwerkskammer.org/activities/Treffen_52_SWK_Nuernberg_Mock_Heuristiken_FP_Fuer_OO_Entwickler), Feb. 1 2018
 - Paket - an alternative to NuGet?
