@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: VisualStudio | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/visualstudio/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2018-02-20T19:24:48+00:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Visual Studio's default path for new projects]]></title>
+    <link href="http://draptik.github.io/blog/2018/02/20/visual-studios-default-path-for-new-projects/"/>
+    <updated>2018-02-20T18:13:10+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/02/20/visual-studios-default-path-for-new-projects</id>
+    <content type="html"><![CDATA[<p>Today I took the time to fix something very simple: Visual Studio&rsquo;s default path.</p>
+
+<p>In the past decade there has never been a single project I wanted to save to:</p>
+
+<p><code>C:\Users\&lt;username&gt;\Documents\Visual Studio &lt;vs version&gt;\Projects</code></p>
+
+<p><img src="/images/posts/vs-default-path/vs-default-path1.png"></p>
+
+<p>I was expecting having to dive into the windows registry to fix this, but it turned out to be rather simple to change this.</p>
+
+<p>In Visual Studio navigate to <code>Tools -&gt; Options -&gt; Projects and Solutions -&gt; Locations</code></p>
+
+<p><img src="/images/posts/vs-default-path/vs-default-path2.png"></p>
+
+<p>Change <code>Project Location</code> to the desired folder:</p>
+
+<p><img src="/images/posts/vs-default-path/vs-default-path3.png"></p>
+
+<p>Et voila:</p>
+
+<p><img src="/images/posts/vs-default-path/vs-default-path4.png"></p>
+
+<p>TL/DR: In Visual Studio: <code>Tools -&gt; Options -&gt; Projects and Solutions -&gt; Locations</code></p>
+]]></content>
+  </entry>
+  
+</feed>
