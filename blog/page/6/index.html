@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="A couple of weeks back I discovered a great tutorial on Ruby on Rails by Michael Hartl at ﻿﻿http://www.railstutorial.org The tutorial takes you &hellip;">
+  <meta name="description" content="Since Microsoft&rsquo;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/08/20/using-nunit-with-visual-studio-express/">Using NUnit With Visual Studio Express</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-20T00:08:36+00:00" pubdate data-updated="true">Aug 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since Microsoft&rsquo;s <strong>Visual Studio Express</strong> edition does not allow installation of any plugins anymore (f.ex. <a href="http://www.testdriven.net/">TestDriven.Net</a>), here is a quick workaround to get <a href="http://www.nunit.org/">NUnit</a>-GUI working. Add this to your Post-Build section of your Project settings:</p>
+
+<p><code>
+copy /Y "$(ProjectDir)App.config" "$(TargetDir)$(TargetFileName).config"
+</code></p>
+
+<p>For more details please consult <a href="http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx">http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -902,332 +944,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/06/15/my-helloworld-script-for-maven/">My HelloWorld Script for Maven</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-15T22:26:55+00:00" pubdate data-updated="true">Jun 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;m still in the learning phase of using <a href="http://maven.apache.org/">Maven</a>, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Description: Create a simple Java project using Maven.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Status: Works</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Author: draptik</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># Created: Mon Jun 15 21:17:24 2009</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># REQUIREMENTS</span>
-</span><span class='line'><span class="c"># ============</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 1. Maven</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 2. This script requires the file &quot;sample-pom.xml&quot;!!!</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 3. The &quot;sample-pom.xml&quot; file should be located in the same folder as</span>
-</span><span class='line'><span class="c"># this script.</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># USAGE</span>
-</span><span class='line'><span class="c"># =====</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 1. Copy this script and &quot;sample-pom.xml&quot; to a newly created test</span>
-</span><span class='line'><span class="c"># folder (ie ~/tmp/maventesting/).</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># 2. Run this script</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># DETAILS</span>
-</span><span class='line'><span class="c"># =======</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># This script creates a &quot;quickstart&quot; Maven project, then overwrites</span>
-</span><span class='line'><span class="c"># the created pom.xml with something more sensible (including some</span>
-</span><span class='line'><span class="c"># useful Maven plugins), and runs &quot;java -jar .jar&quot;.</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## User settings</span>
-</span><span class='line'><span class="nv">companyName</span><span class="o">=</span><span class="s2">&quot;org.foo&quot;</span>
-</span><span class='line'><span class="nv">appName</span><span class="o">=</span><span class="s2">&quot;my-app&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Static file</span>
-</span><span class='line'><span class="nv">samplePom</span><span class="o">=</span><span class="s2">&quot;sample-pom.xml&quot;</span>
-</span><span class='line'><span class="nv">pdinfo</span><span class="o">=</span><span class="s2">&quot;[PDINFO] &quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Delete old builds</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== REMOVING PREVIOUS BUILDS =====================&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;rm -rf \&quot;$appName\&quot;&quot;</span>
-</span><span class='line'>rm -rf <span class="s2">&quot;$appName&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Create Maven skeleton</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## NOTE: You can exchange the first 2 lines with:</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## mvn archetype:create \</span>
-</span><span class='line'><span class="c">##         -DarchetypeGroupId=org.apache.maven.archetypes \</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## This will result in a warning that &quot;archetype:create&quot; is</span>
-</span><span class='line'><span class="c">## deprecated. The warning states that you should use</span>
-</span><span class='line'><span class="c">## &quot;archetype:generate&quot;. This archetype is interactive by default. To</span>
-</span><span class='line'><span class="c">## skip the interactive part and choose the default (=&quot;quickstart&quot;)</span>
-</span><span class='line'><span class="c">## you have to pass the option &quot;-Dinteractive=false&quot; to Maven.</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== MAVEN CREATION ================================&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;&quot;</span>
-</span><span class='line'>mvn archetype:generate <span class="se">\</span>
-</span><span class='line'>  -DinteractiveMode<span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
-</span><span class='line'>  -DarchetypeGroupId<span class="o">=</span>org.apache.maven.archetypes <span class="se">\</span>
-</span><span class='line'>  -DgroupId<span class="o">=</span><span class="s2">&quot;$companyName&quot;</span> <span class="se">\</span>
-</span><span class='line'>  -DartifactId<span class="o">=</span><span class="s2">&quot;$appName&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Show the diff between generated pom.xml and sample-pom.xml</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== DIFF BETWEEN GENERATED AND MY POM.XML ========&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;diff -u \&quot;$appName\&quot;/pom.xml \&quot;$samplePom\&quot; &quot;</span>
-</span><span class='line'>diff -u <span class="s2">&quot;$appName&quot;</span>/pom.xml <span class="s2">&quot;$samplePom&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Overwrite generated pom.xml</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== OVERWRITING GENERATED POM.XML ================&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;cp  \&quot;$samplePom\&quot; \&quot;$appName\&quot;/pom.xml&quot;</span>
-</span><span class='line'>cp  <span class="s2">&quot;$samplePom&quot;</span> <span class="s2">&quot;$appName&quot;</span>/pom.xml
-</span><span class='line'>
-</span><span class='line'><span class="c">## Move to newly created project</span>
-</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$appName&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Make an executable jar file</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== MAKING THE FINAL JAR FILE ====================&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;mvn package&quot;</span>
-</span><span class='line'>mvn package
-</span><span class='line'>
-</span><span class='line'><span class="c">## Move to target folder</span>
-</span><span class='line'><span class="nb">cd </span>target
-</span><span class='line'>
-</span><span class='line'><span class="c">## Run the Hello-World example</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;====== TESTING THE JAR FILE ==========================&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;java -jar $appName-1.0-SNAPSHOT.jar...&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$pdinfo&quot;</span> <span class="s2">&quot;If the next line does not read \&quot;Hello World!\&quot;, something is wrong&quot;</span>
-</span><span class='line'>java -jar <span class="s2">&quot;$appName&quot;</span>-1.0-SNAPSHOT.jar
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is the file <code>sample-pom.xml</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-</span><span class='line'>  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;groupId&gt;</span>org.foo<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;artifactId&gt;</span>my-app<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;version&gt;</span>1.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;name&gt;</span>my-app<span class="nt">&lt;/name&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;url&gt;</span>http://maven.apache.org<span class="nt">&lt;/url&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;build&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>maven-eclipse-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>maven-jar-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;archive&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;manifest&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;addClasspath&gt;</span>true<span class="nt">&lt;/addClasspath&gt;</span>
-</span><span class='line'>              <span class="nt">&lt;mainClass&gt;</span>org.foo.App<span class="nt">&lt;/mainClass&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/manifest&gt;</span>
-</span><span class='line'>          <span class="nt">&lt;/archive&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/build&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;dependencies&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;dependency&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>junit<span class="nt">&lt;/groupId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>junit<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;version&gt;</span>3.8.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/dependency&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/dependencies&gt;</span>
-</span><span class='line'><span class="nt">&lt;/project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1245,6 +961,10 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/03/15/that-moment/">That Moment&#8230;</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a>
       </li>
     
@@ -1258,10 +978,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
     
       <li class="post">
         <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/30/learning/">Learning by Meeting People</a>
       </li>
     
   </ul>

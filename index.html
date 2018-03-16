@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Today I took the time to fix something very simple: Visual Studio&rsquo;s default path. In the past decade there has never been a single project I &hellip;">
+  <meta name="description" content="Half a year ago I introduced an inhouse event called &ldquo;Lunch and Learn&rdquo; to the company I work for. I would like to share my today&rsquo;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/03/15/that-moment/">That Moment&#8230;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-03-15T22:04:36+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Half a year ago I introduced an inhouse event called &ldquo;Lunch and Learn&rdquo; to the company I work for. I would like to share my today&rsquo;s experiences.</p>
+
+<h2>Motivation</h2>
+
+<p>I learn(ed) a lot from visiting local meetups, such as <a href="https://www.softwerkskammer.org/">Softwerkskammer</a>. <strong>Clean Code</strong> is &ldquo;a thing&rdquo;: I was not the only one who was aware of SOLID, DRY, TDD, etc. But: Not everybody has the time to visit such events in their spare time. So my idea was simple: the people at work can eat lunch, and learn. In their spare time.</p>
+
+<h2>Today&hellip;</h2>
+
+<p>The company I work for employs hardware and software developers/architects.</p>
+
+<p>Imagine: 12 developers. 3 experienced OO enterprise, 2 hardcore FP, 2 C++, the rest novices, starting a TDD session. Each with different TDD and mob-programming experience.</p>
+
+<p>What I enjoyed most:</p>
+
+<ul>
+<li>Hearing experts in their field (low-level C programmers discussing with javascript/Haskell cracks with OO-enterprise [c#/java] field-experience people)</li>
+<li>juniors trying to summarize the above</li>
+</ul>
+
+
+<p><strong>That moment</strong>: When the C++ guy tried to explain the essence of TDD to the Haskell guy. And everybody pitched in! Another discussion was on it&rsquo;s way!</p>
+
+<h2>Try it: Lunch &amp; Learn</h2>
+
+<p>Try it in your company!</p>
+
+<p>Questions: Don&rsquo;t hesitate to contact me!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2388,450 +2450,6 @@ gives you a more up to date version of Node.js than default Raspbian does):
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/09/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 2: Software)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-07-09T22:13:12+00:00" pubdate data-updated="true">Jul 9<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
-This post will use a small python program to save the recorded temperatures to a database.</p>
-
-<p>For simplicity&rsquo;s sake we&rsquo;ll be using SQLite3 as our database.</p>
-
-<p>Aside from our (indoor) temperature sensors, we&rsquo;ll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
-
-<p>Note: In case your Raspberry Pi does not have access to the internet you can just exlude the weather underground parts in the code below.</p>
-
-<p>All following code is intended to run on the Raspberry Pi receiving the data.</p>
-
-<h3>Create database (SQLite3)</h3>
-
-<p>The database schema is simple. We need one table to store the temperatures, and another to store sensor information.</p>
-
-<p>Create a new file called <code>templog.db</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>touch templog.db
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There are different ways to interact with SQLite3 (cli (=interactive), script, api).</p>
-
-<p>The goal is to execute the following sql statements:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sensors</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="n">name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">id</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">baudrate</span> <span class="nb">INTEGER</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">port</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">active</span> <span class="nb">INTEGER</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">temps</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="k">timestamp</span> <span class="nb">TEXT</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">temp</span> <span class="nb">REAL</span><span class="p">,</span>
-</span><span class='line'>    <span class="n">ID</span> <span class="nb">TEXT</span>
-</span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Simplest solution is to open the newly created file <code>templog.db</code> with <code>sqlite3</code> (cli/interactive) &hellip;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">sqlite3</span> <span class="n">templog</span><span class="p">.</span><span class="n">db</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;and past the previous code block. Should look like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="err">$</span> <span class="n">sqlite3</span> <span class="n">demo</span><span class="p">.</span><span class="n">db</span>
-</span><span class='line'><span class="n">SQLite</span> <span class="k">version</span> <span class="mi">3</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">2</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">20</span> <span class="mi">18</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">19</span>
-</span><span class='line'><span class="n">Enter</span> <span class="ss">&quot;.help&quot;</span> <span class="k">for</span> <span class="k">usage</span> <span class="n">hints</span><span class="p">.</span>
-</span><span class='line'><span class="n">sqlite</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">sensors</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">(</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">name</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">id</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">baudrate</span> <span class="nb">INTEGER</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">port</span> <span class="nb">TEXT</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">active</span> <span class="nb">INTEGER</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">);</span>
-</span><span class='line'><span class="n">sqlite</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">temps</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">(</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="k">timestamp</span> <span class="nb">TEXT</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">temp</span> <span class="nb">REAL</span><span class="p">,</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span>     <span class="n">ID</span> <span class="nb">TEXT</span>
-</span><span class='line'>   <span class="p">...</span><span class="o">&gt;</span> <span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We&rsquo;ve created a database.</p>
-
-<p>The important table is <code>temps</code>: It will contain the measurements.</p>
-
-<p>The other table (<code>sensors</code>) contains informations about the sensors, which are currently only needed for the weather underground &lsquo;sensor&rsquo;. And yes: the column names/types are not optimal.</p>
-
-<p>Note: <code>timestamp TEXT</code> will bite us in the ass, but SQLite3 does NOT have any date type.</p>
-
-<h3>Monitor script</h3>
-
-<p>I found this nice script somewhere on <a href="https://github.com/kal001/temperature">Github</a>. So Thank You <a href="https://github.com/kal001">kal001</a>!</p>
-
-<p>Here&rsquo;s my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
-
-<p>Place this script side-by-side to <code>temps.log</code>.</p>
-
-<p>Save it as <code>monitor.py</code>.</p>
-
-<p>You will probably want to modify the values for <code>dbname</code>, <code>TIMEOUT</code>, <code>debug.txt</code>, etc.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#!/usr/bin/env python</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">sqlite3</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">threading</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">,</span> <span class="n">strftime</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">serial</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># global variales</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># sqlite database location</span>
-</span><span class='line'><span class="n">dbname</span> <span class="o">=</span> <span class="s">&#39;templog.db&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># serial device</span>
-</span><span class='line'><span class="n">DEVICE</span> <span class="o">=</span> <span class="s">&#39;/dev/ttyAMA0&#39;</span>
-</span><span class='line'><span class="n">BAUD</span> <span class="o">=</span> <span class="mi">9600</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">DEVICE</span><span class="p">,</span> <span class="n">BAUD</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># timeout in seconds for waiting to read temperature from sensors</span>
-</span><span class='line'><span class="n">TIMEOUT</span> <span class="o">=</span> <span class="mi">30</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># weather underground data</span>
-</span><span class='line'><span class="n">WUKEY</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-</span><span class='line'><span class="n">STATION</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
-</span><span class='line'><span class="c"># time between weather underground samples in seconds</span>
-</span><span class='line'><span class="n">SAMPLE</span> <span class="o">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">60</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">log_temperature</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    Store the temperature in the database.</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">curs</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s">&quot;INSERT INTO temps values(datetime(&#39;now&#39;, &#39;localtime&#39;), &#39;{0}&#39;, &#39;{1}&#39; )&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">],</span> <span class="n">temp</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">get_temp</span><span class="p">():</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    Retrieves the temperature from the sensor.</span>
-</span><span class='line'>
-</span><span class='line'><span class="sd">    Returns -100 on error, or the temperature as a float.</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">global</span> <span class="n">ser</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">tempvalue</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-</span><span class='line'>    <span class="n">deviceid</span> <span class="o">=</span> <span class="s">&#39;??&#39;</span>
-</span><span class='line'>    <span class="n">voltage</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">fim</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">TIMEOUT</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">fim</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">tempvalue</span> <span class="o">==</span> <span class="o">-</span><span class="mi">100</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">n</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">inWaiting</span><span class="p">()</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">data</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-</span><span class='line'>            <span class="n">nb_msg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span>
-</span><span class='line'>            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_msg</span><span class="p">):</span>
-</span><span class='line'>                <span class="n">msg</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">12</span><span class="p">:(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">12</span><span class="p">]</span>
-</span><span class='line'>                <span class="n">deviceid</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;TMPA&quot;</span><span class="p">:</span>
-</span><span class='line'>                    <span class="n">tempvalue</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="k">if</span> <span class="n">msg</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s">&quot;BATT&quot;</span><span class="p">:</span>
-</span><span class='line'>                    <span class="n">voltage</span> <span class="o">=</span> <span class="n">msg</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
-</span><span class='line'>                    <span class="k">if</span> <span class="n">voltage</span> <span class="o">==</span> <span class="s">&quot;LOW&quot;</span><span class="p">:</span>
-</span><span class='line'>                        <span class="n">voltage</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="p">{</span><span class="s">&#39;temperature&#39;</span><span class="p">:</span><span class="n">tempvalue</span><span class="p">,</span> <span class="s">&#39;id&#39;</span><span class="p">:</span><span class="n">deviceid</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">get_temp_wu</span><span class="p">():</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    Retrieves temperature(s) from weather underground (wu) and stores it to the database</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">curs</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span class='line'>        <span class="n">query</span> <span class="o">=</span> <span class="s">&quot;SELECT baudrate, port, id, active FROM sensors WHERE id like &#39;W_&#39;&quot;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">rows</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c">#print(rows)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="n">rows</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
-</span><span class='line'>            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[:]:</span>
-</span><span class='line'>                <span class="n">WUKEY</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</span><span class='line'>                <span class="n">STATION</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'>                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span class='line'>                    <span class="k">try</span><span class="p">:</span>
-</span><span class='line'>                        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://api.wunderground.com/api/{0}/conditions/q/{1}.json&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">WUKEY</span><span class="p">,</span> <span class="n">STATION</span><span class="p">)</span>
-</span><span class='line'>                        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span><span class='line'>                        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</span><span class='line'>                        <span class="n">log_temperature</span><span class="p">({</span><span class="s">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;current_observation&#39;</span><span class="p">][</span><span class="s">&#39;temp_c&#39;</span><span class="p">],</span> <span class="s">&#39;id&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]})</span>
-</span><span class='line'>                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span class='line'>                        <span class="k">raise</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">text_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;debug.txt&quot;</span><span class="p">,</span> <span class="s">&quot;a+&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="n">text_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;{0} ERROR:</span><span class="se">\n</span><span class="s">{1}</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">strftime</span><span class="p">(</span><span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&quot;</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">()),</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
-</span><span class='line'>        <span class="n">text_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;</span>
-</span><span class='line'><span class="sd">    Program starts here.</span>
-</span><span class='line'><span class="sd">    &quot;&quot;&quot;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">get_temp_wu</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">SAMPLE</span><span class="p">,</span> <span class="n">get_temp_wu</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-</span><span class='line'>        <span class="n">temperature</span> <span class="o">=</span> <span class="n">get_temp</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="n">temperature</span><span class="p">[</span><span class="s">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">100</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">log_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_alive</span><span class="p">()</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">t</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">SAMPLE</span><span class="p">,</span> <span class="n">get_temp_wu</span><span class="p">)</span>
-</span><span class='line'>            <span class="n">t</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">main</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Run the script. Open another shell, take a look inside the database (new data arriving once an hour?).</p>
-
-<p>Don&rsquo;t forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
-
-<p><a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Part 3</a> will provide a UI for the collected data.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2847,6 +2465,10 @@ This post will use a small python program to save the recorded temperatures to a
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/03/15/that-moment/">That Moment&#8230;</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a>
       </li>
     
@@ -2860,10 +2482,6 @@ This post will use a small python program to save the recorded temperatures to a
     
       <li class="post">
         <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/03/30/learning/">Learning by Meeting People</a>
       </li>
     
   </ul>
