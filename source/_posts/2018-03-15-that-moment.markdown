@@ -25,7 +25,7 @@ Here are just a few of the reasons I find this format so rewarding:
 - People who normally do not engage with each other starting a conversation about something like "best practices", but from very different points of view.
 - Junior developers slowly getting the hang of topics like Clean Code.
 - Seasoned developers pitching in with additional information (f. ex. pros and cons of certain techniques).
-- In the long run, having a well trained team will make everybody's live easier. Ask yourself: Who do you want to work with in the future?
+- In the long run, having a well trained team will make everybody's life easier. Ask yourself: Who do you want to work with in the future?
 
 For me, **one of those moments** I witnessed last week: A C++ developer explaining the essence of TDD to an FP developer. And everybody pitched in! Another discussion was on it's way!
 
