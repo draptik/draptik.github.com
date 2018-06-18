@@ -23,8 +23,10 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 
 ### 2018
 
+- Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
+  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/railway-oriented-programming-komplexe-orchestrierung-wartbar-machen), Jun. 25 2018
 - Value objects on steroids
-  - [Developer Week 2018](https://www.developer-week.de/), Jun. 25 2018
+  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/value-objects-on-steroids), Jun. 25 2018
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
   - [Karlsruher Entwicklertag 2018](https://entwicklertag.de/karlsruhe/2018/), Jun. 21 2018
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen 
