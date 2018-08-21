@@ -4,7 +4,7 @@
   <title><![CDATA[Category: keyboard-shortcuts | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/keyboard-shortcuts/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-08-21T23:12:48+00:00</updated>
+  <updated>2018-08-21T23:25:09+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -26,7 +26,7 @@
 
 <p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
 
-<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was allready in use. The question being: by which application?</p>
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was already in use. The question being: by which application?</p>
 
 <p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
 
@@ -37,7 +37,7 @@
 <p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
 
 <p>Here is a short summary how to figure out if your environment is affected by this extension:
-```</p>
+``` sh</p>
 
 <h1>Find out if screenshot extension is installed</h1>
 
@@ -61,7 +61,7 @@ cycle-screenshot-sizes</p>
 ```</p>
 
 <p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)
-```</p>
+``` sh</p>
 
 <h1>disable:</h1>
 

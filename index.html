@@ -115,7 +115,7 @@
 
 <p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
 
-<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was allready in use. The question being: by which application?</p>
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was already in use. The question being: by which application?</p>
 
 <p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
 
@@ -127,7 +127,7 @@
 
 <p>Here is a short summary how to figure out if your environment is affected by this extension:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -142,39 +142,41 @@
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># Find out if screenshot extension is installed
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Find out if screenshot extension is installed</span>
 </span><span class='line'>gsettings list-schemas | grep screenshot-window-sizer
 </span><span class='line'>
-</span><span class='line'># List keys
-</span><span class='line'>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer 
+</span><span class='line'><span class="c"># List keys</span>
+</span><span class='line'>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer
 </span><span class='line'>cycle-screenshot-sizes-backward
 </span><span class='line'>cycle-screenshot-sizes
 </span><span class='line'>
-</span><span class='line'>## Show key value
+</span><span class='line'><span class="c">## Show key value</span>
 </span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
-</span><span class='line'>['&lt;Alt&gt;&lt;Control&gt;s']
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;&lt;Alt&gt;&lt;Control&gt;s&#39;</span><span class="o">]</span>
 </span><span class='line'>
-</span><span class='line'>## Show key value
+</span><span class='line'><span class="c">## Show key value</span>
 </span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes-backward
-</span><span class='line'>['&lt;Shift&gt;&lt;Alt&gt;&lt;Control&gt;s']</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;&lt;Shift&gt;&lt;Alt&gt;&lt;Control&gt;s&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># disable:
-</span><span class='line'>gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes []
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># disable:</span>
+</span><span class='line'>gsettings <span class="nb">set </span>org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes <span class="o">[]</span>
 </span><span class='line'>gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded
 </span><span class='line'>
-</span><span class='line'># To re-enable: 
+</span><span class='line'><span class="c"># To re-enable: </span>
 </span><span class='line'>gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
-</span><span class='line'>gsettings set org.gnome.desktop.wm.keybindings toggle-shaded []</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>gsettings <span class="nb">set </span>org.gnome.desktop.wm.keybindings toggle-shaded <span class="o">[]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &mdash; even with Gnome.</p>
