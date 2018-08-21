@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers &hellip;">
+  <meta name="description" content="I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,112 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">IntelliJ and Gnome Keyboard Shortcut Conflict: Ctrl Alt S</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-08-21T23:01:12+00:00" pubdate data-updated="true">Aug 21<span>st</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I am currenty experimenting with <a href="https://www.jetbrains.com/rider/">Jetbrains Rider</a> under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts. Even though Jetbrains&#8217; IDEs come with a keyboard setting named <code>Default for GNOME</code>&hellip;</p>
+
+<p>Starting with the most obvious: I was not able to open Rider&rsquo;s settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
+
+<h2><code>Ctrl Alt s</code></h2>
+
+<p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
+
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was allready in use. The question being: by which application?</p>
+
+<p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
+
+<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don&rsquo;t know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome&rsquo;s default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
+
+<p>Full name of the extension:</p>
+
+<p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
+
+<p>Here is a short summary how to figure out if your environment is affected by this extension:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Find out if screenshot extension is installed
+</span><span class='line'>gsettings list-schemas | grep screenshot-window-sizer
+</span><span class='line'>
+</span><span class='line'># List keys
+</span><span class='line'>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer 
+</span><span class='line'>cycle-screenshot-sizes-backward
+</span><span class='line'>cycle-screenshot-sizes
+</span><span class='line'>
+</span><span class='line'>## Show key value
+</span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+</span><span class='line'>['&lt;Alt&gt;&lt;Control&gt;s']
+</span><span class='line'>
+</span><span class='line'>## Show key value
+</span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes-backward
+</span><span class='line'>['&lt;Shift&gt;&lt;Alt&gt;&lt;Control&gt;s']</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># disable:
+</span><span class='line'>gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes []
+</span><span class='line'>gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded
+</span><span class='line'>
+</span><span class='line'># To re-enable: 
+</span><span class='line'>gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+</span><span class='line'>gsettings set org.gnome.desktop.wm.keybindings toggle-shaded []</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &mdash; even with Gnome.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2148,316 +2254,6 @@ For this purpose I mount another file from the <code>docker run</code> script (<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/29/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Remotly Measuring Temperatures With a Raspberry Pi Using Radio Frequency Modules From Ciseco (Part 3: UI)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-07-29T22:07:12+00:00" pubdate data-updated="true">Jul 29<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
-
-<p>In this post I&rsquo;ll describe how to display the data.</p>
-
-<h2>TL;DR</h2>
-
-<ul>
-<li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
-<li><code>npm install</code></li>
-<li><code>bower install</code></li>
-<li>(for deployment in LAN: Configure <code>baseUrl</code> in <code>app.js</code>)</li>
-<li>(for deployment in LAN: Configure <code>dbLocation</code> in <code>app_api/models/db.js</code>)</li>
-<li>(for deployment in LAN: <code>export SET_ENV=production</code>)</li>
-<li><code>npm start</code></li>
-</ul>
-
-
-<p>Should be similar to <a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a>.</p>
-
-<h2>Choosing the right technology stack</h2>
-
-<p>This really depends on your individual needs. Here are some points to consider:</p>
-
-<ul>
-<li>How many people will be accessing the site?</li>
-<li>Do you have to access the site from outside of your LAN? Do you need a login mechanism?</li>
-<li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
-<li>Database interaction possible (this demo uses SQLite3)?</li>
-</ul>
-
-
-<p>If you know that you&rsquo;ll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
-
-<p>Otherwhise, the RPi is a good choice for a web server.</p>
-
-<p>Some of the technology stacks available on the RPi are:</p>
-
-<ul>
-<li>JVM: Java, Scala</li>
-<li>.NET/Mono: C#, F#</li>
-<li>Python</li>
-<li>JS: <a href="https://nodejs.org/">Node.js</a></li>
-</ul>
-
-
-<p>Since I only want to display data in my LAN I decided to use Javascript: <a href="https://nodejs.org/">Node.js</a> in combination with the <a href="http://expressjs.com/">Express framework</a> provides all possible features and is very lightweight.</p>
-
-<p>No matter which stack you choose:
-Running the web site on the same RPi as the temperature recording from the previous posts saves you the hassle of installing software on a different machine. And it obviously saves energy, since the RPi is running 24/7 anyway recording temperature data.</p>
-
-<h2>User Interface</h2>
-
-<p>My primary goal was <em>explorative data visualization</em>. For this purpose I decided to show 2 plots:</p>
-
-<ul>
-<li>an overview plot showing the past 14 days</li>
-<li>and a detail plot, showing the selection of the overview plot</li>
-</ul>
-
-
-<p>You can test the website with some sample data at
-<a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a></p>
-
-<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png"></p>
-
-<p>Some of the UI features:</p>
-
-<ul>
-<li>The detail plot can be dragged and the overview plot has a selection region which can be resized and dragged.</li>
-<li>Changes to either plot are reflected in the other.</li>
-<li>Mouse movement in the detail plot updates the legend.</li>
-</ul>
-
-
-<p>All charting features are implemented using <a href="http://www.flotcharts.org/">Flot</a>.</p>
-
-<h2>Prerequisites: Node.js</h2>
-
-<p>Here is a very concise manual on how to install Node.js on the RPi (this
-gives you a more up to date version of Node.js than default Raspbian does):
-<a href="http://weworkweplay.com/play/raspberry-pi-nodejs/">http://weworkweplay.com/play/raspberry-pi-nodejs/</a></p>
-
-<h2>Installation</h2>
-
-<p>All further instructions are expected to be executed on the RPi.</p>
-
-<p>Download and unzip the source code from</p>
-
-<p><a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~
-</span><span class='line'>mkdir website && cd website
-</span><span class='line'>wget https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip
-</span><span class='line'>unzip *.zip
-</span><span class='line'>cd rpi*</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Install backend packages (node packages are defined in <code>packages.json</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Node.js packages are installed to folder <code>node_modules</code>.</p>
-
-<ul>
-<li>the folder <code>app_server</code> contains the basic web site.</li>
-<li>the folder <code>app_api</code> provides the REST backend.</li>
-</ul>
-
-
-<p>Install frontend packages (bower packages are defined in <code>bower.json</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>bower install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Bower packages are installed to folder <code>public/vendor/bower</code>.</p>
-
-<p>You should now be able to start the application (using the provided sample data in folder <code>sample_data</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm start</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Configuration (development vs production)</h2>
-
-<p>The application uses a single switch between development mode and production mode:</p>
-
-<p><code>NODE_ENV</code></p>
-
-<p>This information is currently used in the following places in the application:</p>
-
-<h3>REST URL</h3>
-
-<p>Setting the URL for the REST service (in <code>app.js</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
-
-<p>And in case you&rsquo;re not familiar with the syntax</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var result = someCondition ? 'string1' : 'string2';</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It&rsquo;s just a shorthand for</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var result;
-</span><span class='line'>if (someCondition) {
-</span><span class='line'>  result = 'string1';
-</span><span class='line'>} else {
-</span><span class='line'>  result = 'string2';
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Database location</h3>
-
-<p>Setting the database location (in <code>app_api/models/db.js</code>):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Usage</h3>
-
-<p>Once you&rsquo;ve configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export NODE_ENV=production
-</span><span class='line'>npm start</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Customizing</h3>
-
-<p>You will probably want to customize the UI, as my design skills are limited at best. ;&ndash;)</p>
-
-<p>Here&rsquo;s an overview of the project, so you know where to change things:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>├── app_api                     //  REST API
-</span><span class='line'>│   ├── controllers
-</span><span class='line'>│   │   └── temperatures.js
-</span><span class='line'>│   ├── models
-</span><span class='line'>│   │   ├── db.js               //  DATABASE
-</span><span class='line'>│   └── routes
-</span><span class='line'>│       └── index.js
-</span><span class='line'>├── app.js                      //  MAIN ENTRY POINT FOR THE APPLICATION
-</span><span class='line'>├── app_server                  //  web server (express.js)
-</span><span class='line'>│   ├── controllers
-</span><span class='line'>│   │   ├── main.js
-</span><span class='line'>│   │   └── temperatures.js
-</span><span class='line'>│   ├── models
-</span><span class='line'>│   ├── routes
-</span><span class='line'>│   │   ├── index.js
-</span><span class='line'>│   │   ├── temperatures.js
-</span><span class='line'>│   └── views
-</span><span class='line'>│       ├── error.jade
-</span><span class='line'>│       ├── index.jade
-</span><span class='line'>│       ├── layout.jade
-</span><span class='line'>│       └── temperatures-list.jade
-</span><span class='line'>├── bower.json                  //  Bower configuration (frontend)
-</span><span class='line'>├── node_modules                //  Location of node modules
-</span><span class='line'>├── nodemon.json                //  nodemon configuration
-</span><span class='line'>├── package.json                //  node configuration
-</span><span class='line'>├── public                      //  frontend stuff...
-</span><span class='line'>│   ├── images                  //  images
-</span><span class='line'>│   ├── scripts                 //  Javascript code
-</span><span class='line'>│   │   ├── chart.js            //  This file includes all charting code
-</span><span class='line'>│   │   ├── rest.js             //  wrapper code to access REST API
-</span><span class='line'>│   │   └── suncalc.js          //  calc sunrise/sunset on the fly
-</span><span class='line'>│   ├── stylesheets             //  ...
-</span><span class='line'>│   │   ├── app.css
-</span><span class='line'>│   │   ├── chart.css
-</span><span class='line'>│   └── vendor                  //  3rd party libraries
-</span><span class='line'>│       ├── bower               //  ...installed via bower
-</span><span class='line'>│       └── custom              //  ...other 3rd party libraries
-</span><span class='line'>├── sample_data                 //  sample data
-</span><span class='line'>│   └── templog.db              //  sqlite3 sample data set</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s it. Have fun!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2473,6 +2269,10 @@ gives you a more up to date version of Node.js than default Raspbian does):
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">IntelliJ and Gnome Keyboard Shortcut Conflict: Ctrl Alt S</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/03/15/that-moment/">Rewarding Moments During Lunch & Learn&#8230;</a>
       </li>
     
@@ -2486,10 +2286,6 @@ gives you a more up to date version of Node.js than default Raspbian does):
     
       <li class="post">
         <a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a>
       </li>
     
   </ul>

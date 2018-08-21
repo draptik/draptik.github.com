@@ -389,6 +389,12 @@
         <lastmod>2018-06-03T16:07:39+00:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://draptik.github.io/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/
+        </loc>
+        <lastmod>2018-08-21T23:12:42+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://draptik.github.io/impressum/</loc>
         <lastmod>2018-06-03T16:07:39+00:00</lastmod>
     </url>
@@ -398,7 +404,7 @@
     </url>
     <url>
         <loc>http://draptik.github.io/</loc>
-        <lastmod>2018-06-03T16:07:39+00:00</lastmod>
+        <lastmod>2018-08-21T23:12:42+00:00</lastmod>
     </url>
     <url>
         <loc>http://draptik.github.io/robots.txt</loc>
@@ -406,6 +412,6 @@
     </url>
     <url>
         <loc>http://draptik.github.io/blog/archives/</loc>
-        <lastmod>2018-06-03T16:07:39+00:00</lastmod>
+        <lastmod>2018-08-21T23:12:42+00:00</lastmod>
     </url>
 </urlset>

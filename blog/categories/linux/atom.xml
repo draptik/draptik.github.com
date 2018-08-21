@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-06-18T22:13:15+00:00</updated>
+  <updated>2018-08-21T23:12:48+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -12,6 +12,71 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s]]></title>
+    <link href="http://draptik.github.io/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/"/>
+    <updated>2018-08-21T23:01:12+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s</id>
+    <content type="html"><![CDATA[<p>I am currenty experimenting with <a href="https://www.jetbrains.com/rider/">Jetbrains Rider</a> under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts. Even though Jetbrains' IDEs come with a keyboard setting named <code>Default for GNOME</code>&hellip;</p>
+
+<p>Starting with the most obvious: I was not able to open Rider&rsquo;s settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
+
+<h2><code>Ctrl Alt s</code></h2>
+
+<p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
+
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was allready in use. The question being: by which application?</p>
+
+<p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
+
+<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don&rsquo;t know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome&rsquo;s default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
+
+<p>Full name of the extension:</p>
+
+<p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
+
+<p>Here is a short summary how to figure out if your environment is affected by this extension:
+```</p>
+
+<h1>Find out if screenshot extension is installed</h1>
+
+<p>gsettings list-schemas | grep screenshot-window-sizer</p>
+
+<h1>List keys</h1>
+
+<p>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer
+cycle-screenshot-sizes-backward
+cycle-screenshot-sizes</p>
+
+<h2>Show key value</h2>
+
+<p>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+[&lsquo;<Alt><Control>s&rsquo;]</p>
+
+<h2>Show key value</h2>
+
+<p>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes-backward
+[&lsquo;<Shift><Alt><Control>s&rsquo;]
+```</p>
+
+<p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)
+```</p>
+
+<h1>disable:</h1>
+
+<p>gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes []
+gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded</p>
+
+<h1>To re-enable:</h1>
+
+<p>gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+gsettings set org.gnome.desktop.wm.keybindings toggle-shaded []
+```</p>
+
+<p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &mdash; even with Gnome.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[F# Test Setup for FizzBuzz]]></title>
@@ -859,7 +924,7 @@ execjs
 <p>bundle install &mdash;path $HOME/.gem</p>
 
 <p>git config &mdash;global user.name &ldquo;FirstName LastName&rdquo;
-git config &mdash;global user.email &ldquo;<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x79;&#111;&#x75;&#114;&#x40;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x79;&#111;&#117;&#x72;&#x40;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a>&rdquo;
+git config &mdash;global user.email &ldquo;<a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#121;&#111;&#117;&#114;&#64;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;">&#121;&#x6f;&#117;&#114;&#x40;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;</a>&rdquo;
 ```</p>
 
 <h2>Final usage for Octopress users</h2>
@@ -979,37 +1044,6 @@ Using Multiple Arguments:</p>
 <p>For more options refer to help:
 <code>bash
 autojump --help
-</code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Listing environment variables (Linux)]]></title>
-    <link href="http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux/"/>
-    <updated>2013-07-05T23:33:00+00:00</updated>
-    <id>http://draptik.github.io/blog/2013/07/05/listing-environment-variables-linux</id>
-    <content type="html"><![CDATA[<p>Just a note to self: Get a list of all linux environment variables and their values using the <code>export</code> command.</p>
-
-<p>Here is an example:</p>
-
-<p><code>sh
-pi@rpidev ~ $ export
-declare -x HOME="/home/pi"
-declare -x JAVA_HOME="/opt/java/jdk1.7.0_25"
-declare -x LANG="en_GB.UTF-8"
-declare -x LOGNAME="pi"
-declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:"
-declare -x MAIL="/var/mail/pi"
-declare -x OLDPWD="/home/pi/myinstall_notes"
-declare -x PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/opt/java/jdk1.7.0_25/bin"
-declare -x PWD="/home/pi"
-declare -x SHELL="/bin/bash"
-declare -x SHLVL="1"
-declare -x SSH_CLIENT="192.168.179.32 39295 22"
-declare -x SSH_CONNECTION="192.168.179.32 39295 192.168.179.148 22"
-declare -x SSH_TTY="/dev/pts/0"
-declare -x TERM="xterm"
-declare -x USER="pi"
 </code></p>
 ]]></content>
   </entry>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rider | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/rider/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2018-08-21T23:12:48+00:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s]]></title>
+    <link href="http://draptik.github.io/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/"/>
+    <updated>2018-08-21T23:01:12+00:00</updated>
+    <id>http://draptik.github.io/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s</id>
+    <content type="html"><![CDATA[<p>I am currenty experimenting with <a href="https://www.jetbrains.com/rider/">Jetbrains Rider</a> under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts. Even though Jetbrains' IDEs come with a keyboard setting named <code>Default for GNOME</code>&hellip;</p>
+
+<p>Starting with the most obvious: I was not able to open Rider&rsquo;s settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
+
+<h2><code>Ctrl Alt s</code></h2>
+
+<p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
+
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was allready in use. The question being: by which application?</p>
+
+<p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
+
+<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don&rsquo;t know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome&rsquo;s default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
+
+<p>Full name of the extension:</p>
+
+<p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
+
+<p>Here is a short summary how to figure out if your environment is affected by this extension:
+```</p>
+
+<h1>Find out if screenshot extension is installed</h1>
+
+<p>gsettings list-schemas | grep screenshot-window-sizer</p>
+
+<h1>List keys</h1>
+
+<p>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer
+cycle-screenshot-sizes-backward
+cycle-screenshot-sizes</p>
+
+<h2>Show key value</h2>
+
+<p>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+[&lsquo;<Alt><Control>s&rsquo;]</p>
+
+<h2>Show key value</h2>
+
+<p>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes-backward
+[&lsquo;<Shift><Alt><Control>s&rsquo;]
+```</p>
+
+<p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)
+```</p>
+
+<h1>disable:</h1>
+
+<p>gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes []
+gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded</p>
+
+<h1>To re-enable:</h1>
+
+<p>gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
+gsettings set org.gnome.desktop.wm.keybindings toggle-shaded []
+```</p>
+
+<p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &mdash; even with Gnome.</p>
+]]></content>
+  </entry>
+  
+</feed>
