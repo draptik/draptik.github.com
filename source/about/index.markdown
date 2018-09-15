@@ -23,16 +23,18 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 
 ### 2018
 
-- Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
-  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/railway-oriented-programming-komplexe-orchestrierung-wartbar-machen), Jun. 25 2018
 - Value objects on steroids
-  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/value-objects-on-steroids), Jun. 25 2018
+  - [Dodnedder (.NET User Group Nuernberg)](https://www.dodnedder.de/termine/71-value-objects-on-steroids)
+- Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
+  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/railway-oriented-programming-komplexe-orchestrierung-wartbar-machen), Jun. 25 2018 [(video)](https://vimeo.com/279232246)
+- Value objects on steroids
+  - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/value-objects-on-steroids), Jun. 25 2018 [(video)](https://vimeo.com/278291038) 
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
   - [Karlsruher Entwicklertag 2018](https://entwicklertag.de/karlsruhe/2018/), Jun. 21 2018
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen 
-  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr 21 2018
+  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr. 21 2018
 - Funktionale Programmierung für OO-Programmierer
-  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr 20 2018
+  - [MATHEMA Campus 2018](https://www.mathema.de/veranstaltungen/mathema-campus), Apr. 20 2018
 - Functional Programming for OO Developers - A gentle introduction
   - [Softwerkskammer Nürnberg](https://www.softwerkskammer.org/activities/Treffen_52_SWK_Nuernberg_Mock_Heuristiken_FP_Fuer_OO_Entwickler), Feb. 1 2018
 - Paket - an alternative to NuGet?
