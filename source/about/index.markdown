@@ -23,8 +23,12 @@ In the past I've also spent some time in the field of biomechanics. If you're bo
 
 ### 2018
 
+- Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
+  - [.NET User Group Ulm](https://www.meetup.com/de-DE/NET-Developer-Group-Ulm-Oberschwaben/events/255135309/), Oct. 15 2018
 - Value objects on steroids
-  - [Dodnedder (.NET User Group Nuernberg)](https://www.dodnedder.de/termine/71-value-objects-on-steroids) - Sep. 27 2018
+  - [SoCraTes Day Franken 2018](https://socrates-day-franken.de), Sep. 29 2018
+- Value objects on steroids
+  - [Dodnedder (.NET User Group Nuernberg)](https://www.dodnedder.de/termine/71-value-objects-on-steroids), Sep. 27 2018
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
   - [Developer Week 2018](https://www.developer-week.de/programm/#/talk/railway-oriented-programming-komplexe-orchestrierung-wartbar-machen), Jun. 25 2018 [(video)](https://vimeo.com/279232246)
 - Value objects on steroids
