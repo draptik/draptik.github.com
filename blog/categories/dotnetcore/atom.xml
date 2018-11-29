@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dotnetcore | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/dotnetcore/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2018-11-29T01:21:37+00:00</updated>
+  <updated>2018-11-29T01:29:14+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -18,9 +18,7 @@
     <link href="http://draptik.github.io/blog/2018/11/29/fsharp-linux-mixed-feelings/"/>
     <updated>2018-11-29T00:58:33+00:00</updated>
     <id>http://draptik.github.io/blog/2018/11/29/fsharp-linux-mixed-feelings</id>
-    <content type="html"><![CDATA[<h1>F# and Linux: mixed feelings</h1>
-
-<p>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &ldquo;mixed&rdquo;:</p>
+    <content type="html"><![CDATA[<p>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &ldquo;mixed&rdquo;:</p>
 
 <p>First off all: It is great that we can use .NET with Linux in the first place! And <code>dotnet</code> as CLI-first tool is amazing (not only for linux desktop users, but also for docker, ci)! I can&rsquo;t emphasis this enough!</p>
 
