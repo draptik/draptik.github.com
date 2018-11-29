@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "fsharp-linux-mixed-feelings"
+title: "F# Linux: mixed feelings"
 date: 2018-11-29 00:58:33 +0000
 comments: true
 categories: [fsharp, linux, dotnetcore]
