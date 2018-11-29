@@ -5,8 +5,6 @@ date: 2018-11-29 00:58:33 +0000
 comments: true
 categories: [fsharp, linux, dotnetcore]
 ---
-# F# and Linux: mixed feelings
-
 I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by "mixed":
 
 First off all: It is great that we can use .NET with Linux in the first place! And `dotnet` as CLI-first tool is amazing (not only for linux desktop users, but also for docker, ci)! I can't emphasis this enough!
