@@ -9,7 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="since most NuGet packages related to NHibernate come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding uNhAddIns ( &hellip;">
+  <meta name="description" content="Note to self: Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip; Example: Create a plain WPF application from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,60 +79,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/05/unhaddins-patch-for-nhibernate-3-1/">uNhAddIns Patch for NHibernate 3.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-05T21:07:26+00:00" pubdate data-updated="true">Oct 5<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>since most NuGet packages related to <a href="http://nhforge.org/Default.aspx">NHibernate</a> come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding <a href="http://code.google.com/p/unhaddins/">uNhAddIns</a> (commit #773) with the newer version of NHibernate.</p>
-
-<p>My changes:</p>
-
-<ul>
-<li><p>upgraded NHibernate to version 3.1.0.4000 (Iesi.Collections, NHibernate, NHibernate.ByteCode.Castle)</p></li>
-<li><p>implemented new Interface method &lsquo;IsProxy&rsquo; for IProxyFactoryFactory (CSLProxyFactoryFactory, ProxyFactoryFactory)</p></li>
-</ul>
-
-
-<p>BTW: .NET is becoming more and more like Java&hellip; Who doesn&rsquo;t love names like &lsquo;IProxyFactoryFactory&rsquo;? ;&ndash;)</p>
-
-<p>I did not update any tests.</p>
-
-<p>Feel free to use this code (no licence).</p>
-
-<p>My patch can be found at:</p>
-
-<p><a href="http://unhaddins.googlecode.com/issues/attachment?aid=260000000&amp;name=unhaddins_cloned_774.patch.zip&amp;token=ef134e75687db99ec50f572023909835">Patch at Google Code</a></p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -601,6 +547,54 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/">NHibernate Code Completion (IntelliSense) for Visual Studio</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-08T21:47:42+00:00" pubdate data-updated="true">Dec 8<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&rsquo;s XML folder.</p>
+
+<p>For example (NHibernate 2.0.1):</p>
+
+<p>Files to copy:</p>
+
+<p><code>${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd
+${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
+</code></p>
+
+<p>Destination:</p>
+
+<p><code>C:\Programme\Microsoft Visual Studio 10.0\Xml\Schemas</code></p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -618,10 +612,6 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2018/11/29/fsharp-linux-mixed-feelings/">F# Linux: Mixed Feelings</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">IntelliJ and Gnome Keyboard Shortcut Conflict: Ctrl Alt S</a>
       </li>
     
@@ -637,6 +627,10 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
         <a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a>
       </li>
     
+      <li class="post">
+        <a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a>
+      </li>
+    
   </ul>
 </section>
 
@@ -646,7 +640,7 @@ This solution should work for all Linux distributions supported by VirtualBox4.<
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2009 - 2018 - Patrick Drechsler  
+  Copyright &copy; 2009 - 2019 - Patrick Drechsler  
 </p>
 
 </footer>
