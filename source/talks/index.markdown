@@ -11,11 +11,11 @@ footer: false
 - Können willkürliche Tests und Zombies unseren Code besser machen?
   - [MATHEMA Campus 2019](https://www.mathema.de/veranstaltungen/mathema-campus), May 10 2019 
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
-  - [.NET Developers Ruhr (Dortmund) TBA](TBA), May 8 2019
+  - [.NET Developers Ruhr (Dortmund)](https://www.xing.com/communities/groups/punkt-net-user-group-dortmund-8078-1012640/about), May 8 2019
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
   - [.NET Developers Ruhr (Gelsenkirchen)](https://www.meetup.com/de-DE/NET-Developers-Ruhr/events/258641255/), May 7 2019
 - Workshop: Von C# zu F# - Einführung in die Funktionale Programmierung
-  - [.NET Day Franken 2019](https://www.dotnet-day-franken.de/workshops/item/6-ws5-von-c-zu-f-einfuehrung-in-die-funktionale-programmierung), Apr. 5 2019
+  - [.NET Day Franken 2019](https://www.dotnet-day-franken.de/workshops/item/6-ws5-von-c-zu-f-einfuehrung-in-die-funktionale-programmierung), Apr. 5 2019 ([slides & code](https://github.com/redheads/2019-04-05-fp-workshop-dotnetday-franken))
 
 ## 2018
 
