@@ -28,7 +28,7 @@ The pros & cons of each solution are demonstrated elaborately: As reader you get
 
 The most valuable chapter (for me) in the book is "Projections & Queries".
 
-It provides potential solutions for mapping an event store "events" with read model DB entries. This is a "best practices" chapter full of different approaches on how to keep your read models in sync with your event store. My personal 'I did not know I could do this'-pattern: Event-Upcasting: Neat technique!
+It provides potential solutions for mapping event store "events" with read model DB entries. This is a "best practices" chapter full of different approaches on how to keep your read models in sync with your event store. My personal 'I did not know I could do this'-pattern: Event-Upcasting: Neat technique!
 
 ## Cons
 
