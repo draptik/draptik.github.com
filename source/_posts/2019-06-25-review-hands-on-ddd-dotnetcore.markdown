@@ -6,11 +6,9 @@ comments: true
 categories: [csharp, linux, dotnetcore, ddd, domain-driven-design, cqrs, event-store, es, event-sourcing, postgres, ravendb, review, book]
 ---
 
-The book: [Hands-On Domain-Driven-Design with .NET Core](https://www.packtpub.com/application-development/hands-domain-driven-design-net-core)
-
 ## TL;DR
 
-The book illustrates the pros & cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.
+The book [Hands-On Domain-Driven-Design with .NET Core](https://www.packtpub.com/application-development/hands-domain-driven-design-net-core) by Alexey Zimarev illustrates the pros & cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.
 
 ## Content
 
