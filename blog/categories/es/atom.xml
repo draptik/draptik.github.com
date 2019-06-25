@@ -4,7 +4,7 @@
   <title><![CDATA[Category: es | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/es/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2019-06-25T22:11:30+00:00</updated>
+  <updated>2019-06-25T22:19:39+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -43,7 +43,7 @@
 
 <p>The most valuable chapter (for me) in the book is &ldquo;Projections &amp; Queries&rdquo;.</p>
 
-<p>It provides potential solutions for mapping an event store &ldquo;events&rdquo; with read model DB entries. This is a &ldquo;best practices&rdquo; chapter full of different approaches on how to keep your read models in sync with your event store. My personal &lsquo;I did not know I could do this&rsquo;-pattern: Event-Upcasting: Neat technique!</p>
+<p>It provides potential solutions for mapping event store &ldquo;events&rdquo; with read model DB entries. This is a &ldquo;best practices&rdquo; chapter full of different approaches on how to keep your read models in sync with your event store. My personal &lsquo;I did not know I could do this&rsquo;-pattern: Event-Upcasting: Neat technique!</p>
 
 <h2>Cons</h2>
 
