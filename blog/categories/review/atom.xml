@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: review | draptik]]></title>
+  <link href="http://draptik.github.io/blog/categories/review/atom.xml" rel="self"/>
+  <link href="http://draptik.github.io/"/>
+  <updated>2019-06-25T22:05:38+00:00</updated>
+  <id>http://draptik.github.io/</id>
+  <author>
+    <name><![CDATA[Patrick Drechsler]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev]]></title>
+    <link href="http://draptik.github.io/blog/2019/06/25/review-hands-on-ddd-dotnetcore/"/>
+    <updated>2019-06-25T21:42:37+00:00</updated>
+    <id>http://draptik.github.io/blog/2019/06/25/review-hands-on-ddd-dotnetcore</id>
+    <content type="html"><![CDATA[<p>The book: <a href="https://www.packtpub.com/application-development/hands-domain-driven-design-net-core">Hands-On Domain-Driven-Design with .NET Core</a></p>
+
+<h2>TL;DR</h2>
+
+<p>The book illustrates the pros &amp; cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.</p>
+
+<h2>Content</h2>
+
+<p>Although the book title includes &ldquo;Hands-On&rdquo;, people new to <a href="https://en.wikipedia.org/wiki/Domain-driven_design">Domain Driven Design (DDD)</a> will get a compact and up-to-date introduction to the topic in the first few chapters of the book. I especially enjoyed how the author introduces <a href="https://en.wikipedia.org/wiki/Event_storming">Event Storming</a> as a valuable technique for distilling an <a href="https://martinfowler.com/bliki/UbiquitousLanguage.html">Ubiquitous Language</a>.</p>
+
+<p><strong>The book focuses on <a href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing (ES)</a> and <a href="https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_query_responsibility_segregation">Command Query Responsibility Segregation (CQRS)</a>.</strong> Previous DDD books (especially in the .NET space) have often treated both of these subjects as an implementation detail. Although I must mention that the book <a href="http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html">Patterns, Principles and Practices of Domain Driven Design (by Tune &amp; Millet)</a> also provides some excellent hands-on advice on CQRS &amp; ES.</p>
+
+<p>One of the interesting &ldquo;twists&rdquo; of the book is that is does not use the default database most .NET developers are used to: MS-SQL. Instead, the author demonstrates that using the right tool for the job also should get us thinking about using the most appropriate persistence store for architectural patterns such as CQRS and ES.</p>
+
+<p>Since neither an &ldquo;event store&rdquo; (ES) nor a read-model database require &ldquo;relations&rdquo;, relational databases can be dropped in favour of NoSQL solutions. The author introduces the following modern document stores:</p>
+
+<ul>
+<li><a href="https://ravendb.net/">RavenDb</a></li>
+<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+<li><a href="https://eventstore.org/">Event Store</a></li>
+</ul>
+
+
+<p>The pros &amp; cons of each solution are demonstrated elaborately: As reader you get a very good impression of which solution might work for you. I really enjoyed this part, because you can clearly see how leaky abstractions change a core domain. F.ex. which framework/DB can map Value Objects without having to change the visibility of ctors or property-setters&hellip; Or having to introduce an Id property just for persistence&hellip;</p>
+
+<p>The most valuable chapter (for me) in the book is &ldquo;Projections &amp; Queries&rdquo;.</p>
+
+<p>It provides potential solutions for mapping an event store &ldquo;events&rdquo; with read model DB entries. This is a &ldquo;best practices&rdquo; chapter full of different approaches on how to keep your read models in sync with your event store. My personal &lsquo;I did not know I could do this&rsquo;-pattern: Event-Upcasting: Neat technique!</p>
+
+<h2>Cons</h2>
+
+<ul>
+<li>Black &amp; white print of the book makes viewing the Event Storming images difficult (although the publisher provides color images)</li>
+<li>Copy editing could be improved (typos in text and source code)</li>
+<li>Technical review
+
+<ul>
+<li>Ubiquitous language is suddenly changed (example: <code>ClassifiedAdPublished</code> to <code>ClassifiedAdPublic</code>)</li>
+<li>Mismatches between text and code samples</li>
+</ul>
+</li>
+<li>The book deals with polyglot persistence, (potentially) distributed systems, and the infamous &ldquo;eventually consistency&rdquo; problems.
+
+<ul>
+<li>Some integrations test in the code samples would have been nice (for api, projections, persistence).</li>
+<li>Some examples (in the code samples) about monitoring would have been nice.</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>Pros</h2>
+
+<ul>
+<li>100% .NET Core: I was able to follow along using Linux &amp; JetBrains Rider / VSCode</li>
+<li>Learning about alternative storage solutions and best practices for using them:
+
+<ul>
+<li><a href="https://eventstore.org/">Event Store</a></li>
+<li><a href="https://ravendb.net/">RavenDb</a></li>
+<li><a href="https://www.postgresql.org/">PostgreSQL</a> (with and without Entity Framework)</li>
+</ul>
+</li>
+<li>all persistence demo DBs are provided as easily runnable <code>docker-compose.yml</code> files</li>
+<li>libraries and frameworks introduced are very up-to-date</li>
+<li>focus on backend: using Swagger as user interface was a great decision</li>
+</ul>
+
+
+<h2>Summary</h2>
+
+<p>It is the first book, to my knowledge, which shows the pros &amp; cons of different CQRS/ES persistency options in the .NET space.</p>
+
+<p>I can highly recommend this book to anybody familiar with DDD and/or wanting to understand concepts such as CQRS/ES. It is also a great addition to <a href="http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html">Patterns, Principles and Practices of Domain Driven Design (by Tune &amp; Millet)</a>.</p>
+
+<p>If it were not for the improvable copy editing I would give this book 5 of 5 stars. The second edition will most likely fix this :&ndash;).</p>
+
+<h2>Resources</h2>
+
+<ul>
+<li>Official Github Repository: <a href="https://github.com/PacktPublishing/Hands-On-Domain-Driven-Design-with-.NET-Core">https://github.com/PacktPublishing/Hands-On-Domain-Driven-Design-with-.NET-Core</a></li>
+<li>My &ldquo;coding along while reading&rdquo; Github repository: <a href="https://github.com/draptik/book_hands-on-domain-driven-design-with-dotnet-core">https://github.com/draptik/book_hands-on-domain-driven-design-with-dotnet-core</a>
+
+<ul>
+<li>I tried placing some sensible git tags along the way</li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -9,7 +9,8 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&rsquo;s XML folder. For example &hellip;">
+  <meta name="description" content="﻿Purpose Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.
+This solution should work for all Linux &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/">Configure VirtualBox Windows Guest System to Use 2 Monitors</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-01T21:13:43+00:00" pubdate data-updated="true">Jan 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2><strong>﻿Purpose</strong></h2>
+
+<p>Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.<br/>
+This solution should work for all Linux distributions supported by VirtualBox4.</p>
+
+<h2><strong>﻿Required software</strong></h2>
+
+<ul>
+<li><p><a href="http://www.ubuntu.com/">Ubuntu 10.10</a> (aka Maverick) as host for VirtualBox4</p></li>
+<li><p><a href="http://www.virtualbox.org/">VirtualBox 4</a></p></li>
+<li><p>VirtualBox guest sytem: Windows XP (incl. VirtualBox guest additions)</p></li>
+</ul>
+
+
+<h2><strong>Configuration</strong></h2>
+
+<ol>
+<li> Setup virtual guest machine (windows) within vm host system (GNU/Linux) to use two monitors:</li>
+</ol>
+
+
+<p>[caption id=&ldquo;attachment_378&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Setting up virtualbox 4 to use 2 monitors for windows xp guest&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png"><img src="http://draptik.files.wordpress.com/2011/01/virtualbox-host-ubuntu-10-10.png?w=300" alt="virtualbox-host-ubuntu-10.10" /></a>[/caption]</p>
+
+<ol>
+<li> Within virtual guest (windows): Configure dual monitor setup:</li>
+</ol>
+
+
+<p>[caption id=&ldquo;attachment_379&rdquo; align=&ldquo;alignnone&rdquo; width=&ldquo;263&rdquo; caption=&ldquo;Setup within virtualbox guest system (windows)&rdquo;]<a href="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png"><img src="http://draptik.files.wordpress.com/2011/01/01012011_183458_virtualbox_dualmonitor_windows_config.png?w=263" alt="virtualbox_dualmonitor_windows_config" /></a>[/caption]</p>
+
+<h2>Side note</h2>
+
+<p>Upgrading from VirtualBox owned by Sun to VirtualBox owned by Oracle was very smooth. Even for Linux host systems. Oracle, thanks for that!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -816,87 +885,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/">VMware Keyboard Mapping Issues (Alt Gr) Solved</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-28T22:27:22+00:00" pubdate data-updated="true">Jul 28<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your <code>/etc/vmware/config</code>:</p>
-
-<figure class='code'><figcaption><span>/etc/vmware/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>xkeymap.keycode.108 <span class="o">=</span> 0x138 <span class="c"># Alt_R</span>
-</span><span class='line'>xkeymap.keycode.106 <span class="o">=</span> 0x135 <span class="c"># KP_Divide</span>
-</span><span class='line'>xkeymap.keycode.104 <span class="o">=</span> 0x11c <span class="c"># KP_Enter</span>
-</span><span class='line'>xkeymap.keycode.111 <span class="o">=</span> 0x148 <span class="c"># Up</span>
-</span><span class='line'>xkeymap.keycode.116 <span class="o">=</span> 0x150 <span class="c"># Down</span>
-</span><span class='line'>xkeymap.keycode.113 <span class="o">=</span> 0x14b <span class="c"># Left</span>
-</span><span class='line'>xkeymap.keycode.114 <span class="o">=</span> 0x14d <span class="c"># Right</span>
-</span><span class='line'>xkeymap.keycode.105 <span class="o">=</span> 0x11d <span class="c"># Control_R</span>
-</span><span class='line'>xkeymap.keycode.118 <span class="o">=</span> 0x152 <span class="c"># Insert</span>
-</span><span class='line'>xkeymap.keycode.119 <span class="o">=</span> 0x153 <span class="c"># Delete</span>
-</span><span class='line'>xkeymap.keycode.110 <span class="o">=</span> 0x147 <span class="c"># Home</span>
-</span><span class='line'>xkeymap.keycode.115 <span class="o">=</span> 0x14f <span class="c"># End</span>
-</span><span class='line'>xkeymap.keycode.112 <span class="o">=</span> 0x149 <span class="c"># Prior</span>
-</span><span class='line'>xkeymap.keycode.117 <span class="o">=</span> 0x151 <span class="c"># Next</span>
-</span><span class='line'>xkeymap.keycode.78 <span class="o">=</span> 0x46 <span class="c"># Scroll_Lock</span>
-</span><span class='line'>xkeymap.keycode.127 <span class="o">=</span> 0x100 <span class="c"># Pause</span>
-</span><span class='line'>xkeymap.keycode.133 <span class="o">=</span> 0x15b <span class="c"># Meta_L</span>
-</span><span class='line'>xkeymap.keycode.134 <span class="o">=</span> 0x15c <span class="c"># Meta_R</span>
-</span><span class='line'>xkeymap.keycode.135 <span class="o">=</span> 0x15d <span class="c"># Menu</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I found this solution on the <a href="http://forum.ubuntuusers.de/topic/vmware-alt-gr-und-andere-tastaturproblem-unte/">German Ubuntu forum</a>.</p>
-
-<p>This worked with VMware-server-2.0.1-156745 in combination with host OS Ubuntu 9.04 and guest OS Windows XP SP3.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -914,6 +902,10 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/06/25/review-hands-on-ddd-dotnetcore/">Review: Hands-On Domain-Driven Design With .NET Core by Alexey Zimarev</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/11/29/fsharp-linux-mixed-feelings/">F# Linux: Mixed Feelings</a>
       </li>
     
@@ -927,10 +919,6 @@ $ svn co svn+ssh://myserver.com/myproject sandbox_myproject
     
       <li class="post">
         <a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a>
       </li>
     
   </ul>

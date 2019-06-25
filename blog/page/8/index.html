@@ -9,32 +9,7 @@
   <meta name="author" content="Patrick Drechsler">
 
   
-  <meta name="description" content="This is a simple example shell script demonstrating how to apply a patch file. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26 &hellip;">
+  <meta name="description" content="For the past few days I was wondering why Maven&rsquo;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +79,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/">Maven2 Heap Overflow in JUnit Test Cases: Howto Increase Memory</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T18:47:51+00:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For the past few days I was wondering why Maven&rsquo;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &ldquo;-Xmx512m&rdquo; to the JVM through Eclipse and from the command line. All to no avail.</p>
+
+<p>Then I found this <a href="http://www.keith-chapman.org/2008/06/increasing-memory-of-junit-testcases-in.html">blog entry</a> by Keith Chapman. And it worked! Here&rsquo;s the solution in short:</p>
+
+<p>The JUnit tests ignore the environment variable MAVEN_OPTS. You have to tell Maven&rsquo;s surefire plugin to increase memory. Add this to your pom.xml file:
+[sourcecode language=&lsquo;xml&rsquo;]</p>
+
+<p>  org.apache.maven.plugins
+  maven-surefire-plugin</p>
+
+<pre><code>pertest
+-Xms512m -Xmx512m
+false
+false
+</code></pre>
+
+<p>[/sourcecode]</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -762,6 +789,10 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/06/25/review-hands-on-ddd-dotnetcore/">Review: Hands-On Domain-Driven Design With .NET Core by Alexey Zimarev</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2018/11/29/fsharp-linux-mixed-feelings/">F# Linux: Mixed Feelings</a>
       </li>
     
@@ -775,10 +806,6 @@ will copy byte-per-byte, no-matter-what, from if (input folder =
     
       <li class="post">
         <a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a>
       </li>
     
   </ul>

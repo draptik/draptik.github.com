@@ -399,6 +399,10 @@
         <lastmod>2019-02-06T18:18:59+00:00</lastmod>
     </url>
     <url>
+        <loc>http://draptik.github.io/blog/2019/06/25/review-hands-on-ddd-dotnetcore/</loc>
+        <lastmod>2019-06-25T21:52:21+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://draptik.github.io/talks/</loc>
         <lastmod>2019-05-15T20:30:20+00:00</lastmod>
     </url>
@@ -412,7 +416,7 @@
     </url>
     <url>
         <loc>http://draptik.github.io/</loc>
-        <lastmod>2019-02-06T18:18:59+00:00</lastmod>
+        <lastmod>2019-06-25T21:52:21+00:00</lastmod>
     </url>
     <url>
         <loc>http://draptik.github.io/robots.txt</loc>
@@ -420,6 +424,6 @@
     </url>
     <url>
         <loc>http://draptik.github.io/blog/archives/</loc>
-        <lastmod>2019-02-06T18:18:59+00:00</lastmod>
+        <lastmod>2019-06-25T21:52:21+00:00</lastmod>
     </url>
 </urlset>
