@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2019-06-25T22:19:39+00:00</updated>
+  <updated>2019-06-29T22:34:55+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -30,7 +30,7 @@
 
 <p>One of the interesting &ldquo;twists&rdquo; of the book is that is does not use the default database most .NET developers are used to: MS-SQL. Instead, the author demonstrates that using the right tool for the job also should get us thinking about using the most appropriate persistence store for architectural patterns such as CQRS and ES.</p>
 
-<p>Since neither an &ldquo;event store&rdquo; (ES) nor a read-model database require &ldquo;relations&rdquo;, relational databases can be dropped in favour of NoSQL solutions. The author introduces the following modern document stores:</p>
+<p>Since neither an &ldquo;event store&rdquo; (ES) nor a read-model database require &ldquo;relations&rdquo;, relational databases can be dropped in favour of NoSQL solutions. The author introduces the following modern <del>document stores</del> storage solutions (2019-06-30: thx to Alexey for the pointer)</p>
 
 <ul>
 <li><a href="https://ravendb.net/">RavenDb</a></li>
