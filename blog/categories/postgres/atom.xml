@@ -4,7 +4,7 @@
   <title><![CDATA[Category: postgres | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/postgres/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2019-06-29T22:34:55+00:00</updated>
+  <updated>2019-07-01T22:50:42+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -18,7 +18,9 @@
     <link href="http://draptik.github.io/blog/2019/06/25/review-hands-on-ddd-dotnetcore/"/>
     <updated>2019-06-25T21:42:37+00:00</updated>
     <id>http://draptik.github.io/blog/2019/06/25/review-hands-on-ddd-dotnetcore</id>
-    <content type="html"><![CDATA[<h2>TL;DR</h2>
+    <content type="html"><![CDATA[<blockquote><p>I have updated this post because the author took the time to respond to my review.</p></blockquote>
+
+<h2>TL;DR</h2>
 
 <p>The book <a href="https://www.packtpub.com/application-development/hands-domain-driven-design-net-core">Hands-On Domain-Driven-Design with .NET Core</a> by Alexey Zimarev illustrates the pros &amp; cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.</p>
 
@@ -49,11 +51,21 @@
 
 <ul>
 <li>Black &amp; white print of the book makes viewing the Event Storming images difficult (although the publisher provides color images)</li>
-<li>Copy editing could be improved (typos in text and source code)</li>
+<li>Copy editing could be improved (typos in text and source code)
+
+<ul>
+<li><a href="https://twitter.com/Zimareff/status/1144582525467136001">2019-07-02: answer from the author</a> &ldquo;[&hellip;] I can only blame Packt for typos since they told me and reviewers explicitly not to pay attention. [&hellip;]&rdquo;</li>
+</ul>
+</li>
 <li>Technical review
 
 <ul>
-<li>Ubiquitous language is suddenly changed (example: <code>ClassifiedAdPublished</code> to <code>ClassifiedAdPublic</code>)</li>
+<li>Ubiquitous language is suddenly changed (example: <code>ClassifiedAdPublished</code> to <code>ClassifiedAdPublic</code>)
+
+<ul>
+<li><a href="https://twitter.com/Zimareff/status/1145450330076975105">2019-07-02: answer from the author</a> &ldquo;[&hellip;] there&rsquo;s a difference between Published (it&rsquo;s a state) and Public (it&rsquo;s a view). Like, a public ad doesn&rsquo;t contain certain private elements (personal data and such). It might not be clear from the code and text, but that was the idea.&rdquo;</li>
+</ul>
+</li>
 <li>Mismatches between text and code samples</li>
 </ul>
 </li>
@@ -62,6 +74,7 @@
 <ul>
 <li>Some integrations test in the code samples would have been nice (for api, projections, persistence).</li>
 <li>Some examples (in the code samples) about monitoring would have been nice.</li>
+<li><a href="https://twitter.com/Zimareff/status/1144582807534129153">2019-07-02: answer from the author</a> &ldquo;Concerning the whole distribution, integration, and monitoring &ndash; it exceeds the original scope of the book. Tbh, I have a lot to say there as well, so [&hellip;]&rdquo;</li>
 </ul>
 </li>
 </ul>
