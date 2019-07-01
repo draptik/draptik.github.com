@@ -6,6 +6,8 @@ comments: true
 categories: [csharp, linux, dotnetcore, ddd, domain-driven-design, cqrs, event-store, es, event-sourcing, postgres, ravendb, review, book]
 ---
 
+> I have updated this post because the author took the time to respond to my review.
+
 ## TL;DR
 
 The book [Hands-On Domain-Driven-Design with .NET Core](https://www.packtpub.com/application-development/hands-domain-driven-design-net-core) by Alexey Zimarev illustrates the pros & cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.
@@ -34,12 +36,15 @@ It provides potential solutions for mapping event store "events" with read model
 
 - Black & white print of the book makes viewing the Event Storming images difficult (although the publisher provides color images)
 - Copy editing could be improved (typos in text and source code)
+  - [2019-07-02: answer from the author](https://twitter.com/Zimareff/status/1144582525467136001) "[...] I can only blame Packt for typos since they told me and reviewers explicitly not to pay attention. [...]"
 - Technical review
   - Ubiquitous language is suddenly changed (example: `ClassifiedAdPublished` to `ClassifiedAdPublic`)
+    - [2019-07-02: answer from the author](https://twitter.com/Zimareff/status/1145450330076975105) "[...] there's a difference between Published (it's a state) and Public (it's a view). Like, a public ad doesn't contain certain private elements (personal data and such). It might not be clear from the code and text, but that was the idea."
   - Mismatches between text and code samples
-- The book deals with polyglot persistence, (potentially) distributed systems, and the infamous "eventually consistency" problems. 
+- The book deals with polyglot persistence, (potentially) distributed systems, and the infamous "eventually consistency" problems.
   - Some integrations test in the code samples would have been nice (for api, projections, persistence).
   - Some examples (in the code samples) about monitoring would have been nice.
+  - [2019-07-02: answer from the author](https://twitter.com/Zimareff/status/1144582807534129153) "Concerning the whole distribution, integration, and monitoring - it exceeds the original scope of the book. Tbh, I have a lot to say there as well, so [...]"
 
 ## Pros
 
