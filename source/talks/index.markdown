@@ -8,8 +8,12 @@ footer: false
 
 ## 2019
 
-- Von C# zu F# - Einführung in die Funktionale Programmierung (with Martin Grotz)
-  - [Herbstcampus 2019](https://www.herbstcampus.de/), Sep. 2019
+- Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with Martin Grotz)
+  - [Herbstcampus 2019 (presentation)](https://www.herbstcampus.de/lecture.php?id=8768), Sep. 4 2019
+    ([slides & code](https://github.com/redheads/2019-09-herbstcampus-fp-intro-csharp-fsharp))
+- Von C# zu F# - Einführung in die Funktionale Programmierung (workshop with Martin Grotz)
+  - [Herbstcampus 2019 (1-day workshop)](https://www.herbstcampus.de/lecture.php?id=8769), Sep. 2
+    2019 ([slides & code](https://github.com/redheads/2019-09-herbstcampus-fp-intro-csharp-fsharp))
 - Können willkürliche Tests und Zombies unseren Code besser machen?
   - [MATHEMA Campus 2019](https://www.mathema.de/veranstaltungen/mathema-campus), May 10 2019 ([slides & code](https://github.com/redheads/2019-05-10-mathemacampus-testing))
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
