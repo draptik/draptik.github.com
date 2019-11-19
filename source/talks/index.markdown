@@ -8,10 +8,18 @@ footer: false
 
 ## 2019
 
-- Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with Martin Grotz)
+- Modern Linux Command Line Tools (co-moderated by [Frank Blendinger](https://twitter.com/yooogan))
+  - [Softwerkskammer Nuernberg (TBA)](TBA), Dec. 5 2019
+- Moderation: Ethics and old white men
+  - [Software Engineering Camp 2019](https://swe-camp.de/), Nov. 10 2019
+    ([sketchnotes](https://twitter.com/wolkencode/status/1193512119431520258))
+- Modern Linux Command Line Tools (co-moderated by [Frank Blendinger](https://twitter.com/yooogan))
+  - [Software Engineering Camp 2019](https://swe-camp.de/), Nov. 09 2019
+    ([sketchnotes](https://twitter.com/wolkencode/status/1193122008684486656), [slides & code](https://github.com/draptik/2019-11-modern-linux-cli-tools))
+- Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with [Martin Grotz](https://twitter.com/mobilgroma))
   - [Herbstcampus 2019 (presentation)](https://www.herbstcampus.de/lecture.php?id=8768), Sep. 4 2019
     ([slides & code](https://github.com/redheads/2019-09-herbstcampus-fp-intro-csharp-fsharp))
-- Von C# zu F# - Einführung in die Funktionale Programmierung (workshop with Martin Grotz)
+- Von C# zu F# - Einführung in die Funktionale Programmierung (workshop with [Martin Grotz](https://twitter.com/mobilgroma))
   - [Herbstcampus 2019 (1-day workshop)](https://www.herbstcampus.de/lecture.php?id=8769), Sep. 2
     2019 ([slides & code](https://github.com/redheads/2019-09-herbstcampus-fp-intro-csharp-fsharp))
 - Können willkürliche Tests und Zombies unseren Code besser machen?
@@ -20,7 +28,7 @@ footer: false
   - [.NET Developers Ruhr (Dortmund)](https://www.xing.com/communities/groups/punkt-net-user-group-dortmund-8078-1012640/about), May 8 2019 ([slides & code](https://github.com/redheads/2019-05-nug-ruhr-railway-oriented-programming))
 - Railway Oriented Programming - Komplexe Orchestrierung wartbar machen
   - [.NET Developers Ruhr (Gelsenkirchen)](https://www.meetup.com/de-DE/NET-Developers-Ruhr/events/258641255/), May 7 2019 ([slides & code](https://github.com/redheads/2019-05-nug-ruhr-railway-oriented-programming))
-- Workshop (with Martin Grotz): Von C# zu F# - Einführung in die Funktionale Programmierung
+- Workshop (with [Martin Grotz](https://twitter.com/mobilgroma)): Von C# zu F# - Einführung in die Funktionale Programmierung
   - [.NET Day Franken 2019](https://www.dotnet-day-franken.de/workshops/item/6-ws5-von-c-zu-f-einfuehrung-in-die-funktionale-programmierung), Apr. 5 2019 ([slides & code](https://github.com/redheads/2019-04-05-fp-workshop-dotnetday-franken))
 
 ## 2018
