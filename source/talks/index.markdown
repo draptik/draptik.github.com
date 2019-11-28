@@ -9,8 +9,7 @@ footer: false
 ## 2019
 
 - Modern Linux Command Line Tools (co-moderated by [Frank Blendinger](https://twitter.com/yooogan))
-  - [Softwerkskammer
-    Nuernberg](https://www.softwerkskammer.org/activities/Treffen_SWK_Nuernberg_dez_2019_modern_linux_cli_tools),
+  - [Softwerkskammer Nuernberg](https://www.softwerkskammer.org/activities/Treffen_SWK_Nuernberg_dez_2019_modern_linux_cli_tools),
     Dec. 5 2019 ([slides & code](https://github.com/draptik/2019-12-modern-linux-command-line-tools))
 - Moderation: Ethics and old white men
   - [Software Engineering Camp 2019](https://swe-camp.de/), Nov. 10 2019
