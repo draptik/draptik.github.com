@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | draptik]]></title>
   <link href="http://draptik.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://draptik.github.io/"/>
-  <updated>2019-11-28T01:56:14+00:00</updated>
+  <updated>2019-11-28T02:03:27+00:00</updated>
   <id>http://draptik.github.io/</id>
   <author>
     <name><![CDATA[Patrick Drechsler]]></name>
@@ -435,7 +435,7 @@ execjs
 <p>bundle install &mdash;path $HOME/.gem</p>
 
 <p>git config &mdash;global user.name &ldquo;FirstName LastName&rdquo;
-git config &mdash;global user.email &ldquo;<a href="&#109;&#97;&#x69;&#108;&#x74;&#x6f;&#x3a;&#121;&#x6f;&#x75;&#x72;&#64;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x79;&#111;&#117;&#x72;&#64;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;
+git config &mdash;global user.email &ldquo;<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#121;&#x6f;&#x75;&#114;&#64;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">&#121;&#111;&#x75;&#x72;&#64;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>&rdquo;
 ```</p>
 
 <h2>Final usage for Octopress users</h2>
