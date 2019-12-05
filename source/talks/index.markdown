@@ -17,6 +17,8 @@ footer: false
 - Modern Linux Command Line Tools (co-moderated by [Frank Blendinger](https://twitter.com/yooogan))
   - [Software Engineering Camp 2019](https://swe-camp.de/), Nov. 09 2019
     ([sketchnotes](https://twitter.com/wolkencode/status/1193122008684486656), [slides & code](https://github.com/draptik/2019-11-modern-linux-cli-tools))
+- Moderation: Teaching Testing
+  - [SoCraTes Day Franken 2019](https://socrates-day-franken.de/), Sep. 28 2019
 - Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with [Martin Grotz](https://twitter.com/mobilgroma))
   - [Herbstcampus 2019 (presentation)](https://www.herbstcampus.de/lecture.php?id=8768), Sep. 4 2019
     ([slides & code](https://github.com/redheads/2019-09-herbstcampus-fp-intro-csharp-fsharp))
