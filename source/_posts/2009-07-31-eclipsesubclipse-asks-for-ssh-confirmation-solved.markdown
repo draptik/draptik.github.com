@@ -5,8 +5,7 @@ date: 2009-07-31 01:31:08
 layout: post
 slug: eclipsesubclipse-asks-for-ssh-confirmation-solved
 title: Eclipse3.5/Subclipse1.6.x asks for unnecessary SSH confirmation and details
-  (solved)
-wordpress_id: 236
+wordpress id: 236
 categories:
 - programming
 ---
