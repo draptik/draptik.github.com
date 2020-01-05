@@ -6,10 +6,20 @@
     <description>Recent content in Posts on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jan 2020 18:05:29 +0100</lastBuildDate>
     
 	<atom:link href="https://draptik.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blog: Update to Hugo</title>
+      <link>https://draptik.github.io/posts/2020/01/05/blog-update-to-hugo/</link>
+      <pubDate>Sun, 05 Jan 2020 18:05:29 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2020/01/05/blog-update-to-hugo/</guid>
+      <description>I&#39;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&#39;t been updated in a while, so I switched to Hugo.
+Old links should still work.</description>
+    </item>
     
     <item>
       <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
