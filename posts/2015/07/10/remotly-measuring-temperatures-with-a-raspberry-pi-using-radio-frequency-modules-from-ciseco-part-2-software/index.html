@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software) • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)"/>
+<meta name="twitter:description" content="In the previous post I described how to setup the hardware for measuring temperatures at home. This post will use a small python program to save the recorded temperatures to a database."/>
+
+<meta property="og:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)" />
+<meta property="og:description" content="In the previous post I described how to setup the hardware for measuring temperatures at home. This post will use a small python program to save the recorded temperatures to a database." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" />
+<meta property="article:published_time" content="2015-07-10T00:13:12+00:00" />
+<meta property="article:modified_time" content="2015-07-10T00:13:12+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jul 10, 2015
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/iot">IOT</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/raspberry-pi">RASPBERRY PI</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 4 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p>In the <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
+This post will use a small python program to save the recorded temperatures to a database.</p>
+<p>For simplicity's sake we'll be using SQLite3 as our database.</p>
+<p>Aside from our (indoor) temperature sensors, we'll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
+<p>Note: In case your Raspberry Pi does not have access to the internet you can just exlude the weather underground parts in the code below.</p>
+<p>All following code is intended to run on the Raspberry Pi receiving the data.</p>
+<h3 id="create-database-sqlite3">Create database (SQLite3)</h3>
+<p>The database schema is simple. We need one table to store the temperatures, and another to store sensor information.</p>
+<p>Create a new file called <code>templog.db</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ touch templog.db
+</code></pre></div><p>There are different ways to interact with SQLite3 (cli (=interactive), script, api).</p>
+<p>The goal is to execute the following sql statements:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> sensors
+(
+    name TEXT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    id TEXT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    baudrate INTEGER,
+    port TEXT <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    active INTEGER
+);
+<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> temps
+(
+    <span style="color:#66d9ef">timestamp</span> TEXT,
+    temp REAL,
+    ID TEXT
+);
+</code></pre></div><p>Simplest solution is to open the newly created file <code>templog.db</code> with <code>sqlite3</code> (cli/interactive) &hellip;</p>
+<pre><code>sqlite3 templog.db
+</code></pre><p>&hellip;and past the previous code block. Should look like this:</p>
+<pre><code>$ sqlite3 demo.db 
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter &quot;.help&quot; for usage hints.
+sqlite&gt; CREATE TABLE sensors
+   ...&gt; (
+   ...&gt;     name TEXT NOT NULL,
+   ...&gt;     id TEXT NOT NULL,
+   ...&gt;     baudrate INTEGER,
+   ...&gt;     port TEXT NOT NULL,
+   ...&gt;     active INTEGER
+   ...&gt; );
+sqlite&gt; CREATE TABLE temps
+   ...&gt; (
+   ...&gt;     timestamp TEXT,
+   ...&gt;     temp REAL,
+   ...&gt;     ID TEXT
+   ...&gt; );
+</code></pre><p>We've created a database.</p>
+<p>The important table is <code>temps</code>: It will contain the measurements.</p>
+<p>The other table (<code>sensors</code>) contains informations about the sensors, which are currently only needed for the weather underground &lsquo;sensor&rsquo;. And yes: the column names/types are not optimal.</p>
+<p>Note: <code>timestamp TEXT</code> will bite us in the ass, but SQLite3 does NOT have any date type.</p>
+<h3 id="monitor-script">Monitor script</h3>
+<p>I found this nice script somewhere on <a href="https://github.com/kal001/temperature">Github</a>. So Thank You <a href="https://github.com/kal001">kal001</a>!</p>
+<p>Here's my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
+<p>Place this script side-by-side to <code>temps.log</code>.</p>
+<p>Save it as <code>monitor.py</code>.</p>
+<p>You will probably want to modify the values for <code>dbname</code>, <code>TIMEOUT</code>, <code>debug.txt</code>, etc.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python</span>
+
+<span style="color:#f92672">import</span> sqlite3
+<span style="color:#f92672">import</span> threading
+<span style="color:#f92672">from</span> time <span style="color:#f92672">import</span> time, sleep, gmtime, strftime
+
+<span style="color:#f92672">import</span> serial
+<span style="color:#f92672">import</span> requests
+
+<span style="color:#75715e"># global variales</span>
+
+<span style="color:#75715e"># sqlite database location</span>
+dbname <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">templog.db</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#75715e"># serial device</span>
+DEVICE <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/dev/ttyAMA0</span><span style="color:#e6db74">&#39;</span>
+BAUD <span style="color:#f92672">=</span> <span style="color:#ae81ff">9600</span>
+
+ser <span style="color:#f92672">=</span> serial<span style="color:#f92672">.</span>Serial(DEVICE, BAUD)
+
+<span style="color:#75715e"># timeout in seconds for waiting to read temperature from sensors</span>
+TIMEOUT <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>
+
+<span style="color:#75715e"># weather underground data</span>
+WUKEY <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+STATION <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#39;</span>
+<span style="color:#75715e"># time between weather underground samples in seconds</span>
+SAMPLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span>
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log_temperature</span>(temp):
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Store the temperature in the database.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    
+    conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(dbname)
+    curs <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+
+    curs<span style="color:#f92672">.</span>execute(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">INSERT INTO temps values(datetime(</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">now</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">localtime</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">), </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{0}</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">, </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{1}</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> )</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(temp[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#39;</span>], temp[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">id</span><span style="color:#e6db74">&#39;</span>]))
+
+    conn<span style="color:#f92672">.</span>commit()
+    conn<span style="color:#f92672">.</span>close()
+
+    
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_temp</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Retrieves the temperature from the sensor.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Returns -100 on error, or the temperature as a float.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">global</span> ser
+
+    tempvalue <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>
+    deviceid <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">??</span><span style="color:#e6db74">&#39;</span>
+    voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    fim <span style="color:#f92672">=</span> time() <span style="color:#f92672">+</span> TIMEOUT
+
+    <span style="color:#66d9ef">while</span> (time() <span style="color:#f92672">&lt;</span> fim) <span style="color:#f92672">and</span> (tempvalue <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>):
+        n <span style="color:#f92672">=</span> ser<span style="color:#f92672">.</span>inWaiting()
+        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+            data <span style="color:#f92672">=</span> ser<span style="color:#f92672">.</span>read(n)
+            nb_msg <span style="color:#f92672">=</span> len(data) <span style="color:#f92672">/</span> <span style="color:#ae81ff">12</span>
+            <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, nb_msg):
+                msg <span style="color:#f92672">=</span> data[i<span style="color:#f92672">*</span><span style="color:#ae81ff">12</span>:(i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span><span style="color:#ae81ff">12</span>]
+                deviceid <span style="color:#f92672">=</span> msg[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">3</span>]
+
+                <span style="color:#66d9ef">if</span> msg[<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">7</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">TMPA</span><span style="color:#e6db74">&#34;</span>:
+                    tempvalue <span style="color:#f92672">=</span> msg[<span style="color:#ae81ff">7</span>:]
+
+                <span style="color:#66d9ef">if</span> msg[<span style="color:#ae81ff">3</span>:<span style="color:#ae81ff">7</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">BATT</span><span style="color:#e6db74">&#34;</span>:
+                    voltage <span style="color:#f92672">=</span> msg[<span style="color:#ae81ff">7</span>:<span style="color:#ae81ff">11</span>]
+                    <span style="color:#66d9ef">if</span> voltage <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">LOW</span><span style="color:#e6db74">&#34;</span>:
+                        voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">else</span>:
+            sleep(<span style="color:#ae81ff">5</span>)
+
+    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#39;</span>:tempvalue, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">id</span><span style="color:#e6db74">&#39;</span>:deviceid}
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_temp_wu</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Retrieves temperature(s) from weather underground (wu) and stores it to the database</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+
+    <span style="color:#66d9ef">try</span>:
+        conn <span style="color:#f92672">=</span> sqlite3<span style="color:#f92672">.</span>connect(dbname)
+        curs <span style="color:#f92672">=</span> conn<span style="color:#f92672">.</span>cursor()
+        query <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SELECT baudrate, port, id, active FROM sensors WHERE id like </span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">W_</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span>
+
+        curs<span style="color:#f92672">.</span>execute(query)
+        rows <span style="color:#f92672">=</span> curs<span style="color:#f92672">.</span>fetchall()
+
+        <span style="color:#75715e">#print(rows)</span>
+
+        conn<span style="color:#f92672">.</span>close()
+
+        <span style="color:#66d9ef">if</span> rows <span style="color:#f92672">!=</span> None:
+            <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> rows[:]:
+                WUKEY <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">1</span>]
+                STATION <span style="color:#f92672">=</span> row[<span style="color:#ae81ff">0</span>]
+
+                <span style="color:#66d9ef">if</span> int(row[<span style="color:#ae81ff">3</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+                    <span style="color:#66d9ef">try</span>:
+                        url <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">http://api.wunderground.com/api/{0}/conditions/q/{1}.json</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(WUKEY, STATION)
+                        r <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+                        data <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>json()
+                        log_temperature({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#39;</span>: data[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">current_observation</span><span style="color:#e6db74">&#39;</span>][<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">temp_c</span><span style="color:#e6db74">&#39;</span>], <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">id</span><span style="color:#e6db74">&#39;</span>: row[<span style="color:#ae81ff">2</span>]})
+                    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+                        <span style="color:#66d9ef">raise</span>
+                        
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+        text_file <span style="color:#f92672">=</span> open(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">debug.txt</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">a+</span><span style="color:#e6db74">&#34;</span>)
+        text_file<span style="color:#f92672">.</span>write(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{0} ERROR:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{1}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(strftime(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%</span><span style="color:#e6db74">Y-</span><span style="color:#e6db74">%</span><span style="color:#e6db74">m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%</span><span style="color:#e6db74">H:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">M:</span><span style="color:#e6db74">%</span><span style="color:#e6db74">S</span><span style="color:#e6db74">&#34;</span>, gmtime()), str(e)))
+        text_file<span style="color:#f92672">.</span>close()
+
+         
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Program starts here.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+    
+    get_temp_wu()
+    t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Timer(SAMPLE, get_temp_wu)
+    t<span style="color:#f92672">.</span>start()
+
+    <span style="color:#66d9ef">while</span> True:
+        temperature <span style="color:#f92672">=</span> get_temp()
+
+        <span style="color:#66d9ef">if</span> temperature[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">temperature</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>:
+            log_temperature(temperature)
+
+        <span style="color:#66d9ef">if</span> t<span style="color:#f92672">.</span>is_alive() <span style="color:#f92672">==</span> False:
+            t <span style="color:#f92672">=</span> threading<span style="color:#f92672">.</span>Timer(SAMPLE, get_temp_wu)
+            t<span style="color:#f92672">.</span>start()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
+    main()
+</code></pre></div><p>Run the script. Open another shell, take a look inside the database (new data arriving once an hour?).</p>
+<p>Don't forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
+<p><a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Part 3</a> will provide a UI for the collected data.</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)</span>
+    </a>
+    
+    
+    <a href="/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/" class="navigation-next">
+      <span class="navigation-tittle">Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

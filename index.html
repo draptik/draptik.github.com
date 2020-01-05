@@ -1,2149 +1,466 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>draptik</title>
-  <meta name="author" content="Patrick Drechsler">
+<html lang="en-us">
+    
+  <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
 
-  
-  <meta name="description" content="I have updated this post because the author took the time to respond to my review. TL;DR The book Hands-On Domain-Driven-Design with .NET Core by &hellip;">
-  
+    
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>draptik</title>
 
-  
-  <link rel="canonical" href="http://draptik.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="draptik" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
-  
-   <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="draptik"/>
+<meta name="twitter:description" content="mostly tech stuff"/>
 
-    ga('create', 'UA-65991503-1', 'auto');
-    ga('send', 'pageview');
+<meta property="og:title" content="draptik" />
+<meta property="og:description" content="mostly tech stuff" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://draptik.github.io/" />
+<meta property="og:updated_time" content="2019-06-25T21:42:37+00:00" /><meta property="og:site_name" content="draptik title" />
 
-  </script>
 
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    <link rel="alternate" type="application/rss+xml" href="https://draptik.github.io/index.xml" title="draptik" />
+
+    
 
 </head>
 
-<body    class="collapse-sidebar sidebar-footer" >
-  <header role="banner"><hgroup>
-  <h1><a href="/">draptik</a></h1>
-  
-    <h2>mostly tech stuff</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:draptik.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/talks">Talks</a></li>
-  <li><a href="/about">About Me</a></li>
-  <li><a href="/impressum">Impressum</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/06/25/review-hands-on-ddd-dotnetcore/">Review: Hands-On Domain-Driven Design With .NET Core by Alexey Zimarev</a></h1>
-    
-    
-      <p class="meta">
         
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-06-25T21:42:37+00:00" pubdate data-updated="true">Jun 25<span>th</span>, 2019</time>
         
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>I have updated this post because the author took the time to respond to my review.</p></blockquote>
-
-<h2>TL;DR</h2>
-
-<p>The book <a href="https://www.packtpub.com/application-development/hands-domain-driven-design-net-core">Hands-On Domain-Driven-Design with .NET Core</a> by Alexey Zimarev illustrates the pros &amp; cons of different CQRS/ES persistency options in the .NET space. I can highly recommend this book to anybody looking for a deep dive into concrete CQRS/ES examples using up-to-date solutions.</p>
-
-<h2>Content</h2>
-
-<p>Although the book title includes &ldquo;Hands-On&rdquo;, people new to <a href="https://en.wikipedia.org/wiki/Domain-driven_design">Domain Driven Design (DDD)</a> will get a compact and up-to-date introduction to the topic in the first few chapters of the book. I especially enjoyed how the author introduces <a href="https://en.wikipedia.org/wiki/Event_storming">Event Storming</a> as a valuable technique for distilling an <a href="https://martinfowler.com/bliki/UbiquitousLanguage.html">Ubiquitous Language</a>.</p>
-
-<p><strong>The book focuses on <a href="https://martinfowler.com/eaaDev/EventSourcing.html">Event Sourcing (ES)</a> and <a href="https://en.wikipedia.org/wiki/Command%E2%80%93query_separation#Command_query_responsibility_segregation">Command Query Responsibility Segregation (CQRS)</a>.</strong> Previous DDD books (especially in the .NET space) have often treated both of these subjects as an implementation detail. Although I must mention that the book <a href="http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html">Patterns, Principles and Practices of Domain Driven Design (by Tune &amp; Millet)</a> also provides some excellent hands-on advice on CQRS &amp; ES.</p>
-
-<p>One of the interesting &ldquo;twists&rdquo; of the book is that is does not use the default database most .NET developers are used to: MS-SQL. Instead, the author demonstrates that using the right tool for the job also should get us thinking about using the most appropriate persistence store for architectural patterns such as CQRS and ES.</p>
-
-<p>Since neither an &ldquo;event store&rdquo; (ES) nor a read-model database require &ldquo;relations&rdquo;, relational databases can be dropped in favour of NoSQL solutions. The author introduces the following modern <del>document stores</del> storage solutions (2019-06-30: thx to Alexey for the pointer)</p>
-
-<ul>
-<li><a href="https://ravendb.net/">RavenDb</a></li>
-<li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-<li><a href="https://eventstore.org/">Event Store</a></li>
-</ul>
-
-
-<p>The pros &amp; cons of each solution are demonstrated elaborately: As reader you get a very good impression of which solution might work for you. I really enjoyed this part, because you can clearly see how leaky abstractions change a core domain. F.ex. which framework/DB can map Value Objects without having to change the visibility of ctors or property-setters&hellip; Or having to introduce an Id property just for persistence&hellip;</p>
-
-<p>The most valuable chapter (for me) in the book is &ldquo;Projections &amp; Queries&rdquo;.</p>
-
-<p>It provides potential solutions for mapping event store &ldquo;events&rdquo; with read model DB entries. This is a &ldquo;best practices&rdquo; chapter full of different approaches on how to keep your read models in sync with your event store. My personal &lsquo;I did not know I could do this&rsquo;-pattern: Event-Upcasting: Neat technique!</p>
-
-<h2>Cons</h2>
-
-<ul>
-<li>Black &amp; white print of the book makes viewing the Event Storming images difficult (although the publisher provides color images)</li>
-<li>Copy editing could be improved (typos in text and source code)
-
-<ul>
-<li><a href="https://twitter.com/Zimareff/status/1144582525467136001">2019-07-02: answer from the author</a> &ldquo;[&hellip;] I can only blame Packt for typos since they told me and reviewers explicitly not to pay attention. [&hellip;]&rdquo;</li>
-</ul>
-</li>
-<li>Technical review
-
-<ul>
-<li>Ubiquitous language is suddenly changed (example: <code>ClassifiedAdPublished</code> to <code>ClassifiedAdPublic</code>)
-
-<ul>
-<li><a href="https://twitter.com/Zimareff/status/1145450330076975105">2019-07-02: answer from the author</a> &ldquo;[&hellip;] there&rsquo;s a difference between Published (it&rsquo;s a state) and Public (it&rsquo;s a view). Like, a public ad doesn&rsquo;t contain certain private elements (personal data and such). It might not be clear from the code and text, but that was the idea.&rdquo;</li>
-</ul>
-</li>
-<li>Mismatches between text and code samples</li>
-</ul>
-</li>
-<li>The book deals with polyglot persistence, (potentially) distributed systems, and the infamous &ldquo;eventually consistency&rdquo; problems.
-
-<ul>
-<li>Some integrations test in the code samples would have been nice (for api, projections, persistence).</li>
-<li>Some examples (in the code samples) about monitoring would have been nice.</li>
-<li><a href="https://twitter.com/Zimareff/status/1144582807534129153">2019-07-02: answer from the author</a> &ldquo;Concerning the whole distribution, integration, and monitoring &ndash; it exceeds the original scope of the book. Tbh, I have a lot to say there as well, so [&hellip;]&rdquo;</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>Pros</h2>
-
-<ul>
-<li>100% .NET Core: I was able to follow along using Linux &amp; JetBrains Rider / VSCode</li>
-<li>Learning about alternative storage solutions and best practices for using them:
-
-<ul>
-<li><a href="https://eventstore.org/">Event Store</a></li>
-<li><a href="https://ravendb.net/">RavenDb</a></li>
-<li><a href="https://www.postgresql.org/">PostgreSQL</a> (with and without Entity Framework)</li>
-</ul>
-</li>
-<li>all persistence demo DBs are provided as easily runnable <code>docker-compose.yml</code> files</li>
-<li>libraries and frameworks introduced are very up-to-date</li>
-<li>focus on backend: using Swagger as user interface was a great decision</li>
-</ul>
-
-
-<h2>Summary</h2>
-
-<p>It is the first book, to my knowledge, which shows the pros &amp; cons of different CQRS/ES persistency options in the .NET space.</p>
-
-<p>I can highly recommend this book to anybody familiar with DDD and/or wanting to understand concepts such as CQRS/ES. It is also a great addition to <a href="http://www.wrox.com/WileyCDA/WroxTitle/Patterns-Principles-and-Practices-of-Domain-Driven-Design.productCd-1118714709.html">Patterns, Principles and Practices of Domain Driven Design (by Tune &amp; Millet)</a>.</p>
-
-<p>If it were not for the improvable copy editing I would give this book 5 of 5 stars. The second edition will most likely fix this :&ndash;).</p>
-
-<h2>Resources</h2>
-
-<ul>
-<li>Official Github Repository: <a href="https://github.com/PacktPublishing/Hands-On-Domain-Driven-Design-with-.NET-Core">https://github.com/PacktPublishing/Hands-On-Domain-Driven-Design-with-.NET-Core</a></li>
-<li>My &ldquo;coding along while reading&rdquo; Github repository: <a href="https://github.com/draptik/book_hands-on-domain-driven-design-with-dotnet-core">https://github.com/draptik/book_hands-on-domain-driven-design-with-dotnet-core</a>
-
-<ul>
-<li>I tried placing some sensible git tags along the way</li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/11/29/fsharp-linux-mixed-feelings/">F# Linux: Mixed Feelings</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-11-29T00:58:33+00:00" pubdate data-updated="true">Nov 29<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &ldquo;mixed&rdquo;:</p>
-
-<p>First off all: It is great that we can use .NET with Linux in the first place! And <code>dotnet</code> as CLI-first tool is amazing (not only for linux desktop users, but also for docker, ci)! I can&rsquo;t emphasis this enough!</p>
-
-<p>BUT:</p>
-
-<ul>
-<li>The templates generated by <code>dotnet new</code> are never up-to-date for F#. One always has to spend 30min cleaning up and updating.</li>
-<li>IDE integration (Ionide) also takes weeks until everything works flawlessly after a new dotnet core release (VSCode, Rider).</li>
-</ul>
-
-
-<p>Example: Currently (2018-11-29) I have to patch <code>dotnet new xunit -lang f# -o somefolder</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>dotnet new xunit -lang f# -o somefolder
-</span><span class='line'>The template <span class="s2">&quot;xUnit Test Project&quot;</span> was created successfully.
-</span><span class='line'>
-</span><span class='line'>Processing post-creation actions...
-</span><span class='line'>Running <span class="s1">&#39;dotnet restore&#39;</span> on somefolder/somefolder.fsproj...
-</span><span class='line'>...
-</span><span class='line'>Restore succeeded.
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="sb">`</span><span class="nv">$ </span>dotnet <span class="nb">test</span>
-</span><span class='line'>Build started, please wait...
-</span><span class='line'>/home/patrick/.nuget/packages/microsoft.net.test.sdk/15.9.0/build/netcoreapp1.0/Microsoft.Net.Test.Sdk.targets<span class="o">(</span>104,5<span class="o">)</span>: warning : A <span class="s1">&#39;Program.fs&#39;</span> file can be automatically generated <span class="k">for </span>F# .NET Core <span class="nb">test </span>projects. To fix this warning, either delete the file from the project, or <span class="nb">set </span>the &lt;GenerateProgramFile&gt; property to <span class="s1">&#39;false&#39;</span>. <span class="o">[</span>/home/patrick/tmp/somefolder/somefolder.fsproj<span class="o">]</span>
-</span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong><em>Why? Learning F#, this really irritates me! Am I doing something wrong? Is it idiomatic to see these kinds of warnings?</em></strong></p>
-
-<p>Fix:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd </span>somefolder
-</span><span class='line'>rm Program.fs
-</span><span class='line'>sed -i <span class="s1">&#39;/Program/d&#39;</span> somefolder.fsproj
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Simple, isn&rsquo;t it? F#-Team: Talk to the template team.</p>
-
-<p>Electron apps such as VSCode behave unusually with Arch Linux, so I won&rsquo;t comment on that. And Rider is really slow catching up to new .NET Core versions on Linux&hellip; (linux: 2nd class citizen).</p>
-
-<p>All in all, F# with .NET Core and Linux: keeps being interesting ;&ndash;)</p>
-
-<p>Setup (2018-11-29):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>dotnet --info
-</span><span class='line'>.NET Core SDK <span class="o">(</span>reflecting any global.json<span class="o">)</span>:
-</span><span class='line'> Version:   2.1.500
-</span><span class='line'> Commit:    b68b931422
-</span><span class='line'>
-</span><span class='line'>Runtime Environment:
-</span><span class='line'> OS Name:     arch
-</span><span class='line'> OS Version:
-</span><span class='line'> OS Platform: Linux
-</span><span class='line'> RID:         arch-x64
-</span><span class='line'> Base Path:   /opt/dotnet/sdk/2.1.500/
-</span><span class='line'>
-</span><span class='line'>Host <span class="o">(</span>useful <span class="k">for </span>support<span class="o">)</span>:
-</span><span class='line'>  Version: 2.1.6
-</span><span class='line'>  Commit:  3f4f8eebd8
-</span><span class='line'>
-</span><span class='line'>.NET Core SDKs installed:
-</span><span class='line'>  2.1.3 <span class="o">[</span>/opt/dotnet/sdk<span class="o">]</span>
-</span><span class='line'>  2.1.500 <span class="o">[</span>/opt/dotnet/sdk<span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>.NET Core runtimes installed:
-</span><span class='line'>  Microsoft.NETCore.App 2.1.6 <span class="o">[</span>/opt/dotnet/shared/Microsoft.NETCore.App<span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>To install additional .NET Core runtimes or SDKs:
-</span><span class='line'>  https://aka.ms/dotnet-download
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Yes, this is just a rant.</p>
-
-<p>I am still a big fan of F#, .NET Core, and Linux. And the combination of the three. I&rsquo;ll keep trying to understand them, because I think they are a good combination.</p>
-
-<p>Any pointers to better usage are more than welcome!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">IntelliJ and Gnome Keyboard Shortcut Conflict: Ctrl Alt S</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-08-21T23:01:12+00:00" pubdate data-updated="true">Aug 21<span>st</span>, 2018</time>
-        
+      <p class="site__description">
+         mostly tech stuff 
       </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I am currenty experimenting with <a href="https://www.jetbrains.com/rider/">Jetbrains Rider</a> under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts. Even though Jetbrains&#8217; IDEs come with a keyboard setting named <code>Default for GNOME</code>&hellip;</p>
-
-<p>Starting with the most obvious: I was not able to open Rider&rsquo;s settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
-
-<h2><code>Ctrl Alt s</code></h2>
-
-<p>This command opens the settings in most IntelliJ products (File &ndash;> Settings).</p>
-
-<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was already in use. The question being: by which application?</p>
-
-<p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
-
-<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don&rsquo;t know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome&rsquo;s default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
-
-<p>Full name of the extension:</p>
-
-<p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
-
-<p>Here is a short summary how to figure out if your environment is affected by this extension:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># Find out if screenshot extension is installed</span>
-</span><span class='line'>gsettings list-schemas | grep screenshot-window-sizer
-</span><span class='line'>
-</span><span class='line'><span class="c"># List keys</span>
-</span><span class='line'>gsettings list-keys org.gnome.shell.extensions.screenshot-window-sizer
-</span><span class='line'>cycle-screenshot-sizes-backward
-</span><span class='line'>cycle-screenshot-sizes
-</span><span class='line'>
-</span><span class='line'><span class="c">## Show key value</span>
-</span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
-</span><span class='line'><span class="o">[</span><span class="s1">&#39;&lt;Alt&gt;&lt;Control&gt;s&#39;</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="c">## Show key value</span>
-</span><span class='line'>gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes-backward
-</span><span class='line'><span class="o">[</span><span class="s1">&#39;&lt;Shift&gt;&lt;Alt&gt;&lt;Control&gt;s&#39;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c"># disable:</span>
-</span><span class='line'>gsettings <span class="nb">set </span>org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes <span class="o">[]</span>
-</span><span class='line'>gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded
-</span><span class='line'>
-</span><span class='line'><span class="c"># To re-enable: </span>
-</span><span class='line'>gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
-</span><span class='line'>gsettings <span class="nb">set </span>org.gnome.desktop.wm.keybindings toggle-shaded <span class="o">[]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &mdash; even with Gnome.</p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/03/15/that-moment/">Rewarding Moments During Lunch & Learn&#8230;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-03-15T22:04:36+00:00" pubdate data-updated="true">Mar 15<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers pitched in! It was over lunch. We don&rsquo;t talk about TDD everyday while eating. But when we do, we do it purposefully and we call it &ldquo;Lunch &amp; Learn&rdquo;. Lunch &amp; Learn is an inhouse event I introduced 6 months ago to our company.</p>
-
-<h2>Motivation</h2>
-
-<p>I learn a lot from visiting local meetups, such as <a href="https://www.softwerkskammer.org/">Softwerkskammer</a>. <em>Clean Code</em> is &ldquo;a thing&rdquo;: I was not the only one who was aware of SOLID, DRY, TDD, etc.  <em>But: Not everybody has the time to visit such events in their spare time.</em> Especially since many of these meetups take place in the evening or during weekends. So my idea was simple: the people at work can eat lunch, and learn. During their lunch break. It&rsquo;s still spare time, but a lot easier to fit into a normal work schedule.</p>
-
-<h2>Lunch &amp; Learn</h2>
-
-<p>We try to meet for an hour during lunch break once a week. Before each meeting we decide on a topic: Everything from classic Coding Katas with mob-programming, to discussing new technologies, or pain points in our projects. We normally have around 5 to 20 attendees and we organize food for everybody.</p>
-
-<h2>Rewarding</h2>
-
-<p>The company I work for employs hardware and software developers/architects. Imagine a dozen developers from different fields (enterprise OO, FP, C/C++, experts and novices), starting a TDD session. Each with different TDD and mob-programming experience. So why do I and a couple of colleagues of mine burden ourself with this extra unpaid work?</p>
-
-<p>Here are just a few of the reasons I find this format so rewarding:</p>
-
-<ul>
-<li>Everybody can practice their communication skills in a familiar environment.</li>
-<li>People who normally do not engage with each other starting a conversation about something like &ldquo;best practices&rdquo;, but from very different points of view.</li>
-<li>Junior developers slowly getting the hang of topics like Clean Code.</li>
-<li>Seasoned developers pitching in with additional information (f. ex. pros and cons of certain techniques).</li>
-<li>In the long run, having a well trained team will make everybody&rsquo;s life easier. Ask yourself: Who do you want to work with in the future?</li>
-</ul>
-
-
-<p>For me, <strong>one of those moments</strong> I witnessed last week: A C++ developer explaining the essence of TDD to an FP developer. And everybody pitched in! Another discussion was on it&rsquo;s way!</p>
-
-<h2>Give it a try!</h2>
-
-<p>Try it in your company!</p>
-
-<p>Pro tip: Ask your boss to sponsor the food for the session! As soon as your boss sees that people are investing their spare time to become better at their job, he/she will probably notice that spending some money on pizza is a good long term investment.</p>
-
-<p>Questions: Don&rsquo;t hesitate to contact me!</p>
-
-<p>(Article rewritten on 2018-03-18 after valuable feedback from <a href="http://www.timbourguignon.fr">Tim</a>).</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-02-20T18:13:10+00:00" pubdate data-updated="true">Feb 20<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I took the time to fix something very simple: Visual Studio&rsquo;s default path.</p>
-
-<p>In the past decade there has never been a single project I wanted to save to:</p>
-
-<p><code>C:\Users\&lt;username&gt;\Documents\Visual Studio &lt;vs version&gt;\Projects</code></p>
-
-<p><img src="/images/posts/vs-default-path/vs-default-path1.png"></p>
-
-<p>I was expecting having to dive into the windows registry to fix this, but it turned out to be rather simple to change this.</p>
-
-<p>In Visual Studio navigate to <code>Tools -&gt; Options -&gt; Projects and Solutions -&gt; Locations</code></p>
-
-<p><img src="/images/posts/vs-default-path/vs-default-path2.png"></p>
-
-<p>Change <code>Project Location</code> to the desired folder:</p>
-
-<p><img src="/images/posts/vs-default-path/vs-default-path3.png"></p>
-
-<p>Et voila:</p>
-
-<p><img src="/images/posts/vs-default-path/vs-default-path4.png"></p>
-
-<p>TL/DR: In Visual Studio: <code>Tools -&gt; Options -&gt; Projects and Solutions -&gt; Locations</code></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/02/07/fsharp-test-setup-for-fizzbuzz/">F# Test Setup for FizzBuzz</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-02-07T20:53:43+00:00" pubdate data-updated="true">Feb 7<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> we setup a basic F# project in Linux.</p>
-
-<p>In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</p>
-
-<h4>Side note for people unfamiliar with .NET</h4>
-
-<p>Actually, it&rsquo;s not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
-
-<p>We have 2 projects (<code>FizzBuzz</code> and <code>FizzBuzz.Tests</code>), each with a <code>*.fsproj</code> file. The <code>FizzBuzz.Tests.fsproj</code> references the <code>FizzBuzz.fsproj</code> file (see the <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> for details):</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.
-</span><span class='line'>├── FizzBuzz
-</span><span class='line'>│   ├── FizzBuzz.fsproj
-</span><span class='line'>│   ├── ...
-</span><span class='line'>├── FizzBuzz.Tests
-</span><span class='line'>│   ├── FizzBuzz.Tests.fsproj
-</span><span class='line'>│   ├── ...
-</span><span class='line'>└── fsharp-kata-fizzbuzz.sln</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Current state</h3>
-
-<p>This is the current state of our test:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
-</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>    <span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="s2">&quot;one&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><code>[&lt;Fact&gt;]</code>: this is F#&rsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
-<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
-<li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
-</ul>
-
-
-<h3>FsUnit: Idiomatic assertions</h3>
-
-<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile if you don&rsquo;t comply to these conventions, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages one concept is preferred over the other.</p>
-
-<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
-
-<p>Example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="c1">// instead of</span>
-</span><span class='line'><span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// idiomatic F# (using pipe) with FsUnit:</span>
-</span><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>Installing FsUnit</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">cd </span>FizzBuzz.Tests
-</span><span class='line'>dotnet add package FsUnit.Xunit
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>File <code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code> should now look like this (plus/minus some version numbers):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;PropertyGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.0<span class="nt">&lt;/TargetFramework&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;IsPackable&gt;</span>false<span class="nt">&lt;/IsPackable&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/PropertyGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Tests.fs&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Program.fs&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;FsUnit.Xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;3.0.0&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Microsoft.NET.Test.Sdk&quot;</span> <span class="na">Version=</span><span class="s">&quot;15.5.0&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit.runner.visualstudio&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;DotNetCliToolReference</span> <span class="na">Include=</span><span class="s">&quot;dotnet-xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ProjectReference</span> <span class="na">Include=</span><span class="s">&quot;..\FizzBuzz\FizzBuzz.fsproj&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/Project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Note the line <code>&lt;PackageReference Include="FsUnit.Xunit" Version="3.0.0" /&gt;</code> (your version number might differ).</p>
-
-<h4>Using FsUnit</h4>
-
-<p>Modify the test file <code>FizzBuzz.Tests/Tests.fs</code> to look like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">Tests</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">open</span> <span class="nc">System</span>
-</span><span class='line'><span class="k">open</span> <span class="nn">FsUnit</span><span class="p">.</span><span class="nc">Xunit</span> <span class="c1">// &lt;-- add FsUnit.Xunit</span>
-</span><span class='line'><span class="k">open</span> <span class="nc">Xunit</span>
-</span><span class='line'><span class="k">open</span> <span class="nc">FizzBuzz</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
-</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>    <span class="o">|&gt;</span> <span class="n">should</span> <span class="n">equal</span> <span class="s2">&quot;one&quot;</span> <span class="c1">// using &quot;|&gt;&quot; and &quot;should&quot; syntax</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Running the unit tests within the test folder:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>dotnet <span class="nb">test</span>
-</span><span class='line'>Build started, please wait...
-</span><span class='line'>Build completed.
-</span><span class='line'>
-</span><span class='line'>Test run <span class="k">for</span> /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll<span class="o">(</span>.NETCoreApp,Version<span class="o">=</span>v2.0<span class="o">)</span>
-</span><span class='line'>Microsoft <span class="o">(</span>R<span class="o">)</span> Test Execution Command Line Tool Version 15.5.0
-</span><span class='line'>Copyright <span class="o">(</span>c<span class="o">)</span> Microsoft Corporation.  All rights reserved.
-</span><span class='line'>
-</span><span class='line'>Starting <span class="nb">test </span>execution, please wait...
-</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.7436128<span class="o">]</span>   Discovering: FizzBuzz.Tests
-</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8627111<span class="o">]</span>   Discovered:  FizzBuzz.Tests
-</span><span class='line'><span class="o">[</span>xUnit.net 00:00:00.8695487<span class="o">]</span>   Starting:    FizzBuzz.Tests
-</span><span class='line'><span class="o">[</span>xUnit.net 00:00:01.1888259<span class="o">]</span>   Finished:    FizzBuzz.Tests
-</span><span class='line'>
-</span><span class='line'>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
-</span><span class='line'>Test Run Successful.
-</span><span class='line'>Test execution <span class="nb">time</span>: 2.4787 Seconds
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Summary</h3>
-
-<p>We can now write unit tests in an F# way (&ldquo;idiomatic&rdquo;) by using the library <code>FsUnit</code>.</p>
-
-<p>Have fun with F# and linux!</p>
-
-<p>Get the source code <a href="https://github.com/draptik/blog-fsharp-fizzbuzz-setup">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">F# Setup Linux: FizzBuzz</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2018-02-05T22:31:04+00:00" pubdate data-updated="true">Feb 5<span>th</span>, 2018</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.</p>
-
-<h2>Prerequisite: .NET Core with Linux</h2>
-
-<p>I won&rsquo;t go into setting up .NET Core for linux. This should be straightforward either by following <a href="https://docs.microsoft.com/en-us/dotnet/core/linux-prerequisites?tabs=netcore2x">Microsoft instructions</a> or, in my case, the <a href="https://wiki.archlinux.org/index.php/.NET_Core">Arch Linux homepage</a>. <code>dotnet --info</code> should return something similar to:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.NET Command Line Tools (2.1.3)
-</span><span class='line'>
-</span><span class='line'>Product Information:
-</span><span class='line'> Version:            2.1.3
-</span><span class='line'> Commit SHA-1 hash:  a0ca411ca5
-</span><span class='line'>
-</span><span class='line'>Runtime Environment:
-</span><span class='line'> OS Name:     arch
-</span><span class='line'> OS Version:
-</span><span class='line'> OS Platform: Linux
-</span><span class='line'> RID:         linux-x64
-</span><span class='line'> Base Path:   /opt/dotnet/sdk/2.1.3/
-</span><span class='line'>
-</span><span class='line'>Microsoft .NET Core Shared Framework Host
-</span><span class='line'>
-</span><span class='line'>  Version  : 2.0.5
-</span><span class='line'>  Build    : 17373eb129b3b05aa18ece963f8795d65ef8ea54</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Creating a Kata</h2>
-
-<p>Let&rsquo;s create a project for the FizzBuzz Kata.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir fsharp-kata-fizzbuzz
-</span><span class='line'>cd fsharp-kata-fizzbuzz
-</span><span class='line'>dotnet new classlib -lang f# -o FizzBuzz
-</span><span class='line'>dotnet new xunit -lang f# -o FizzBuzz.Tests
-</span><span class='line'>cd FizzBuzz.Tests
-</span><span class='line'>dotnet add reference ../FizzBuzz/FizzBuzz.fsproj
-</span><span class='line'>cd ..
-</span><span class='line'>dotnet new sln
-</span><span class='line'>dotnet sln add FizzBuzz/FizzBuzz.fsproj
-</span><span class='line'>dotnet sln add FizzBuzz.Tests/FizzBuzz.Tests.fsproj</span></code></pre></td></tr></table></div></figure>
-
-
-<p>(I really love this new &ldquo;CLI first&rdquo; approach! It makes live so much easier for DevOps)</p>
-
-<p>This is our project structure after templating:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tree . -L 4
-</span><span class='line'>.
-</span><span class='line'>├── FizzBuzz
-</span><span class='line'>│   ├── bin
-</span><span class='line'>│   │   └── Debug
-</span><span class='line'>│   │       └── netstandard2.0
-</span><span class='line'>│   ├── FizzBuzz.fsproj
-</span><span class='line'>│   ├── Library.fs
-</span><span class='line'>│   └── obj
-</span><span class='line'>│       ├── Debug
-</span><span class='line'>│       │   └── netstandard2.0
-</span><span class='line'>│       ├── FizzBuzz.fsproj.nuget.cache
-</span><span class='line'>│       ├── FizzBuzz.fsproj.nuget.g.props
-</span><span class='line'>│       ├── FizzBuzz.fsproj.nuget.g.targets
-</span><span class='line'>│       └── project.assets.json
-</span><span class='line'>├── FizzBuzz.Tests
-</span><span class='line'>│   ├── bin
-</span><span class='line'>│   │   └── Debug
-</span><span class='line'>│   │       └── netcoreapp2.0
-</span><span class='line'>│   ├── FizzBuzz.Tests.fsproj
-</span><span class='line'>│   ├── obj
-</span><span class='line'>│   │   ├── Debug
-</span><span class='line'>│   │   │   └── netcoreapp2.0
-</span><span class='line'>│   │   ├── FizzBuzz.Tests.fsproj.nuget.cache
-</span><span class='line'>│   │   ├── FizzBuzz.Tests.fsproj.nuget.g.props
-</span><span class='line'>│   │   ├── FizzBuzz.Tests.fsproj.nuget.g.targets
-</span><span class='line'>│   │   └── project.assets.json
-</span><span class='line'>│   ├── Program.fs
-</span><span class='line'>│   └── Tests.fs
-</span><span class='line'>└── fsharp-kata-fizzbuzz.sln</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The 3 project files (top &ndash; down)&hellip;</p>
-
-<p><code>fsharp-kata-fizzbuzz.sln</code> (nothing new here)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Microsoft Visual Studio Solution File, Format Version 12.00
-</span><span class='line'># Visual Studio 15
-</span><span class='line'>VisualStudioVersion = 15.0.26124.0
-</span><span class='line'>MinimumVisualStudioVersion = 15.0.26124.0
-</span><span class='line'>Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FizzBuzz", "FizzBuzz\FizzBuzz.fsproj", "{C64F3370-DE54-4D58-BDD4-33C4B02F7290}"
-</span><span class='line'>EndProject
-</span><span class='line'>Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FizzBuzz.Tests", "FizzBuzz.Tests\FizzBuzz.Tests.fsproj", "{4AA6DACD-EA0E-4938-BB41-7B055A9A0C8C}"
-</span><span class='line'>EndProject
-</span><span class='line'>[...]</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>FizzBuzz/FizzBuzz.fsproj</code> (not relevant here, but keep in mind that fsharp files have to be in the correct order):</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;PropertyGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;TargetFramework&gt;</span>netstandard2.0<span class="nt">&lt;/TargetFramework&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/PropertyGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Library.fs&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/Project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Project</span> <span class="na">Sdk=</span><span class="s">&quot;Microsoft.NET.Sdk&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;PropertyGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;TargetFramework&gt;</span>netcoreapp2.0<span class="nt">&lt;/TargetFramework&gt;</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nt">&lt;IsPackable&gt;</span>false<span class="nt">&lt;/IsPackable&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/PropertyGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Tests.fs&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;Compile</span> <span class="na">Include=</span><span class="s">&quot;Program.fs&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;Microsoft.NET.Test.Sdk&quot;</span> <span class="na">Version=</span><span class="s">&quot;15.5.0&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&quot;xunit.runner.visualstudio&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;DotNetCliToolReference</span> <span class="na">Include=</span><span class="s">&quot;dotnet-xunit&quot;</span> <span class="na">Version=</span><span class="s">&quot;2.3.1&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;ItemGroup&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;ProjectReference</span> <span class="na">Include=</span><span class="s">&quot;..\FizzBuzz\FizzBuzz.fsproj&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/ItemGroup&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;/Project&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Running <code>dotnet test</code> returns</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'>$ dotnet test
-</span><span class='line'>Build started, please wait...
-</span><span class='line'>Build started, please wait...
-</span><span class='line'>Build completed.
-</span><span class='line'>
-</span><span class='line'>Test run for /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz/bin/Debug/netstandard2.0/FizzBuzz.dll(.NETStandard,Version=v2.0)
-</span><span class='line'>Microsoft (R) Test Execution Command Line Tool Version 15.5.0
-</span><span class='line'>Copyright (c) Microsoft Corporation.  All rights reserved.
-</span><span class='line'>
-</span><span class='line'>Starting test execution, please wait...
-</span><span class='line'>No test is available in /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz/bin/Debug/netstandard2.0/FizzBuzz.dll. Make sure test project has a nuget reference of package &quot;Microsoft.NET.Test.Sdk&quot; and framework version settings are appropriate and try again.
-</span><span class='line'>
-</span><span class='line'>Test Run Aborted.
-</span><span class='line'>Build completed.
-</span><span class='line'>
-</span><span class='line'>Test run for /home/patrick/projects/fsharp-blog-fizzbuzz/fsharp-kata-fizzbuzz/FizzBuzz.Tests/bin/Debug/netcoreapp2.0/FizzBuzz.Tests.dll(.NETCoreApp,Version=v2.0)
-</span><span class='line'>Microsoft (R) Test Execution Command Line Tool Version 15.5.0
-</span><span class='line'>Copyright (c) Microsoft Corporation.  All rights reserved.
-</span><span class='line'>
-</span><span class='line'>Starting test execution, please wait...
-</span><span class='line'>[xUnit.net 00:00:00.9263576]   Discovering: FizzBuzz.Tests
-</span><span class='line'>[xUnit.net 00:00:01.0646319]   Discovered:  FizzBuzz.Tests
-</span><span class='line'>[xUnit.net 00:00:01.0733357]   Starting:    FizzBuzz.Tests
-</span><span class='line'>[xUnit.net 00:00:01.2961789]   Finished:    FizzBuzz.Tests
-</span><span class='line'>
-</span><span class='line'>Total tests: 1. Passed: 1. Failed: 0. Skipped: 0.
-</span><span class='line'>Test Run Successful.
-</span><span class='line'>Test execution time: 2.5956 Seconds
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Ok, <code>dotnet test</code> does not recognize which project actually contains tests. But it runs all tests!</p>
-
-<p>Let&rsquo;s add a test.</p>
-
-<p>The file <code>FizzBuzz.Tests/Tests.fs</code> (generated by <code>dotnet new xunit...</code>) looks like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">Tests</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">open</span> <span class="nc">System</span>
-</span><span class='line'><span class="k">open</span> <span class="nc">Xunit</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
-</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">My</span> <span class="n">test</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="nn">Assert</span><span class="p">.</span><span class="nc">True</span><span class="o">(</span><span class="bp">true</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>TDD approach: We will create a failing test first, then implement something.</p>
-
-<p>Replace the content of <code>FizzBuzz.Tests/Tests.fs</code> with</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">Tests</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">open</span> <span class="nc">System</span>
-</span><span class='line'><span class="k">open</span> <span class="nc">Xunit</span>
-</span><span class='line'><span class="k">open</span> <span class="nc">FizzBuzz</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">[&lt;</span><span class="nc">Fact</span><span class="o">&gt;]</span>
-</span><span class='line'><span class="k">let</span> <span class="o">``</span><span class="nc">Array</span> <span class="k">with</span> <span class="nc">Number</span> <span class="mi">1</span> <span class="n">returns</span> <span class="k">&#39;</span><span class="n">one&#39;</span><span class="o">``</span> <span class="bp">()</span> <span class="o">=</span>
-</span><span class='line'>    <span class="k">let</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">FizzBuzz</span><span class="p">.</span><span class="nc">Generate</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
-</span><span class='line'>    <span class="nn">Assert</span><span class="p">.</span><span class="nc">Equal</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="s2">&quot;one&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We verify 2 aspects:</p>
-
-<ul>
-<li>we are invoking another library (<code>FizzBuzz</code>) from our test class</li>
-<li>we are learning to use the test library</li>
-</ul>
-
-
-<p>This does not compile. Let&rsquo;s implement the simplest solution:</p>
-
-<p>Replace <code>FizzBuzz/Library.fs</code> with</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='fsharp'><span class='line'><span class="k">module</span> <span class="nc">FizzBuzz</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">let</span> <span class="nc">Generate</span> <span class="n">i</span> <span class="o">=</span> <span class="s2">&quot;one&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Running <code>dotnet test</code> should now confirm 1 passing test.</p>
-
-<p>Have fun with F# on Linux!</p>
-
-<p>Get the source code <a href="https://github.com/draptik/blog-fsharp-fizzbuzz-setup">here</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/04/04/docker-and-octopress/">Docker and Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-04-04T18:41:51+00:00" pubdate data-updated="true">Apr 4<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post describes how I created my first customized docker image(s).</p>
-
-<p>I have been watching the <a href="https://www.docker.com/">docker</a> space for a while and finally found a private use-case: This blog uses <a href="http://octopress.org/">Octopress</a>, which is a ruby-based convenience-wrapper around Jekyll.
-<a href="https://jekyllrb.com/">Jekyll</a> is a static web-site generator provided by <a href="https://github.com/jekyll/jekyll">GitHub</a>.
-Octopress requires some old libs: Ruby 1.9.3, Python 2.7, and nodejs.</p>
-
-<p>So, to use Octopress on any machine, I have to either:</p>
-
-<ul>
-<li>configure the machine to use specific versions of Ruby, Python and NodeJs. Works.
-
-<ul>
-<li>Drawback: Other projects using different versions of Ruby, Python, NodeJs won&rsquo;t work out of the box.</li>
-</ul>
-</li>
-<li>use version managers for Ruby, Python and NodeJs (f.ex. <a href="https://rvm.io/"><code>rvm</code></a>, <a href="http://fgimian.github.io/blog/2012/12/08/setting-up-virtual-development-environments-for-python/"><code>virtualenv</code></a>, <a href="https://github.com/creationix/nvm"><code>nvm</code></a>). Works.
-
-<ul>
-<li>Drawback: Tedious setup which differs between OSes.</li>
-</ul>
-</li>
-<li>use a virtual machine. Works.
-
-<ul>
-<li>Drawback: Not easily portable due to size of virtual machine image.</li>
-</ul>
-</li>
-<li>Or, I could use docker.</li>
-</ul>
-
-
-<p>I decided to give docker a spin.</p>
-
-<p><strong>My primary goal was to be able to blog from any (linux) machine running docker.</strong></p>
-
-<p>From a birds-eye view my goal is to:</p>
-
-<ul>
-<li>install a docker image on any machine</li>
-<li>and run a docker container with my blog mounted as shared folder (so I can edit the content on the host system, but compilation, preview and publishing is accomplished from within the docker container)</li>
-</ul>
-
-
-<p><strong>My secondary goal was to get my hands dirty with docker :&ndash;)</strong></p>
-
-<p>Obviously docker also has potential usage for other development setups (i.e. testing application code in local docker container before pushing to CI to reduce roundtrip time).</p>
-
-<h2>Overview</h2>
-
-<p>I created 3 docker images, which build upon each other:</p>
-
-<ul>
-<li>Docker 00: base image including Ruby, Python and NodeJs</li>
-<li>Docker 01: image with docker <code>ENTRYPOINT</code></li>
-<li>Docker 02: image optimized for octopress usage</li>
-</ul>
-
-
-<p>Here is the folder structure:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>├── 00_ruby_base
-</span><span class='line'>│   ├── build-image.sh
-</span><span class='line'>│   └── Dockerfile
-</span><span class='line'>├── 01_user
-</span><span class='line'>│   ├── build-image.sh
-</span><span class='line'>│   ├── Dockerfile
-</span><span class='line'>│   └── entrypoint.sh
-</span><span class='line'>├── 02_octopress
-</span><span class='line'>│   ├── build-image.sh
-</span><span class='line'>│   ├── Dockerfile
-</span><span class='line'>│   ├── post-install.sh
-</span><span class='line'>│   └── run-container.sh
-</span><span class='line'>└── share
-</span><span class='line'>    └── octopress
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Each image (<code>00*</code>, <code>01*</code>, <code>02*</code>) contains a <code>Dockerfile</code> and a <code>build-image.sh</code> file. Only the last image (<code>02*</code>) contains a <code>run-container.sh</code> file.</p>
-
-<ul>
-<li><code>Dockerfile</code>s contain the instructions for building a docker image.</li>
-<li><code>build-image.sh</code> files invoke the <code>Dockerfile</code>.</li>
-</ul>
-
-
-<h2>Docker 00: base image</h2>
-
-<p>Since I couldn&rsquo;t find a simple Ruby image of 1.9.3 at docker hub I decided to create my own.</p>
-
-<p>Knowing my use-case (Octopress), I also installed Python2.7 and NodeJs for my <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs/">base docker image</a>. This image is the only one that takes quite some time to build.</p>
-
-<h3>Dockerfile</h3>
-
-<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM debian:jessie
-</span><span class='line'>
-</span><span class='line'><span class="c"># Get the dependencies for Octopress page generation</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## Notes:</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'><span class="c">## - Python 2.7 is required for using pygments gem.</span>
-</span><span class='line'><span class="c">## - NodeJs is required for execjs Gem</span>
-</span><span class='line'><span class="c">##</span>
-</span><span class='line'>RUN apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    apt-get --no-install-recommends -y install <span class="se">\</span>
-</span><span class='line'>    autoconf <span class="se">\</span>
-</span><span class='line'>    bison <span class="se">\</span>
-</span><span class='line'>    build-essential <span class="se">\</span>
-</span><span class='line'>    libssl-dev <span class="se">\</span>
-</span><span class='line'>    libyaml-dev <span class="se">\</span>
-</span><span class='line'>    locales <span class="se">\</span>
-</span><span class='line'>    libreadline6-dev <span class="se">\</span>
-</span><span class='line'>    zlib1g-dev <span class="se">\</span>
-</span><span class='line'>    libncurses5-dev <span class="se">\</span>
-</span><span class='line'>    libffi-dev <span class="se">\</span>
-</span><span class='line'>    libgdbm3 <span class="se">\</span>
-</span><span class='line'>    libgdbm-dev <span class="se">\</span>
-</span><span class='line'>    nodejs <span class="se">\</span>
-</span><span class='line'>    python2.7 <span class="se">\</span>
-</span><span class='line'>    wget <span class="se">\</span>
-</span><span class='line'>    ca-certificates <span class="se">\</span>
-</span><span class='line'>    curl <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    apt-get clean <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-</span><span class='line'>
-</span><span class='line'><span class="c"># Set LOCALE to UTF8</span>
-</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt; /etc/locale.gen <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    locale-gen en_US.UTF-8 <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    dpkg-reconfigure --frontend<span class="o">=</span>noninteractive locales <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    /usr/sbin/update-locale <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
-</span><span class='line'>ENV LANG en_US.UTF-8
-</span><span class='line'>ENV LC_ALL en_US.UTF-8
-</span><span class='line'>
-</span><span class='line'><span class="c"># Install ruby (adopted from https://hub.docker.com/r/liaisonintl/ruby-1.9.3/~/dockerfile/)</span>
-</span><span class='line'>ENV <span class="nv">RUBY_MAJOR</span><span class="o">=</span>1.9 <span class="se">\</span>
-</span><span class='line'>    <span class="nv">RUBY_VERSION</span><span class="o">=</span>1.9.3-p551 <span class="se">\</span>
-</span><span class='line'>    <span class="nv">RUBY_DOWNLOAD_SHA256</span><span class="o">=</span>bb5be55cd1f49c95bb05b6f587701376b53d310eb1bb7c76fbd445a1c75b51e8 <span class="se">\</span>
-</span><span class='line'>    <span class="nv">RUBYGEMS_VERSION</span><span class="o">=</span>2.6.6 <span class="se">\</span>
-</span><span class='line'>    <span class="nv">PATH</span><span class="o">=</span>/usr/local/bundle/bin:<span class="nv">$PATH</span>
-</span><span class='line'>RUN <span class="nb">set</span> -ex <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    curl -SL -o ruby.tar.gz <span class="s2">&quot;http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR/ruby-$RUBY_VERSION.tar.gz&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$RUBY_DOWNLOAD_SHA256 ruby.tar.gz&quot;</span> | sha256sum -c - <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    mkdir -p /usr/src/ruby <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    tar -xzf ruby.tar.gz -C /usr/src/ruby --strip-components<span class="o">=</span>1 <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    rm -f ruby.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    <span class="nb">cd</span> /usr/src/ruby <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    autoconf <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    ./configure --disable-install-doc --sysconfdir<span class="o">=</span>/etc/ <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    make <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    make install <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    gem update --system <span class="nv">$RUBYGEMS_VERSION</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
-</span><span class='line'>    rm -rf /usr/src/ruby
-</span><span class='line'>
-</span><span class='line'><span class="c"># Create soft link for python</span>
-</span><span class='line'>RUN ln -s /usr/bin/python2.7 /usr/bin/python
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Here is a short description of what happens in this <code>Dockerfile</code>:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>RUN apt-get ...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;retrieves required packages from the debian package repository.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt; /etc/locale.gen ...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;ensures the default system language uses UTF8 (required by some packages).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>RUN <span class="nb">set</span> -ex <span class="o">&amp;&amp;</span> curl... <span class="o">&amp;&amp;</span> make ...
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;downloads, compiles and installs Ruby from scratch (this step takes some time!).</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>RUN ln -s /usr/bin/python2.7 /usr/bin/python
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;creates a soft link to Python2.7.</p>
-
-<h3>Docker build</h3>
-
-<p>To execute the previous <code>Dockerfile</code>, run <code>./build-image.sh</code>.</p>
-
-<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>docker build -t draptik/ruby1.9.3-python2.7-nodejs:0.1 .
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Make the file executable (<code>chmod 744 build-image.sh</code>).</p>
-
-<p>Ensure to replace <code>draptik</code> with some other string (f.ex. your name, initials or company) to build your own image. F.ex. <code>docker build -t homersimpson/ruby1.9.3-python2.7-nodejs:0.1 .</code></p>
-
-<p><strong>Since this image is going to be the base image for the next step, ensure to always use the same name (f.ex. <code>homersimpson</code>)</strong>.</p>
-
-<p>You can verify that the docker build step worked as expected by listing all docker images using <code>docker images</code>. The output should be similar to:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>docker images
-</span><span class='line'>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-</span><span class='line'>homersimpson/ruby1.9.3-python2.7-nodejs:0.1   0.1                 641ca1a59e87        8 days ago          486 MB
-</span><span class='line'>debian              jessie              e5599115b6a6        4 weeks ago         123 MB
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Docker 01: user</h2>
-
-<p>Here is where things start getting difficult. Sharing a folder from the host system with docker. And keeping permissions/users in sync&hellip;</p>
-
-<h3>Some things to know about sharing a volume in docker</h3>
-
-<p>Sharing data between host and docker container is normally accomplished by <code>docker run -v host-location/folder:container-location/folder</code>.</p>
-
-<p>Be aware, though:</p>
-
-<ul>
-<li>The volume will be owned by the container</li>
-<li>The container&rsquo;s default user is root (UID/GID 1)!</li>
-<li>The container will change the UID/GID on the host system!</li>
-</ul>
-
-
-<h3>My workaround</h3>
-
-<p>I found this <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post by Deni Bertovic</a>. In short, the post proposes to use docker&rsquo;s <code>ENTRYPOINT</code> to pipe all <code>RUN</code> commands through the <code>ENTRYPOINT</code>. Which in turn is a bash script (<code>entrypoint.sh</code>, see below), creating a new user, and executing all docker commands as user. This is where I start walking on very thin ice&hellip; Nevertheless, I created another <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs-user/">docker image</a> based on the base image from the previous step.</p>
-
-<h3>Dockerfile</h3>
-
-<p>Make sure to replace <code>draptik</code> in the <code>FROM</code> string&hellip;</p>
-
-<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM draptik/ruby1.9.3-python2.7-nodejs:0.1
-</span><span class='line'>
-</span><span class='line'><span class="c"># For details see https://denibertovic.com/posts/handling-permissions-with-docker-volumes/</span>
-</span><span class='line'>
-</span><span class='line'>RUN apt-get update <span class="o">&amp;&amp;</span> apt-get -y --no-install-recommends install <span class="se">\</span>
-</span><span class='line'>    ca-certificates <span class="se">\</span>
-</span><span class='line'>    curl
-</span><span class='line'>
-</span><span class='line'>RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-</span><span class='line'>RUN curl -o /usr/local/bin/gosu -SL <span class="s2">&quot;https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture)&quot;</span> <span class="se">\</span>
-</span><span class='line'>    <span class="o">&amp;&amp;</span> curl -o /usr/local/bin/gosu.asc -SL <span class="s2">&quot;https://github.com/tianon/gosu/releases/download/1.10/gosu-$(dpkg --print-architecture).asc&quot;</span> <span class="se">\</span>
-</span><span class='line'>    <span class="o">&amp;&amp;</span> gpg --verify /usr/local/bin/gosu.asc <span class="se">\</span>
-</span><span class='line'>    <span class="o">&amp;&amp;</span> rm /usr/local/bin/gosu.asc <span class="se">\</span>
-</span><span class='line'>    <span class="o">&amp;&amp;</span> chmod +x /usr/local/bin/gosu
-</span><span class='line'>
-</span><span class='line'>COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-</span><span class='line'>
-</span><span class='line'>ENTRYPOINT <span class="o">[</span><span class="s2">&quot;/usr/local/bin/entrypoint.sh&quot;</span><span class="o">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For further details about the above <code>Dockerfile</code> refer to aforementioned <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post by Deni</a>.</p>
-
-<p>The <code>entrypoint.sh</code> file should be located beside the <code>Dockerfile</code>:</p>
-
-<figure class='code'><figcaption><span>entrypoint.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># Add local user</span>
-</span><span class='line'><span class="c"># Either use the LOCAL_USER_ID if passed in at runtime or</span>
-</span><span class='line'><span class="c"># fallback</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">USER_ID</span><span class="o">=</span><span class="k">${</span><span class="nv">LOCAL_USER_ID</span><span class="k">:-</span><span class="nv">9001</span><span class="k">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Starting with UID : $USER_ID&quot;</span>
-</span><span class='line'>useradd --shell /bin/bash -u <span class="nv">$USER_ID</span> -o -c <span class="s2">&quot;&quot;</span> -m user
-</span><span class='line'><span class="nb">export </span><span class="nv">HOME</span><span class="o">=</span>/home/user
-</span><span class='line'>
-</span><span class='line'><span class="nb">exec</span> /usr/local/bin/gosu user <span class="s2">&quot;$@&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Docker build</h3>
-
-<p>&hellip;and the corresponding <code>docker build</code> command (again, wrapped in a file):</p>
-
-<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>docker build -t draptik/ruby1.9.3-python2.7-nodejs-user:0.1 .
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>&hellip;again, make sure to replace <code>draptik</code>&hellip;</p>
-
-<h2>Docker 02: octopress</h2>
-
-<p>Because, in addition to mounting the content of my blog, I also mount the blog-engine itself (using <code>docker run -v &lt;orig-location&gt;:&lt;container-location&gt;</code>)
-I also have to execute an initial script within the mounted folder to setup the blog-engine. To prepare the environment for this script I create a customized <code>~/.gemrc</code> and <code>~/.bashrc</code> file in the <code>Dockerfile</code>.
-For this purpose I mount another file from the <code>docker run</code> script (<code>post-install.sh</code>), which must be executed from within the container.</p>
-
-<h3>Dockerfile</h3>
-
-<p>(Make sure to replace <code>draptik</code> in the <code>FROM</code> string&hellip;)</p>
-
-<figure class='code'><figcaption><span>Dockerfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>FROM draptik/ruby1.9.3-python2.7-nodejs-user:0.1
-</span><span class='line'>
-</span><span class='line'><span class="c"># I am not really sure why this is needed, because we have an ENTRYPOINT in the parent image.</span>
-</span><span class='line'>RUN useradd -ms /bin/bash user
-</span><span class='line'>
-</span><span class='line'><span class="c"># Setup ruby/bundler to work with non-admin user</span>
-</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;gem: --user-install&quot;</span> &gt; /home/user/.gemrc <span class="o">&amp;&amp;</span> chown user:user /home/user/.gemrc
-</span><span class='line'>RUN <span class="nb">echo</span> <span class="s2">&quot;PATH=\&quot;/home/user/.gem/ruby/1.9.1/bin:$PATH\&quot;&quot;</span> &gt;&gt; /home/user/.bashrc <span class="o">&amp;&amp;</span> chown user:user /home/user/.bashrc
-</span><span class='line'>
-</span><span class='line'>WORKDIR /octopress
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You might be wondering why I am explicitly creating a new user (<code>RUN useradd -ms /bin/bash user</code>). Valid question. In the next 2 lines I write some config values to files which are located in the <code>/home/user/</code> folder. I was not able to do this without first explicitly creating the user. Probably not best practice, but it works. I would be very grateful for feedback on this issue.</p>
-
-<h3>Docker build</h3>
-
-<p>(&hellip;again, make sure to replace <code>draptik</code>&hellip;)</p>
-
-<figure class='code'><figcaption><span>build-image.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>docker build -t draptik/octopress:0.1 .
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Starting the final image as docker container</h3>
-
-<p>The following script starts the docker container:</p>
-
-<figure class='code'><figcaption><span>run-container.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>docker run <span class="se">\</span>
-</span><span class='line'>    --rm <span class="se">\</span>
-</span><span class='line'>    -it <span class="se">\</span>
-</span><span class='line'>    -e <span class="nv">LOCAL_USER_ID</span><span class="o">=</span><span class="sb">`</span>id -u <span class="nv">$USER</span><span class="sb">`</span> <span class="se">\</span>
-</span><span class='line'>    -p 4001:4001 <span class="se">\</span>
-</span><span class='line'>    -v <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/../share/octopress:/octopress <span class="se">\</span>
-</span><span class='line'>    -v <span class="k">${</span><span class="nv">PWD</span><span class="k">}</span>/post-install.sh:/home/user/post-install.sh <span class="se">\</span>
-</span><span class='line'>    draptik/octopress:0.1 <span class="se">\</span>
-</span><span class='line'>    /bin/bash
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Some notes about the <code>docker run</code> options:</p>
-
-<ul>
-<li><code>--rm</code> ensures that the docker container is removed once exited</li>
-<li><code>-it</code> runs an interactive terminal as soon as the container starts</li>
-<li><code>-e LOCAL_USER...</code> sets the host user&rsquo;s ID within the docker container</li>
-<li><code>-p ...</code> maps the port numbers</li>
-<li><code>-v ${PWD}/../share/octopress:/octopress</code> mounts the blog volume</li>
-<li><code>-v ${PWD}/post-install.sh:/home/user/post-install.sh</code> mounts the post install script</li>
-</ul>
-
-
-<p>Mounting volumes in docker using <code>docker-machine</code> or <code>Docker for Windows</code> on windows requires some extra path-tweaking. I intend to add these tweaks in the future&hellip;</p>
-
-<h4>post-install</h4>
-
-<p>Yet another step&hellip; After docker mounted the external volumes from the host, they have to be configured (including our blogging engine).</p>
-
-<p>That is the reason for the <code>post-install.sh</code> script. It must be run from within the container!</p>
-
-<p>IMPORTANT: Ensure to replace the git user name/email in <code>post-install.sh</code>. Otherwhise you will not be able to deploy!</p>
-
-<figure class='code'><figcaption><span>post-install.sh</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="c">#</span>
-</span><span class='line'><span class="c"># This script must be executed in ~ folder (not in /octopress)!</span>
-</span><span class='line'>gem install --no-ri --no-rdoc <span class="se">\</span>
-</span><span class='line'>  bundler <span class="se">\</span>
-</span><span class='line'>  execjs
-</span><span class='line'>
-</span><span class='line'><span class="nb">cd</span> /octopress
-</span><span class='line'><span class="c"># Important: use `--path...`!</span>
-</span><span class='line'>bundle install --path <span class="nv">$HOME</span>/.gem
-</span><span class='line'>
-</span><span class='line'>git config --global user.name <span class="s2">&quot;FirstName LastName&quot;</span>
-</span><span class='line'>git config --global user.email <span class="s2">&quot;your@mail.com&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Final usage for Octopress users</h2>
-
-<p>All images are published to <a href="https://hub.docker.com/u/draptik/">docker hub</a>.</p>
-
-<p>Just run <code>docker pull draptik/octopress:0.1</code>.</p>
-
-<ul>
-<li>Create a folder for your blog: <code>mkdir blog &amp;&amp; cd blog</code></li>
-<li>Create a folder for the blog content: <code>mkdir share &amp;&amp; cd share</code></li>
-</ul>
-
-
-<p>Initially clone octopress in <code>share</code> folder:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone -b <span class="nb">source</span> &lt;octopress-git-repo&gt; octopress
-</span><span class='line'><span class="nb">cd </span>octopress
-</span><span class='line'>git clone -b master &lt;octopress-git-repo&gt; _deploy
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then, run the <code>run-container.sh</code> script.</p>
-
-<p>From within the newly created docker container, follow the steps from the post-install section above.</p>
-
-<p>You should now be able to use Octopress from within the docker container (i.e. <code>rake new_post["test"]</code>, <code>rake generate</code>, <code>rake preview</code>, <code>rake deploy</code>, etc.) while being able to edit your posts on the host machine.</p>
-
-<h2>Summary</h2>
-
-<p>It helps if you have a linux background, since all docker images are linux based. Setting up a customized docker image can be a bit tedious (especially configuring user privileges and mounting host folders), but once the image works you have an automated and reproducible environment. I think this makes it worth the effort.</p>
-
-<p>Obviously I am just starting with docker, so take my example above with a grain of salt. But maybe the example gives you a starting point for your own docker experiments.</p>
-
-<p>As always: Thankful for feedback!</p>
-
-<h2>Links</h2>
-
-<p>You can find the complete source code at Github here: <a href="https://github.com/draptik/octopress-docker">https://github.com/draptik/octopress-docker</a></p>
-
-<p>The docker images are hosted at Docker Hub: <a href="https://hub.docker.com/u/draptik/">https://hub.docker.com/u/draptik/</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/03/30/learning/">Learning by Meeting People</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-03-30T17:01:33+00:00" pubdate data-updated="true">Mar 30<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my day job I&rsquo;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences. Lately I started to expand my horizon by meeting people face to face. This turned out to be very rewarding.</p>
-
-<p>These kind of meetups, which often take place in your spare time, are a very efficient way of learning to think outside the box. Meeting other developers in person &mdash; in an informal setting &mdash; enables me to interact directly: Asking questions, as soon as they pop into my mind (everything from &ldquo;what was that keyboard shortcut?&rdquo; to &ldquo;Stop, I did not understand what a monad is&rdquo;).</p>
-
-<p>Here is a short resume of some the meetings I&rsquo;ve been to in the last couple of weeks.</p>
-
-<h3>Softwerkskammer &ndash; Mocking Frameworks</h3>
-
-<p><a href="https://www.softwerkskammer.org/">https://www.softwerkskammer.org/</a></p>
-
-<ul>
-<li>Open for all: yes</li>
-<li>Audience: Software developers (PHP, Java, .NET, Ruby, Python, etc)</li>
-<li>Audience size: 10-15</li>
-<li>Time: 3h</li>
-<li>Action: Code Kata</li>
-</ul>
-
-
-<p>I learned: <a href="https://gist.github.com/bobuss/6534934">Object Calistenics</a>; cool and simple kata; Cool croud!</p>
-
-<h3>Make Night &ndash; Arduino 101</h3>
-
-<p><a href="https://www.meetup.com/de-DE/HealthhackersER/">Health Hackers Erlangen</a></p>
-
-<ul>
-<li>Open for all: yes</li>
-<li>Audience: Nice mix of medical researchers, a few physicists, some software developers</li>
-<li>Audience size: ~20</li>
-<li>Time: 3h</li>
-<li>Action: Arduino basics with different sensors, organizer provided kits for everybody</li>
-</ul>
-
-
-<p>I learned: The organizers want to accomplish something. Real medical research supported by &ldquo;hackers&rdquo; (RPi, Arduino, etc). Very interdisciplinary!</p>
-
-<h3>JUG Nuernberg &ndash; Dropwizard</h3>
-
-<p><a href="http://www.jug-n.de/">JUG Nuernberg</a></p>
-
-<ul>
-<li>Open for all: yes</li>
-<li>Audience: Software developers</li>
-<li>Audience size: ~10</li>
-<li>Time: 2h</li>
-<li>Action: presentation &amp; discussion</li>
-</ul>
-
-
-<p>I learned:  Wow, very impressive framework. I was really fascinated by the so called devops features (healthchecks, logging, etc)! Wish there was something similar in .NET!</p>
-
-<h3>Hackerkegeln DATEV &ndash; Scala Kata</h3>
-
-<ul>
-<li>Open for all: no (internal company event)</li>
-<li>Audience: Software developers (C/C++, JS, Java, .NET, COBOL, etc)</li>
-<li>Audience size: ~10</li>
-<li>Time: 4h</li>
-<li>Action: interactive Kata in Scala</li>
-</ul>
-
-
-<p>I learned: Scala is a cool language! Learned pattern matching (now also available in <a href="https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/">C# 7</a>). Very relaxed audience ;&ndash;)</p>
-
-<p>Thanks to Latti for the invitation!</p>
-
-<h3>MATHEMA Freitag &ndash; Microservices</h3>
-
-<ul>
-<li>Open for all: no (internal company event)</li>
-<li>Audience: Software developers</li>
-<li>Audience size: ~20</li>
-<li>Time: 6h</li>
-<li>Action: presentations, discussions, interactive microservice setup</li>
-</ul>
-
-
-<p>I learned: incredible cool tooling: Consul, Ribbon, Hystrix, Graphite, ELK</p>
-
-<h2>What to expect?</h2>
-
-<p>First time at such an event? Ask a lot of questions. It might be that you are the expert! If not: you are likely to find an expert. Or somebody will point you to a local expert.</p>
-
-<p>One of the main differences between these local user group meetings and big conferences is that the audience size is a lot smaller. Everybody wants to share and/or gain knowledge at these meetings. The format is often very open: Sometimes there is no official topic for the event. Instead, people decide on the spot: &ldquo;I have no idea how X works. Can somedody explain it?&rdquo; &mdash; &ldquo;Sure&rdquo;. And then the knowledge transfer starts&hellip;</p>
-
-<h2>How to find meetings in your area</h2>
-
-<ul>
-<li>google <code>&lt;your technology&gt;</code> <code>user group &lt;your town&gt;</code> for example <code>java</code> <code>user group london</code></li>
-<li>Meetup is a plattform for meeting people face to face. Try it: <a href="https://www.meetup.com/">https://www.meetup.com/</a></li>
-<li>google <code>Software Craftsmanship &lt;your town&gt;</code></li>
-<li>Germany: <a href="https://www.softwerkskammer.org/">Softwerkskammer</a></li>
-<li>google <code>Unconference</code> or <code>BarCamp</code> in <code>&lt;your town&gt;</code></li>
-</ul>
-
-
-<p>What do you do to learn new technologies and stay up-to-date?</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/01/10/pi-hole-simple-ad-blocker-for-your-network/">Pi Hole - Simple Ad Blocker for Your Network</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2017-01-10T23:01:24+00:00" pubdate data-updated="true">Jan 10<span>th</span>, 2017</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. <a href="https://en.wikipedia.org/wiki/Troy_Hunt">Troy Hunt</a> recently wrote a <a href="https://www.troyhunt.com/ad-blockers-are-part-of-the-problem/">nice post on the subject</a>.</p>
-
-<p>Most <strong>desktop browsers</strong> provide &ldquo;ad blockers&rdquo; as plugins. These plugins normally also have configurable whitelists (whitelist: a list of sites exluded from being blocked) &#8212; which you should use for those sites which (a) provide high quality content and (b) rely on advertisements for a living.</p>
-
-<p>Other devices in our home network also communicate with the web:</p>
-
-<ul>
-<li>cell/smart phones (f.ex. iPhone, Android)</li>
-<li>smart TVs (f.ex. <a href="https://www.cnet.com/news/samsungs-warning-our-smart-tvs-record-your-living-room-chatter/">Samsung</a>)</li>
-<li>and all those new IoT devices (IoT: Internet of Things): those &ldquo;smart&rdquo; home automation devices that communicate with &ldquo;the cloud&rdquo; and your &ldquo;smart phone&rdquo;</li>
-</ul>
-
-
-<p>We can&rsquo;t install &ldquo;ad blockers&rdquo; on these devices.</p>
-
-<p>Here is where <a href="https://github.com/pi-hole/pi-hole">Pi Hole</a> comes into play: We can plug a Raspberry Pi straight into our router!</p>
-
-<p>My experience:</p>
-
-<p>On my phone (an old Galaxy-S4) web pages load a <strong>hell of a lot faster</strong> when I&rsquo;m in my home network compared to outside of my home network.</p>
-
-<p>The Pi Hole web interface looks like this:</p>
-
-<p><img src="/images/posts/pi-hole/screenshot-pi-hole-25-percent-blocked-requests.png"></p>
-
-<p>As you can see in the screenshot: ~20% traffic is blocked (!) and you can configure whitelists just like with those browser plugins. <strong>Nobody in my household noticed that 20% traffic was blocked</strong>.</p>
-
-<p>Installing the software on your Raspberry Pi is straightforward: Just follow the instructions on the <a href="https://github.com/pi-hole/pi-hole">Pi Hole</a> website.</p>
-
-<p>Configuring your router is another beast: OpenWRT and DD-WRT router instructions are available (<a href="https://www.youtube.com/watch?v=TzFLJqUeirA">example &ndash; short youtube promo</a>).</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2019/06/25/review-hands-on-ddd-dotnetcore/">Review: Hands-On Domain-Driven Design With .NET Core by Alexey Zimarev</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/11/29/fsharp-linux-mixed-feelings/">F# Linux: Mixed Feelings</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">IntelliJ and Gnome Keyboard Shortcut Conflict: Ctrl Alt S</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/03/15/that-moment/">Rewarding Moments During Lunch & Learn&#8230;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/02/20/visual-studios-default-path-for-new-projects/">Visual Studio&#8217;s Default Path for New Projects</a>
-      </li>
-    
-  </ul>
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
 </section>
 
-  
-</aside>
-
+      </div>
     </div>
+    
+
+
   </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2009 - 2020 - Patrick Drechsler  
-</p>
+</div>
 
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'draptik';
+        <div class="content container">
+            
+  <div class="post-list">
+    
+    
       
         
-        var disqus_script = 'count.js';
       
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2019/06/25/review-hands-on-ddd-dotnetcore/" >Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</a>
+        </span>
+        <span class="item__date">
+          Jun 25, 2019
+        </span>
+        <span >
+        
+        I have updated this post because the author took the time to respond to my review.
+ TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp; cons of different CQRS/ES persistency options in the .
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2019/06/25/review-hands-on-ddd-dotnetcore/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2018/11/29/fsharp-linux-mixed-feelings/" >F# Linux: mixed feelings</a>
+        </span>
+        <span class="item__date">
+          Nov 29, 2018
+        </span>
+        <span >
+        
+        I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &ldquo;mixed&rdquo;:
+First off all: It is great that we can use .
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2018/11/29/fsharp-linux-mixed-feelings/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/" >IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</a>
+        </span>
+        <span class="item__date">
+          Aug 21, 2018
+        </span>
+        <span >
+        
+        I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2018/03/15/that-moment/" >Rewarding moments during Lunch &amp; Learn...</a>
+        </span>
+        <span class="item__date">
+          Mar 15, 2018
+        </span>
+        <span >
+        
+        Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers pitched in! It was over lunch. We don't talk about TDD everyday while eating.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2018/03/15/that-moment/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2018/02/20/visual-studios-default-path-for-new-projects/" >Visual Studio&#39;s default path for new projects</a>
+        </span>
+        <span class="item__date">
+          Feb 20, 2018
+        </span>
+        <span >
+        
+        Today I took the time to fix something very simple: Visual Studio's default path.
+In the past decade there has never been a single project I wanted to save to:
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2018/02/20/visual-studios-default-path-for-new-projects/">➦</a>
+        
+        </div>
+        
+     
+  </div>
+  
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item disabled">
+    <a href="" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/16/">16</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/page/2/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/16/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+
+        </div>
+        
+  
+    
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
 
 
-
-
-
-
-
-
-
-
-
-</body>
+    </body>
 </html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI) • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)"/>
+<meta name="twitter:description" content="Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
+In this post I&#39;ll describe how to display the data.
+TL;DR  Download and unzip the source code from https://github."/>
+
+<meta property="og:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)" />
+<meta property="og:description" content="Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
+In this post I&#39;ll describe how to display the data.
+TL;DR  Download and unzip the source code from https://github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/" />
+<meta property="article:published_time" content="2015-07-30T00:07:12+00:00" />
+<meta property="article:modified_time" content="2015-07-30T00:07:12+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jul 30, 2015
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/charting">CHARTING</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/flotchart">FLOTCHART</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/iot">IOT</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/javascript">JAVASCRIPT</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/raspberry-pi">RASPBERRY PI</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 5 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
+<p>In this post I'll describe how to display the data.</p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
+<li><code>npm install</code></li>
+<li><code>bower install</code></li>
+<li>(for deployment in LAN: Configure <code>baseUrl</code> in <code>app.js</code>)</li>
+<li>(for deployment in LAN: Configure <code>dbLocation</code> in <code>app_api/models/db.js</code>)</li>
+<li>(for deployment in LAN: <code>export SET_ENV=production</code>)</li>
+<li><code>npm start</code></li>
+</ul>
+<p>Should be similar to <a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a>.</p>
+<h2 id="choosing-the-right-technology-stack">Choosing the right technology stack</h2>
+<p>This really depends on your individual needs. Here are some points to consider:</p>
+<ul>
+<li>How many people will be accessing the site?</li>
+<li>Do you have to access the site from outside of your LAN? Do you need a login mechanism?</li>
+<li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
+<li>Database interaction possible (this demo uses SQLite3)?</li>
+</ul>
+<p>If you know that you'll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
+<p>Otherwhise, the RPi is a good choice for a web server.</p>
+<p>Some of the technology stacks available on the RPi are:</p>
+<ul>
+<li>JVM: Java, Scala</li>
+<li>.NET/Mono: C#, F#</li>
+<li>Python</li>
+<li>JS: <a href="https://nodejs.org/">Node.js</a></li>
+</ul>
+<p>Since I only want to display data in my LAN I decided to use Javascript: <a href="https://nodejs.org/">Node.js</a> in combination with the <a href="http://expressjs.com/">Express framework</a> provides all possible features and is very lightweight.</p>
+<p>No matter which stack you choose:
+Running the web site on the same RPi as the temperature recording from the previous posts saves you the hassle of installing software on a different machine. And it obviously saves energy, since the RPi is running 24/7 anyway recording temperature data.</p>
+<h2 id="user-interface">User Interface</h2>
+<p>My primary goal was <em>explorative data visualization</em>. For this purpose I decided to show 2 plots:</p>
+<ul>
+<li>an overview plot showing the past 14 days</li>
+<li>and a detail plot, showing the selection of the overview plot</li>
+</ul>
+<p>You can test the website with some sample data at
+<a href="http://rpi-temperatures-website-demo.firebaseapp.com/">http://rpi-temperatures-website-demo.firebaseapp.com/</a></p>
+<p><img src="/images/posts/rpi_temperatures/screenshot-demo.png" alt="img"></p>
+<p>Some of the UI features:</p>
+<ul>
+<li>The detail plot can be dragged and the overview plot has a selection region which can be resized and dragged.</li>
+<li>Changes to either plot are reflected in the other.</li>
+<li>Mouse movement in the detail plot updates the legend.</li>
+</ul>
+<p>All charting features are implemented using <a href="http://www.flotcharts.org/">Flot</a>.</p>
+<h2 id="prerequisites-nodejs">Prerequisites: Node.js</h2>
+<p>Here is a very concise manual on how to install Node.js on the RPi (this
+gives you a more up to date version of Node.js than default Raspbian does):
+<a href="http://weworkweplay.com/play/raspberry-pi-nodejs/">http://weworkweplay.com/play/raspberry-pi-nodejs/</a></p>
+<h2 id="installation">Installation</h2>
+<p>All further instructions are expected to be executed on the RPi.</p>
+<p>Download and unzip the source code from</p>
+<p><a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></p>
+<pre><code>cd ~
+mkdir website &amp;&amp; cd website
+wget https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip
+unzip *.zip
+cd rpi*
+</code></pre><p>Install backend packages (node packages are defined in <code>packages.json</code>):</p>
+<pre><code>npm install
+</code></pre><p>Node.js packages are installed to folder <code>node_modules</code>.</p>
+<ul>
+<li>the folder <code>app_server</code> contains the basic web site.</li>
+<li>the folder <code>app_api</code> provides the REST backend.</li>
+</ul>
+<p>Install frontend packages (bower packages are defined in <code>bower.json</code>):</p>
+<pre><code>bower install
+</code></pre><p>Bower packages are installed to folder <code>public/vendor/bower</code>.</p>
+<p>You should now be able to start the application (using the provided sample data in folder <code>sample_data</code>):</p>
+<pre><code>npm start
+</code></pre><h2 id="configuration-development-vs-production">Configuration (development vs production)</h2>
+<p>The application uses a single switch between development mode and production mode:</p>
+<p><code>NODE_ENV</code></p>
+<p>This information is currently used in the following places in the application:</p>
+<h3 id="rest-url">REST URL</h3>
+<p>Setting the URL for the REST service (in <code>app.js</code>):</p>
+<pre><code>var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
+</code></pre><p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
+<p>And in case you're not familiar with the syntax</p>
+<pre><code>var result = someCondition ? 'string1' : 'string2';
+</code></pre><p>It's just a shorthand for</p>
+<pre><code>var result;
+if (someCondition) {
+  result = 'string1';
+} else {
+  result = 'string2';
+}
+</code></pre><h3 id="database-location">Database location</h3>
+<p>Setting the database location (in <code>app_api/models/db.js</code>):</p>
+<pre><code>var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
+</code></pre><h3 id="usage">Usage</h3>
+<p>Once you've configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
+<pre><code>export NODE_ENV=production
+npm start
+</code></pre><h3 id="customizing">Customizing</h3>
+<p>You will probably want to customize the UI, as my design skills are limited at best. ;-)</p>
+<p>Here's an overview of the project, so you know where to change things:</p>
+<pre><code>├── app_api                     //  REST API
+│   ├── controllers
+│   │   └── temperatures.js
+│   ├── models
+│   │   ├── db.js               //  DATABASE
+│   └── routes
+│       └── index.js
+├── app.js                      //  MAIN ENTRY POINT FOR THE APPLICATION
+├── app_server                  //  web server (express.js)
+│   ├── controllers
+│   │   ├── main.js
+│   │   └── temperatures.js
+│   ├── models
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── temperatures.js
+│   └── views
+│       ├── error.jade
+│       ├── index.jade
+│       ├── layout.jade
+│       └── temperatures-list.jade
+├── bower.json                  //  Bower configuration (frontend)
+├── node_modules                //  Location of node modules
+├── nodemon.json                //  nodemon configuration
+├── package.json                //  node configuration
+├── public                      //  frontend stuff...
+│   ├── images                  //  images
+│   ├── scripts                 //  Javascript code
+│   │   ├── chart.js            //  This file includes all charting code
+│   │   ├── rest.js             //  wrapper code to access REST API
+│   │   └── suncalc.js          //  calc sunrise/sunset on the fly
+│   ├── stylesheets             //  ...
+│   │   ├── app.css
+│   │   ├── chart.css
+│   └── vendor                  //  3rd party libraries
+│       ├── bower               //  ...installed via bower
+│       └── custom              //  ...other 3rd party libraries
+├── sample_data                 //  sample data
+│   └── templog.db              //  sqlite3 sample data set
+</code></pre><p>That's it. Have fun!</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</span>
+    </a>
+    
+    
+    <a href="/posts/2016/05/09/testing-objects-have-same-properties/" class="navigation-next">
+      <span class="navigation-tittle">Testing that different objects have the same properties</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

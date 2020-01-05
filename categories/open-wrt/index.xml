@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>open-wrt on draptik</title>
+    <link>https://draptik.github.io/categories/open-wrt/</link>
+    <description>Recent content in open-wrt on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Jan 2017 00:01:24 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/open-wrt/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pi Hole - simple ad blocker for your network</title>
+      <link>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</guid>
+      <description>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. Troy Hunt recently wrote a nice post on the subject.</description>
+    </item>
+    
+  </channel>
+</rss>

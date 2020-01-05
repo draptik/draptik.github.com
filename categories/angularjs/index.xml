@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>angularjs on draptik</title>
+    <link>https://draptik.github.io/categories/angularjs/</link>
+    <description>Recent content in angularjs on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Jul 2014 18:46:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/angularjs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>.NET backend providing REST</title>
+      <link>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using .NET Web API.
+&amp;hellip; Recap Our goals:
+ server side: minimal working REST API providing  GET dummy CRUD users   client side (angular): communicate with server side  Setup Creating a Web API project is straightforward: Just follow the instructions at</description>
+    </item>
+    
+    <item>
+      <title>link collection #3</title>
+      <link>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
+      <description>JavaScript stuff:
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+    </item>
+    
+    <item>
+      <title>Node.js backend providing REST</title>
+      <link>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</link>
+      <pubDate>Tue, 01 Oct 2013 21:25:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using node.js.
+&amp;hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+OK. Here is a &amp;lsquo;minimal&amp;rsquo; setup for a node.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS and CORS</title>
+      <link>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</link>
+      <pubDate>Mon, 19 Aug 2013 18:47:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</guid>
+      <description>TL;DR While splitting my AngularJS demo app into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</description>
+    </item>
+    
+    <item>
+      <title>link collection #1</title>
+      <link>https://draptik.github.io/posts/2013/08/05/link-collection-1/</link>
+      <pubDate>Mon, 05 Aug 2013 20:09:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/08/05/link-collection-1/</guid>
+      <description>When I try to learn new technologies I stumble across many sites. If a site is useful to the problem at hand, I normally add a comment in my source code referencing the URL.</description>
+    </item>
+    
+    <item>
+      <title>RESTful CRUD with AngularJS</title>
+      <link>https://draptik.github.io/posts/2013/07/28/restful-crud-with-angularjs/</link>
+      <pubDate>Sun, 28 Jul 2013 11:15:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/28/restful-crud-with-angularjs/</guid>
+      <description>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.
+A prerequisite for this demo is a working RESTful web service.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS example using a Java RESTful web service</title>
+      <link>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</link>
+      <pubDate>Sat, 13 Jul 2013 20:12:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</guid>
+      <description>AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
+Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
+    </item>
+    
+  </channel>
+</rss>

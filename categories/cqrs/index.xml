@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cqrs on draptik</title>
+    <link>https://draptik.github.io/categories/cqrs/</link>
+    <description>Recent content in cqrs on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/cqrs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
+      <link>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</guid>
+      <description>I have updated this post because the author took the time to respond to my review.
+ TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp;amp; cons of different CQRS/ES persistency options in the .</description>
+    </item>
+    
+  </channel>
+</rss>

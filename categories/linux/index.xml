@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linux on draptik</title>
+    <link>https://draptik.github.io/categories/linux/</link>
+    <description>Recent content in linux on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
+      <link>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</guid>
+      <description>I have updated this post because the author took the time to respond to my review.
+ TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp;amp; cons of different CQRS/ES persistency options in the .</description>
+    </item>
+    
+    <item>
+      <title>F# Linux: mixed feelings</title>
+      <link>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</link>
+      <pubDate>Thu, 29 Nov 2018 00:58:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</guid>
+      <description>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &amp;ldquo;mixed&amp;rdquo;:
+First off all: It is great that we can use .</description>
+    </item>
+    
+    <item>
+      <title>IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</title>
+      <link>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</guid>
+      <description>I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts.</description>
+    </item>
+    
+    <item>
+      <title>F# Test Setup for FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</guid>
+      <description>In my previous post we setup a basic F# project in Linux.
+In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</description>
+    </item>
+    
+    <item>
+      <title>F# Setup Linux: FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</link>
+      <pubDate>Mon, 05 Feb 2018 22:31:04 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</guid>
+      <description>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
+Prerequisite: .NET Core with Linux I won&#39;t go into setting up .</description>
+    </item>
+    
+    <item>
+      <title>Docker and Octopress</title>
+      <link>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</link>
+      <pubDate>Tue, 04 Apr 2017 18:41:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</guid>
+      <description>This post describes how I created my first customized docker image(s).
+I have been watching the docker space for a while and finally found a private use-case: This blog uses Octopress, which is a ruby-based convenience-wrapper around Jekyll.</description>
+    </item>
+    
+    <item>
+      <title>Bash tricks</title>
+      <link>https://draptik.github.io/posts/2017/01/10/bash-tricks/</link>
+      <pubDate>Tue, 10 Jan 2017 00:22:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
+      <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
+ autocd autojump  Neither of these features is new.
+autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+    </item>
+    
+    <item>
+      <title>Why I switched from Ubuntu to Arch Linux</title>
+      <link>https://draptik.github.io/posts/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/</link>
+      <pubDate>Tue, 16 Oct 2012 01:35:34 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/</guid>
+      <description>Ubuntu is a great GNU/Linux distribution. I have been using it since 2004, and except for one LTS (long term support) upgrade a couple years back everything was fine. That LTS upgrade a couple years back screwed up the X system, leaving me with the bash shell.</description>
+    </item>
+    
+    <item>
+      <title>PS1 prompt</title>
+      <link>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</link>
+      <pubDate>Mon, 20 Aug 2012 21:31:20 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</guid>
+      <description>Here&#39;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
+    </item>
+    
+    <item>
+      <title>GNU/Emacs: Desktop Save with &#34;Lazy Loading&#34;</title>
+      <link>https://draptik.github.io/posts/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/</link>
+      <pubDate>Tue, 27 Mar 2012 20:33:18 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/</guid>
+      <description>When using desktop-save-mode using desktop-restore-eager is a must:
+(custom-set-variables &amp;#39;(desktop-save-mode t) &amp;#39;(desktop-restore-eager 5)) desktop-save-mode will load your last session. Setting desktop-restore-eager to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</description>
+    </item>
+    
+    <item>
+      <title>Workaround for VirtualBox 4.0.8 regression bug</title>
+      <link>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</link>
+      <pubDate>Wed, 25 May 2011 20:35:29 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</guid>
+      <description>The current version of Oracle&#39;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
+    </item>
+    
+    <item>
+      <title>Adding Truecrypt to Ubuntu&#39;s Unity panel</title>
+      <link>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</link>
+      <pubDate>Mon, 09 May 2011 19:55:56 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</guid>
+      <description>To add applications like Truecrypt to Ubuntu&#39;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
+  Install dconf-editor (ie sudo aptitude install dconf-editor)
+  Go to section desktop | unity | panel and add &amp;lsquo;Truecrypt&amp;rsquo; to the systray-whitelist variable</description>
+    </item>
+    
+    <item>
+      <title>Configure VirtualBox Windows guest system to use 2 monitors</title>
+      <link>https://draptik.github.io/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/</link>
+      <pubDate>Sat, 01 Jan 2011 21:13:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/</guid>
+      <description>﻿Purpose Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.
+This solution should work for all Linux distributions supported by VirtualBox4.
+﻿Required software   Ubuntu 10.</description>
+    </item>
+    
+    <item>
+      <title>Emacs: murrine_style_draw_box: assertion `height &gt;= -1&#39; failed</title>
+      <link>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</link>
+      <pubDate>Tue, 02 Nov 2010 23:59:09 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</guid>
+      <description>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs
+murrine_style_draw_box: assertion height &amp;gt;= -1&amp;rsquo; failed`
+after every action within Emacs.
+The solution is simple, but has not been integrated in the Ubuntu repository yet.</description>
+    </item>
+    
+    <item>
+      <title>Using basic Emacs keybindings in Gnome-Terminal</title>
+      <link>https://draptik.github.io/posts/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/</link>
+      <pubDate>Fri, 15 Jan 2010 22:00:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/</guid>
+      <description>Summary: Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people familiar with Emacs.
+This is so simple that I almost afraid to post it&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Executing a script after mounting a TrueCrypt partition on Ubuntu 9.10 (Karmic Koala)</title>
+      <link>https://draptik.github.io/posts/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/</link>
+      <pubDate>Tue, 08 Dec 2009 00:18:40 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/</guid>
+      <description>**Goal: **Automatically run a script/program of your choice after mounting a TrueCrypt partition on Ubuntu 9.10.
+Background info on udev (very short)
+  UDEV listens to certain events. Depending on the event, a certain &amp;ldquo;rule&amp;rdquo; can be executed.</description>
+    </item>
+    
+    <item>
+      <title>Emacsclient usage on a GNU/Linux system</title>
+      <link>https://draptik.github.io/posts/2009/10/23/emacsclient-usage-on-a-gnulinux-system/</link>
+      <pubDate>Fri, 23 Oct 2009 21:31:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/10/23/emacsclient-usage-on-a-gnulinux-system/</guid>
+      <description>Short instructions on how to setup Emacs using the Emacs Server/Emacs Client system on a GNU/Linux machine.
+This post is intended for people familiar with GNU/Emacs.
+Requirements:
+GNU/Emacs 23 or greater (for Ubuntu get the Emacs PPA: https://launchpad.</description>
+    </item>
+    
+    <item>
+      <title>VMware keyboard mapping issues (Alt Gr) solved</title>
+      <link>https://draptik.github.io/posts/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/</link>
+      <pubDate>Tue, 28 Jul 2009 22:27:22 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/</guid>
+      <description>If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your /etc/vmware/config:
+xkeymap.keycode.108 = 0x138 # Alt_R xkeymap.keycode.106 = 0x135 # KP_Divide xkeymap.</description>
+    </item>
+    
+    <item>
+      <title>Maven Error: generics are not supported in source 1.3</title>
+      <link>https://draptik.github.io/posts/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/</link>
+      <pubDate>Mon, 22 Jun 2009 19:57:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/</guid>
+      <description>Just stumbled across this error while trying to compile a simple Java Maven project:
+Maven Error: generics are not supported in source 1.3
+It turns out that maven uses the Java compiler 1.</description>
+    </item>
+    
+    <item>
+      <title>Installing Adobe AIR and TweetDeck on Ubuntu 9.04</title>
+      <link>https://draptik.github.io/posts/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/</link>
+      <pubDate>Wed, 17 Jun 2009 20:39:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/</guid>
+      <description>This is a short manual on how to install Adobe AIR and Adobe AIR applications such as TweetDeck on Ubuntu 9.04 (This instruction should also work with most up-to-date Linux distributions).</description>
+    </item>
+    
+    <item>
+      <title>New in Ubuntu 9.04: screen-profiles, the enhanced GNU screen</title>
+      <link>https://draptik.github.io/posts/2009/06/05/new-in-ubuntu-9-04-screen-profiles-the-enhanced-gnu-screen/</link>
+      <pubDate>Fri, 05 Jun 2009 00:09:15 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/05/new-in-ubuntu-9-04-screen-profiles-the-enhanced-gnu-screen/</guid>
+      <description>My recent discovery: Ubuntu 9.04 comes with screen-profiles, a command-line &amp;ldquo;GUI&amp;rdquo; enhancement based on curses. If you have been using GNU-Screen for a while, but have always been too lazy to configure the display (or any other part of the program), you might enjoy this tool.</description>
+    </item>
+    
+    <item>
+      <title>NAS-Box SS4000-E ignores partition table of plugged-in external harddrive</title>
+      <link>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</link>
+      <pubDate>Tue, 26 May 2009 23:54:45 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</guid>
+      <description>Intel&#39;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
+    </item>
+    
+    <item>
+      <title>Problem upgrading VMware Tools (because of JIT-Debugger) solved</title>
+      <link>https://draptik.github.io/posts/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/</link>
+      <pubDate>Tue, 26 May 2009 20:50:47 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/</guid>
+      <description>After resurrecting an old VMware installation (I started with the first freely available version of VMware.. version 1) and upgrading successfully (see this post), I was not able to update Vmware Tools within my guest OS (Windows XP SP3).</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 9.04 with VMware-server-2.0.1-156745</title>
+      <link>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</link>
+      <pubDate>Tue, 26 May 2009 20:20:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</guid>
+      <description>I have used VMware for some years. There are many alternatives. I won&#39;t get into that ;-)
+I always download the tar.gz file from VMware directly.
+After unpacking the file and running the install script I encountered the problem vsock (German UbuntuWiki page).</description>
+    </item>
+    
+    <item>
+      <title>From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</title>
+      <link>https://draptik.github.io/posts/2009/04/28/from-804-lts-to-jaunty-jackalone-ubuntu-904/</link>
+      <pubDate>Tue, 28 Apr 2009 22:26:03 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/28/from-804-lts-to-jaunty-jackalone-ubuntu-904/</guid>
+      <description>The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &amp;ldquo;Jaunty Jackalone&amp;rdquo; = JJ) was very smooth. It did NOT screw up the X-Server, SMB, Cups, NFS, SSH, USB, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>java on draptik</title>
+    <link>https://draptik.github.io/categories/java/</link>
+    <description>Recent content in java on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 17:01:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning by meeting people</title>
+      <link>https://draptik.github.io/posts/2017/03/30/learning/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/03/30/learning/</guid>
+      <description>In my day job I&#39;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS and CORS</title>
+      <link>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</link>
+      <pubDate>Mon, 19 Aug 2013 18:47:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</guid>
+      <description>TL;DR While splitting my AngularJS demo app into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</description>
+    </item>
+    
+    <item>
+      <title>Unit testing RESTful services</title>
+      <link>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</link>
+      <pubDate>Fri, 19 Jul 2013 13:18:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</guid>
+      <description>In my two previous posts I gave an introduction on how to consume a RESTful web service with AngularJS created by a Java backend and use Guice in the Java backend.</description>
+    </item>
+    
+    <item>
+      <title>Guice in Java Web Application</title>
+      <link>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</link>
+      <pubDate>Thu, 18 Jul 2013 21:36:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</guid>
+      <description>Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+Advantages compared to Spring:
+ Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS example using a Java RESTful web service</title>
+      <link>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</link>
+      <pubDate>Sat, 13 Jul 2013 20:12:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</guid>
+      <description>AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
+Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
+    </item>
+    
+  </channel>
+</rss>

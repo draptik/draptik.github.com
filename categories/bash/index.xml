@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bash on draptik</title>
+    <link>https://draptik.github.io/categories/bash/</link>
+    <description>Recent content in bash on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Jan 2017 00:22:02 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bash tricks</title>
+      <link>https://draptik.github.io/posts/2017/01/10/bash-tricks/</link>
+      <pubDate>Tue, 10 Jan 2017 00:22:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
+      <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
+ autocd autojump  Neither of these features is new.
+autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>VMware keyboard mapping issues (Alt Gr) solved • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VMware keyboard mapping issues (Alt Gr) solved"/>
+<meta name="twitter:description" content="If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your /etc/vmware/config:
+xkeymap.keycode.108 = 0x138 # Alt_R xkeymap.keycode.106 = 0x135 # KP_Divide xkeymap."/>
+
+<meta property="og:title" content="VMware keyboard mapping issues (Alt Gr) solved" />
+<meta property="og:description" content="If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your /etc/vmware/config:
+xkeymap.keycode.108 = 0x138 # Alt_R xkeymap.keycode.106 = 0x135 # KP_Divide xkeymap." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/" />
+<meta property="article:published_time" content="2009-07-28T22:27:22+00:00" />
+<meta property="article:modified_time" content="2009-07-28T22:27:22+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>VMware keyboard mapping issues (Alt Gr) solved</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jul 28, 2009
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/linux">LINUX</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 1 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p>If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your <code>/etc/vmware/config</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xkeymap.keycode.108 <span style="color:#f92672">=</span> 0x138 <span style="color:#75715e"># Alt_R</span>
+xkeymap.keycode.106 <span style="color:#f92672">=</span> 0x135 <span style="color:#75715e"># KP_Divide</span>
+xkeymap.keycode.104 <span style="color:#f92672">=</span> 0x11c <span style="color:#75715e"># KP_Enter</span>
+xkeymap.keycode.111 <span style="color:#f92672">=</span> 0x148 <span style="color:#75715e"># Up</span>
+xkeymap.keycode.116 <span style="color:#f92672">=</span> 0x150 <span style="color:#75715e"># Down</span>
+xkeymap.keycode.113 <span style="color:#f92672">=</span> 0x14b <span style="color:#75715e"># Left</span>
+xkeymap.keycode.114 <span style="color:#f92672">=</span> 0x14d <span style="color:#75715e"># Right</span>
+xkeymap.keycode.105 <span style="color:#f92672">=</span> 0x11d <span style="color:#75715e"># Control_R</span>
+xkeymap.keycode.118 <span style="color:#f92672">=</span> 0x152 <span style="color:#75715e"># Insert</span>
+xkeymap.keycode.119 <span style="color:#f92672">=</span> 0x153 <span style="color:#75715e"># Delete</span>
+xkeymap.keycode.110 <span style="color:#f92672">=</span> 0x147 <span style="color:#75715e"># Home</span>
+xkeymap.keycode.115 <span style="color:#f92672">=</span> 0x14f <span style="color:#75715e"># End</span>
+xkeymap.keycode.112 <span style="color:#f92672">=</span> 0x149 <span style="color:#75715e"># Prior</span>
+xkeymap.keycode.117 <span style="color:#f92672">=</span> 0x151 <span style="color:#75715e"># Next</span>
+xkeymap.keycode.78 <span style="color:#f92672">=</span> 0x46 <span style="color:#75715e"># Scroll_Lock</span>
+xkeymap.keycode.127 <span style="color:#f92672">=</span> 0x100 <span style="color:#75715e"># Pause</span>
+xkeymap.keycode.133 <span style="color:#f92672">=</span> 0x15b <span style="color:#75715e"># Meta_L</span>
+xkeymap.keycode.134 <span style="color:#f92672">=</span> 0x15c <span style="color:#75715e"># Meta_R</span>
+xkeymap.keycode.135 <span style="color:#f92672">=</span> 0x15d <span style="color:#75715e"># Menu</span>
+</code></pre></div><p>I found this solution on the <a href="http://forum.ubuntuusers.de/topic/vmware-alt-gr-und-andere-tastaturproblem-unte/">German Ubuntu forum</a>.</p>
+<p>This worked with VMware-server-2.0.1-156745 in combination with host OS Ubuntu 9.04 and guest OS Windows XP SP3.</p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Maven Error: generics are not supported in source 1.3</span>
+    </a>
+    
+    
+    <a href="/posts/2009/07/31/eclipsesubclipse-asks-for-ssh-confirmation-solved/" class="navigation-next">
+      <span class="navigation-tittle">Eclipse3.5/Subclipse1.6.x asks for unnecessary SSH confirmation and details (solved)</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

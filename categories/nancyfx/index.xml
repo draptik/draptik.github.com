@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nancyfx on draptik</title>
+    <link>https://draptik.github.io/categories/nancyfx/</link>
+    <description>Recent content in nancyfx on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 16 Sep 2013 21:58:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/nancyfx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>link collection #2</title>
+      <link>https://draptik.github.io/posts/2013/09/16/link-collection-2/</link>
+      <pubDate>Mon, 16 Sep 2013 21:58:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/09/16/link-collection-2/</guid>
+      <description>I attended the Herbstcampus 2013 this month. As usual, a very good conference.
+Here is some fun stuff I learned:
+ NancyFx is to ASP.NET as Sinatra is to Ruby-on-Rails. Simple.</description>
+    </item>
+    
+  </channel>
+</rss>

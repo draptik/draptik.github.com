@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jersey on draptik</title>
+    <link>https://draptik.github.io/categories/jersey/</link>
+    <description>Recent content in jersey on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 13 Jul 2013 20:12:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/jersey/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AngularJS example using a Java RESTful web service</title>
+      <link>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</link>
+      <pubDate>Sat, 13 Jul 2013 20:12:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</guid>
+      <description>AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
+Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
+    </item>
+    
+  </channel>
+</rss>

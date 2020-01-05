@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web api on draptik</title>
+    <link>https://draptik.github.io/categories/web-api/</link>
+    <description>Recent content in web api on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Jul 2014 18:46:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/web-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>.NET backend providing REST</title>
+      <link>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using .NET Web API.
+&amp;hellip; Recap Our goals:
+ server side: minimal working REST API providing  GET dummy CRUD users   client side (angular): communicate with server side  Setup Creating a Web API project is straightforward: Just follow the instructions at</description>
+    </item>
+    
+  </channel>
+</rss>

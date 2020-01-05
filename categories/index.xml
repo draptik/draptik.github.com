@@ -1,0 +1,816 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on draptik</title>
+    <link>https://draptik.github.io/categories/</link>
+    <description>Recent content in Categories on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>book</title>
+      <link>https://draptik.github.io/categories/book/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/book/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cqrs</title>
+      <link>https://draptik.github.io/categories/cqrs/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/cqrs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csharp</title>
+      <link>https://draptik.github.io/categories/csharp/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/csharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ddd</title>
+      <link>https://draptik.github.io/categories/ddd/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ddd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>domain-driven-design</title>
+      <link>https://draptik.github.io/categories/domain-driven-design/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/domain-driven-design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dotnetcore</title>
+      <link>https://draptik.github.io/categories/dotnetcore/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/dotnetcore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>es</title>
+      <link>https://draptik.github.io/categories/es/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/es/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>event-sourcing</title>
+      <link>https://draptik.github.io/categories/event-sourcing/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/event-sourcing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>event-store</title>
+      <link>https://draptik.github.io/categories/event-store/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/event-store/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://draptik.github.io/categories/linux/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://draptik.github.io/categories/postgres/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ravendb</title>
+      <link>https://draptik.github.io/categories/ravendb/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ravendb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>review</title>
+      <link>https://draptik.github.io/categories/review/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/review/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fsharp</title>
+      <link>https://draptik.github.io/categories/fsharp/</link>
+      <pubDate>Thu, 29 Nov 2018 00:58:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/fsharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arch</title>
+      <link>https://draptik.github.io/categories/arch/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/arch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gnome</title>
+      <link>https://draptik.github.io/categories/gnome/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/gnome/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gnome-extensions</title>
+      <link>https://draptik.github.io/categories/gnome-extensions/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/gnome-extensions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jetbrains</title>
+      <link>https://draptik.github.io/categories/jetbrains/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/jetbrains/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keyboard-bindings</title>
+      <link>https://draptik.github.io/categories/keyboard-bindings/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/keyboard-bindings/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keyboard-shortcuts</title>
+      <link>https://draptik.github.io/categories/keyboard-shortcuts/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/keyboard-shortcuts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rider</title>
+      <link>https://draptik.github.io/categories/rider/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/rider/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shortcuts</title>
+      <link>https://draptik.github.io/categories/shortcuts/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/shortcuts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title> VisualStudio </title>
+      <link>https://draptik.github.io/categories/visualstudio/</link>
+      <pubDate>Tue, 20 Feb 2018 18:13:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/visualstudio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>.NET</title>
+      <link>https://draptik.github.io/categories/.net/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fizzbuzz</title>
+      <link>https://draptik.github.io/categories/fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/fizzbuzz/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kata</title>
+      <link>https://draptik.github.io/categories/kata/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/kata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tdd</title>
+      <link>https://draptik.github.io/categories/tdd/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/tdd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://draptik.github.io/categories/test/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
+      <link>https://draptik.github.io/categories/testing/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>https://draptik.github.io/categories/docker/</link>
+      <pubDate>Tue, 04 Apr 2017 18:41:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>octopress</title>
+      <link>https://draptik.github.io/categories/octopress/</link>
+      <pubDate>Tue, 04 Apr 2017 18:41:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/octopress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>arduino</title>
+      <link>https://draptik.github.io/categories/arduino/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/arduino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>conference</title>
+      <link>https://draptik.github.io/categories/conference/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/conference/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>consul</title>
+      <link>https://draptik.github.io/categories/consul/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/consul/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>elk</title>
+      <link>https://draptik.github.io/categories/elk/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/elk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>graphite</title>
+      <link>https://draptik.github.io/categories/graphite/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/graphite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hystrix</title>
+      <link>https://draptik.github.io/categories/hystrix/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/hystrix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>java</title>
+      <link>https://draptik.github.io/categories/java/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jvm</title>
+      <link>https://draptik.github.io/categories/jvm/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/jvm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>learning</title>
+      <link>https://draptik.github.io/categories/learning/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meetups</title>
+      <link>https://draptik.github.io/categories/meetups/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/meetups/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mocking</title>
+      <link>https://draptik.github.io/categories/mocking/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/mocking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>object calistenics</title>
+      <link>https://draptik.github.io/categories/object-calistenics/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/object-calistenics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>people</title>
+      <link>https://draptik.github.io/categories/people/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/people/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>podcast</title>
+      <link>https://draptik.github.io/categories/podcast/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/podcast/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ribbon</title>
+      <link>https://draptik.github.io/categories/ribbon/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ribbon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://draptik.github.io/categories/scala/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software craftsmanship</title>
+      <link>https://draptik.github.io/categories/software-craftsmanship/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/software-craftsmanship/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ad blocker</title>
+      <link>https://draptik.github.io/categories/ad-blocker/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ad-blocker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dd-wrt</title>
+      <link>https://draptik.github.io/categories/dd-wrt/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/dd-wrt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iot</title>
+      <link>https://draptik.github.io/categories/iot/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/iot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>open-wrt</title>
+      <link>https://draptik.github.io/categories/open-wrt/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/open-wrt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pi hole</title>
+      <link>https://draptik.github.io/categories/pi-hole/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/pi-hole/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raspberry Pi</title>
+      <link>https://draptik.github.io/categories/raspberry-pi/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>https://draptik.github.io/categories/bash/</link>
+      <pubDate>Tue, 10 Jan 2017 00:22:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c#</title>
+      <link>https://draptik.github.io/categories/c#/</link>
+      <pubDate>Mon, 09 May 2016 19:25:17 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/c#/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fluentassertions</title>
+      <link>https://draptik.github.io/categories/fluentassertions/</link>
+      <pubDate>Mon, 09 May 2016 19:25:17 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/fluentassertions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>charting</title>
+      <link>https://draptik.github.io/categories/charting/</link>
+      <pubDate>Thu, 30 Jul 2015 00:07:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/charting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flotchart</title>
+      <link>https://draptik.github.io/categories/flotchart/</link>
+      <pubDate>Thu, 30 Jul 2015 00:07:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/flotchart/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>https://draptik.github.io/categories/javascript/</link>
+      <pubDate>Thu, 30 Jul 2015 00:07:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>angularjs</title>
+      <link>https://draptik.github.io/categories/angularjs/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/angularjs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>asp.net</title>
+      <link>https://draptik.github.io/categories/asp.net/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/asp.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CORS</title>
+      <link>https://draptik.github.io/categories/cors/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/cors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ioc</title>
+      <link>https://draptik.github.io/categories/ioc/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ioc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nodejs</title>
+      <link>https://draptik.github.io/categories/nodejs/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/nodejs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>RESTful</title>
+      <link>https://draptik.github.io/categories/restful/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/restful/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web api</title>
+      <link>https://draptik.github.io/categories/web-api/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/web-api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web service</title>
+      <link>https://draptik.github.io/categories/web-service/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/web-service/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fun</title>
+      <link>https://draptik.github.io/categories/fun/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/fun/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>link-collection</title>
+      <link>https://draptik.github.io/categories/link-collection/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/link-collection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reading</title>
+      <link>https://draptik.github.io/categories/reading/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/reading/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sql</title>
+      <link>https://draptik.github.io/categories/sql/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ttd</title>
+      <link>https://draptik.github.io/categories/ttd/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/ttd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tv </title>
+      <link>https://draptik.github.io/categories/tv/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/tv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloud</title>
+      <link>https://draptik.github.io/categories/cloud/</link>
+      <pubDate>Mon, 21 Apr 2014 00:23:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>seafile</title>
+      <link>https://draptik.github.io/categories/seafile/</link>
+      <pubDate>Mon, 21 Apr 2014 00:23:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/seafile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>db</title>
+      <link>https://draptik.github.io/categories/db/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/db/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>https://draptik.github.io/categories/mongodb/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nhibernate </title>
+      <link>https://draptik.github.io/categories/nhibernate/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/nhibernate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nancyfx</title>
+      <link>https://draptik.github.io/categories/nancyfx/</link>
+      <pubDate>Mon, 16 Sep 2013 21:58:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/nancyfx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>signalr </title>
+      <link>https://draptik.github.io/categories/signalr/</link>
+      <pubDate>Mon, 16 Sep 2013 21:58:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/signalr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>simpledata</title>
+      <link>https://draptik.github.io/categories/simpledata/</link>
+      <pubDate>Mon, 16 Sep 2013 21:58:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/simpledata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jsonp</title>
+      <link>https://draptik.github.io/categories/jsonp/</link>
+      <pubDate>Mon, 19 Aug 2013 18:47:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/jsonp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CRUD</title>
+      <link>https://draptik.github.io/categories/crud/</link>
+      <pubDate>Sun, 28 Jul 2013 11:15:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/crud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>guice</title>
+      <link>https://draptik.github.io/categories/guice/</link>
+      <pubDate>Thu, 18 Jul 2013 21:36:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/guice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jersey</title>
+      <link>https://draptik.github.io/categories/jersey/</link>
+      <pubDate>Sat, 13 Jul 2013 20:12:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/jersey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://draptik.github.io/categories/programming/</link>
+      <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>https://draptik.github.io/categories/blog/</link>
+      <pubDate>Fri, 24 May 2013 21:11:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hiking</title>
+      <link>https://draptik.github.io/categories/hiking/</link>
+      <pubDate>Sat, 11 Apr 2009 12:14:25 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/hiking/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

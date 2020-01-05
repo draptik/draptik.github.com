@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dotnetcore on draptik</title>
+    <link>https://draptik.github.io/categories/dotnetcore/</link>
+    <description>Recent content in dotnetcore on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/dotnetcore/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
+      <link>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</guid>
+      <description>I have updated this post because the author took the time to respond to my review.
+ TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp;amp; cons of different CQRS/ES persistency options in the .</description>
+    </item>
+    
+    <item>
+      <title>F# Linux: mixed feelings</title>
+      <link>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</link>
+      <pubDate>Thu, 29 Nov 2018 00:58:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</guid>
+      <description>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &amp;ldquo;mixed&amp;rdquo;:
+First off all: It is great that we can use .</description>
+    </item>
+    
+    <item>
+      <title>F# Test Setup for FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</guid>
+      <description>In my previous post we setup a basic F# project in Linux.
+In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</description>
+    </item>
+    
+    <item>
+      <title>F# Setup Linux: FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</link>
+      <pubDate>Mon, 05 Feb 2018 22:31:04 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</guid>
+      <description>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
+Prerequisite: .NET Core with Linux I won&#39;t go into setting up .</description>
+    </item>
+    
+  </channel>
+</rss>

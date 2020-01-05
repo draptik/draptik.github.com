@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hiking on draptik</title>
+    <link>https://draptik.github.io/categories/hiking/</link>
+    <description>Recent content in hiking on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 11 Apr 2009 12:14:25 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/hiking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hiking routes in the &#34;Fränkische Schweiz&#34;</title>
+      <link>https://draptik.github.io/posts/2009/04/11/hiking-routes-in-the-frankische-schweiz/</link>
+      <pubDate>Sat, 11 Apr 2009 12:14:25 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/11/hiking-routes-in-the-frankische-schweiz/</guid>
+      <description>A collection of hiking routes in the Fränkische Schweiz&amp;hellip;
+  http://www.naturerlebnis-fs.de/Tipps/wandern.html
+  http://fraenkische-schweiz.bayern-online.de/die-region/aktiv/sport/wandern-wanderwege/
+  http://www.fraenkische-schweiz.com/sport/wandern.html
+  </description>
+    </item>
+    
+  </channel>
+</rss>

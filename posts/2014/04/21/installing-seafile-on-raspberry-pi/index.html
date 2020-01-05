@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>Installing Seafile on Raspberry Pi • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Installing Seafile on Raspberry Pi"/>
+<meta name="twitter:description" content="With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi."/>
+
+<meta property="og:title" content="Installing Seafile on Raspberry Pi" />
+<meta property="og:description" content="With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/" />
+<meta property="article:published_time" content="2014-04-21T00:23:00+00:00" />
+<meta property="article:modified_time" content="2014-04-21T00:23:00+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Installing Seafile on Raspberry Pi</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Apr 21, 2014
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/cloud">CLOUD</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/raspberry-pi">RASPBERRY PI</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/seafile">SEAFILE</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 7 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p>With all the security issues in the past relating to privacy I've been wanting to install a private cloud service similar to <a href="http://www.dropbox.com">Dropbox</a> for some time now. So, here's a post on how to install Seafile on the Raspberry Pi.</p>
+<p>I choose <a href="http://seafile.com/en/home/">Seafile</a> over <a href="http://owncloud.org/">Owncloud</a> because I have read multiple posts that (1) Owncloud is not very responsive an a Raspberry Pi and (2) Seafile has a better security model (see <a href="http://blog.kovah.de/private-cloud-owncloud-alternativen-teil-2">1</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">2</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">3</a>).</p>
+<p>Using a <a href="http://www.raspberrypi.org">Raspberry Pi</a> for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. <a href="http://www.raspbian.org">Raspbian</a>) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.</p>
+<p>Installing Seafile should be straightforward from following the instructions at the official <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">Seafile Wiki</a>. If you can read German, you can also follow the excellent instructions on Jan Karres's blog <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Raspberry Pi: Owncloud-Alternative Seafile Server installieren</a>.</p>
+<p>As there are some pitfalls along the way, I'll describe how I installed Seafile with SSL support.</p>
+<h2 id="installation">Installation</h2>
+<p>Note: This is mainly a merge of <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Jan Karres's blog post (in German)</a> and the <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">official wiki documentation from Seafile</a>.</p>
+<h3 id="demo-values">Demo values</h3>
+<pre><code>domain: no-ip.org
+sub-domain: mycloud
+DDNS-domain: mycloud.no-ip.org
+internal server name: mycloud
+internal IP address of Raspberry Pi: 192.168.1.42
+</code></pre><h3 id="prerequisites">Prerequisites</h3>
+<p>I'll assume you have a working Raspian installation on a Raspberry Pi.</p>
+<p>If you want to reach your Seafile server from the internet and your ISP only provides you with a dynamic IP you will have to register with a <a href="http://en.wikipedia.org/wiki/Dynamic_DNS">DDNS</a> provider such as <a href="http://dyn.com/dns/">Dyn</a> or <a href="http://www.noip.com/">no-ip.com</a>.</p>
+<h3 id="step-0-update">Step 0 Update</h3>
+<p>Update Raspbian:</p>
+<p><code>$ sudo aptitude update</code></p>
+<h3 id="step-1-install-dependencies">Step 1 Install dependencies</h3>
+<p>Install dependencies required by Seafile:</p>
+<p><code>$ sudo aptitude -y install python2.7 python-setuptools python-simplejson python-imaging sqlite3</code></p>
+<h3 id="step-2-create-seafile-user">Step 2 Create seafile user</h3>
+<p>For security reasons we'll create a separate user for running Seafile. The user will be called <code>seafile</code> and will not require a password, since we will never be accessing this user directly through SSH.</p>
+<p><code>$ sudo adduser seafile --disabled-login</code> (CHANGE 2016-09-14 the parameter <code>--disable-password</code> was a typo: Thanks to Raphi111 for the pointer)</p>
+<p>Switch to being <code>seafile</code> user:</p>
+<p><code>$ sudo su seafile</code></p>
+<p>Change to <code>seafile</code>'s home directory:</p>
+<p><code>$ cd</code></p>
+<h3 id="step-3-download-and-unpack">Step 3 Download and unpack</h3>
+<p>First we'll create a new folder <code>mycloud</code> in the seafile user's home directory:</p>
+<p><code>$ mkdir mycloud &amp;&amp; cd mycloud</code></p>
+<p>Download and unpack Seafile Server for Raspberry Pi from <a href="http://www.seafile.com/en/download/">http://www.seafile.com/en/download/</a>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget https://bitbucket.org/haiwen/seafile/downloads/seafile-server_2.1.5_pi.tar.gz
+tar -xvzf seafile-server_*
+mkdir installed
+mv seafile-server_* installed
+</code></pre></div><p>You should have the following directory structure:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tree /home/seafile/mycloud/ -L <span style="color:#ae81ff">2</span>
+/home/seafile/mycloud/
+├── installed
+│   └── seafile-server_2.1.5_pi.tar.gz
+└── seafile-server-2.1.5
+    ├── reset-admin.sh
+    ├── runtime
+    ├── seaf-fuse.sh
+    ├── seafile
+    ├── seafile.sh
+    ├── seahub
+    ├── seahub.sh
+    ├── setup-seafile-mysql.py
+    ├── setup-seafile-mysql.sh
+    ├── setup-seafile.sh
+    └── upgrade
+</code></pre></div><p>All config files are in the folder <code>mycloud</code> (currently there are no config files present yet).
+New versions can be installed side by side without having to change the config files. The install process will create a soft link <code>seafile-server-latest</code> pointing the the most current installation.</p>
+<h3 id="step-4-installation">Step 4 Installation</h3>
+<p><code>$ cd seafile-server-2.1.5</code></p>
+<p>Before you start the install process you can have a look at the options being configured during installation <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server#SSetup">here</a>.</p>
+<p>For this example we'll assume your DDNS domain is <code>mycloud.no-ip.org</code> and that we'll use the default location for storing our data.
+Furthermore, we'll use <code>mycloud</code> as our server name.</p>
+<p>During the installation of Seahub (the web frontend for the Seafile server) you must enter an admin email address and provide a password (this password is your Seafile admin password and should not be the same as your email account password).</p>
+<p>All other question can be answered by using the default values (press ENTER).</p>
+<p><code>./setup-seafile.sh</code></p>
+<p>Your directory tree should now look something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">tree . -L <span style="color:#ae81ff">2</span>
+.
+├── ccnet <span style="color:#75715e"># &lt;--------------------------- configuration files</span>
+│   ├── ccnet.conf
+│   ├── ccnet.conf.lan
+│   ├── ccnet.conf.wan
+│   ├── ccnet.db
+│   ├── GroupMgr
+│   ├── misc
+│   ├── mykey.peer
+│   ├── OrgMgr
+│   ├── PeerMgr
+│   └── seafile.ini
+├── conf
+│   └── seafdav.conf
+├── installed
+│   └── seafile-server_2.1.5_pi.tar.gz
+├── logs
+│   ├── ccnet.log
+│   ├── controller.log
+│   ├── http.log
+│   ├── seafile.log
+│   ├── seahub_django_request.log
+│   └── seahub.log
+├── seafile-server-2.1.5
+│   ├── reset-admin.sh
+│   ├── runtime
+│   ├── seaf-fuse.sh
+│   ├── seafile
+│   ├── seafile.sh
+│   ├── seahub
+│   ├── seahub.sh
+│   ├── setup-seafile-mysql.py
+│   ├── setup-seafile-mysql.sh
+│   ├── setup-seafile.sh
+│   └── upgrade
+├── seafile-server-latest -&gt; seafile-server-2.1.5
+├── seahub-data
+│   └── avatars
+├── seahub.db
+├── seahub_settings.py
+└── seahub_settings.pyc
+</code></pre></div><h3 id="step-5-update-urls-for-seahub">Step 5 Update URLs for Seahub</h3>
+<p><code>nano /home/seafile/mycloud/ccnet/ccnet.conf</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">SERVICE_URL <span style="color:#f92672">=</span> https://mycloud.no-ip.org:8001
+</code></pre></div><p>Don't forget replacing <code>http</code> with <code>https</code>&hellip;</p>
+<p>Also add a line to <code>seahub_settings.py</code>.</p>
+<p><code>nano /home/seafile/mycloud/seahub_settings.py</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">SECRET_KEY ...
+HTTP_SERVER_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://mycloud.no-ip.org:8001/seafhttp&#39;</span>
+</code></pre></div><h3 id="step-6-restart-seahub-in-fastcgi-mode">Step 6 (Re)start Seahub in FastCGI mode</h3>
+<p><code>/home/seafile/mycloud/seafile-server-latest/seahub.sh stop</code></p>
+<p><code>/home/seafile/mycloud/seafile-server-latest/seahub.sh start-fastcgi</code></p>
+<h3 id="step-7-install-nginx-as-admin">Step 7 Install nginx (as admin)</h3>
+<p>IMPORTANT: Do not run steps 7 to 11 as user <code>seafile</code>. Use the default <code>pi</code> user for admin stuff.</p>
+<p><code>sudo aptitude install nginx</code></p>
+<p>Patching nginx for Raspberry Pi:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo sed -i <span style="color:#e6db74">&#34;s/worker_processes 4;/worker_processes 1;/g&#34;</span> /etc/nginx/nginx.conf
+sudo sed -i <span style="color:#e6db74">&#34;s/worker_connections 768;/worker_connections 128;/g&#34;</span> /etc/nginx/nginx.conf
+sudo /etc/init.d/nginx start
+</code></pre></div><h3 id="step-8-create-a-self-certified-ssl-certificate-as-admin">Step 8 Create a self certified SSL certificate (as admin)</h3>
+<p>The following commands create a self certified SSL certificate. The second to last command is interactive and will ask a few questions. Provide <em>Country Name</em> (enter your two letter country code, i.e. DE for Germany, UK for United Kingdom) and <em>Common Name</em>. The later should be your DDNS name (<code>mycloud.no-ip.org</code> in this example).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /etc/nginx/ssl
+cd /etc/nginx/ssl
+sudo openssl genrsa -out seahub.key <span style="color:#ae81ff">2048</span>
+sudo openssl req -new -key seahub.key -out seahub.csr
+sudo openssl x509 -req -days <span style="color:#ae81ff">3650</span> -in seahub.csr -signkey seahub.key -out seahub.crt
+</code></pre></div><h3 id="step-9-create-nginx-seahub-site-as-admin">Step 9 Create nginx Seahub site (as admin)</h3>
+<p><code>sudo nano /etc/nginx/sites-available/seahub</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">server <span style="color:#f92672">{</span>
+    listen 8001; <span style="color:#75715e"># &lt;--------------------------------------- NGINX PORT</span>
+    ssl on; <span style="color:#75715e"># &lt;-------------------------------------------- SSL</span>
+    ssl_certificate /etc/nginx/ssl/seahub.crt; <span style="color:#75715e"># &lt;--------- SSL</span>
+    ssl_certificate_key /etc/nginx/ssl/seahub.key; <span style="color:#75715e"># &lt;----- SSL</span>
+    server_name mycloud.no-ip.org.tld; <span style="color:#75715e"># &lt;----------------- CHANGE THIS</span>
+    error_page <span style="color:#ae81ff">497</span>  https://$host:$server_port$request_uri;
+    
+    location / <span style="color:#f92672">{</span>
+        fastcgi_pass    127.0.0.1:8000;
+        fastcgi_param   SCRIPT_FILENAME     $document_root$fastcgi_script_name;
+        fastcgi_param   PATH_INFO           $fastcgi_script_name;
+ 
+        fastcgi_param   SERVER_PROTOCOL $server_protocol;
+        fastcgi_param   QUERY_STRING        $query_string;
+        fastcgi_param   REQUEST_METHOD      $request_method;
+        fastcgi_param   CONTENT_TYPE        $content_type;
+        fastcgi_param   CONTENT_LENGTH      $content_length;
+        fastcgi_param   SERVER_ADDR         $server_addr;
+        fastcgi_param   SERVER_PORT         $server_port;
+        fastcgi_param   SERVER_NAME         $server_name;
+        fastcgi_param   HTTPS   on;
+        fastcgi_param HTTP_SCHEME https;
+     
+        access_log      /var/log/nginx/seahub.access.log;
+        error_log       /var/log/nginx/seahub.error.log;
+    <span style="color:#f92672">}</span>       
+    location /seafhttp <span style="color:#f92672">{</span>
+        rewrite ^/seafhttp<span style="color:#f92672">(</span>.*<span style="color:#f92672">)</span>$ $1 break;
+        proxy_pass http://127.0.0.1:8082;
+        client_max_body_size 0;
+    <span style="color:#f92672">}</span>
+    
+    location /media <span style="color:#f92672">{</span>
+        root /home/seafile/mycloud/seafile-server-latest/seahub; <span style="color:#75715e"># &lt;-- change: 2014-07-11</span>
+        <span style="color:#75715e"># include /etc/nginx/mime.types; # &lt;--- UNCOMMENT THIS IF CSS FILES AREN&#39;T LOADED</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="step-10-activate-nginx-seahub-site-as-admin">Step 10 Activate nginx Seahub site (as admin)</h3>
+<p><code>sudo ln -s /etc/nginx/sites-available/seahub /etc/nginx/sites-enabled/seahub</code></p>
+<h3 id="step-11-restart-nginx-as-admin">Step 11 Restart nginx (as admin)</h3>
+<p><code>sudo /etc/init.d/nginx restart</code></p>
+<h3 id="step-12-network-setup-port-forwarding">Step 12 Network: Setup port forwarding</h3>
+<p>Depending on your router, the naming might differ. Some routers call it &ldquo;port mapping&rdquo;, some call it &ldquo;port forwarding&rdquo;. For what we are doing, it's all the same.</p>
+<p>My ISP provided me with a combined dsl-modem/router called &ldquo;Easybox 904 xDSL&rdquo;, so YMMV:</p>
+<p><img src="center" alt="img"></p>
+<h3 id="step-13-test-if-everything-works">Step 13 Test if everything works</h3>
+<h4 id="lan-test-using-ip-address">LAN test using IP address</h4>
+<p>Test if Seafile/Seahub is reachable from within your LAN using the <em>IP address</em> of your Raspberry Pi. Assuming the Raspberry Pi has the internal IP address 192.168.1.42, entering <code>https://192.168.1.42:8001</code> in your browser should render the Seahub page.</p>
+<p>If this fails, go back and confirm that you don't have any typos in your config files.</p>
+<h4 id="internet-test">Internet test</h4>
+<p>Test if Seafile/Seahub is reachable from the <em>internet</em>. You must use a device which is not connected to your LAN. If you have a smartphone, you can deactivate your WiFi, and try connecting to your newly setup server at <code>https://mycloud.no-ip.org:8001</code>. The Seahub page should be rendered correctly in your &lsquo;internet&rsquo; browser.</p>
+<p>If this fails, go back and confirm that you don't have any typos in your config files.</p>
+<h4 id="lan-test-using-ddns">LAN test using DDNS</h4>
+<p>Try connecting to Seafile/Seahub from within the LAN using the DDNS name: <code>https://mycloud.no-ip.org:8001</code>.</p>
+<p>If this works out of the box, you can skip the rest of this article.</p>
+<h3 id="step-14">Step 14</h3>
+<p>I should probably mention that I am not a trained network admin. So everything below falls under the category &ldquo;works for my setup, sorry I can't provide support&rdquo;.</p>
+<p>Here's an image of what has to be accomplished:</p>
+<p><img src="center" alt="img"></p>
+<h3 id="step-14a-nat-loopback">Step 14a NAT loopback</h3>
+<p>If trying to reach the IP of your DDNS from within your LAN fails, you should try to setup your NAT loopback (see your router documentation for details).</p>
+<h3 id="step-14b-workaround-in-case-nat-loopback-doesnt-work">Step 14b Workaround, in case NAT loopback doesn't work</h3>
+<p>This is the tricky part. (Marko, thanks!)</p>
+<p><em>BEWARE: This works with my setup, but it might ruin your setup.</em></p>
+<ol>
+<li>Rename internal LAN DNS zone to <code>no-ip.org</code> (replace with your domain)</li>
+</ol>
+<p><img src="" alt="img"></p>
+<ol start="2">
+<li>Rename internal LAN name (static DHCP lease) to <code>mycloud</code> (replace with your sub domain)</li>
+</ol>
+<p><img src="" alt="img"></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2014/01/03/link-collection-number-3/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">link collection #3</span>
+    </a>
+    
+    
+    <a href="/posts/2014/04/21/link-collection-number-4/" class="navigation-next">
+      <span class="navigation-tittle">link collection #4</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

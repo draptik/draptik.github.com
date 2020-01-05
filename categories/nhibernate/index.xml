@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nhibernate  on draptik</title>
+    <link>https://draptik.github.io/categories/nhibernate/</link>
+    <description>Recent content in nhibernate  on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Jan 2014 23:30:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/nhibernate/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>link collection #3</title>
+      <link>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
+      <description>JavaScript stuff:
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+    </item>
+    
+  </channel>
+</rss>

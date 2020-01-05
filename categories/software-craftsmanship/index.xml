@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>software craftsmanship on draptik</title>
+    <link>https://draptik.github.io/categories/software-craftsmanship/</link>
+    <description>Recent content in software craftsmanship on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Mar 2017 17:01:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/software-craftsmanship/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Learning by meeting people</title>
+      <link>https://draptik.github.io/posts/2017/03/30/learning/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/03/30/learning/</guid>
+      <description>In my day job I&#39;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.</description>
+    </item>
+    
+  </channel>
+</rss>

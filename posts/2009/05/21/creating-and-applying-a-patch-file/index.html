@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>Creating and applying a patch file • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Creating and applying a patch file"/>
+<meta name="twitter:description" content="This is a simple example shell script demonstrating how to apply a patch file.
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode."/>
+
+<meta property="og:title" content="Creating and applying a patch file" />
+<meta property="og:description" content="This is a simple example shell script demonstrating how to apply a patch file.
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2009/05/21/creating-and-applying-a-patch-file/" />
+<meta property="article:published_time" content="2009-05-21T03:00:26+00:00" />
+<meta property="article:modified_time" content="2009-05-21T03:00:26+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Creating and applying a patch file</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> May 21, 2009
+    
+    
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 2 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p>This is a simple example shell script demonstrating how to apply a patch file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>#
+<span style="color:#75715e"># Description: Simple demo of creating and</span>
+<span style="color:#75715e"># applying a patch file.</span>
+#
+<span style="color:#75715e"># Author: draptik</span>
+#
+<span style="color:#75715e">## TODO: Make sure you don&#39;t have a directory by</span> 
+<span style="color:#75715e">## this name</span>
+DEMODIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/tmp/diff-patch-demo-draptik</span><span style="color:#e6db74">&#34;</span>
+ORIGDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/original-stuff</span><span style="color:#e6db74">&#34;</span>
+APPLYDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/patch-usage</span><span style="color:#e6db74">&#34;</span>
+#
+<span style="color:#75715e">## Cleanup before use</span>
+rm -rf <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
+mkdir <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
+cd <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
+#
+<span style="color:#75715e">## Create directories</span>
+mkdir $ORIGDIR
+mkdir $APPLYDIR
+#
+<span style="color:#75715e">## Switch directory</span>
+cd $ORIGDIR
+#
+<span style="color:#75715e">## Create original file (the file you want to patch)</span>
+ORIGCODE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mycode.txt&#34;</span>
+echo <span style="color:#e6db74">&#34;This is the old content&#34;</span> &gt; $ORIGCODE
+<span style="color:#75715e">## Create file with your changes</span>
+NEWCODE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mycode.new.txt&#34;</span>
+echo <span style="color:#e6db74">&#34;THIS IS THE NEW CONTENT&#34;</span> &gt; $NEWCODE
+#
+<span style="color:#75715e">## ============================</span>
+<span style="color:#75715e"># 1. CREATE A PATCH</span>
+<span style="color:#75715e">## ============================</span>
+#
+<span style="color:#75715e">## Make a diff between the files and save the</span>
+<span style="color:#75715e">## result to $PATCHFILE</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## You can use different diff options:</span>
+<span style="color:#75715e">##     &#34;-u&#34; (unified)</span>
+<span style="color:#75715e">##  OR</span>
+<span style="color:#75715e">##     &#34;-c&#34; (context).</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## The &#34;-u&#34; option is specific to GNU.</span>
+<span style="color:#75715e">## PDTODO: Write about different diff formats.</span>
+PATCHFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;patch-mycode&#34;</span>
+echo <span style="color:#e6db74">&#34;&#34;</span>
+echo <span style="color:#e6db74">&#34;***************************&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** DIFF BETWEEN\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;***************************&#34;</span>
+diff -u $ORIGCODE $NEWCODE | tee $PATCHFILE
+#
+<span style="color:#75715e">## Switch directory</span>
+cd <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
+#
+<span style="color:#75715e">## Copy the unpatched original file ($ORIGCODE) and</span> 
+<span style="color:#75715e">## the $PATCHFILE to different directory ($APPLYDIR).</span>
+cp $ORIGDIR/$ORIGCODE $APPLYDIR
+cp $ORIGDIR/$PATCHFILE $APPLYDIR
+#
+#
+<span style="color:#75715e">## ============================</span>
+<span style="color:#75715e"># APPLY A PATCH</span>
+<span style="color:#75715e">## ============================</span>
+#
+<span style="color:#75715e">## Apply the patch to a copy of the original file</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## The &#34;--backup&#34; option will create a file</span> 
+<span style="color:#75715e">## &#34;$ORIGCODE.orig&#34; as backup.</span> 
+<span style="color:#75715e">## You can drop this option.</span>
+<span style="color:#75715e">##</span>
+cd $APPLYDIR
+echo <span style="color:#e6db74">&#34;&#34;</span>
+echo <span style="color:#e6db74">&#34;***************************&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34; ...</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** NOW PATCHING WITH COMMAND \&#34;patch --backup -p0 &lt; </span>$PATCHFILE<span style="color:#e6db74">\&#34;...</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;***************************&#34;</span>
+patch --backup -p0 &lt; $PATCHFILE
+<span style="color:#75715e">## patch -p0 &lt; $PATCHFILE</span>
+#
+<span style="color:#75715e">## Show that the file has been patched correctly:</span>
+cd ..
+echo <span style="color:#e6db74">&#34;&#34;</span>
+echo <span style="color:#e6db74">&#34;****************************&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** DIFF BETWEEN\n***\t\&#34;</span>$ORIGDIR<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$APPLYDIR<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;****************************&#34;</span>
+diff -u $ORIGDIR/$ORIGCODE $APPLYDIR/$ORIGCODE
+</code></pre></div>
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2009/04/28/from-804-lts-to-jaunty-jackalone-ubuntu-904/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</span>
+    </a>
+    
+    
+    <a href="/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/" class="navigation-next">
+      <span class="navigation-tittle">Maven2 Heap Overflow in JUnit test cases: Howto increase memory</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

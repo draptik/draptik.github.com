@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>testing on draptik</title>
+    <link>https://draptik.github.io/categories/testing/</link>
+    <description>Recent content in testing on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Feb 2018 20:53:43 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>F# Test Setup for FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</guid>
+      <description>In my previous post we setup a basic F# project in Linux.
+In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</description>
+    </item>
+    
+    <item>
+      <title>Testing that different objects have the same properties</title>
+      <link>https://draptik.github.io/posts/2016/05/09/testing-objects-have-same-properties/</link>
+      <pubDate>Mon, 09 May 2016 19:25:17 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2016/05/09/testing-objects-have-same-properties/</guid>
+      <description>Sometimes you want to ensure that 2 unrelated objects share a set of properties &amp;ndash; without using an interface.
+Here is an example:
+namespace Demo { public class Customer { public string FirstName { get; set; } public string LastName { get; set; } } public class Person { public string FirstName { get; set; } public string LastName { get; set; } } } First thought for C# developers: AutoMapper</description>
+    </item>
+    
+    <item>
+      <title>Unit testing RESTful services</title>
+      <link>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</link>
+      <pubDate>Fri, 19 Jul 2013 13:18:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</guid>
+      <description>In my two previous posts I gave an introduction on how to consume a RESTful web service with AngularJS created by a Java backend and use Guice in the Java backend.</description>
+    </item>
+    
+  </channel>
+</rss>

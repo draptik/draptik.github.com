@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>RESTful CRUD with AngularJS • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RESTful CRUD with AngularJS"/>
+<meta name="twitter:description" content="This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.
+A prerequisite for this demo is a working RESTful web service."/>
+
+<meta property="og:title" content="RESTful CRUD with AngularJS" />
+<meta property="og:description" content="This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.
+A prerequisite for this demo is a working RESTful web service." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2013/07/28/restful-crud-with-angularjs/" />
+<meta property="article:published_time" content="2013-07-28T11:15:00+00:00" />
+<meta property="article:modified_time" content="2013-07-28T11:15:00+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>RESTful CRUD with AngularJS</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Jul 28, 2013
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/angularjs">ANGULARJS</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/crud">CRUD</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/javascript">JAVASCRIPT</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/restful">RESTFUL</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/web-service">WEB SERVICE</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 4 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <p>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.</p>
+<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I've added a Java based sample at the end of this post.</p>
+<h2 id="frontend-angularjs">Frontend (AngularJS)</h2>
+<h3 id="views-partials">Views (Partials)</h3>
+<p>We will create three views.</p>
+<p>The first view will display all users (<code>user-list.html</code>):</p>
+<p><img src="/images/posts/angular/userlist.png" alt="img"></p>
+<p>The view also provides links to edit (<code>ng-click=&quot;editUser(user.id)&quot;</code>) and delete (<code>ng-click=&quot;deleteUser(user.id)&quot;</code>) specific users as well as a link to create a new user (<code>ng-click=&quot;createUser()&quot;</code>).</p>
+<p>{% codeblock %}
+{% raw %}</p>
+<!-- raw HTML omitted -->
+<p>The second and third view (<code>user-detail.html</code> and <code>user-creation.html</code>) both provide a form for entering the user properties.</p>
+<p><img src="/images/posts/angular/usercreationdetail.png" alt="img"></p>
+<p>They only differ in the actions provided. These actions (<code>cancel()</code>, <code>updateUser()</code>, <code>createNewUser()</code>) are invoked using <code>ng-click</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;container&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;h1</span><span style="color:#f92672">&gt;</span>User detail<span style="color:#f92672">&lt;/h1&gt;</span>
+
+    <span style="color:#f92672">&lt;form</span> <span style="color:#a6e22e">novalidate=</span><span style="color:#e6db74">&#34;novalidate&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;form-horizontal&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-group&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;label</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-label&#34;</span> <span style="color:#a6e22e">for=</span><span style="color:#e6db74">&#34;inputFirstName&#34;</span><span style="color:#f92672">&gt;</span>First name:<span style="color:#f92672">&lt;/label&gt;</span>
+            <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;controls&#34;</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;input</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;inputFirstName&#34;</span> <span style="color:#a6e22e">ng-model=</span><span style="color:#e6db74">&#34;user.firstName&#34;</span><span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;/div&gt;</span>
+        <span style="color:#f92672">&lt;/div&gt;</span>
+        <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-group&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;label</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-label&#34;</span> <span style="color:#a6e22e">for=</span><span style="color:#e6db74">&#34;inputLastName&#34;</span><span style="color:#f92672">&gt;</span>Last name:<span style="color:#f92672">&lt;/label&gt;</span>
+            <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;controls&#34;</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;input</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;text&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;inputLastName&#34;</span> <span style="color:#a6e22e">ng-model=</span><span style="color:#e6db74">&#34;user.lastName&#34;</span><span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;/div&gt;</span>
+        <span style="color:#f92672">&lt;/div&gt;</span>
+        <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-group&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;controls&#34;</span><span style="color:#f92672">&gt;</span>
+            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> user</span><span style="color:#75715e">-</span><span style="color:#75715e">detail.html: </span><span style="color:#75715e">--&gt;</span>
+                <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;cancel()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small&#34;</span><span style="color:#f92672">&gt;</span>cancel<span style="color:#f92672">&lt;/a&gt;</span>
+                <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;updateUser()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small btn-primary&#34;</span><span style="color:#f92672">&gt;</span>update user<span style="color:#f92672">&lt;/a&gt;</span>
+
+				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> user</span><span style="color:#75715e">-</span><span style="color:#75715e">creation.html: </span><span style="color:#75715e">--&gt;</span>
+                <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;createNewUser()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small btn-primary&#34;</span><span style="color:#f92672">&gt;</span>create new user<span style="color:#f92672">&lt;/a&gt;</span>
+            <span style="color:#f92672">&lt;/div&gt;</span>
+        <span style="color:#f92672">&lt;/div&gt;</span>
+    <span style="color:#f92672">&lt;/form&gt;</span>
+<span style="color:#f92672">&lt;/div&gt;</span>
+</code></pre></div><h3 id="controller">Controller</h3>
+<p>Next we will create three controllers corresponding to the three views.</p>
+<h4 id="userlistctrl">UserListCtrl</h4>
+<p><code>UserListCtrl</code> provides three functions <code>editUser</code>, <code>deleteUser</code> and <code>createUser</code>.</p>
+<ul>
+<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs's <code>$location</code> function.</li>
+<li><code>deleteUser</code> calls the <code>UserFactory</code> service method <code>delete</code> (which we will create shortly).</li>
+</ul>
+<p>Furthermore the <code>$scope.users</code> is filled with the result from the <code>UsersFactory.query()</code> function.</p>
+<p>Note that all required dependencies are injected into the controller's signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo.controllers&#39;</span>, []);
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">controller</span>(<span style="color:#e6db74">&#39;UserListCtrl&#39;</span>, [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;UsersFactory&#39;</span>, <span style="color:#e6db74">&#39;UserFactory&#39;</span>, <span style="color:#e6db74">&#39;$location&#39;</span>,
+    <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">UsersFactory</span>, <span style="color:#a6e22e">UserFactory</span>, <span style="color:#a6e22e">$location</span>) {
+
+        <span style="color:#75715e">// callback for ng-click &#39;editUser&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">editUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">userId</span>) {
+            <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-detail/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">userId</span>);
+        };
+
+        <span style="color:#75715e">// callback for ng-click &#39;deleteUser&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">deleteUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">userId</span>) {
+            <span style="color:#a6e22e">UserFactory</span>.<span style="color:#66d9ef">delete</span>({ <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">userId</span> });
+            <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">users</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">UsersFactory</span>.<span style="color:#a6e22e">query</span>();
+        };
+
+        <span style="color:#75715e">// callback for ng-click &#39;createUser&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">createNewUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+            <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-creation&#39;</span>);
+        };
+
+        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">users</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">UsersFactory</span>.<span style="color:#a6e22e">query</span>();
+    }]);
+	<span style="color:#75715e">/* ... */</span>
+</code></pre></div><h4 id="userdetailctrl-and-usercreationctrl">UserDetailCtrl and UserCreationCtrl</h4>
+<p><code>UserDetailCtrl</code> provides the function <code>updateUser</code>, which in turn invokes the service method <code>UserFactory.update</code>. The <code>$scope.user</code> is filled with the result from calling <code>UserFactory.show</code>. <code>cancel</code> is just a convenient link redirecting back to the <code>user-list</code> view.</p>
+<p><code>UserCreationCtrl</code> provides the function <code>createNewUser</code>, calling <code>UsersFactory.create</code>.</p>
+<p>Again, both controllers use <code>$location</code> to redirect back to the <code>user-list</code> partial view.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">/* ... */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">controller</span>(<span style="color:#e6db74">&#39;UserDetailCtrl&#39;</span>, [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;$routeParams&#39;</span>, <span style="color:#e6db74">&#39;UserFactory&#39;</span>, <span style="color:#e6db74">&#39;$location&#39;</span>,
+    <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">$routeParams</span>, <span style="color:#a6e22e">UserFactory</span>, <span style="color:#a6e22e">$location</span>) {
+
+        <span style="color:#75715e">// callback for ng-click &#39;updateUser&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">updateUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+            <span style="color:#a6e22e">UserFactory</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">user</span>);
+            <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>);
+        };
+
+        <span style="color:#75715e">// callback for ng-click &#39;cancel&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">cancel</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+            <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>);
+        };
+
+        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">UserFactory</span>.<span style="color:#a6e22e">show</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">$routeParams</span>.<span style="color:#a6e22e">id</span>});
+    }]);
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">controller</span>(<span style="color:#e6db74">&#39;UserCreationCtrl&#39;</span>, [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;UsersFactory&#39;</span>, <span style="color:#e6db74">&#39;$location&#39;</span>,
+    <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$scope</span>, <span style="color:#a6e22e">UsersFactory</span>, <span style="color:#a6e22e">$location</span>) {
+
+        <span style="color:#75715e">// callback for ng-click &#39;createNewUser&#39;:
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">createNewUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+            <span style="color:#a6e22e">UsersFactory</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">$scope</span>.<span style="color:#a6e22e">user</span>);
+            <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>);
+        }
+    }]);    
+</code></pre></div><p>Don't forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo&#39;</span>, [<span style="color:#e6db74">&#39;ngdemo.filters&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.services&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.directives&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.controllers&#39;</span>]).
+    <span style="color:#a6e22e">config</span>([<span style="color:#e6db74">&#39;$routeProvider&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$routeProvider</span>) {
+        <span style="color:#a6e22e">$routeProvider</span>.<span style="color:#a6e22e">when</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>, {<span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;partials/user-list.html&#39;</span>, <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UserListCtrl&#39;</span>});
+        <span style="color:#a6e22e">$routeProvider</span>.<span style="color:#a6e22e">when</span>(<span style="color:#e6db74">&#39;/user-detail/:id&#39;</span>, {<span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;partials/user-detail.html&#39;</span>, <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UserDetailCtrl&#39;</span>});
+        <span style="color:#a6e22e">$routeProvider</span>.<span style="color:#a6e22e">when</span>(<span style="color:#e6db74">&#39;/user-creation&#39;</span>, {<span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;partials/user-creation.html&#39;</span>, <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UserCreationCtrl&#39;</span>});
+        <span style="color:#a6e22e">$routeProvider</span>.<span style="color:#a6e22e">otherwise</span>({<span style="color:#a6e22e">redirectTo</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/user-list&#39;</span>});
+    }]);
+</code></pre></div><h3 id="service">Service</h3>
+<p>AngularJS can consume the web service using <code>$resource</code>. This module is injected via <code>'ngResource'</code>.</p>
+<p>We create two factories:</p>
+<ul>
+<li><code>UsersFactory</code> (note the plural s) calls the web service with methods not requiring an id (<code>query</code> and <code>create</code>).</li>
+<li><code>UserFactory</code> calls the web service with methods requiring a user id (<code>show</code>, <code>update</code> and <code>delete</code>).</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">services</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo.services&#39;</span>, [<span style="color:#e6db74">&#39;ngResource&#39;</span>]);
+
+<span style="color:#a6e22e">services</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;UsersFactory&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$resource</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;/ngdemo/web/users&#39;</span>, {}, {
+        <span style="color:#a6e22e">query</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#a6e22e">isArray</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span> },
+        <span style="color:#a6e22e">create</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span> }
+    })
+});
+
+<span style="color:#a6e22e">services</span>.<span style="color:#a6e22e">factory</span>(<span style="color:#e6db74">&#39;UserFactory&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$resource</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">$resource</span>(<span style="color:#e6db74">&#39;/ngdemo/web/users/:id&#39;</span>, {}, {
+        <span style="color:#a6e22e">show</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span> },
+<span style="color:#a6e22e">date</span><span style="color:#f92672">:</span>  <span style="color:#a6e22e">T</span>
+<span style="color:#a6e22e">slug</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;restful-crud-with-angularjs&#34;</span>
+<span style="color:#a6e22e">aliases</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">/blog/</span><span style="color:#f92672">/</span><span style="color:#a6e22e">restful</span><span style="color:#f92672">-</span><span style="color:#a6e22e">crud</span><span style="color:#f92672">-</span><span style="color:#66d9ef">with</span><span style="color:#f92672">-</span><span style="color:#a6e22e">angularjs</span>]
+        <span style="color:#66d9ef">delete</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DELETE&#39;</span>, <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> {<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;@id&#39;</span>} }
+    })
+});
+</code></pre></div><h2 id="backend-java">Backend (Java)</h2>
+<p>Here is an example of a RESTful web service created with Java:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> ngdemo.web.rest<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> com.google.inject.Inject<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> ngdemo.domain.User<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> ngdemo.service.contract.UserService<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> javax.ws.rs.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> javax.ws.rs.core.MediaType<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.util.List<span style="color:#f92672">;</span>
+
+<span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/users&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserRestService</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> UserService userService<span style="color:#f92672">;</span>
+
+    <span style="color:#a6e22e">@Inject</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">UserRestService</span><span style="color:#f92672">(</span>UserService userService<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">userService</span> <span style="color:#f92672">=</span> userService<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    
+    <span style="color:#a6e22e">@GET</span>
+    <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsersInJSON</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getAllUsers</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@GET</span>
+    <span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{id}&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUserById</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">int</span> id<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getById</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@POST</span>
+    <span style="color:#a6e22e">@Consumes</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewUser</span><span style="color:#f92672">(</span>user<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@PUT</span>
+    <span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{id}&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Consumes</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>user<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#a6e22e">@DELETE</span>
+    <span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{id}&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">int</span> id<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        userService<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+<p>To checkout the correct version for this demo, use the following code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step4-angularjs-crud
+</code></pre></div><p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud">https://github.com/draptik/angulardemorestful/releases/tag/step4-angularjs-crud</a></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2013/07/19/unit-testing-restful-services/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">Unit testing RESTful services</span>
+    </a>
+    
+    
+    <a href="/posts/2013/08/05/link-collection-1/" class="navigation-next">
+      <span class="navigation-tittle">link collection #1</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

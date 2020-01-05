@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> VisualStudio  on draptik</title>
+    <link>https://draptik.github.io/categories/visualstudio/</link>
+    <description>Recent content in  VisualStudio  on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Feb 2018 18:13:10 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/visualstudio/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Visual Studio&#39;s default path for new projects</title>
+      <link>https://draptik.github.io/posts/2018/02/20/visual-studios-default-path-for-new-projects/</link>
+      <pubDate>Tue, 20 Feb 2018 18:13:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/20/visual-studios-default-path-for-new-projects/</guid>
+      <description>Today I took the time to fix something very simple: Visual Studio&#39;s default path.
+In the past decade there has never been a single project I wanted to save to:</description>
+    </item>
+    
+  </channel>
+</rss>

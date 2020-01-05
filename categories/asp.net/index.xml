@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>asp.net on draptik</title>
+    <link>https://draptik.github.io/categories/asp.net/</link>
+    <description>Recent content in asp.net on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 18 Jul 2014 18:46:33 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/asp.net/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>.NET backend providing REST</title>
+      <link>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using .NET Web API.
+&amp;hellip; Recap Our goals:
+ server side: minimal working REST API providing  GET dummy CRUD users   client side (angular): communicate with server side  Setup Creating a Web API project is straightforward: Just follow the instructions at</description>
+    </item>
+    
+    <item>
+      <title>ReorderList demo for AjaxControlToolkit</title>
+      <link>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</link>
+      <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</guid>
+      <description>AjaxControlToolkit&#39;s ReorderList provides drag and drop functionality within a list.
+&amp;lt;div class=&amp;#34;CssReorderList&amp;#34;&amp;gt; &amp;lt;!--ClientMode=&amp;#34;AutoID&amp;#34; is required for certain versions of AjaxControlToolkit --&amp;gt; &amp;lt;ajaxToolkit:ReorderList ID=&amp;#34;MyReorderList&amp;#34; runat=&amp;#34;server&amp;#34; DataKeyField=&amp;#34;MyId&amp;#34; SortOrderField=&amp;#34;MyPosition&amp;#34; PostBackOnReorder=&amp;#34;False&amp;#34; ClientIDMode=&amp;#34;AutoID&amp;#34; DragHandleAlignment=&amp;#34;Left&amp;#34; ItemInsertLocation=&amp;#34;Beginning&amp;#34; AllowReorder=&amp;#34;true&amp;#34; &amp;gt; &amp;lt;ItemTemplate&amp;gt; &amp;lt;div style=&amp;#34;background-color: yellow;&amp;#34; class=&amp;#34;CssItemArea&amp;#34;&amp;gt; &amp;lt;asp:HiddenField runat=&amp;#34;server&amp;#34; ID=&amp;#34;hdfMyId&amp;#34; Value=&amp;#34;&amp;lt;%# ((DummyViewModel)Container.</description>
+    </item>
+    
+  </channel>
+</rss>

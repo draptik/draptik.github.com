@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programming on draptik</title>
+    <link>https://draptik.github.io/categories/programming/</link>
+    <description>Recent content in programming on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 May 2013 15:55:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ReorderList demo for AjaxControlToolkit</title>
+      <link>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</link>
+      <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</guid>
+      <description>AjaxControlToolkit&#39;s ReorderList provides drag and drop functionality within a list.
+&amp;lt;div class=&amp;#34;CssReorderList&amp;#34;&amp;gt; &amp;lt;!--ClientMode=&amp;#34;AutoID&amp;#34; is required for certain versions of AjaxControlToolkit --&amp;gt; &amp;lt;ajaxToolkit:ReorderList ID=&amp;#34;MyReorderList&amp;#34; runat=&amp;#34;server&amp;#34; DataKeyField=&amp;#34;MyId&amp;#34; SortOrderField=&amp;#34;MyPosition&amp;#34; PostBackOnReorder=&amp;#34;False&amp;#34; ClientIDMode=&amp;#34;AutoID&amp;#34; DragHandleAlignment=&amp;#34;Left&amp;#34; ItemInsertLocation=&amp;#34;Beginning&amp;#34; AllowReorder=&amp;#34;true&amp;#34; &amp;gt; &amp;lt;ItemTemplate&amp;gt; &amp;lt;div style=&amp;#34;background-color: yellow;&amp;#34; class=&amp;#34;CssItemArea&amp;#34;&amp;gt; &amp;lt;asp:HiddenField runat=&amp;#34;server&amp;#34; ID=&amp;#34;hdfMyId&amp;#34; Value=&amp;#34;&amp;lt;%# ((DummyViewModel)Container.</description>
+    </item>
+    
+    <item>
+      <title>IT book recommendations</title>
+      <link>https://draptik.github.io/posts/2012/12/15/it-book-recommendations/</link>
+      <pubDate>Sat, 15 Dec 2012 00:17:20 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/12/15/it-book-recommendations/</guid>
+      <description>I now have a list of IT book recommendations at GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Impressions during developing my first application with Mono and Gtk# (GtkSharp)</title>
+      <link>https://draptik.github.io/posts/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/</link>
+      <pubDate>Sun, 30 Sep 2012 00:57:56 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/</guid>
+      <description>Why Mono? Why Gtk? Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.
+That answers the first question: Mono gives me C# and the .</description>
+    </item>
+    
+    <item>
+      <title>Converting a Mercurial repository to Git</title>
+      <link>https://draptik.github.io/posts/2012/02/07/converting-a-mercurial-repository-to-git/</link>
+      <pubDate>Tue, 07 Feb 2012 00:40:01 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/02/07/converting-a-mercurial-repository-to-git/</guid>
+      <description>Note to self:
+Converting Hg repos to git using hg-fast-export.
+Installation:
+$ sudo aptitude install hg-fast-export
+Usage:
+$ cd new_git_dir $ git init $ hg-fast-export -r &amp;lt;hg-repo&amp;gt; Works with:
+git version 1.</description>
+    </item>
+    
+    <item>
+      <title>Converting a Subversion repository to Git</title>
+      <link>https://draptik.github.io/posts/2012/02/06/converting-a-subversion-repository-to-git/</link>
+      <pubDate>Mon, 06 Feb 2012 23:10:21 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/02/06/converting-a-subversion-repository-to-git/</guid>
+      <description>Just discovered this:
+John Albin wrote an excellent article on how to convert a subversion repository to git:
+http://john.albin.net/git/convert-subversion-to-git</description>
+    </item>
+    
+    <item>
+      <title>NHibernate 3.2 Upgrades</title>
+      <link>https://draptik.github.io/posts/2011/11/09/nhibernate-3-2/</link>
+      <pubDate>Wed, 09 Nov 2011 00:10:15 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/11/09/nhibernate-3-2/</guid>
+      <description>Trying Google Plus for blogging&amp;hellip; https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3</description>
+    </item>
+    
+    <item>
+      <title>uNhAddIns patch for NHibernate 3.1</title>
+      <link>https://draptik.github.io/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/</link>
+      <pubDate>Wed, 05 Oct 2011 21:07:26 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/</guid>
+      <description>since most NuGet packages related to NHibernate come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding uNhAddIns (commit #773) with the newer version of NHibernate.
+My changes:</description>
+    </item>
+    
+    <item>
+      <title>App.Config: Order matters</title>
+      <link>https://draptik.github.io/posts/2011/09/23/app-config-order-matters/</link>
+      <pubDate>Fri, 23 Sep 2011 22:09:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/09/23/app-config-order-matters/</guid>
+      <description>Note to self:
+Within an App/Web.config in .NET&amp;hellip; The startup node must be the last node&amp;hellip;
+Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.</description>
+    </item>
+    
+    <item>
+      <title>Rails and Emacs: Rsense and Auto-Complete</title>
+      <link>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</link>
+      <pubDate>Sun, 17 Jul 2011 04:24:23 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</guid>
+      <description>If you&#39;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
+http://cx4a.org/software/auto-complete/
+and
+http://cx4a.org/software/rsense/
+Installation. Just as described. Code completion for ruby-on-rails with emacs!</description>
+    </item>
+    
+    <item>
+      <title>Antivir regression bug makes Visual Studio 2010 unusable</title>
+      <link>https://draptik.github.io/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/</link>
+      <pubDate>Sat, 09 Jul 2011 01:04:48 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/</guid>
+      <description>The current version of Antivir Personal slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications.
+Debugging with active Antivir: appr. 5min for an empty Default.aspx page to display.</description>
+    </item>
+    
+    <item>
+      <title>NHibernate Simple Setup</title>
+      <link>https://draptik.github.io/posts/2011/04/11/nhibernate-simple-setup/</link>
+      <pubDate>Mon, 11 Apr 2011 22:50:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/04/11/nhibernate-simple-setup/</guid>
+      <description>My simple NHibernate 3 setup under GitHub: https://github.com/draptik/nhibernate-nunit</description>
+    </item>
+    
+    <item>
+      <title>Snippet for adding unknown files/dirs to Subversion (command line)</title>
+      <link>https://draptik.github.io/posts/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/</link>
+      <pubDate>Tue, 29 Mar 2011 19:58:31 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/</guid>
+      <description>svn add `svn st | grep &amp;quot;^?&amp;quot; | awk &#39;{print $2}&#39;` </description>
+    </item>
+    
+    <item>
+      <title>Installing SQL Server Management Studio 2008 Express after installing Visual Studio 2010</title>
+      <link>https://draptik.github.io/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/</link>
+      <pubDate>Thu, 17 Mar 2011 22:48:06 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/</guid>
+      <description>Visual Studio 2010 comes with its own version of SQL Server Express.
+If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards and run into trouble, take a look at this post by Alexander Zeitler.</description>
+    </item>
+    
+    <item>
+      <title>NHibernate Code Completion (IntelliSense) for Visual Studio</title>
+      <link>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</link>
+      <pubDate>Wed, 08 Dec 2010 21:47:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</guid>
+      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&#39;s XML folder.
+For example (NHibernate 2.0.1):
+Files to copy:
+${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
+Destination:</description>
+    </item>
+    
+    <item>
+      <title>Using NUnit with Visual Studio Express</title>
+      <link>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</link>
+      <pubDate>Fri, 20 Aug 2010 00:08:36 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</guid>
+      <description>Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
+    </item>
+    
+    <item>
+      <title>Praise for Railstutorial.org</title>
+      <link>https://draptik.github.io/posts/2010/06/25/praise-for-railstutorial-org/</link>
+      <pubDate>Fri, 25 Jun 2010 20:56:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/06/25/praise-for-railstutorial-org/</guid>
+      <description>A couple of weeks back I discovered a great tutorial on Ruby on Rails by Michael Hartl at ﻿﻿http://www.railstutorial.org
+The tutorial takes you through the steps of building a Twitter-like application (not a client!</description>
+    </item>
+    
+    <item>
+      <title>Using a different minor-mode-prefix with Rinari (Emacs Rails)</title>
+      <link>https://draptik.github.io/posts/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/</link>
+      <pubDate>Tue, 27 Apr 2010 20:40:27 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/</guid>
+      <description>Rinari is a Ruby on Rails Minor Mode for GNU/Emacs.
+Problem: Most key mappings / keyboard shortcuts rely on the hard coded strings ; and &#39; (I.e. C-; f c -&amp;gt; rinari-find-controller).</description>
+    </item>
+    
+    <item>
+      <title>Eclipse3.5/Subclipse1.6.x asks for unnecessary SSH confirmation and details (solved)</title>
+      <link>https://draptik.github.io/posts/2009/07/31/eclipsesubclipse-asks-for-ssh-confirmation-solved/</link>
+      <pubDate>Fri, 31 Jul 2009 01:31:08 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/07/31/eclipsesubclipse-asks-for-ssh-confirmation-solved/</guid>
+      <description>This is one of those &amp;ldquo;notes to self&amp;rdquo;&amp;hellip;
+I recently upgraded Eclipse (3.4 -&amp;gt; 3.5) and Subversion (1.5 -&amp;gt; 1.6).
+I never check out my sandbox directly from within Eclipse: I do that from the command line.</description>
+    </item>
+    
+    <item>
+      <title>My HelloWorld script for Maven</title>
+      <link>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</link>
+      <pubDate>Mon, 15 Jun 2009 22:26:55 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</guid>
+      <description>I&#39;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
+    </item>
+    
+    <item>
+      <title>Maven-eclipse-plugin 2.6 might break wicket projects</title>
+      <link>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</link>
+      <pubDate>Sat, 13 Jun 2009 17:59:16 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</guid>
+      <description>Took me a while to find this, so I thought I&#39;ll post it: Maven&#39;s eclipse plugin version 2.6 does not work well with Wicket projects.
+The problem with version 2.6 is that the Maven&#39;s folder structure does not conform to Wicket&#39;s folder structure.</description>
+    </item>
+    
+    <item>
+      <title>Maven2 Heap Overflow in JUnit test cases: Howto increase memory</title>
+      <link>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</link>
+      <pubDate>Fri, 22 May 2009 18:47:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</guid>
+      <description>For the past few days I was wondering why Maven&#39;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
+    </item>
+    
+  </channel>
+</rss>

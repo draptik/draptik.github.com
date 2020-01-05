@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>keyboard-bindings on draptik</title>
+    <link>https://draptik.github.io/categories/keyboard-bindings/</link>
+    <description>Recent content in keyboard-bindings on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Aug 2018 23:01:12 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/keyboard-bindings/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</title>
+      <link>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</guid>
+      <description>I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts.</description>
+    </item>
+    
+  </channel>
+</rss>

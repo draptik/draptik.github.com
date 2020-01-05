@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>octopress on draptik</title>
+    <link>https://draptik.github.io/categories/octopress/</link>
+    <description>Recent content in octopress on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 04 Apr 2017 18:41:51 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/octopress/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker and Octopress</title>
+      <link>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</link>
+      <pubDate>Tue, 04 Apr 2017 18:41:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</guid>
+      <description>This post describes how I created my first customized docker image(s).
+I have been watching the docker space for a while and finally found a private use-case: This blog uses Octopress, which is a ruby-based convenience-wrapper around Jekyll.</description>
+    </item>
+    
+  </channel>
+</rss>

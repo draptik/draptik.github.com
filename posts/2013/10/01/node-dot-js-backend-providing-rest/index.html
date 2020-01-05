@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+    
+
+
+    <head>
+    <link href="https://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="public" />
+<!-- Enable responsiveness on mobile devices -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.62.0" />
+
+    
+    
+    
+
+<title>Node.js backend providing REST • draptik</title>
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Node.js backend providing REST"/>
+<meta name="twitter:description" content="TL;DR My AngularJS demo app has a new backend implementation using node.js.
+&hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+OK. Here is a &lsquo;minimal&rsquo; setup for a node."/>
+
+<meta property="og:title" content="Node.js backend providing REST" />
+<meta property="og:description" content="TL;DR My AngularJS demo app has a new backend implementation using node.js.
+&hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+OK. Here is a &lsquo;minimal&rsquo; setup for a node." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/" />
+<meta property="article:published_time" content="2013-10-01T21:25:00+00:00" />
+<meta property="article:modified_time" content="2013-10-01T21:25:00+00:00" /><meta property="og:site_name" content="draptik title" />
+
+
+    
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+
+
+<link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+    
+
+</head>
+
+
+    <body class=" ">
+    
+<div class="sidebar">
+  <div class="container ">
+    <div class="sidebar-about">
+      <span class="site__title">
+        <a href="https://draptik.github.io/">draptik</a>
+      </span>
+      
+        
+        
+        
+        <div class="author-image">
+          <img src="https://draptik.github.io/images/ant.jpg" alt="Author Image" class="img--circle img--headshot element--center">
+        </div>
+        
+      
+      
+      <p class="site__description">
+         mostly tech stuff 
+      </p>
+    </div>
+    <div class="collapsible-menu">
+      <input type="checkbox" id="menuToggle">
+      <label for="menuToggle">draptik</label>
+      <div class="menu-content">
+        <div>
+	<ul class="sidebar-nav">
+		 
+		 
+			 
+				<li>
+					<a href="/posts/">
+						<span>Posts</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/talks/">
+						<span>Talks</span>
+					</a>
+				</li>
+			 
+		 
+			 
+				<li>
+					<a href="/about/">
+						<span>About</span>
+					</a>
+				</li>
+			 
+		
+	</ul>
+</div>
+
+        <section class="social">
+	
+	<a href="https://twitter.com/drechsler" rel="me"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	<a href="https://github.com/draptik" rel="me"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>
+
+        <div class="content container">
+            
+    
+<article>
+  <header>
+    <h1>Node.js backend providing REST</h1>
+    
+    
+<div class="post__meta">
+    
+    
+      <i class="fas fa-calendar-alt"></i> Oct 01, 2013
+    
+    
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/angularjs">ANGULARJS</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/cors">CORS</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/javascript">JAVASCRIPT</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/nodejs">NODEJS</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/restful">RESTFUL</a>
+              
+          
+      
+    
+    
+    
+    <br/>
+    <i class="fas fa-clock"></i> 3 min read
+</div>
+
+
+  </header>
+  
+  
+  <div class="post">
+    <h1 id="tldr">TL;DR</h1>
+<p>My <a href="https://github.com/draptik/angulardemorestful">AngularJS demo app</a> has a new backend implementation using <a href="http://nodejs.org/">node.js</a>.</p>
+<h1 id="heading">&hellip;</h1>
+<p>After some reading I decided I'll stick with node's <code>express</code> module.</p>
+<p>OK. Here is a &lsquo;minimal&rsquo; setup for a node.js server:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">express</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;express&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">express</span>();
+
+<span style="color:#75715e">//CORS middleware
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">allowCrossDomain</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">next</span>) {
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Origin&#39;</span>, <span style="color:#e6db74">&#39;*&#39;</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Methods&#39;</span>, <span style="color:#e6db74">&#39;GET,PUT,POST,DELETE&#39;</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#39;Access-Control-Allow-Headers&#39;</span>, <span style="color:#e6db74">&#39;Content-Type, X-XSRF-TOKEN&#39;</span>);
+  <span style="color:#a6e22e">next</span>();
+};
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">allowCrossDomain</span>);
+
+<span style="color:#75715e">/* we&#39;ll use the same port as tomcat... */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">MY_PORT</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">8080</span>; <span style="color:#75715e">// default: 4730
+</span><span style="color:#75715e"></span>
+
+<span style="color:#75715e">/* REST API =========================================== */</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/ngdemo/web&#39;</span>;
+
+<span style="color:#75715e">/* GET ALL -------------------------------------------- */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/users&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+	<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">userRepository</span>.<span style="color:#a6e22e">getAll</span>());
+});
+
+<span style="color:#75715e">/* GET Dummy ------------------------------------------ */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/dummy&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">firstName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;JonFromREST&#39;</span>, <span style="color:#a6e22e">lastName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;DoeFromREST&#39;</span>});
+});
+
+<span style="color:#75715e">/* GET By Id ------------------------------------------ */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/users/:id&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;trying to retrieve user with id: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">id</span>);
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userRepository</span>.<span style="color:#a6e22e">getById</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">id</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">user</span>);
+});
+
+
+<span style="color:#75715e">/* POST Create ---------------------------------------- */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/users&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#e6db74">&#39;firstName&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#e6db74">&#39;lastName&#39;</span>)) {
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;Error 400: POST syntax incorrect.&#39;</span>);
+  }
+
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newUser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userRepository</span>.<span style="color:#a6e22e">addNewUser</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">lastName</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">newUser</span>);
+});
+
+<span style="color:#75715e">/* PUT (Update) --------------------------------------- */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">put</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/users/:id&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#e6db74">&#39;id&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#e6db74">&#39;firstName&#39;</span>) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">hasOwnProperty</span>(<span style="color:#e6db74">&#39;lastName&#39;</span>)) {
+    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">statusCode</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#39;Error 400: PUT syntax incorrect.&#39;</span>);
+  }
+  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">changedUser</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">userRepository</span>.<span style="color:#a6e22e">changeUser</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">lastName</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">changedUser</span>);
+});
+
+<span style="color:#75715e">/* DELETE --------------------------------------------- */</span>
+<span style="color:#a6e22e">app</span>.<span style="color:#66d9ef">delete</span>(<span style="color:#a6e22e">baseUrl</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;/users/:id&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) {
+  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;trying to delete user with id: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">id</span>);
+  <span style="color:#a6e22e">userRepository</span>.<span style="color:#a6e22e">deleteUser</span>(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">id</span>);
+  <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">json</span>(<span style="color:#66d9ef">true</span>);
+});
+
+<span style="color:#75715e">/* ==================================================== */</span>
+
+<span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">listen</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PORT</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">MY_PORT</span>);
+
+<span style="color:#75715e">/* Mmmhh... how can I place the code below into a seperate file and load it here? */</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">User</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>) {
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">id</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">firstName</span>;
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastName</span>;
+};
+
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">UserRepository</span>() {
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span> <span style="color:#f92672">=</span> [];
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">createUsers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">numberOfUsers</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">numberOfUsers</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">User</span>(<span style="color:#a6e22e">id</span>, <span style="color:#e6db74">&#39;Foo&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>, <span style="color:#e6db74">&#39;Bar&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>));
+    };
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>;
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getMaxUserId</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#66d9ef">return</span> Math.<span style="color:#a6e22e">max</span>.<span style="color:#a6e22e">apply</span>(Math, <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">user</span>) { 
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>; 
+    }));
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getNumberOfUsers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">length</span>;
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getAll</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>;
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getById</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">id</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">foundUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>[<span style="color:#a6e22e">i</span>];
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;...checking user.id &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>);
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">id</span>) {
+        <span style="color:#a6e22e">foundUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+      };
+    };
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">foundUser</span>) {
+      <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Could not find user with id: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span>);
+      <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;user with id &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; not found.&#39;</span>;
+    };
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addNewUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">User</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getMaxUserId</span>() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>);
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">push</span>(<span style="color:#a6e22e">newUser</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getById</span>(<span style="color:#a6e22e">newUser</span>.<span style="color:#a6e22e">id</span>);
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">changeUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">firstName</span>, <span style="color:#a6e22e">lastName</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">getById</span>(<span style="color:#a6e22e">id</span>);
+    <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">firstName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">firstName</span>;
+    <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">lastName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">lastName</span>;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+  };
+
+  <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">deleteUser</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">id</span>) {
+    <span style="color:#75715e">// sorry, i&#39;m tired and don&#39;t know javascript that well...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">indexToDelete</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>[<span style="color:#a6e22e">i</span>];
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">id</span>) {
+        <span style="color:#a6e22e">indexToDelete</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">i</span>;
+        <span style="color:#66d9ef">break</span>;
+      };
+    };
+
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">indexToDelete</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) {
+      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">splice</span>(<span style="color:#a6e22e">indexToDelete</span>, <span style="color:#ae81ff">1</span>);
+    };
+  };
+};
+</code></pre></div><p>As you can see I am just dabbling with JS&hellip;</p>
+<p>But hey: It works! ;-)</p>
+<h2 id="source-code-for-this-post">Source code for this post</h2>
+<p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>
+<p>To checkout the correct version for this demo, use the following code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone git@github.com:draptik/angulardemorestful.git
+cd angulardemorestful
+git checkout -f step6-nodejs-backend
+</code></pre></div><p>In case you are not using git you can also download the project as ZIP or tar.gz file here: <a href="https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend">https://github.com/draptik/angulardemorestful/releases/tag/step6-nodejs-backend</a></p>
+
+  </div>
+  
+
+<div class="navigation navigation-single">
+    
+    <a href="/posts/2013/09/16/link-collection-2/" class="navigation-prev">
+      <i aria-hidden="true" class="fa fa-chevron-left"></i>
+      <span class="navigation-tittle">link collection #2</span>
+    </a>
+    
+    
+    <a href="/posts/2014/01/03/link-collection-number-3/" class="navigation-next">
+      <span class="navigation-tittle">link collection #3</span>
+      <i aria-hidden="true" class="fa fa-chevron-right"></i>
+    </a>
+    
+</div>
+
+
+  
+
+  
+    
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    (function () {
+    if (location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "") {
+      return;
+    }
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    var disqus_shortname = 'draptik';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || 
+      document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the
+  <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by
+  <span class="logo-disqus">Disqus</span>
+</a>
+
+    
+
+
+</article>
+
+
+        </div>
+        
+    
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-65991503-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+
+
+    
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+        
+    
+    <script type="text/javascript">
+        
+        hljs.initHighlightingOnLoad();
+    </script>
+    
+
+
+
+
+    
+
+
+
+    </body>
+</html>

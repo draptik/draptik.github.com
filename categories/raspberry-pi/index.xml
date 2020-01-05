@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Raspberry Pi on draptik</title>
+    <link>https://draptik.github.io/categories/raspberry-pi/</link>
+    <description>Recent content in Raspberry Pi on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Jan 2017 00:01:24 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pi Hole - simple ad blocker for your network</title>
+      <link>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</guid>
+      <description>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. Troy Hunt recently wrote a nice post on the subject.</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</title>
+      <link>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</link>
+      <pubDate>Thu, 30 Jul 2015 00:07:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</guid>
+      <description>Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
+In this post I&#39;ll describe how to display the data.
+TL;DR  Download and unzip the source code from https://github.</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</title>
+      <link>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/</link>
+      <pubDate>Fri, 10 Jul 2015 00:13:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/</guid>
+      <description>In the previous post I described how to setup the hardware for measuring temperatures at home. This post will use a small python program to save the recorded temperatures to a database.</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)</title>
+      <link>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</link>
+      <pubDate>Fri, 10 Jul 2015 00:11:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</guid>
+      <description>Since I&#39;m a software developer, I&#39;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
+    </item>
+    
+    <item>
+      <title>Installing Seafile on Raspberry Pi</title>
+      <link>https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/</link>
+      <pubDate>Mon, 21 Apr 2014 00:23:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/</guid>
+      <description>With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi.</description>
+    </item>
+    
+    <item>
+      <title>Setting up a network printer using Raspberry Pi</title>
+      <link>https://draptik.github.io/posts/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/</link>
+      <pubDate>Thu, 30 May 2013 08:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/</guid>
+      <description>This post by Lynsay describes in detail how to convert a non-network printer into a network printer.
+You will have to install CUPS and SAMBA on your Raspberry Pi.
+Once your done you can access the printer from any OS (windows, linux, mac) within your network.</description>
+    </item>
+    
+    <item>
+      <title>RPi/XBMC: Keeping content in sync</title>
+      <link>https://draptik.github.io/posts/2013/05/25/rpi-xbmc-sync/</link>
+      <pubDate>Sat, 25 May 2013 19:24:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/25/rpi-xbmc-sync/</guid>
+      <description>If you have multiple Rasperry Pi/XBMC clients and want to
+ keep your &amp;ldquo;history&amp;rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume) do not want to individually update every RPi/XBMC client if the content of your data storage changes  then this post might be for you.</description>
+    </item>
+    
+    <item>
+      <title>Mapping missing context menu in OpenELEC with Remote Control HAMA MCE</title>
+      <link>https://draptik.github.io/posts/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/</link>
+      <pubDate>Fri, 24 May 2013 21:27:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/</guid>
+      <description>The IR remote control HAMA MCE works out of the box with XBMC. Except that XBMC&#39;s context menu is not mapped to any key.
+An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent Yatse app.</description>
+    </item>
+    
+  </channel>
+</rss>

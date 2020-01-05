@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>test on draptik</title>
+    <link>https://draptik.github.io/categories/test/</link>
+    <description>Recent content in test on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 07 Feb 2018 20:53:43 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>F# Test Setup for FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</guid>
+      <description>In my previous post we setup a basic F# project in Linux.
+In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</description>
+    </item>
+    
+    <item>
+      <title>link collection #3</title>
+      <link>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
+      <description>JavaScript stuff:
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+    </item>
+    
+  </channel>
+</rss>

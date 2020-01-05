@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on draptik</title>
+    <link>https://draptik.github.io/posts/</link>
+    <description>Recent content in Posts on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
+      <link>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</link>
+      <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</guid>
+      <description>I have updated this post because the author took the time to respond to my review.
+ TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp;amp; cons of different CQRS/ES persistency options in the .</description>
+    </item>
+    
+    <item>
+      <title>F# Linux: mixed feelings</title>
+      <link>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</link>
+      <pubDate>Thu, 29 Nov 2018 00:58:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</guid>
+      <description>I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &amp;ldquo;mixed&amp;rdquo;:
+First off all: It is great that we can use .</description>
+    </item>
+    
+    <item>
+      <title>IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</title>
+      <link>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</link>
+      <pubDate>Tue, 21 Aug 2018 23:01:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</guid>
+      <description>I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts.</description>
+    </item>
+    
+    <item>
+      <title>Rewarding moments during Lunch &amp; Learn...</title>
+      <link>https://draptik.github.io/posts/2018/03/15/that-moment/</link>
+      <pubDate>Thu, 15 Mar 2018 22:04:36 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/03/15/that-moment/</guid>
+      <description>Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers pitched in! It was over lunch. We don&#39;t talk about TDD everyday while eating.</description>
+    </item>
+    
+    <item>
+      <title>Visual Studio&#39;s default path for new projects</title>
+      <link>https://draptik.github.io/posts/2018/02/20/visual-studios-default-path-for-new-projects/</link>
+      <pubDate>Tue, 20 Feb 2018 18:13:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/20/visual-studios-default-path-for-new-projects/</guid>
+      <description>Today I took the time to fix something very simple: Visual Studio&#39;s default path.
+In the past decade there has never been a single project I wanted to save to:</description>
+    </item>
+    
+    <item>
+      <title>F# Test Setup for FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>
+      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</guid>
+      <description>In my previous post we setup a basic F# project in Linux.
+In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</description>
+    </item>
+    
+    <item>
+      <title>F# Setup Linux: FizzBuzz</title>
+      <link>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</link>
+      <pubDate>Mon, 05 Feb 2018 22:31:04 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</guid>
+      <description>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
+Prerequisite: .NET Core with Linux I won&#39;t go into setting up .</description>
+    </item>
+    
+    <item>
+      <title>Docker and Octopress</title>
+      <link>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</link>
+      <pubDate>Tue, 04 Apr 2017 18:41:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/04/04/docker-and-octopress/</guid>
+      <description>This post describes how I created my first customized docker image(s).
+I have been watching the docker space for a while and finally found a private use-case: This blog uses Octopress, which is a ruby-based convenience-wrapper around Jekyll.</description>
+    </item>
+    
+    <item>
+      <title>Learning by meeting people</title>
+      <link>https://draptik.github.io/posts/2017/03/30/learning/</link>
+      <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/03/30/learning/</guid>
+      <description>In my day job I&#39;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.</description>
+    </item>
+    
+    <item>
+      <title>Pi Hole - simple ad blocker for your network</title>
+      <link>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</link>
+      <pubDate>Wed, 11 Jan 2017 00:01:24 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/</guid>
+      <description>Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. Troy Hunt recently wrote a nice post on the subject.</description>
+    </item>
+    
+    <item>
+      <title>Bash tricks</title>
+      <link>https://draptik.github.io/posts/2017/01/10/bash-tricks/</link>
+      <pubDate>Tue, 10 Jan 2017 00:22:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
+      <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
+ autocd autojump  Neither of these features is new.
+autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+    </item>
+    
+    <item>
+      <title>Testing that different objects have the same properties</title>
+      <link>https://draptik.github.io/posts/2016/05/09/testing-objects-have-same-properties/</link>
+      <pubDate>Mon, 09 May 2016 19:25:17 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2016/05/09/testing-objects-have-same-properties/</guid>
+      <description>Sometimes you want to ensure that 2 unrelated objects share a set of properties &amp;ndash; without using an interface.
+Here is an example:
+namespace Demo { public class Customer { public string FirstName { get; set; } public string LastName { get; set; } } public class Person { public string FirstName { get; set; } public string LastName { get; set; } } } First thought for C# developers: AutoMapper</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</title>
+      <link>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</link>
+      <pubDate>Thu, 30 Jul 2015 00:07:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</guid>
+      <description>Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
+In this post I&#39;ll describe how to display the data.
+TL;DR  Download and unzip the source code from https://github.</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</title>
+      <link>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/</link>
+      <pubDate>Fri, 10 Jul 2015 00:13:12 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/</guid>
+      <description>In the previous post I described how to setup the hardware for measuring temperatures at home. This post will use a small python program to save the recorded temperatures to a database.</description>
+    </item>
+    
+    <item>
+      <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)</title>
+      <link>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</link>
+      <pubDate>Fri, 10 Jul 2015 00:11:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</guid>
+      <description>Since I&#39;m a software developer, I&#39;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
+    </item>
+    
+    <item>
+      <title>.NET backend providing REST</title>
+      <link>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</link>
+      <pubDate>Fri, 18 Jul 2014 18:46:33 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/07/18/dot-net-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using .NET Web API.
+&amp;hellip; Recap Our goals:
+ server side: minimal working REST API providing  GET dummy CRUD users   client side (angular): communicate with server side  Setup Creating a Web API project is straightforward: Just follow the instructions at</description>
+    </item>
+    
+    <item>
+      <title>link collection #4</title>
+      <link>https://draptik.github.io/posts/2014/04/21/link-collection-number-4/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/04/21/link-collection-number-4/</guid>
+      <description>I&#39;m a bit behind on this section, I know. Here&#39;s the first batch:
+currently reading:
+ Growing Object-Oriented Software, Guided by Tests Implementing Domain-Driven Design  c# stuff:
+ Mark Seemann&#39;s on Bastard Injection foreach vs ForEach  sql stuff:</description>
+    </item>
+    
+    <item>
+      <title>Installing Seafile on Raspberry Pi</title>
+      <link>https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/</link>
+      <pubDate>Mon, 21 Apr 2014 00:23:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/</guid>
+      <description>With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi.</description>
+    </item>
+    
+    <item>
+      <title>link collection #3</title>
+      <link>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</link>
+      <pubDate>Fri, 03 Jan 2014 23:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
+      <description>JavaScript stuff:
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+    </item>
+    
+    <item>
+      <title>Node.js backend providing REST</title>
+      <link>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</link>
+      <pubDate>Tue, 01 Oct 2013 21:25:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</guid>
+      <description>TL;DR My AngularJS demo app has a new backend implementation using node.js.
+&amp;hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+OK. Here is a &amp;lsquo;minimal&amp;rsquo; setup for a node.</description>
+    </item>
+    
+    <item>
+      <title>link collection #2</title>
+      <link>https://draptik.github.io/posts/2013/09/16/link-collection-2/</link>
+      <pubDate>Mon, 16 Sep 2013 21:58:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/09/16/link-collection-2/</guid>
+      <description>I attended the Herbstcampus 2013 this month. As usual, a very good conference.
+Here is some fun stuff I learned:
+ NancyFx is to ASP.NET as Sinatra is to Ruby-on-Rails. Simple.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS and CORS</title>
+      <link>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</link>
+      <pubDate>Mon, 19 Aug 2013 18:47:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/08/19/angularjs-and-cors/</guid>
+      <description>TL;DR While splitting my AngularJS demo app into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.</description>
+    </item>
+    
+    <item>
+      <title>link collection #1</title>
+      <link>https://draptik.github.io/posts/2013/08/05/link-collection-1/</link>
+      <pubDate>Mon, 05 Aug 2013 20:09:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/08/05/link-collection-1/</guid>
+      <description>When I try to learn new technologies I stumble across many sites. If a site is useful to the problem at hand, I normally add a comment in my source code referencing the URL.</description>
+    </item>
+    
+    <item>
+      <title>RESTful CRUD with AngularJS</title>
+      <link>https://draptik.github.io/posts/2013/07/28/restful-crud-with-angularjs/</link>
+      <pubDate>Sun, 28 Jul 2013 11:15:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/28/restful-crud-with-angularjs/</guid>
+      <description>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.
+A prerequisite for this demo is a working RESTful web service.</description>
+    </item>
+    
+    <item>
+      <title>Unit testing RESTful services</title>
+      <link>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</link>
+      <pubDate>Fri, 19 Jul 2013 13:18:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/19/unit-testing-restful-services/</guid>
+      <description>In my two previous posts I gave an introduction on how to consume a RESTful web service with AngularJS created by a Java backend and use Guice in the Java backend.</description>
+    </item>
+    
+    <item>
+      <title>Guice in Java Web Application</title>
+      <link>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</link>
+      <pubDate>Thu, 18 Jul 2013 21:36:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</guid>
+      <description>Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+Advantages compared to Spring:
+ Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS example using a Java RESTful web service</title>
+      <link>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</link>
+      <pubDate>Sat, 13 Jul 2013 20:12:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</guid>
+      <description>AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
+Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
+    </item>
+    
+    <item>
+      <title>Listing environment variables (Linux)</title>
+      <link>https://draptik.github.io/posts/2013/07/05/listing-environment-variables-linux/</link>
+      <pubDate>Fri, 05 Jul 2013 23:33:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/07/05/listing-environment-variables-linux/</guid>
+      <description>Just a note to self: Get a list of all linux environment variables and their values using the export command.
+Here is an example:
+pi@rpidev ~ $ export declare -x HOME=&amp;#34;/home/pi&amp;#34; declare -x JAVA_HOME=&amp;#34;/opt/java/jdk1.</description>
+    </item>
+    
+    <item>
+      <title>ReorderList demo for AjaxControlToolkit</title>
+      <link>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</link>
+      <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</guid>
+      <description>AjaxControlToolkit&#39;s ReorderList provides drag and drop functionality within a list.
+&amp;lt;div class=&amp;#34;CssReorderList&amp;#34;&amp;gt; &amp;lt;!--ClientMode=&amp;#34;AutoID&amp;#34; is required for certain versions of AjaxControlToolkit --&amp;gt; &amp;lt;ajaxToolkit:ReorderList ID=&amp;#34;MyReorderList&amp;#34; runat=&amp;#34;server&amp;#34; DataKeyField=&amp;#34;MyId&amp;#34; SortOrderField=&amp;#34;MyPosition&amp;#34; PostBackOnReorder=&amp;#34;False&amp;#34; ClientIDMode=&amp;#34;AutoID&amp;#34; DragHandleAlignment=&amp;#34;Left&amp;#34; ItemInsertLocation=&amp;#34;Beginning&amp;#34; AllowReorder=&amp;#34;true&amp;#34; &amp;gt; &amp;lt;ItemTemplate&amp;gt; &amp;lt;div style=&amp;#34;background-color: yellow;&amp;#34; class=&amp;#34;CssItemArea&amp;#34;&amp;gt; &amp;lt;asp:HiddenField runat=&amp;#34;server&amp;#34; ID=&amp;#34;hdfMyId&amp;#34; Value=&amp;#34;&amp;lt;%# ((DummyViewModel)Container.</description>
+    </item>
+    
+    <item>
+      <title>Setting up a network printer using Raspberry Pi</title>
+      <link>https://draptik.github.io/posts/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/</link>
+      <pubDate>Thu, 30 May 2013 08:30:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/30/setting-up-a-network-printer-using-raspberry-pi/</guid>
+      <description>This post by Lynsay describes in detail how to convert a non-network printer into a network printer.
+You will have to install CUPS and SAMBA on your Raspberry Pi.
+Once your done you can access the printer from any OS (windows, linux, mac) within your network.</description>
+    </item>
+    
+    <item>
+      <title>RPi/XBMC: Keeping content in sync</title>
+      <link>https://draptik.github.io/posts/2013/05/25/rpi-xbmc-sync/</link>
+      <pubDate>Sat, 25 May 2013 19:24:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/25/rpi-xbmc-sync/</guid>
+      <description>If you have multiple Rasperry Pi/XBMC clients and want to
+ keep your &amp;ldquo;history&amp;rdquo; in sync (watch a movie in room1, stop, start the same movie in room2 and resume) do not want to individually update every RPi/XBMC client if the content of your data storage changes  then this post might be for you.</description>
+    </item>
+    
+    <item>
+      <title>Mapping missing context menu in OpenELEC with Remote Control HAMA MCE</title>
+      <link>https://draptik.github.io/posts/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/</link>
+      <pubDate>Fri, 24 May 2013 21:27:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/</guid>
+      <description>The IR remote control HAMA MCE works out of the box with XBMC. Except that XBMC&#39;s context menu is not mapped to any key.
+An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent Yatse app.</description>
+    </item>
+    
+    <item>
+      <title>Pygments and Python</title>
+      <link>https://draptik.github.io/posts/2013/05/24/pygments-and-python/</link>
+      <pubDate>Fri, 24 May 2013 21:11:00 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2013/05/24/pygments-and-python/</guid>
+      <description>Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting.
+Currenty (2013-05-23) Pygments does not work flawlessly with Python3 (see this post and this issue on pygment&#39;s issue tracker).</description>
+    </item>
+    
+    <item>
+      <title>IT book recommendations</title>
+      <link>https://draptik.github.io/posts/2012/12/15/it-book-recommendations/</link>
+      <pubDate>Sat, 15 Dec 2012 00:17:20 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/12/15/it-book-recommendations/</guid>
+      <description>I now have a list of IT book recommendations at GitHub.</description>
+    </item>
+    
+    <item>
+      <title>Why I switched from Ubuntu to Arch Linux</title>
+      <link>https://draptik.github.io/posts/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/</link>
+      <pubDate>Tue, 16 Oct 2012 01:35:34 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/10/16/why-i-switched-from-ubuntu-to-arch-linux/</guid>
+      <description>Ubuntu is a great GNU/Linux distribution. I have been using it since 2004, and except for one LTS (long term support) upgrade a couple years back everything was fine. That LTS upgrade a couple years back screwed up the X system, leaving me with the bash shell.</description>
+    </item>
+    
+    <item>
+      <title>Impressions during developing my first application with Mono and Gtk# (GtkSharp)</title>
+      <link>https://draptik.github.io/posts/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/</link>
+      <pubDate>Sun, 30 Sep 2012 00:57:56 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/09/30/impressions-during-developing-my-first-application-with-mono-and-gtk-gtksharp/</guid>
+      <description>Why Mono? Why Gtk? Over the past couple of years I have been developing C# ASP.NET enterprise applications. So I am quite comfortable with the Microsoft stack.
+That answers the first question: Mono gives me C# and the .</description>
+    </item>
+    
+    <item>
+      <title>PS1 prompt</title>
+      <link>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</link>
+      <pubDate>Mon, 20 Aug 2012 21:31:20 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</guid>
+      <description>Here&#39;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
+    </item>
+    
+    <item>
+      <title>GNU/Emacs: Desktop Save with &#34;Lazy Loading&#34;</title>
+      <link>https://draptik.github.io/posts/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/</link>
+      <pubDate>Tue, 27 Mar 2012 20:33:18 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/03/27/gnuemacs-desktop-save-with-lazy-loading/</guid>
+      <description>When using desktop-save-mode using desktop-restore-eager is a must:
+(custom-set-variables &amp;#39;(desktop-save-mode t) &amp;#39;(desktop-restore-eager 5)) desktop-save-mode will load your last session. Setting desktop-restore-eager to 5 will only try to load and render the last 5 buffers while loading your saved buffers.</description>
+    </item>
+    
+    <item>
+      <title>Converting a Mercurial repository to Git</title>
+      <link>https://draptik.github.io/posts/2012/02/07/converting-a-mercurial-repository-to-git/</link>
+      <pubDate>Tue, 07 Feb 2012 00:40:01 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/02/07/converting-a-mercurial-repository-to-git/</guid>
+      <description>Note to self:
+Converting Hg repos to git using hg-fast-export.
+Installation:
+$ sudo aptitude install hg-fast-export
+Usage:
+$ cd new_git_dir $ git init $ hg-fast-export -r &amp;lt;hg-repo&amp;gt; Works with:
+git version 1.</description>
+    </item>
+    
+    <item>
+      <title>Converting a Subversion repository to Git</title>
+      <link>https://draptik.github.io/posts/2012/02/06/converting-a-subversion-repository-to-git/</link>
+      <pubDate>Mon, 06 Feb 2012 23:10:21 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2012/02/06/converting-a-subversion-repository-to-git/</guid>
+      <description>Just discovered this:
+John Albin wrote an excellent article on how to convert a subversion repository to git:
+http://john.albin.net/git/convert-subversion-to-git</description>
+    </item>
+    
+    <item>
+      <title>NHibernate 3.2 Upgrades</title>
+      <link>https://draptik.github.io/posts/2011/11/09/nhibernate-3-2/</link>
+      <pubDate>Wed, 09 Nov 2011 00:10:15 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/11/09/nhibernate-3-2/</guid>
+      <description>Trying Google Plus for blogging&amp;hellip; https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3</description>
+    </item>
+    
+    <item>
+      <title>uNhAddIns patch for NHibernate 3.1</title>
+      <link>https://draptik.github.io/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/</link>
+      <pubDate>Wed, 05 Oct 2011 21:07:26 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/</guid>
+      <description>since most NuGet packages related to NHibernate come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding uNhAddIns (commit #773) with the newer version of NHibernate.
+My changes:</description>
+    </item>
+    
+    <item>
+      <title>App.Config: Order matters</title>
+      <link>https://draptik.github.io/posts/2011/09/23/app-config-order-matters/</link>
+      <pubDate>Fri, 23 Sep 2011 22:09:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/09/23/app-config-order-matters/</guid>
+      <description>Note to self:
+Within an App/Web.config in .NET&amp;hellip; The startup node must be the last node&amp;hellip;
+Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.</description>
+    </item>
+    
+    <item>
+      <title>Rails and Emacs: Rsense and Auto-Complete</title>
+      <link>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</link>
+      <pubDate>Sun, 17 Jul 2011 04:24:23 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</guid>
+      <description>If you&#39;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
+http://cx4a.org/software/auto-complete/
+and
+http://cx4a.org/software/rsense/
+Installation. Just as described. Code completion for ruby-on-rails with emacs!</description>
+    </item>
+    
+    <item>
+      <title>Antivir regression bug makes Visual Studio 2010 unusable</title>
+      <link>https://draptik.github.io/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/</link>
+      <pubDate>Sat, 09 Jul 2011 01:04:48 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/</guid>
+      <description>The current version of Antivir Personal slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications.
+Debugging with active Antivir: appr. 5min for an empty Default.aspx page to display.</description>
+    </item>
+    
+    <item>
+      <title>Workaround for VirtualBox 4.0.8 regression bug</title>
+      <link>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</link>
+      <pubDate>Wed, 25 May 2011 20:35:29 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</guid>
+      <description>The current version of Oracle&#39;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
+    </item>
+    
+    <item>
+      <title>Adding Truecrypt to Ubuntu&#39;s Unity panel</title>
+      <link>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</link>
+      <pubDate>Mon, 09 May 2011 19:55:56 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</guid>
+      <description>To add applications like Truecrypt to Ubuntu&#39;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
+  Install dconf-editor (ie sudo aptitude install dconf-editor)
+  Go to section desktop | unity | panel and add &amp;lsquo;Truecrypt&amp;rsquo; to the systray-whitelist variable</description>
+    </item>
+    
+    <item>
+      <title>NHibernate Simple Setup</title>
+      <link>https://draptik.github.io/posts/2011/04/11/nhibernate-simple-setup/</link>
+      <pubDate>Mon, 11 Apr 2011 22:50:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/04/11/nhibernate-simple-setup/</guid>
+      <description>My simple NHibernate 3 setup under GitHub: https://github.com/draptik/nhibernate-nunit</description>
+    </item>
+    
+    <item>
+      <title>Snippet for adding unknown files/dirs to Subversion (command line)</title>
+      <link>https://draptik.github.io/posts/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/</link>
+      <pubDate>Tue, 29 Mar 2011 19:58:31 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/</guid>
+      <description>svn add `svn st | grep &amp;quot;^?&amp;quot; | awk &#39;{print $2}&#39;` </description>
+    </item>
+    
+    <item>
+      <title>Installing SQL Server Management Studio 2008 Express after installing Visual Studio 2010</title>
+      <link>https://draptik.github.io/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/</link>
+      <pubDate>Thu, 17 Mar 2011 22:48:06 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/</guid>
+      <description>Visual Studio 2010 comes with its own version of SQL Server Express.
+If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards and run into trouble, take a look at this post by Alexander Zeitler.</description>
+    </item>
+    
+    <item>
+      <title>Configure VirtualBox Windows guest system to use 2 monitors</title>
+      <link>https://draptik.github.io/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/</link>
+      <pubDate>Sat, 01 Jan 2011 21:13:43 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/</guid>
+      <description>﻿Purpose Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.
+This solution should work for all Linux distributions supported by VirtualBox4.
+﻿Required software   Ubuntu 10.</description>
+    </item>
+    
+    <item>
+      <title>NHibernate Code Completion (IntelliSense) for Visual Studio</title>
+      <link>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</link>
+      <pubDate>Wed, 08 Dec 2010 21:47:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</guid>
+      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&#39;s XML folder.
+For example (NHibernate 2.0.1):
+Files to copy:
+${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
+Destination:</description>
+    </item>
+    
+    <item>
+      <title>Emacs: murrine_style_draw_box: assertion `height &gt;= -1&#39; failed</title>
+      <link>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</link>
+      <pubDate>Tue, 02 Nov 2010 23:59:09 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</guid>
+      <description>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs
+murrine_style_draw_box: assertion height &amp;gt;= -1&amp;rsquo; failed`
+after every action within Emacs.
+The solution is simple, but has not been integrated in the Ubuntu repository yet.</description>
+    </item>
+    
+    <item>
+      <title>Using NUnit with Visual Studio Express</title>
+      <link>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</link>
+      <pubDate>Fri, 20 Aug 2010 00:08:36 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</guid>
+      <description>Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
+    </item>
+    
+    <item>
+      <title>Praise for Railstutorial.org</title>
+      <link>https://draptik.github.io/posts/2010/06/25/praise-for-railstutorial-org/</link>
+      <pubDate>Fri, 25 Jun 2010 20:56:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/06/25/praise-for-railstutorial-org/</guid>
+      <description>A couple of weeks back I discovered a great tutorial on Ruby on Rails by Michael Hartl at ﻿﻿http://www.railstutorial.org
+The tutorial takes you through the steps of building a Twitter-like application (not a client!</description>
+    </item>
+    
+    <item>
+      <title>Using a different minor-mode-prefix with Rinari (Emacs Rails)</title>
+      <link>https://draptik.github.io/posts/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/</link>
+      <pubDate>Tue, 27 Apr 2010 20:40:27 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/04/27/using-a-different-minor-mode-prefix-with-rinari-emacs-rails/</guid>
+      <description>Rinari is a Ruby on Rails Minor Mode for GNU/Emacs.
+Problem: Most key mappings / keyboard shortcuts rely on the hard coded strings ; and &#39; (I.e. C-; f c -&amp;gt; rinari-find-controller).</description>
+    </item>
+    
+    <item>
+      <title>Using basic Emacs keybindings in Gnome-Terminal</title>
+      <link>https://draptik.github.io/posts/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/</link>
+      <pubDate>Fri, 15 Jan 2010 22:00:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2010/01/15/using-basic-emacs-keybindings-in-gnome-terminal/</guid>
+      <description>Summary: Use basic Emacs keyboard shortcuts (ie navigation) in Gnome-Terminal while using the Bash shell. This post is only interesting for people familiar with Emacs.
+This is so simple that I almost afraid to post it&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Executing a script after mounting a TrueCrypt partition on Ubuntu 9.10 (Karmic Koala)</title>
+      <link>https://draptik.github.io/posts/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/</link>
+      <pubDate>Tue, 08 Dec 2009 00:18:40 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/12/08/executing-a-script-after-mounting-a-truecrypt-partition-on-ubuntu-9-10-karmic-koala/</guid>
+      <description>**Goal: **Automatically run a script/program of your choice after mounting a TrueCrypt partition on Ubuntu 9.10.
+Background info on udev (very short)
+  UDEV listens to certain events. Depending on the event, a certain &amp;ldquo;rule&amp;rdquo; can be executed.</description>
+    </item>
+    
+    <item>
+      <title>Emacsclient usage on a GNU/Linux system</title>
+      <link>https://draptik.github.io/posts/2009/10/23/emacsclient-usage-on-a-gnulinux-system/</link>
+      <pubDate>Fri, 23 Oct 2009 21:31:02 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/10/23/emacsclient-usage-on-a-gnulinux-system/</guid>
+      <description>Short instructions on how to setup Emacs using the Emacs Server/Emacs Client system on a GNU/Linux machine.
+This post is intended for people familiar with GNU/Emacs.
+Requirements:
+GNU/Emacs 23 or greater (for Ubuntu get the Emacs PPA: https://launchpad.</description>
+    </item>
+    
+    <item>
+      <title>Eclipse3.5/Subclipse1.6.x asks for unnecessary SSH confirmation and details (solved)</title>
+      <link>https://draptik.github.io/posts/2009/07/31/eclipsesubclipse-asks-for-ssh-confirmation-solved/</link>
+      <pubDate>Fri, 31 Jul 2009 01:31:08 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/07/31/eclipsesubclipse-asks-for-ssh-confirmation-solved/</guid>
+      <description>This is one of those &amp;ldquo;notes to self&amp;rdquo;&amp;hellip;
+I recently upgraded Eclipse (3.4 -&amp;gt; 3.5) and Subversion (1.5 -&amp;gt; 1.6).
+I never check out my sandbox directly from within Eclipse: I do that from the command line.</description>
+    </item>
+    
+    <item>
+      <title>VMware keyboard mapping issues (Alt Gr) solved</title>
+      <link>https://draptik.github.io/posts/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/</link>
+      <pubDate>Tue, 28 Jul 2009 22:27:22 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/07/28/vmware-keyboard-mapping-issues-alt-gr-solved/</guid>
+      <description>If your VMWare keyboard mapping prevents you from using special keys such as Alt Gr, just add the following the your /etc/vmware/config:
+xkeymap.keycode.108 = 0x138 # Alt_R xkeymap.keycode.106 = 0x135 # KP_Divide xkeymap.</description>
+    </item>
+    
+    <item>
+      <title>Maven Error: generics are not supported in source 1.3</title>
+      <link>https://draptik.github.io/posts/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/</link>
+      <pubDate>Mon, 22 Jun 2009 19:57:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/22/maven-error-generics-are-not-supported-in-source-1-3/</guid>
+      <description>Just stumbled across this error while trying to compile a simple Java Maven project:
+Maven Error: generics are not supported in source 1.3
+It turns out that maven uses the Java compiler 1.</description>
+    </item>
+    
+    <item>
+      <title>Installing Adobe AIR and TweetDeck on Ubuntu 9.04</title>
+      <link>https://draptik.github.io/posts/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/</link>
+      <pubDate>Wed, 17 Jun 2009 20:39:05 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/17/installing-adobe-air-and-tweetdeck-on-ubuntu-9-04/</guid>
+      <description>This is a short manual on how to install Adobe AIR and Adobe AIR applications such as TweetDeck on Ubuntu 9.04 (This instruction should also work with most up-to-date Linux distributions).</description>
+    </item>
+    
+    <item>
+      <title>My HelloWorld script for Maven</title>
+      <link>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</link>
+      <pubDate>Mon, 15 Jun 2009 22:26:55 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</guid>
+      <description>I&#39;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
+    </item>
+    
+    <item>
+      <title>Maven-eclipse-plugin 2.6 might break wicket projects</title>
+      <link>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</link>
+      <pubDate>Sat, 13 Jun 2009 17:59:16 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</guid>
+      <description>Took me a while to find this, so I thought I&#39;ll post it: Maven&#39;s eclipse plugin version 2.6 does not work well with Wicket projects.
+The problem with version 2.6 is that the Maven&#39;s folder structure does not conform to Wicket&#39;s folder structure.</description>
+    </item>
+    
+    <item>
+      <title>New in Ubuntu 9.04: screen-profiles, the enhanced GNU screen</title>
+      <link>https://draptik.github.io/posts/2009/06/05/new-in-ubuntu-9-04-screen-profiles-the-enhanced-gnu-screen/</link>
+      <pubDate>Fri, 05 Jun 2009 00:09:15 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/06/05/new-in-ubuntu-9-04-screen-profiles-the-enhanced-gnu-screen/</guid>
+      <description>My recent discovery: Ubuntu 9.04 comes with screen-profiles, a command-line &amp;ldquo;GUI&amp;rdquo; enhancement based on curses. If you have been using GNU-Screen for a while, but have always been too lazy to configure the display (or any other part of the program), you might enjoy this tool.</description>
+    </item>
+    
+    <item>
+      <title>Porting phone book from Nokia 6230i to Samsung S7220</title>
+      <link>https://draptik.github.io/posts/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/</link>
+      <pubDate>Sat, 30 May 2009 03:04:17 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/</guid>
+      <description>There must be a smarter way to do this&amp;hellip; But I&#39;ll describe my combersome way anyway. It depends on having windows somewhere.
+Old phone: Nokia 6230i
+New phone: Samsung S7220</description>
+    </item>
+    
+    <item>
+      <title>NAS-Box SS4000-E ignores partition table of plugged-in external harddrive</title>
+      <link>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</link>
+      <pubDate>Tue, 26 May 2009 23:54:45 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</guid>
+      <description>Intel&#39;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
+    </item>
+    
+    <item>
+      <title>Problem upgrading VMware Tools (because of JIT-Debugger) solved</title>
+      <link>https://draptik.github.io/posts/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/</link>
+      <pubDate>Tue, 26 May 2009 20:50:47 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/problem-upgrading-vmware-tools-because-of-jit-debugger-solved/</guid>
+      <description>After resurrecting an old VMware installation (I started with the first freely available version of VMware.. version 1) and upgrading successfully (see this post), I was not able to update Vmware Tools within my guest OS (Windows XP SP3).</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 9.04 with VMware-server-2.0.1-156745</title>
+      <link>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</link>
+      <pubDate>Tue, 26 May 2009 20:20:42 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</guid>
+      <description>I have used VMware for some years. There are many alternatives. I won&#39;t get into that ;-)
+I always download the tar.gz file from VMware directly.
+After unpacking the file and running the install script I encountered the problem vsock (German UbuntuWiki page).</description>
+    </item>
+    
+    <item>
+      <title>Maven2 Heap Overflow in JUnit test cases: Howto increase memory</title>
+      <link>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</link>
+      <pubDate>Fri, 22 May 2009 18:47:51 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</guid>
+      <description>For the past few days I was wondering why Maven&#39;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
+    </item>
+    
+    <item>
+      <title>Creating and applying a patch file</title>
+      <link>https://draptik.github.io/posts/2009/05/21/creating-and-applying-a-patch-file/</link>
+      <pubDate>Thu, 21 May 2009 03:00:26 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/05/21/creating-and-applying-a-patch-file/</guid>
+      <description>This is a simple example shell script demonstrating how to apply a patch file.
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&amp;#39;t have a directory by ## this name DEMODIR=&amp;#34;$HOME/tmp/diff-patch-demo-draptik&amp;#34; ORIGDIR=&amp;#34;$DEMODIR/original-stuff&amp;#34; APPLYDIR=&amp;#34;$DEMODIR/patch-usage&amp;#34; # ## Cleanup before use rm -rf &amp;#34;$DEMODIR&amp;#34; mkdir &amp;#34;$DEMODIR&amp;#34; cd &amp;#34;$DEMODIR&amp;#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&amp;#34;mycode.</description>
+    </item>
+    
+    <item>
+      <title>From 8.04 LTS to Jaunty Jackalone (Ubuntu 9.04): Software</title>
+      <link>https://draptik.github.io/posts/2009/04/28/from-804-lts-to-jaunty-jackalone-ubuntu-904/</link>
+      <pubDate>Tue, 28 Apr 2009 22:26:03 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/28/from-804-lts-to-jaunty-jackalone-ubuntu-904/</guid>
+      <description>The upgrade from the Ubuntu 8.04 LTS version to 9.04 (codename &amp;ldquo;Jaunty Jackalone&amp;rdquo; = JJ) was very smooth. It did NOT screw up the X-Server, SMB, Cups, NFS, SSH, USB, etc.</description>
+    </item>
+    
+    <item>
+      <title>Accessing further (Windows) Partitions with Portable Ubuntu</title>
+      <link>https://draptik.github.io/posts/2009/04/19/accessing-further-windows-partitions-with-portable-ubuntu/</link>
+      <pubDate>Sun, 19 Apr 2009 03:15:45 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/19/accessing-further-windows-partitions-with-portable-ubuntu/</guid>
+      <description>If you&#39;ve followed my blog on how to install Portable Ubuntu to your USB Stick, you might have noticed people asking &amp;ldquo;how do I access my other Windows partitions by default&amp;rdquo; or &amp;ldquo;How do I access partition X?</description>
+    </item>
+    
+    <item>
+      <title>First experiences with Portable Ubuntu and Upgrading from 8.04 to 8.10</title>
+      <link>https://draptik.github.io/posts/2009/04/13/first-experiences-with-portable-ubuntu-and-upgrading-from-804-to-810/</link>
+      <pubDate>Mon, 13 Apr 2009 07:56:08 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/13/first-experiences-with-portable-ubuntu-and-upgrading-from-804-to-810/</guid>
+      <description>There is a new thing called &amp;ldquo;Portable Ubuntu&amp;rdquo;. Get it here:
+http://portableubuntu.demonccc.com.ar/
+It&#39;s about 450MB download and its default size after unpacking is about 2GB.
+It promises to be a Linux installation which runs side by side with your MS-Windows desktop.</description>
+    </item>
+    
+    <item>
+      <title>Hiking routes in the &#34;Fränkische Schweiz&#34;</title>
+      <link>https://draptik.github.io/posts/2009/04/11/hiking-routes-in-the-frankische-schweiz/</link>
+      <pubDate>Sat, 11 Apr 2009 12:14:25 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/11/hiking-routes-in-the-frankische-schweiz/</guid>
+      <description>A collection of hiking routes in the Fränkische Schweiz&amp;hellip;
+  http://www.naturerlebnis-fs.de/Tipps/wandern.html
+  http://fraenkische-schweiz.bayern-online.de/die-region/aktiv/sport/wandern-wanderwege/
+  http://www.fraenkische-schweiz.com/sport/wandern.html
+  </description>
+    </item>
+    
+    <item>
+      <title>Pidgin, the multi-plattform, multi-protocol instant messenger</title>
+      <link>https://draptik.github.io/posts/2009/04/09/pidgin-the-multi-plattform-multi-protocol-instant-messenger/</link>
+      <pubDate>Thu, 09 Apr 2009 14:23:41 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/09/pidgin-the-multi-plattform-multi-protocol-instant-messenger/</guid>
+      <description>Pidgin is one of the many multi-protocol instant messengers. And its available for many plattforms (Windows, GNU/Linux, Mac OS X, etc). Although pidgin supports many protocols out-of-the-box (f. ex. ICQ, AIM, IRC, XMPP/Jabber, Groupwise), new plugins are constantly emerging.</description>
+    </item>
+    
+    <item>
+      <title>Fixing Cygwin&#39;s GNU Screen program</title>
+      <link>https://draptik.github.io/posts/2009/04/09/fixing-cygwins-gnu-screen-program/</link>
+      <pubDate>Thu, 09 Apr 2009 12:57:47 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2009/04/09/fixing-cygwins-gnu-screen-program/</guid>
+      <description>After years of ignorance I discovered the wonderful GNU screen program on my GNU/Linux system. Basically screen is a window manager for terminals or terminal sessions. But after installing the Cygwin package on my Windows box I ended up with this error message after trying to invoke screen:</description>
+    </item>
+    
+  </channel>
+</rss>
