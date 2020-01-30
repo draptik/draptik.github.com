@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -22,12 +22,12 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Guice in Java Web Application"/>
-<meta name="twitter:description" content="Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+<meta name="twitter:description" content="Google&rsquo;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
 Advantages compared to Spring:
  Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code."/>
 
 <meta property="og:title" content="Guice in Java Web Application" />
-<meta property="og:description" content="Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+<meta property="og:description" content="Google&rsquo;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
 Advantages compared to Spring:
  Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code." />
 <meta property="og:type" content="article" />
@@ -209,14 +209,14 @@ Advantages compared to Spring:
   
   
   <div class="post">
-    <p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google's Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
+    <p><a href="http://en.wikipedia.org/wiki/Google_Guice">Google&rsquo;s Guice framework</a> promises to be a lightweight(!) <a href="http://en.wikipedia.org/wiki/Inversion_of_control">Inversion-of-Control</a> (IoC) container.</p>
 <p>Advantages compared to <a href="http://en.wikipedia.org/wiki/Spring_Framework">Spring</a>:</p>
 <ul>
 <li>Spring is much more than an IoC container, and therefore overkill for many projects.</li>
 <li>Configuration by code. <em>NO XML</em>.</li>
 </ul>
 <p>Based on my <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">previous post showing how to use AngularJS with a Java RESTful backend</a> I extended the simple demo application to use Guice.</p>
-<p>Let's say we have a <code>UserServiceImpl</code> class which depends on a <code>UserFactory</code> interface. The <code>UserFactory</code> interface is injected into the constructor of the <code>UserServiceImpl</code> class.</p>
+<p>Let&rsquo;s say we have a <code>UserServiceImpl</code> class which depends on a <code>UserFactory</code> interface. The <code>UserFactory</code> interface is injected into the constructor of the <code>UserServiceImpl</code> class.</p>
 <p>The only thing we have to do is add the <code>@Inject</code> annotation to the constructor so that Guice can do its job.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> ngdemo.service.impl<span style="color:#f92672">;</span>
 

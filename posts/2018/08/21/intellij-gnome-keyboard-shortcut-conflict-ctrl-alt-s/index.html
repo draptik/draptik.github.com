@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -224,12 +224,12 @@
   
   <div class="post">
     <p>I am currenty experimenting with <a href="https://www.jetbrains.com/rider/">Jetbrains Rider</a> under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts. Even though Jetbrains&rsquo; IDEs come with a keyboard setting named <code>Default for GNOME</code>&hellip;</p>
-<p>Starting with the most obvious: I was not able to open Rider's settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
+<p>Starting with the most obvious: I was not able to open Rider&rsquo;s settings using the keyboard shortcut <code>Ctrl Alt s</code>.</p>
 <h2 id="ctrl-alt-s"><code>Ctrl Alt s</code></h2>
 <p>This command opens the settings in most IntelliJ products (File -&gt; Settings).</p>
-<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don't need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was already in use. The question being: by which application?</p>
+<p>Pressing <code>Crtl Alt s</code> &ldquo;rolled up the window&rdquo;: The current window was minimized to the title bar (an effect I have never seen before and don&rsquo;t need). Double clicking the window title bar expanded the window again. So obviously the keyboard shortcut was already in use. The question being: by which application?</p>
 <p>Gnome settings did not reveal any conflicting bindings in the keyboard section!</p>
-<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don't know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome's default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
+<p>After some searching the gnome extension <code>screenshot-window-sizer</code> turned out being the culprit. I don&rsquo;t know if I installed this extension on purpose or if it was installed as a dependency by some other package or if belongs to gnome&rsquo;s default. The following solution keeps the extension installed: Only the keyboard shortcut is disabled.</p>
 <p>Full name of the extension:</p>
 <p><code>org.gnome.shell.extensions.screenshot-window-sizer</code></p>
 <p>Here is a short summary how to figure out if your environment is affected by this extension:</p>

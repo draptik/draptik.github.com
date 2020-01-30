@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -221,7 +221,7 @@ That answers the first question: Mono gives me C# and the ." />
 <p>I also published a small demo application for gtk# and treeview: <a href="https://github.com/draptik/GtkSharpTreeViewDemo">https://github.com/draptik/GtkSharpTreeViewDemo</a></p>
 <h2 id="impressions">Impressions</h2>
 <h5 id="monodevelop-vs-visual-studio">Monodevelop vs Visual Studio</h5>
-<p>I'll keep it brief: If you're used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
+<p>I&rsquo;ll keep it brief: If you&rsquo;re used to Visual Studio and ReSharper, Monodevelop does not come close. On the other hand Monodevelop is a full C# IDE which works with linux. And Monodevelop can be used cross-plattform.</p>
 <h5 id="gtk-api">Gtk# API</h5>
 <p>The Gtk# API is not your typical .NET library. You will very soon notice that the origins are C/C++. This takes some getting used to if you have a .NET background.</p>
 <p>Typically there are no return values. Instead Gtk# methods very often use the &ldquo;out&rdquo; keyword in .NET because that comes closer to the C++ implementation using pointers.</p>
@@ -234,7 +234,7 @@ That answers the first question: Mono gives me C# and the ." />
 }
 <span style="color:#66d9ef">return</span> someBool;
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c#" data-lang="c#"><span style="color:#66d9ef">return</span> listStore.ToList().Any(s =&gt; s.MyBoolProp);
-</code></pre></div><p>From the .NET side, I don't like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;-)</p>
+</code></pre></div><p>From the .NET side, I don&rsquo;t like the Gtk# API. I prefer methods having return values. I guess it is a matter of tast. If it would really bother me, I would write some wrappers around&hellip; ;-)</p>
 
   </div>
   

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -249,7 +249,7 @@ alias emacs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;
 <p>Starting the Emacs client from a new shell: <code>$ emacsclient deleteme-from-shell.txt</code></p>
 </li>
 </ol>
-<p>This will open the file &ldquo;deleteme-from-shell.txt&rdquo; in your running Emacs session. Cool, isn't it?</p>
+<p>This will open the file &ldquo;deleteme-from-shell.txt&rdquo; in your running Emacs session. Cool, isn&rsquo;t it?</p>
 <p><strong>IMPORTANT:</strong> To close the attached Emacs client without killing the Emacs server you have to use &ldquo;C-x #&rdquo; instead of &ldquo;C-x C-c&rdquo;!</p>
 <ol start="6">
 <li>Starting the Emacs client from a new shell AND opening a new Emacs frame:Same as step 5, but use &ldquo;-c&rdquo;: <code>$ emacsclient -c deleteme-from-shell.txt</code></li>
@@ -266,21 +266,21 @@ alias emacs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;
 <p>Switch back to your graphical display: Ctrl+Alt+F7</p>
 <ol start="8">
 <li>
-<p>The only drawback so far is that we had to start the Emacs server manually from within an Emacs session using &ldquo;M-x server-start&rdquo;. Otherwise &ldquo;emacsclient&rdquo; will complain that it has no server to attach to. So let's include this feature in our Emacs init file (~/.emacs). Add this to your init file: <code>(server-start)</code></p>
+<p>The only drawback so far is that we had to start the Emacs server manually from within an Emacs session using &ldquo;M-x server-start&rdquo;. Otherwise &ldquo;emacsclient&rdquo; will complain that it has no server to attach to. So let&rsquo;s include this feature in our Emacs init file (~/.emacs). Add this to your init file: <code>(server-start)</code></p>
 </li>
 <li>
-<p>The previous step still requires us to start Emacs before we can invoke emacsclient. Let's tell our default shell (ie Bash) to use &ldquo;emacsclient&rdquo; as default. If that doesn't work, our shell should use &ldquo;emacs&rdquo;. Add the following the your ~/.bashrc: <code>export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient</code></p>
+<p>The previous step still requires us to start Emacs before we can invoke emacsclient. Let&rsquo;s tell our default shell (ie Bash) to use &ldquo;emacsclient&rdquo; as default. If that doesn&rsquo;t work, our shell should use &ldquo;emacs&rdquo;. Add the following the your ~/.bashrc: <code>export ALTERNATE_EDITOR=emacs EDITOR=emacsclient VISUAL=emacsclient</code></p>
 </li>
 <li>
 <p>I prefer to to only use a single command, &ldquo;emacs&rdquo;, and &ldquo;the computer&rdquo; should figure out
-IF an Emacs server is running (then I'll use &ldquo;emacsclient&rdquo; to attach to a running Emacs server)</p>
+IF an Emacs server is running (then I&rsquo;ll use &ldquo;emacsclient&rdquo; to attach to a running Emacs server)</p>
 </li>
 </ol>
 <p>OR if I have to start a new Emacs session (which, in turn, starts an Emacs server).</p>
 <p>You can always use the command <code>emacs</code> instead of <code>emacsclient -c</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">alias emacs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;emacsclient -c&#39;</span>
 </code></pre></div><ol start="11">
-<li>Sugar: To be sure to have an Emacs server running, we can add the Emacs daemon to our system startup options. How to add scripts to your startup options differs strongly between different Linux systems. Here's how I did it (using Gnome):&ldquo;System&rdquo; -&gt; &ldquo;Einstellungen&rdquo; -&gt; &ldquo;Startprogramme&rdquo;(in English this should correspond to something like &ldquo;System&rdquo; -&gt; &ldquo;Settings&rdquo; -&gt; &ldquo;Start programs&rdquo;)I added a new entry with the following content: <code>/path/to/your/emacs --daemon</code></li>
+<li>Sugar: To be sure to have an Emacs server running, we can add the Emacs daemon to our system startup options. How to add scripts to your startup options differs strongly between different Linux systems. Here&rsquo;s how I did it (using Gnome):&ldquo;System&rdquo; -&gt; &ldquo;Einstellungen&rdquo; -&gt; &ldquo;Startprogramme&rdquo;(in English this should correspond to something like &ldquo;System&rdquo; -&gt; &ldquo;Settings&rdquo; -&gt; &ldquo;Start programs&rdquo;)I added a new entry with the following content: <code>/path/to/your/emacs --daemon</code></li>
 </ol>
 <p>ie:</p>
 <p><code>/usr/bin/emacs --daemon</code></p>

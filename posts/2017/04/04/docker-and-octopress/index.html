@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -215,7 +215,7 @@ Octopress requires some old libs: Ruby 1.9.3, Python 2.7, and nodejs.</p>
 <ul>
 <li>configure the machine to use specific versions of Ruby, Python and NodeJs. Works.
 <ul>
-<li>Drawback: Other projects using different versions of Ruby, Python, NodeJs won't work out of the box.</li>
+<li>Drawback: Other projects using different versions of Ruby, Python, NodeJs won&rsquo;t work out of the box.</li>
 </ul>
 </li>
 <li>use version managers for Ruby, Python and NodeJs (f.ex. <a href="https://rvm.io/"><code>rvm</code></a>, <a href="http://fgimian.github.io/blog/2012/12/08/setting-up-virtual-development-environments-for-python/"><code>virtualenv</code></a>, <a href="https://github.com/creationix/nvm"><code>nvm</code></a>). Works.
@@ -267,7 +267,7 @@ Octopress requires some old libs: Ruby 1.9.3, Python 2.7, and nodejs.</p>
 <li><code>build-image.sh</code> files invoke the <code>Dockerfile</code>.</li>
 </ul>
 <h2 id="docker-00-base-image">Docker 00: base image</h2>
-<p>Since I couldn't find a simple Ruby image of 1.9.3 at docker hub I decided to create my own.</p>
+<p>Since I couldn&rsquo;t find a simple Ruby image of 1.9.3 at docker hub I decided to create my own.</p>
 <p>Knowing my use-case (Octopress), I also installed Python2.7 and NodeJs for my <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs/">base docker image</a>. This image is the only one that takes quite some time to build.</p>
 <h3 id="dockerfile">Dockerfile</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">FROM debian:jessie
@@ -359,11 +359,11 @@ debian              jessie              e5599115b6a6        <span style="color:#
 <p>Be aware, though:</p>
 <ul>
 <li>The volume will be owned by the container</li>
-<li>The container's default user is root (UID/GID 1)!</li>
+<li>The container&rsquo;s default user is root (UID/GID 1)!</li>
 <li>The container will change the UID/GID on the host system!</li>
 </ul>
 <h3 id="my-workaround">My workaround</h3>
-<p>I found this <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post by Deni Bertovic</a>. In short, the post proposes to use docker's <code>ENTRYPOINT</code> to pipe all <code>RUN</code> commands through the <code>ENTRYPOINT</code>. Which in turn is a bash script (<code>entrypoint.sh</code>, see below), creating a new user, and executing all docker commands as user. This is where I start walking on very thin ice&hellip; Nevertheless, I created another <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs-user/">docker image</a> based on the base image from the previous step.</p>
+<p>I found this <a href="https://denibertovic.com/posts/handling-permissions-with-docker-volumes/">post by Deni Bertovic</a>. In short, the post proposes to use docker&rsquo;s <code>ENTRYPOINT</code> to pipe all <code>RUN</code> commands through the <code>ENTRYPOINT</code>. Which in turn is a bash script (<code>entrypoint.sh</code>, see below), creating a new user, and executing all docker commands as user. This is where I start walking on very thin ice&hellip; Nevertheless, I created another <a href="https://hub.docker.com/r/draptik/ruby1.9.3-python2.7-nodejs-user/">docker image</a> based on the base image from the previous step.</p>
 <h3 id="dockerfile-1">Dockerfile</h3>
 <p>Make sure to replace <code>draptik</code> in the <code>FROM</code> string&hellip;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">FROM draptik/ruby1.9.3-python2.7-nodejs:0.1
@@ -441,7 +441,7 @@ WORKDIR /octopress
 <ul>
 <li><code>--rm</code> ensures that the docker container is removed once exited</li>
 <li><code>-it</code> runs an interactive terminal as soon as the container starts</li>
-<li><code>-e LOCAL_USER...</code> sets the host user's ID within the docker container</li>
+<li><code>-e LOCAL_USER...</code> sets the host user&rsquo;s ID within the docker container</li>
 <li><code>-p ...</code> maps the port numbers</li>
 <li><code>-v ${PWD}/../share/octopress:/octopress</code> mounts the blog volume</li>
 <li><code>-v ${PWD}/post-install.sh:/home/user/post-install.sh</code> mounts the post install script</li>

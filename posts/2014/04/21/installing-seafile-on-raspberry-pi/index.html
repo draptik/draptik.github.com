@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -22,10 +22,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Installing Seafile on Raspberry Pi"/>
-<meta name="twitter:description" content="With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi."/>
+<meta name="twitter:description" content="With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi."/>
 
 <meta property="og:title" content="Installing Seafile on Raspberry Pi" />
-<meta property="og:description" content="With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi." />
+<meta property="og:description" content="With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/" />
 <meta property="article:published_time" content="2014-04-21T00:23:00+00:00" />
@@ -205,13 +205,13 @@
   
   
   <div class="post">
-    <p>With all the security issues in the past relating to privacy I've been wanting to install a private cloud service similar to <a href="http://www.dropbox.com">Dropbox</a> for some time now. So, here's a post on how to install Seafile on the Raspberry Pi.</p>
+    <p>With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to <a href="http://www.dropbox.com">Dropbox</a> for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi.</p>
 <p>I choose <a href="http://seafile.com/en/home/">Seafile</a> over <a href="http://owncloud.org/">Owncloud</a> because I have read multiple posts that (1) Owncloud is not very responsive an a Raspberry Pi and (2) Seafile has a better security model (see <a href="http://blog.kovah.de/private-cloud-owncloud-alternativen-teil-2">1</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">2</a>, <a href="http://stevenhickson.blogspot.de/2013/04/cloud-storage-on-raspberry-pi.html">3</a>).</p>
 <p>Using a <a href="http://www.raspberrypi.org">Raspberry Pi</a> for the server seems like a good choice, because it has very low power consumption, so you can have it running 24/7. Furthermore, the Rasperry Pi can be setup with Debian GNU/Linux (f. ex. <a href="http://www.raspbian.org">Raspbian</a>) running in server mode. As Debian is a widely used Linux distribution, most problems can be easily solved by searching the web.</p>
-<p>Installing Seafile should be straightforward from following the instructions at the official <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">Seafile Wiki</a>. If you can read German, you can also follow the excellent instructions on Jan Karres's blog <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Raspberry Pi: Owncloud-Alternative Seafile Server installieren</a>.</p>
-<p>As there are some pitfalls along the way, I'll describe how I installed Seafile with SSL support.</p>
+<p>Installing Seafile should be straightforward from following the instructions at the official <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">Seafile Wiki</a>. If you can read German, you can also follow the excellent instructions on Jan Karres&rsquo;s blog <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Raspberry Pi: Owncloud-Alternative Seafile Server installieren</a>.</p>
+<p>As there are some pitfalls along the way, I&rsquo;ll describe how I installed Seafile with SSL support.</p>
 <h2 id="installation">Installation</h2>
-<p>Note: This is mainly a merge of <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Jan Karres's blog post (in German)</a> and the <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">official wiki documentation from Seafile</a>.</p>
+<p>Note: This is mainly a merge of <a href="http://jankarres.de/2013/06/raspberry-pi-owncloud-alternative-seafile-server-installieren/">Jan Karres&rsquo;s blog post (in German)</a> and the <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server">official wiki documentation from Seafile</a>.</p>
 <h3 id="demo-values">Demo values</h3>
 <pre><code>domain: no-ip.org
 sub-domain: mycloud
@@ -219,7 +219,7 @@ DDNS-domain: mycloud.no-ip.org
 internal server name: mycloud
 internal IP address of Raspberry Pi: 192.168.1.42
 </code></pre><h3 id="prerequisites">Prerequisites</h3>
-<p>I'll assume you have a working Raspian installation on a Raspberry Pi.</p>
+<p>I&rsquo;ll assume you have a working Raspian installation on a Raspberry Pi.</p>
 <p>If you want to reach your Seafile server from the internet and your ISP only provides you with a dynamic IP you will have to register with a <a href="http://en.wikipedia.org/wiki/Dynamic_DNS">DDNS</a> provider such as <a href="http://dyn.com/dns/">Dyn</a> or <a href="http://www.noip.com/">no-ip.com</a>.</p>
 <h3 id="step-0-update">Step 0 Update</h3>
 <p>Update Raspbian:</p>
@@ -228,14 +228,14 @@ internal IP address of Raspberry Pi: 192.168.1.42
 <p>Install dependencies required by Seafile:</p>
 <p><code>$ sudo aptitude -y install python2.7 python-setuptools python-simplejson python-imaging sqlite3</code></p>
 <h3 id="step-2-create-seafile-user">Step 2 Create seafile user</h3>
-<p>For security reasons we'll create a separate user for running Seafile. The user will be called <code>seafile</code> and will not require a password, since we will never be accessing this user directly through SSH.</p>
+<p>For security reasons we&rsquo;ll create a separate user for running Seafile. The user will be called <code>seafile</code> and will not require a password, since we will never be accessing this user directly through SSH.</p>
 <p><code>$ sudo adduser seafile --disabled-login</code> (CHANGE 2016-09-14 the parameter <code>--disable-password</code> was a typo: Thanks to Raphi111 for the pointer)</p>
 <p>Switch to being <code>seafile</code> user:</p>
 <p><code>$ sudo su seafile</code></p>
 <p>Change to <code>seafile</code>'s home directory:</p>
 <p><code>$ cd</code></p>
 <h3 id="step-3-download-and-unpack">Step 3 Download and unpack</h3>
-<p>First we'll create a new folder <code>mycloud</code> in the seafile user's home directory:</p>
+<p>First we&rsquo;ll create a new folder <code>mycloud</code> in the seafile user&rsquo;s home directory:</p>
 <p><code>$ mkdir mycloud &amp;&amp; cd mycloud</code></p>
 <p>Download and unpack Seafile Server for Raspberry Pi from <a href="http://www.seafile.com/en/download/">http://www.seafile.com/en/download/</a>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget https://bitbucket.org/haiwen/seafile/downloads/seafile-server_2.1.5_pi.tar.gz
@@ -264,8 +264,8 @@ New versions can be installed side by side without having to change the config f
 <h3 id="step-4-installation">Step 4 Installation</h3>
 <p><code>$ cd seafile-server-2.1.5</code></p>
 <p>Before you start the install process you can have a look at the options being configured during installation <a href="https://github.com/haiwen/seafile/wiki/Download-and-setup-seafile-server#SSetup">here</a>.</p>
-<p>For this example we'll assume your DDNS domain is <code>mycloud.no-ip.org</code> and that we'll use the default location for storing our data.
-Furthermore, we'll use <code>mycloud</code> as our server name.</p>
+<p>For this example we&rsquo;ll assume your DDNS domain is <code>mycloud.no-ip.org</code> and that we&rsquo;ll use the default location for storing our data.
+Furthermore, we&rsquo;ll use <code>mycloud</code> as our server name.</p>
 <p>During the installation of Seahub (the web frontend for the Seafile server) you must enter an admin email address and provide a password (this password is your Seafile admin password and should not be the same as your email account password).</p>
 <p>All other question can be answered by using the default values (press ENTER).</p>
 <p><code>./setup-seafile.sh</code></p>
@@ -315,7 +315,7 @@ Furthermore, we'll use <code>mycloud</code> as our server name.</p>
 </code></pre></div><h3 id="step-5-update-urls-for-seahub">Step 5 Update URLs for Seahub</h3>
 <p><code>nano /home/seafile/mycloud/ccnet/ccnet.conf</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">SERVICE_URL <span style="color:#f92672">=</span> https://mycloud.no-ip.org:8001
-</code></pre></div><p>Don't forget replacing <code>http</code> with <code>https</code>&hellip;</p>
+</code></pre></div><p>Don&rsquo;t forget replacing <code>http</code> with <code>https</code>&hellip;</p>
 <p>Also add a line to <code>seahub_settings.py</code>.</p>
 <p><code>nano /home/seafile/mycloud/seahub_settings.py</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">SECRET_KEY ...
@@ -382,26 +382,26 @@ sudo openssl x509 -req -days <span style="color:#ae81ff">3650</span> -in seahub.
 <h3 id="step-11-restart-nginx-as-admin">Step 11 Restart nginx (as admin)</h3>
 <p><code>sudo /etc/init.d/nginx restart</code></p>
 <h3 id="step-12-network-setup-port-forwarding">Step 12 Network: Setup port forwarding</h3>
-<p>Depending on your router, the naming might differ. Some routers call it &ldquo;port mapping&rdquo;, some call it &ldquo;port forwarding&rdquo;. For what we are doing, it's all the same.</p>
+<p>Depending on your router, the naming might differ. Some routers call it &ldquo;port mapping&rdquo;, some call it &ldquo;port forwarding&rdquo;. For what we are doing, it&rsquo;s all the same.</p>
 <p>My ISP provided me with a combined dsl-modem/router called &ldquo;Easybox 904 xDSL&rdquo;, so YMMV:</p>
 <p><img src="center" alt="img"></p>
 <h3 id="step-13-test-if-everything-works">Step 13 Test if everything works</h3>
 <h4 id="lan-test-using-ip-address">LAN test using IP address</h4>
 <p>Test if Seafile/Seahub is reachable from within your LAN using the <em>IP address</em> of your Raspberry Pi. Assuming the Raspberry Pi has the internal IP address 192.168.1.42, entering <code>https://192.168.1.42:8001</code> in your browser should render the Seahub page.</p>
-<p>If this fails, go back and confirm that you don't have any typos in your config files.</p>
+<p>If this fails, go back and confirm that you don&rsquo;t have any typos in your config files.</p>
 <h4 id="internet-test">Internet test</h4>
 <p>Test if Seafile/Seahub is reachable from the <em>internet</em>. You must use a device which is not connected to your LAN. If you have a smartphone, you can deactivate your WiFi, and try connecting to your newly setup server at <code>https://mycloud.no-ip.org:8001</code>. The Seahub page should be rendered correctly in your &lsquo;internet&rsquo; browser.</p>
-<p>If this fails, go back and confirm that you don't have any typos in your config files.</p>
+<p>If this fails, go back and confirm that you don&rsquo;t have any typos in your config files.</p>
 <h4 id="lan-test-using-ddns">LAN test using DDNS</h4>
 <p>Try connecting to Seafile/Seahub from within the LAN using the DDNS name: <code>https://mycloud.no-ip.org:8001</code>.</p>
 <p>If this works out of the box, you can skip the rest of this article.</p>
 <h3 id="step-14">Step 14</h3>
-<p>I should probably mention that I am not a trained network admin. So everything below falls under the category &ldquo;works for my setup, sorry I can't provide support&rdquo;.</p>
-<p>Here's an image of what has to be accomplished:</p>
+<p>I should probably mention that I am not a trained network admin. So everything below falls under the category &ldquo;works for my setup, sorry I can&rsquo;t provide support&rdquo;.</p>
+<p>Here&rsquo;s an image of what has to be accomplished:</p>
 <p><img src="center" alt="img"></p>
 <h3 id="step-14a-nat-loopback">Step 14a NAT loopback</h3>
 <p>If trying to reach the IP of your DDNS from within your LAN fails, you should try to setup your NAT loopback (see your router documentation for details).</p>
-<h3 id="step-14b-workaround-in-case-nat-loopback-doesnt-work">Step 14b Workaround, in case NAT loopback doesn't work</h3>
+<h3 id="step-14b-workaround-in-case-nat-loopback-doesnt-work">Step 14b Workaround, in case NAT loopback doesn&rsquo;t work</h3>
 <p>This is the tricky part. (Marko, thanks!)</p>
 <p><em>BEWARE: This works with my setup, but it might ruin your setup.</em></p>
 <ol>

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -23,12 +23,12 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)"/>
 <meta name="twitter:description" content="Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
-In this post I&#39;ll describe how to display the data.
+In this post I&rsquo;ll describe how to display the data.
 TL;DR  Download and unzip the source code from https://github."/>
 
 <meta property="og:title" content="Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)" />
 <meta property="og:description" content="Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
-In this post I&#39;ll describe how to display the data.
+In this post I&rsquo;ll describe how to display the data.
 TL;DR  Download and unzip the source code from https://github." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/" />
@@ -216,7 +216,7 @@ TL;DR  Download and unzip the source code from https://github." />
   
   <div class="post">
     <p><a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">Part 1</a> describes how to setup the hardware, <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">part 2</a> describes how to to record/persist the sensor information.</p>
-<p>In this post I'll describe how to display the data.</p>
+<p>In this post I&rsquo;ll describe how to display the data.</p>
 <h2 id="tldr">TL;DR</h2>
 <ul>
 <li>Download and unzip the source code from <a href="https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip">https://github.com/draptik/rpi-temperature-website/archive/v1.0.zip</a></li>
@@ -236,7 +236,7 @@ TL;DR  Download and unzip the source code from https://github." />
 <li>Which technology stack are you comfortable with? Which technology stack is supported on the server?</li>
 <li>Database interaction possible (this demo uses SQLite3)?</li>
 </ul>
-<p>If you know that you'll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
+<p>If you know that you&rsquo;ll have many requests I would discourage you from using the Raspberry Pi (RPi) as a web server.</p>
 <p>Otherwhise, the RPi is a good choice for a web server.</p>
 <p>Some of the technology stacks available on the RPi are:</p>
 <ul>
@@ -297,9 +297,9 @@ cd rpi*
 <p>Setting the URL for the REST service (in <code>app.js</code>):</p>
 <pre><code>var url = process.env.NODE_ENV === 'production' ? 'http://camel:3000' : 'http://localhost:3000';
 </code></pre><p>Within my LAN the RPi is named <code>camel</code>&hellip;</p>
-<p>And in case you're not familiar with the syntax</p>
+<p>And in case you&rsquo;re not familiar with the syntax</p>
 <pre><code>var result = someCondition ? 'string1' : 'string2';
-</code></pre><p>It's just a shorthand for</p>
+</code></pre><p>It&rsquo;s just a shorthand for</p>
 <pre><code>var result;
 if (someCondition) {
   result = 'string1';
@@ -310,12 +310,12 @@ if (someCondition) {
 <p>Setting the database location (in <code>app_api/models/db.js</code>):</p>
 <pre><code>var dbLocation = process.env.NODE_ENV === 'production' ? '/var/www/templog.db' : 'sample_data/templog.db';
 </code></pre><h3 id="usage">Usage</h3>
-<p>Once you've configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
+<p>Once you&rsquo;ve configured the LAN URL and the database location, you can set the environment variable <code>NODE_ENV</code> to <code>production</code> and start the application:</p>
 <pre><code>export NODE_ENV=production
 npm start
 </code></pre><h3 id="customizing">Customizing</h3>
 <p>You will probably want to customize the UI, as my design skills are limited at best. ;-)</p>
-<p>Here's an overview of the project, so you know where to change things:</p>
+<p>Here&rsquo;s an overview of the project, so you know where to change things:</p>
 <pre><code>├── app_api                     //  REST API
 │   ├── controllers
 │   │   └── temperatures.js
@@ -355,7 +355,7 @@ npm start
 │       └── custom              //  ...other 3rd party libraries
 ├── sample_data                 //  sample data
 │   └── templog.db              //  sqlite3 sample data set
-</code></pre><p>That's it. Have fun!</p>
+</code></pre><p>That&rsquo;s it. Have fun!</p>
 
   </div>
   

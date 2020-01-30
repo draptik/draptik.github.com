@@ -57,7 +57,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
       
       <guid>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</guid>
       <description>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
-Prerequisite: .NET Core with Linux I won&#39;t go into setting up .</description>
+Prerequisite: .NET Core with Linux I won&amp;rsquo;t go into setting up .</description>
     </item>
     
     <item>
@@ -78,7 +78,7 @@ I have been watching the docker space for a while and finally found a private us
       <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
       <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
  autocd autojump  Neither of these features is new.
-autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+autocd autocd is very simple: It&amp;rsquo;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
     </item>
     
     <item>
@@ -96,7 +96,7 @@ autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd
       <pubDate>Mon, 20 Aug 2012 21:31:20 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</guid>
-      <description>Here&#39;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
+      <description>Here&amp;rsquo;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
     </item>
     
     <item>
@@ -115,7 +115,7 @@ autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd
       <pubDate>Wed, 25 May 2011 20:35:29 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</guid>
-      <description>The current version of Oracle&#39;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
+      <description>The current version of Oracle&amp;rsquo;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
     </item>
     
     <item>
@@ -124,7 +124,7 @@ autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd
       <pubDate>Mon, 09 May 2011 19:55:56 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</guid>
-      <description>To add applications like Truecrypt to Ubuntu&#39;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
+      <description>To add applications like Truecrypt to Ubuntu&amp;rsquo;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
   Install dconf-editor (ie sudo aptitude install dconf-editor)
   Go to section desktop | unity | panel and add &amp;lsquo;Truecrypt&amp;rsquo; to the systray-whitelist variable</description>
     </item>
@@ -230,7 +230,7 @@ It turns out that maven uses the Java compiler 1.</description>
       <pubDate>Tue, 26 May 2009 23:54:45 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</guid>
-      <description>Intel&#39;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
+      <description>Intel&amp;rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
     </item>
     
     <item>
@@ -248,7 +248,7 @@ It turns out that maven uses the Java compiler 1.</description>
       <pubDate>Tue, 26 May 2009 20:20:42 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</guid>
-      <description>I have used VMware for some years. There are many alternatives. I won&#39;t get into that ;-)
+      <description>I have used VMware for some years. There are many alternatives. I won&amp;rsquo;t get into that ;-)
 I always download the tar.gz file from VMware directly.
 After unpacking the file and running the install script I encountered the problem vsock (German UbuntuWiki page).</description>
     </item>

@@ -29,7 +29,7 @@
       
       <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
       <description>JavaScript stuff:
- Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&amp;rsquo;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@
       
       <guid>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</guid>
       <description>TL;DR My AngularJS demo app has a new backend implementation using node.js.
-&amp;hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+&amp;hellip; After some reading I decided I&amp;rsquo;ll stick with node&amp;rsquo;s express module.
 OK. Here is a &amp;lsquo;minimal&amp;rsquo; setup for a node.</description>
     </item>
     

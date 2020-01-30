@@ -624,20 +624,20 @@
     </item>
     
     <item>
-      <title> link-collection</title>
-      <link>https://draptik.github.io/categories/link-collection/</link>
-      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/link-collection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>fun</title>
       <link>https://draptik.github.io/categories/fun/</link>
       <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
       
       <guid>https://draptik.github.io/categories/fun/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>link-collection</title>
+      <link>https://draptik.github.io/categories/link-collection/</link>
+      <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/link-collection/</guid>
       <description></description>
     </item>
     

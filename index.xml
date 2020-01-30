@@ -17,7 +17,7 @@
       <pubDate>Sun, 05 Jan 2020 18:05:29 +0100</pubDate>
       
       <guid>https://draptik.github.io/posts/2020/01/05/blog-update-to-hugo/</guid>
-      <description>I&#39;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&#39;t been updated in a while, so I switched to Hugo.
+      <description>I&amp;rsquo;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&amp;rsquo;t been updated in a while, so I switched to Hugo.
 Old links should still work.</description>
     </item>
     
@@ -56,7 +56,7 @@ First off all: It is great that we can use .</description>
       <pubDate>Thu, 15 Mar 2018 22:04:36 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2018/03/15/that-moment/</guid>
-      <description>Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers pitched in! It was over lunch. We don&#39;t talk about TDD everyday while eating.</description>
+      <description>Today I witnessed a C++ developer explaining the essence of Test-Driven Development (TDD) to a Haskell developer. And a bunch of other developers pitched in! It was over lunch. We don&amp;rsquo;t talk about TDD everyday while eating.</description>
     </item>
     
     <item>
@@ -65,7 +65,7 @@ First off all: It is great that we can use .</description>
       <pubDate>Tue, 20 Feb 2018 18:13:10 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2018/02/20/visual-studios-default-path-for-new-projects/</guid>
-      <description>Today I took the time to fix something very simple: Visual Studio&#39;s default path.
+      <description>Today I took the time to fix something very simple: Visual Studio&amp;rsquo;s default path.
 In the past decade there has never been a single project I wanted to save to:</description>
     </item>
     
@@ -86,7 +86,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
       
       <guid>https://draptik.github.io/posts/2018/02/05/fsharp-setup-linux-fizzbuzz/</guid>
       <description>One of the first things I always struggle with when learning new languages is the environment. Here is a simple setup for playing with F# and Linux.
-Prerequisite: .NET Core with Linux I won&#39;t go into setting up .</description>
+Prerequisite: .NET Core with Linux I won&amp;rsquo;t go into setting up .</description>
     </item>
     
     <item>
@@ -105,7 +105,7 @@ I have been watching the docker space for a while and finally found a private us
       <pubDate>Thu, 30 Mar 2017 17:01:33 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2017/03/30/learning/</guid>
-      <description>In my day job I&#39;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.</description>
+      <description>In my day job I&amp;rsquo;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.</description>
     </item>
     
     <item>
@@ -125,7 +125,7 @@ I have been watching the docker space for a while and finally found a private us
       <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
       <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
  autocd autojump  Neither of these features is new.
-autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+autocd autocd is very simple: It&amp;rsquo;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
     </item>
     
     <item>
@@ -146,7 +146,7 @@ namespace Demo { public class Customer { public string FirstName { get; set; } p
       
       <guid>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</guid>
       <description>Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
-In this post I&#39;ll describe how to display the data.
+In this post I&amp;rsquo;ll describe how to display the data.
 TL;DR  Download and unzip the source code from https://github.</description>
     </item>
     
@@ -165,7 +165,7 @@ TL;DR  Download and unzip the source code from https://github.</description>
       <pubDate>Fri, 10 Jul 2015 00:11:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</guid>
-      <description>Since I&#39;m a software developer, I&#39;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
+      <description>Since I&amp;rsquo;m a software developer, I&amp;rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
     </item>
     
     <item>
@@ -185,10 +185,10 @@ TL;DR  Download and unzip the source code from https://github.</description>
       <pubDate>Mon, 21 Apr 2014 03:24:32 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2014/04/21/link-collection-number-4/</guid>
-      <description>I&#39;m a bit behind on this section, I know. Here&#39;s the first batch:
+      <description>I&amp;rsquo;m a bit behind on this section, I know. Here&amp;rsquo;s the first batch:
 currently reading:
  Growing Object-Oriented Software, Guided by Tests Implementing Domain-Driven Design  c# stuff:
- Mark Seemann&#39;s on Bastard Injection foreach vs ForEach  sql stuff:</description>
+ Mark Seemann&amp;rsquo;s on Bastard Injection foreach vs ForEach  sql stuff:</description>
     </item>
     
     <item>
@@ -197,7 +197,7 @@ currently reading:
       <pubDate>Mon, 21 Apr 2014 00:23:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2014/04/21/installing-seafile-on-raspberry-pi/</guid>
-      <description>With all the security issues in the past relating to privacy I&#39;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&#39;s a post on how to install Seafile on the Raspberry Pi.</description>
+      <description>With all the security issues in the past relating to privacy I&amp;rsquo;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&amp;rsquo;s a post on how to install Seafile on the Raspberry Pi.</description>
     </item>
     
     <item>
@@ -207,7 +207,7 @@ currently reading:
       
       <guid>https://draptik.github.io/posts/2014/01/03/link-collection-number-3/</guid>
       <description>JavaScript stuff:
- Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&#39;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&amp;rsquo;re in for using JavaScript for your complete stack, try MEAN: mean.</description>
     </item>
     
     <item>
@@ -217,7 +217,7 @@ currently reading:
       
       <guid>https://draptik.github.io/posts/2013/10/01/node-dot-js-backend-providing-rest/</guid>
       <description>TL;DR My AngularJS demo app has a new backend implementation using node.js.
-&amp;hellip; After some reading I decided I&#39;ll stick with node&#39;s express module.
+&amp;hellip; After some reading I decided I&amp;rsquo;ll stick with node&amp;rsquo;s express module.
 OK. Here is a &amp;lsquo;minimal&amp;rsquo; setup for a node.</description>
     </item>
     
@@ -275,7 +275,7 @@ A prerequisite for this demo is a working RESTful web service.</description>
       <pubDate>Thu, 18 Jul 2013 21:36:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</guid>
-      <description>Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+      <description>Google&amp;rsquo;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
 Advantages compared to Spring:
  Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code.</description>
     </item>
@@ -287,7 +287,7 @@ Advantages compared to Spring:
       
       <guid>https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/</guid>
       <description>AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
-Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
+Although I&amp;rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &amp;lsquo;Hello-World&amp;rsquo; example:</description>
     </item>
     
     <item>
@@ -307,7 +307,7 @@ pi@rpidev ~ $ export declare -x HOME=&amp;#34;/home/pi&amp;#34; declare -x JAVA_
       <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</guid>
-      <description>AjaxControlToolkit&#39;s ReorderList provides drag and drop functionality within a list.
+      <description>AjaxControlToolkit&amp;rsquo;s ReorderList provides drag and drop functionality within a list.
 &amp;lt;div class=&amp;#34;CssReorderList&amp;#34;&amp;gt; &amp;lt;!--ClientMode=&amp;#34;AutoID&amp;#34; is required for certain versions of AjaxControlToolkit --&amp;gt; &amp;lt;ajaxToolkit:ReorderList ID=&amp;#34;MyReorderList&amp;#34; runat=&amp;#34;server&amp;#34; DataKeyField=&amp;#34;MyId&amp;#34; SortOrderField=&amp;#34;MyPosition&amp;#34; PostBackOnReorder=&amp;#34;False&amp;#34; ClientIDMode=&amp;#34;AutoID&amp;#34; DragHandleAlignment=&amp;#34;Left&amp;#34; ItemInsertLocation=&amp;#34;Beginning&amp;#34; AllowReorder=&amp;#34;true&amp;#34; &amp;gt; &amp;lt;ItemTemplate&amp;gt; &amp;lt;div style=&amp;#34;background-color: yellow;&amp;#34; class=&amp;#34;CssItemArea&amp;#34;&amp;gt; &amp;lt;asp:HiddenField runat=&amp;#34;server&amp;#34; ID=&amp;#34;hdfMyId&amp;#34; Value=&amp;#34;&amp;lt;%# ((DummyViewModel)Container.</description>
     </item>
     
@@ -338,7 +338,7 @@ Once your done you can access the printer from any OS (windows, linux, mac) with
       <pubDate>Fri, 24 May 2013 21:27:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2013/05/24/mapping-missing-context-menu-in-openelec-with-remote-control-hama-mce/</guid>
-      <description>The IR remote control HAMA MCE works out of the box with XBMC. Except that XBMC&#39;s context menu is not mapped to any key.
+      <description>The IR remote control HAMA MCE works out of the box with XBMC. Except that XBMC&amp;rsquo;s context menu is not mapped to any key.
 An alternative solution to the one provided here is using your smart phone or tablet as a remote control with the excellent Yatse app.</description>
     </item>
     
@@ -349,7 +349,7 @@ An alternative solution to the one provided here is using your smart phone or ta
       
       <guid>https://draptik.github.io/posts/2013/05/24/pygments-and-python/</guid>
       <description>Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting.
-Currenty (2013-05-23) Pygments does not work flawlessly with Python3 (see this post and this issue on pygment&#39;s issue tracker).</description>
+Currenty (2013-05-23) Pygments does not work flawlessly with Python3 (see this post and this issue on pygment&amp;rsquo;s issue tracker).</description>
     </item>
     
     <item>
@@ -386,7 +386,7 @@ That answers the first question: Mono gives me C# and the .</description>
       <pubDate>Mon, 20 Aug 2012 21:31:20 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2012/08/20/ps1-prompt/</guid>
-      <description>Here&#39;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
+      <description>Here&amp;rsquo;s my current PS1 prompt for bash with optional git support: https://gist.github.com/3324534</description>
     </item>
     
     <item>
@@ -461,7 +461,7 @@ Example: Create a plain WPF application from Visual Studio 2010, add an App.Conf
       <pubDate>Sun, 17 Jul 2011 04:24:23 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</guid>
-      <description>If you&#39;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
+      <description>If you&amp;rsquo;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
 http://cx4a.org/software/auto-complete/
 and
 http://cx4a.org/software/rsense/
@@ -484,7 +484,7 @@ Debugging with active Antivir: appr. 5min for an empty Default.aspx page to disp
       <pubDate>Wed, 25 May 2011 20:35:29 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/</guid>
-      <description>The current version of Oracle&#39;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
+      <description>The current version of Oracle&amp;rsquo;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.</description>
     </item>
     
     <item>
@@ -493,7 +493,7 @@ Debugging with active Antivir: appr. 5min for an empty Default.aspx page to disp
       <pubDate>Mon, 09 May 2011 19:55:56 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/</guid>
-      <description>To add applications like Truecrypt to Ubuntu&#39;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
+      <description>To add applications like Truecrypt to Ubuntu&amp;rsquo;s Unity panel the application has to be &amp;ldquo;white listed&amp;rdquo;.
   Install dconf-editor (ie sudo aptitude install dconf-editor)
   Go to section desktop | unity | panel and add &amp;lsquo;Truecrypt&amp;rsquo; to the systray-whitelist variable</description>
     </item>
@@ -543,7 +543,7 @@ This solution should work for all Linux distributions supported by VirtualBox4.
       <pubDate>Wed, 08 Dec 2010 21:47:42 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</guid>
-      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&#39;s XML folder.
+      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&amp;rsquo;s XML folder.
 For example (NHibernate 2.0.1):
 Files to copy:
 ${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
@@ -568,7 +568,7 @@ The solution is simple, but has not been integrated in the Ubuntu repository yet
       <pubDate>Fri, 20 Aug 2010 00:08:36 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</guid>
-      <description>Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
+      <description>Since Microsoft&amp;rsquo;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
     </item>
     
     <item>
@@ -671,7 +671,7 @@ It turns out that maven uses the Java compiler 1.</description>
       <pubDate>Mon, 15 Jun 2009 22:26:55 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</guid>
-      <description>I&#39;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
+      <description>I&amp;rsquo;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
     </item>
     
     <item>
@@ -680,8 +680,8 @@ It turns out that maven uses the Java compiler 1.</description>
       <pubDate>Sat, 13 Jun 2009 17:59:16 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</guid>
-      <description>Took me a while to find this, so I thought I&#39;ll post it: Maven&#39;s eclipse plugin version 2.6 does not work well with Wicket projects.
-The problem with version 2.6 is that the Maven&#39;s folder structure does not conform to Wicket&#39;s folder structure.</description>
+      <description>Took me a while to find this, so I thought I&amp;rsquo;ll post it: Maven&amp;rsquo;s eclipse plugin version 2.6 does not work well with Wicket projects.
+The problem with version 2.6 is that the Maven&amp;rsquo;s folder structure does not conform to Wicket&amp;rsquo;s folder structure.</description>
     </item>
     
     <item>
@@ -699,7 +699,7 @@ The problem with version 2.6 is that the Maven&#39;s folder structure does not c
       <pubDate>Sat, 30 May 2009 03:04:17 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/30/porting-phone-book-from-nokia-6230i-to-samsung-s7220/</guid>
-      <description>There must be a smarter way to do this&amp;hellip; But I&#39;ll describe my combersome way anyway. It depends on having windows somewhere.
+      <description>There must be a smarter way to do this&amp;hellip; But I&amp;rsquo;ll describe my combersome way anyway. It depends on having windows somewhere.
 Old phone: Nokia 6230i
 New phone: Samsung S7220</description>
     </item>
@@ -710,7 +710,7 @@ New phone: Samsung S7220</description>
       <pubDate>Tue, 26 May 2009 23:54:45 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/26/nas-box-ss4000-e-ignores-partition-table-of-plugged-in-external-harddrive/</guid>
-      <description>Intel&#39;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
+      <description>Intel&amp;rsquo;s NAS Box SS 4000-e ignores the partition table of external usb-drives if the latter is connected directly to the NAS-Box. Not nice, because my external USB-Drive is split into two FAT32 partitions.</description>
     </item>
     
     <item>
@@ -728,7 +728,7 @@ New phone: Samsung S7220</description>
       <pubDate>Tue, 26 May 2009 20:20:42 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/26/ubuntu-9-04-with-vmware-server-2-0-1-156745/</guid>
-      <description>I have used VMware for some years. There are many alternatives. I won&#39;t get into that ;-)
+      <description>I have used VMware for some years. There are many alternatives. I won&amp;rsquo;t get into that ;-)
 I always download the tar.gz file from VMware directly.
 After unpacking the file and running the install script I encountered the problem vsock (German UbuntuWiki page).</description>
     </item>
@@ -739,7 +739,7 @@ After unpacking the file and running the install script I encountered the proble
       <pubDate>Fri, 22 May 2009 18:47:51 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</guid>
-      <description>For the past few days I was wondering why Maven&#39;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
+      <description>For the past few days I was wondering why Maven&amp;rsquo;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
     </item>
     
     <item>
@@ -767,7 +767,7 @@ After unpacking the file and running the install script I encountered the proble
       <pubDate>Sun, 19 Apr 2009 03:15:45 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/04/19/accessing-further-windows-partitions-with-portable-ubuntu/</guid>
-      <description>If you&#39;ve followed my blog on how to install Portable Ubuntu to your USB Stick, you might have noticed people asking &amp;ldquo;how do I access my other Windows partitions by default&amp;rdquo; or &amp;ldquo;How do I access partition X?</description>
+      <description>If you&amp;rsquo;ve followed my blog on how to install Portable Ubuntu to your USB Stick, you might have noticed people asking &amp;ldquo;how do I access my other Windows partitions by default&amp;rdquo; or &amp;ldquo;How do I access partition X?</description>
     </item>
     
     <item>
@@ -778,7 +778,7 @@ After unpacking the file and running the install script I encountered the proble
       <guid>https://draptik.github.io/posts/2009/04/13/first-experiences-with-portable-ubuntu-and-upgrading-from-804-to-810/</guid>
       <description>There is a new thing called &amp;ldquo;Portable Ubuntu&amp;rdquo;. Get it here:
 http://portableubuntu.demonccc.com.ar/
-It&#39;s about 450MB download and its default size after unpacking is about 2GB.
+It&amp;rsquo;s about 450MB download and its default size after unpacking is about 2GB.
 It promises to be a Linux installation which runs side by side with your MS-Windows desktop.</description>
     </item>
     
@@ -819,8 +819,8 @@ It promises to be a Linux installation which runs side by side with your MS-Wind
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/about/</guid>
-      <description>My name is Patrick Drechsler. I&#39;m a software developer.
-In the past I&#39;ve also spent some time in the field of biomechanics. If you&#39;re bored you can look at my thesis on how insects and frogs cling to surfaces.</description>
+      <description>My name is Patrick Drechsler. I&amp;rsquo;m a software developer.
+In the past I&amp;rsquo;ve also spent some time in the field of biomechanics. If you&amp;rsquo;re bored you can look at my thesis on how insects and frogs cling to surfaces.</description>
     </item>
     
     <item>
@@ -840,7 +840,7 @@ Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt.</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/talks/</guid>
-      <description>2020  Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with Martin Grotz)  Magdeburger Developer Days 2020, May 11-13 2020   Von C# zu F# - Einführung in die Funktionale Programmierung (1-day workshop with Martin Grotz)  Magdeburger Developer Days 2020, May 11-13 2020   Modern Linux Command Line Tools  Hackerkegeln @ DATEV, Jan.</description>
+      <description>2020  Von C# zu F# - Einführung in die Funktionale Programmierung (presentation with Martin Grotz)  Magdeburger Developer Days 2020, May 11-13 2020   Von C# zu F# - Einführung in die Funktionale Programmierung (1-day workshop with Martin Grotz)  Magdeburger Developer Days 2020, May 11-13 2020   Modern Linux Command Line Tools  MATHEMA Campus 2020, May 8 2020   Modern Linux Command Line Tools  Hackerkegeln @ DATEV, Jan.</description>
     </item>
     
   </channel>

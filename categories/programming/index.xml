@@ -17,7 +17,7 @@
       <pubDate>Thu, 30 May 2013 15:55:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</guid>
-      <description>AjaxControlToolkit&#39;s ReorderList provides drag and drop functionality within a list.
+      <description>AjaxControlToolkit&amp;rsquo;s ReorderList provides drag and drop functionality within a list.
 &amp;lt;div class=&amp;#34;CssReorderList&amp;#34;&amp;gt; &amp;lt;!--ClientMode=&amp;#34;AutoID&amp;#34; is required for certain versions of AjaxControlToolkit --&amp;gt; &amp;lt;ajaxToolkit:ReorderList ID=&amp;#34;MyReorderList&amp;#34; runat=&amp;#34;server&amp;#34; DataKeyField=&amp;#34;MyId&amp;#34; SortOrderField=&amp;#34;MyPosition&amp;#34; PostBackOnReorder=&amp;#34;False&amp;#34; ClientIDMode=&amp;#34;AutoID&amp;#34; DragHandleAlignment=&amp;#34;Left&amp;#34; ItemInsertLocation=&amp;#34;Beginning&amp;#34; AllowReorder=&amp;#34;true&amp;#34; &amp;gt; &amp;lt;ItemTemplate&amp;gt; &amp;lt;div style=&amp;#34;background-color: yellow;&amp;#34; class=&amp;#34;CssItemArea&amp;#34;&amp;gt; &amp;lt;asp:HiddenField runat=&amp;#34;server&amp;#34; ID=&amp;#34;hdfMyId&amp;#34; Value=&amp;#34;&amp;lt;%# ((DummyViewModel)Container.</description>
     </item>
     
@@ -102,7 +102,7 @@ Example: Create a plain WPF application from Visual Studio 2010, add an App.Conf
       <pubDate>Sun, 17 Jul 2011 04:24:23 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/</guid>
-      <description>If you&#39;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
+      <description>If you&amp;rsquo;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
 http://cx4a.org/software/auto-complete/
 and
 http://cx4a.org/software/rsense/
@@ -153,7 +153,7 @@ If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards
       <pubDate>Wed, 08 Dec 2010 21:47:42 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/</guid>
-      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&#39;s XML folder.
+      <description>Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&amp;rsquo;s XML folder.
 For example (NHibernate 2.0.1):
 Files to copy:
 ${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
@@ -166,7 +166,7 @@ Destination:</description>
       <pubDate>Fri, 20 Aug 2010 00:08:36 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/</guid>
-      <description>Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
+      <description>Since Microsoft&amp;rsquo;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:</description>
     </item>
     
     <item>
@@ -206,7 +206,7 @@ I never check out my sandbox directly from within Eclipse: I do that from the co
       <pubDate>Mon, 15 Jun 2009 22:26:55 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/06/15/my-helloworld-script-for-maven/</guid>
-      <description>I&#39;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
+      <description>I&amp;rsquo;m still in the learning phase of using Maven, so bare with me. Here is my script to create an executable HelloWorld-jar file using Maven (it requires the file sample-pom.xml listed after the script):</description>
     </item>
     
     <item>
@@ -215,8 +215,8 @@ I never check out my sandbox directly from within Eclipse: I do that from the co
       <pubDate>Sat, 13 Jun 2009 17:59:16 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/06/13/maven-eclipse-plugin-2-6-might-break-wicket-projects/</guid>
-      <description>Took me a while to find this, so I thought I&#39;ll post it: Maven&#39;s eclipse plugin version 2.6 does not work well with Wicket projects.
-The problem with version 2.6 is that the Maven&#39;s folder structure does not conform to Wicket&#39;s folder structure.</description>
+      <description>Took me a while to find this, so I thought I&amp;rsquo;ll post it: Maven&amp;rsquo;s eclipse plugin version 2.6 does not work well with Wicket projects.
+The problem with version 2.6 is that the Maven&amp;rsquo;s folder structure does not conform to Wicket&amp;rsquo;s folder structure.</description>
     </item>
     
     <item>
@@ -225,7 +225,7 @@ The problem with version 2.6 is that the Maven&#39;s folder structure does not c
       <pubDate>Fri, 22 May 2009 18:47:51 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2009/05/22/maven2-heap-overflow-in-junit-test-cases-howto-increase-memory/</guid>
-      <description>For the past few days I was wondering why Maven&#39;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
+      <description>For the past few days I was wondering why Maven&amp;rsquo;s install gave me a Heap Overflow exception on JUnit tests on some of my machines. I tried increasing the memory by using the environment variable MAVEN_OPTS, by passing the option &amp;ldquo;-Xmx512m&amp;rdquo; to the JVM through Eclipse and from the command line.</description>
     </item>
     
   </channel>

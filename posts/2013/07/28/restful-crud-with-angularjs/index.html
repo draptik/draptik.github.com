@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -214,7 +214,7 @@ A prerequisite for this demo is a working RESTful web service." />
   
   <div class="post">
     <p>This post will show how to perform typical CRUD (create, read, update and delete) operations in AngularJS when consuming a RESTful web service.</p>
-<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I've added a Java based sample at the end of this post.</p>
+<p>A prerequisite for this demo is a working RESTful web service. For a basic introduction on creating a Java based RESTful web service, see my introduction on how to <a href="http://draptik.github.io/blog/2013/07/13/angularjs-example-using-a-java-restful-web-service/">consume a RESTful web service with AngularJS created by a Java backend</a>. For completeness sake I&rsquo;ve added a Java based sample at the end of this post.</p>
 <h2 id="frontend-angularjs">Frontend (AngularJS)</h2>
 <h3 id="views-partials">Views (Partials)</h3>
 <p>We will create three views.</p>
@@ -260,11 +260,11 @@ A prerequisite for this demo is a working RESTful web service." />
 <h4 id="userlistctrl">UserListCtrl</h4>
 <p><code>UserListCtrl</code> provides three functions <code>editUser</code>, <code>deleteUser</code> and <code>createUser</code>.</p>
 <ul>
-<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs's <code>$location</code> function.</li>
+<li><code>editUser</code> and <code>createUser</code> merely redirect to a different partial view using AngularJs&rsquo;s <code>$location</code> function.</li>
 <li><code>deleteUser</code> calls the <code>UserFactory</code> service method <code>delete</code> (which we will create shortly).</li>
 </ul>
 <p>Furthermore the <code>$scope.users</code> is filled with the result from the <code>UsersFactory.query()</code> function.</p>
-<p>Note that all required dependencies are injected into the controller's signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
+<p>Note that all required dependencies are injected into the controller&rsquo;s signature (<code>function ($scope, UsersFactory, UserFactory, $location)</code>).</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">app</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo.controllers&#39;</span>, []);
 
 <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">controller</span>(<span style="color:#e6db74">&#39;UserListCtrl&#39;</span>, [<span style="color:#e6db74">&#39;$scope&#39;</span>, <span style="color:#e6db74">&#39;UsersFactory&#39;</span>, <span style="color:#e6db74">&#39;UserFactory&#39;</span>, <span style="color:#e6db74">&#39;$location&#39;</span>,
@@ -320,7 +320,7 @@ A prerequisite for this demo is a working RESTful web service." />
             <span style="color:#a6e22e">$location</span>.<span style="color:#a6e22e">path</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>);
         }
     }]);    
-</code></pre></div><p>Don't forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
+</code></pre></div><p>Don&rsquo;t forget to map the views to the corresponding controllers in <code>app.js</code> using the <code>$routeProvider</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo&#39;</span>, [<span style="color:#e6db74">&#39;ngdemo.filters&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.services&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.directives&#39;</span>, <span style="color:#e6db74">&#39;ngdemo.controllers&#39;</span>]).
     <span style="color:#a6e22e">config</span>([<span style="color:#e6db74">&#39;$routeProvider&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$routeProvider</span>) {
         <span style="color:#a6e22e">$routeProvider</span>.<span style="color:#a6e22e">when</span>(<span style="color:#e6db74">&#39;/user-list&#39;</span>, {<span style="color:#a6e22e">templateUrl</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;partials/user-list.html&#39;</span>, <span style="color:#a6e22e">controller</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;UserListCtrl&#39;</span>});

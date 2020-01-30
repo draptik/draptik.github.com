@@ -28,7 +28,7 @@
       <pubDate>Thu, 18 Jul 2013 21:36:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2013/07/18/guice-in-java-web-application/</guid>
-      <description>Google&#39;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
+      <description>Google&amp;rsquo;s Guice framework promises to be a lightweight(!) Inversion-of-Control (IoC) container.
 Advantages compared to Spring:
  Spring is much more than an IoC container, and therefore overkill for many projects. Configuration by code.</description>
     </item>

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -204,8 +204,8 @@
   <div class="post">
     <p>In the <a href="/blog/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">previous post</a> I described how to setup the hardware for measuring temperatures at home.
 This post will use a small python program to save the recorded temperatures to a database.</p>
-<p>For simplicity's sake we'll be using SQLite3 as our database.</p>
-<p>Aside from our (indoor) temperature sensors, we'll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
+<p>For simplicity&rsquo;s sake we&rsquo;ll be using SQLite3 as our database.</p>
+<p>Aside from our (indoor) temperature sensors, we&rsquo;ll also retrieve outdoor temperatures using the free service <a href="http://www.wunderground.com/">weather underground</a> (registration required).</p>
 <p>Note: In case your Raspberry Pi does not have access to the internet you can just exlude the weather underground parts in the code below.</p>
 <p>All following code is intended to run on the Raspberry Pi receiving the data.</p>
 <h3 id="create-database-sqlite3">Create database (SQLite3)</h3>
@@ -248,13 +248,13 @@ sqlite&gt; CREATE TABLE temps
    ...&gt;     temp REAL,
    ...&gt;     ID TEXT
    ...&gt; );
-</code></pre><p>We've created a database.</p>
+</code></pre><p>We&rsquo;ve created a database.</p>
 <p>The important table is <code>temps</code>: It will contain the measurements.</p>
 <p>The other table (<code>sensors</code>) contains informations about the sensors, which are currently only needed for the weather underground &lsquo;sensor&rsquo;. And yes: the column names/types are not optimal.</p>
 <p>Note: <code>timestamp TEXT</code> will bite us in the ass, but SQLite3 does NOT have any date type.</p>
 <h3 id="monitor-script">Monitor script</h3>
 <p>I found this nice script somewhere on <a href="https://github.com/kal001/temperature">Github</a>. So Thank You <a href="https://github.com/kal001">kal001</a>!</p>
-<p>Here's my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
+<p>Here&rsquo;s my <a href="https://gist.github.com/draptik/36834b68b7b4d6366f38">gist link for the script below</a>.</p>
 <p>Place this script side-by-side to <code>temps.log</code>.</p>
 <p>Save it as <code>monitor.py</code>.</p>
 <p>You will probably want to modify the values for <code>dbname</code>, <code>TIMEOUT</code>, <code>debug.txt</code>, etc.</p>
@@ -398,7 +398,7 @@ SAMPLE <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span
 <span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#34;</span>:
     main()
 </code></pre></div><p>Run the script. Open another shell, take a look inside the database (new data arriving once an hour?).</p>
-<p>Don't forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
+<p>Don&rsquo;t forget to start the script after turning off the Raspberry Pi. Or include the script in your boot process (init, systemd).</p>
 <p><a href="/blog/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">Part 3</a> will provide a UI for the collected data.</p>
 
   </div>

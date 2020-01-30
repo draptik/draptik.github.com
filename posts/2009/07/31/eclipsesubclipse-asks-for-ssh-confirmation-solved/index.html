@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -208,11 +208,11 @@ I never check out my sandbox directly from within Eclipse: I do that from the co
 <p>I never check out my sandbox directly from within Eclipse: I do that from the command line. F.ex.:</p>
 <p><code>$ svn co svn+ssh://myserver.com/myproject sandbox_myproject</code></p>
 <p>From within Eclipse, I then create a new project &ldquo;from existing project&rdquo; and select <code>sandbox_myproject/trunk/project_name</code>.</p>
-<p>Eclipse/Subclipse is smart enough to recognize that the project is under version control (after you've installed <a href="http://subclipse.tigris.org/">Subclipse</a>).</p>
+<p>Eclipse/Subclipse is smart enough to recognize that the project is under version control (after you&rsquo;ve installed <a href="http://subclipse.tigris.org/">Subclipse</a>).</p>
 <p>Well, this is all very cool, and works under Windows and Linux.</p>
 <p>Until upgrading to Eclipse 3.5 (Galileo).</p>
 <p>Suddenly you are asked for SSH Details. Why is that?</p>
-<p>If the Command-Line Interface (CLI) knows my SSH-details, why shouldn't Eclipse/Subclipse pick them up? This worked flawlessly with previous version of Eclipse and Subclipse (also with prev. versions of SVN). But no, in Eclipse 3.5 (Galileo), you have to point the Subclipse Interface (1.6.x) directly to <code>~/.ssh/id_dsa</code> (the default location). It does not make any sense to me&hellip; It seems like a regression in functionality. And there is no comment whatsoever on the tigris/subclipse homepage&hellip;.</p>
+<p>If the Command-Line Interface (CLI) knows my SSH-details, why shouldn&rsquo;t Eclipse/Subclipse pick them up? This worked flawlessly with previous version of Eclipse and Subclipse (also with prev. versions of SVN). But no, in Eclipse 3.5 (Galileo), you have to point the Subclipse Interface (1.6.x) directly to <code>~/.ssh/id_dsa</code> (the default location). It does not make any sense to me&hellip; It seems like a regression in functionality. And there is no comment whatsoever on the tigris/subclipse homepage&hellip;.</p>
 <p>Just a rant.</p>
 
   </div>

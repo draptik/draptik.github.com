@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -229,7 +229,7 @@ namespace Demo { public class Customer { public string FirstName { get; set; } p
     }
 }
 </code></pre></div><p>First thought for C# developers: <a href="http://automapper.org/">AutoMapper</a></p>
-<p>Let's do that:</p>
+<p>Let&rsquo;s do that:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> AutoMapper;
 
 <span style="color:#66d9ef">namespace</span> Demo
@@ -297,7 +297,7 @@ namespace Demo { public class Customer { public string FirstName { get; set; } p
     }
 }
 </code></pre></div><p>Our unit test still passes. ☹</p>
-<p><strong>Wouldn't it be nice to have our unit test fail if the classes are not in sync?</strong></p>
+<p><strong>Wouldn&rsquo;t it be nice to have our unit test fail if the classes are not in sync?</strong></p>
 <p>Here is where <a href="http://www.fluentassertions.com/">FluentAssertions</a> <code>ShouldBeEquivalentTo</code> comes in handy:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">using</span> FluentAssertions;
 <span style="color:#66d9ef">using</span> Xunit;

@@ -19,7 +19,7 @@
       <guid>https://draptik.github.io/posts/2017/01/10/bash-tricks/</guid>
       <description>Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
  autocd autojump  Neither of these features is new.
-autocd autocd is very simple: It&#39;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
+autocd autocd is very simple: It&amp;rsquo;s a built-in bash feature which prepends cd in case you enter a valid path.</description>
     </item>
     
   </channel>

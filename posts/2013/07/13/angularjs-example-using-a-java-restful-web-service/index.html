@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -23,11 +23,11 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="AngularJS example using a Java RESTful web service"/>
 <meta name="twitter:description" content="AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
-Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:"/>
+Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:"/>
 
 <meta property="og:title" content="AngularJS example using a Java RESTful web service" />
 <meta property="og:description" content="AngularJS is the current MVV-Whatever JavaScript framework by Google. Among other things, it provides bidirectional data binding.
-Although I&#39;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:" />
+Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2013/07/13/angularjs-example-using-a-java-restful-web-service/" />
 <meta property="article:published_time" content="2013-07-13T20:12:00+00:00" />
@@ -212,7 +212,7 @@ Although I&#39;m neither a Java nor a JavaScript expert, I choose the following 
   <div class="post">
     <p><a href="http://angularjs.org/">AngularJS</a> is the current MVV-Whatever JavaScript framework by Google.
 Among other things, it provides bidirectional data binding.</p>
-<p>Although I'm neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:</p>
+<p>Although I&rsquo;m neither a Java nor a JavaScript expert, I choose the following scenario for my &lsquo;Hello-World&rsquo; example:</p>
 <ol>
 <li>
 <p>Java backend provides a RESTful web service.</p>
@@ -221,7 +221,7 @@ Among other things, it provides bidirectional data binding.</p>
 <p>AngularJS consumes the web service.</p>
 </li>
 </ol>
-<p>That's it.</p>
+<p>That&rsquo;s it.</p>
 <h1 id="project-structure">Project structure</h1>
 <p>I intentionally put the backend and frontend code in the same project to simplify the example. In a real project you probably want to have seperate projects for front- and backend.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">+---------------------------------------------------+
@@ -392,7 +392,7 @@ Among other things, it provides bidirectional data binding.</p>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Converting the <code>User</code> object to JSON via <code>@Produces(MediaType.APPLICATION_JSON)</code> requires jersey-json in <code>web.xml</code> (<code>POJOMappingFeature</code>).</p>
 <h1 id="consuming-web-service-from-angularjs-frontend">Consuming web service from AngularJS (frontend)</h1>
-<p>Don't forget to add <code>angular-resources.js</code> to your <code>index.html</code>&hellip;</p>
+<p>Don&rsquo;t forget to add <code>angular-resources.js</code> to your <code>index.html</code>&hellip;</p>
 <p>Consuming the web service:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">services</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">angular</span>.<span style="color:#a6e22e">module</span>(<span style="color:#e6db74">&#39;ngdemo.services&#39;</span>, [<span style="color:#e6db74">&#39;ngResource&#39;</span>]);
 

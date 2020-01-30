@@ -27,7 +27,7 @@
       
       <guid>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</guid>
       <description>Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
-In this post I&#39;ll describe how to display the data.
+In this post I&amp;rsquo;ll describe how to display the data.
 TL;DR  Download and unzip the source code from https://github.</description>
     </item>
     
@@ -46,7 +46,7 @@ TL;DR  Download and unzip the source code from https://github.</description>
       <pubDate>Fri, 10 Jul 2015 00:11:00 +0000</pubDate>
       
       <guid>https://draptik.github.io/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/</guid>
-      <description>Since I&#39;m a software developer, I&#39;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
+      <description>Since I&amp;rsquo;m a software developer, I&amp;rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):</description>
     </item>
     
   </channel>

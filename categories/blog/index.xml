@@ -18,7 +18,7 @@
       
       <guid>https://draptik.github.io/posts/2013/05/24/pygments-and-python/</guid>
       <description>Frameworks like Octopress and Jekyll use the Python library Pygments for syntax highlighting.
-Currenty (2013-05-23) Pygments does not work flawlessly with Python3 (see this post and this issue on pygment&#39;s issue tracker).</description>
+Currenty (2013-05-23) Pygments does not work flawlessly with Python3 (see this post and this issue on pygment&amp;rsquo;s issue tracker).</description>
     </item>
     
   </channel>

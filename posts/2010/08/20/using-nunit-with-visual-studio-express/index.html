@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -22,10 +22,10 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Using NUnit with Visual Studio Express"/>
-<meta name="twitter:description" content="Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:"/>
+<meta name="twitter:description" content="Since Microsoft&rsquo;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:"/>
 
 <meta property="og:title" content="Using NUnit with Visual Studio Express" />
-<meta property="og:description" content="Since Microsoft&#39;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:" />
+<meta property="og:description" content="Since Microsoft&rsquo;s Visual Studio Express edition does not allow installation of any plugins anymore (f.ex. TestDriven.Net), here is a quick workaround to get NUnit-GUI working. Add this to your Post-Build section of your Project settings:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2010/08/20/using-nunit-with-visual-studio-express/" />
 <meta property="article:published_time" content="2010-08-20T00:08:36+00:00" />
@@ -199,7 +199,7 @@
   
   
   <div class="post">
-    <p>Since Microsoft's <strong>Visual Studio Express</strong> edition does not allow installation of any plugins anymore (f.ex. <a href="http://www.testdriven.net/">TestDriven.Net</a>), here is a quick workaround to get <a href="http://www.nunit.org/">NUnit</a>-GUI working. Add this to your Post-Build section of your Project settings:</p>
+    <p>Since Microsoft&rsquo;s <strong>Visual Studio Express</strong> edition does not allow installation of any plugins anymore (f.ex. <a href="http://www.testdriven.net/">TestDriven.Net</a>), here is a quick workaround to get <a href="http://www.nunit.org/">NUnit</a>-GUI working. Add this to your Post-Build section of your Project settings:</p>
 <p><code>copy /Y &quot;$(ProjectDir)App.config&quot; &quot;$(TargetDir)$(TargetFileName).config&quot;</code></p>
 <p>For more details please consult <a href="http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx">http://codebetter.com/blogs/darrell.norton/archive/2005/05/13/63169.aspx</a></p>
 

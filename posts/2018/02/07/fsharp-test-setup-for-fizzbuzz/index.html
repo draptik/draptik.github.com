@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.62.2" />
+<meta name="generator" content="Hugo 0.63.2" />
 
     
     
@@ -228,7 +228,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
     <p>In my <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> we setup a basic F# project in Linux.</p>
 <p>In this post I would like to show how to setup an idiomatic F# testing environment using FsUnit.</p>
 <h4 id="side-note-for-people-unfamiliar-with-net">Side note for people unfamiliar with .NET</h4>
-<p>Actually, it's not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
+<p>Actually, it&rsquo;s not a project, but a &ldquo;solution&rdquo;. To clear things up for people not familiar with the .NET ecosystem: In .NET, the top level configuration is called a &ldquo;solution&rdquo; and resides in a <code>*.sln</code> file. A solution references &ldquo;projects&rdquo;. Each project configuration is stored in a <code>*.fsproj</code> file (F#) or a <code>*.csproj</code> file (C#). Projects can reference each other. This information is stored in the <code>*.[f|c]sproj</code> file.</p>
 <p>We have 2 projects (<code>FizzBuzz</code> and <code>FizzBuzz.Tests</code>), each with a <code>*.fsproj</code> file. The <code>FizzBuzz.Tests.fsproj</code> references the <code>FizzBuzz.fsproj</code> file (see the <a href="http://draptik.github.io/blog/2018/02/05/fsharp-setup-linux-fizzbuzz/">previous post</a> for details):</p>
 <pre><code>.
 ├── FizzBuzz
@@ -246,12 +246,12 @@ In this post I would like to show how to setup an idiomatic F# testing environme
     Assert.Equal<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">one</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
 </code></pre></div><ul>
 <li><code>[&lt;Fact&gt;]</code>: this is F#&lsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
-<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It's an F# language feature.</li>
+<li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
 <li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
 </ul>
 <h3 id="fsunit-idiomatic-assertions">FsUnit: Idiomatic assertions</h3>
-<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile if you don't comply to these conventions, but it's not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages one concept is preferred over the other.</p>
-<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it's not, but close enough in this context).</p>
+<p>What does &ldquo;idiomatic&rdquo; mean? For programming languages, it means: Writing code as most people, who are used to the language, would write the code (how a &ldquo;native&rdquo; would express an idea, a concept, an algorithm, etc). Simple example: In Java and JS, the first character of a method name should be lower case. In C#, the first character should be upper case (yes, even if the method is private!). The code will still compile if you don&rsquo;t comply to these conventions, but it&rsquo;s not &ldquo;idiomatic&rdquo;. Same goes for &ldquo;For Loops&rdquo; vs using a &ldquo;Map&rdquo; functions: In some languages one concept is preferred over the other.</p>
+<p><code>FsUnit</code> brings <strong>pipes</strong> to F# unit tests. Pipes are used extensively in F# and should be familiar to most linux shell users: Bash uses the <code>|</code> symbol as operator to redirect the output of one expression to the input of another expression. In F# the pipe operator is <code>|&gt;</code>. The concept might seem similar to using &ldquo;Method Chaining&rdquo; in C# (it&rsquo;s not, but close enough in this context).</p>
 <p>Example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#75715e">// instead of
 </span><span style="color:#75715e"></span>Assert.Equal<span style="color:#f92672">(</span>1 <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span>
