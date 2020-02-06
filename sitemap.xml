@@ -3,27 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://draptik.github.io/categories/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/categories/domain-driven-design/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/categories/f#/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/posts/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://draptik.github.io/posts/2020/01/05/blog-update-to-hugo/</loc>
     <lastmod>2020-01-05T18:05:29+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://draptik.github.io/</loc>
-    <lastmod>2020-01-05T18:05:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/posts/</loc>
-    <lastmod>2020-01-05T18:05:29+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://draptik.github.io/categories/book/</loc>
-    <lastmod>2019-06-25T21:42:37+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/categories/</loc>
     <lastmod>2019-06-25T21:42:37+00:00</lastmod>
   </url>
   
@@ -39,11 +54,6 @@
   
   <url>
     <loc>https://draptik.github.io/categories/ddd/</loc>
-    <lastmod>2019-06-25T21:42:37+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/categories/domain-driven-design/</loc>
     <lastmod>2019-06-25T21:42:37+00:00</lastmod>
   </url>
   
@@ -443,17 +453,17 @@
   </url>
   
   <url>
+    <loc>https://draptik.github.io/categories/link-collection/</loc>
+    <lastmod>2014-04-21T03:24:32+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://draptik.github.io/categories/fun/</loc>
     <lastmod>2014-04-21T03:24:32+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://draptik.github.io/posts/2014/04/21/link-collection-number-4/</loc>
-    <lastmod>2014-04-21T03:24:32+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/categories/link-collection/</loc>
     <lastmod>2014-04-21T03:24:32+00:00</lastmod>
   </url>
   

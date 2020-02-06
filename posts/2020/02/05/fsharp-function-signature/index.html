@@ -17,21 +17,21 @@
     
     
 
-<title>Blog: Update to Hugo • draptik</title>
+<title>F#: Function Signature • draptik</title>
 
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Blog: Update to Hugo"/>
-<meta name="twitter:description" content="I&rsquo;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&rsquo;t been updated in a while, so I switched to Hugo.
-Old links should still work."/>
+<meta name="twitter:title" content="F#: Function Signature"/>
+<meta name="twitter:description" content="I always forget how to write Haskell-like function signatures in F#.
+type AddOne = int -&gt; int let addOne : AddOne = fun i -&gt; i &#43; 1 You can think of AddOne as an interface in OO-languages, for functions."/>
 
-<meta property="og:title" content="Blog: Update to Hugo" />
-<meta property="og:description" content="I&rsquo;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&rsquo;t been updated in a while, so I switched to Hugo.
-Old links should still work." />
+<meta property="og:title" content="F#: Function Signature" />
+<meta property="og:description" content="I always forget how to write Haskell-like function signatures in F#.
+type AddOne = int -&gt; int let addOne : AddOne = fun i -&gt; i &#43; 1 You can think of AddOne as an interface in OO-languages, for functions." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://draptik.github.io/posts/2020/01/05/blog-update-to-hugo/" />
-<meta property="article:published_time" content="2020-01-05T18:05:29+01:00" />
-<meta property="article:modified_time" content="2020-01-05T18:05:29+01:00" /><meta property="og:site_name" content="draptik title" />
+<meta property="og:url" content="https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/" />
+<meta property="article:published_time" content="2020-02-05T08:54:33+01:00" />
+<meta property="article:modified_time" content="2020-02-05T08:54:33+01:00" /><meta property="og:site_name" content="draptik title" />
 
 
     
@@ -174,15 +174,28 @@ Old links should still work." />
     
 <article>
   <header>
-    <h1>Blog: Update to Hugo</h1>
+    <h1>F#: Function Signature</h1>
     
     
 <div class="post__meta">
     
     
-      <i class="fas fa-calendar-alt"></i> Jan 05, 2020
+      <i class="fas fa-calendar-alt"></i> Feb 05, 2020
     
     
+    
+      
+      
+          in
+          
+          
+              <a class="badge badge-category" href="/categories/domain-driven-design">DOMAIN-DRIVEN-DESIGN</a>
+              •
+          
+              <a class="badge badge-category" href="/categories/f">F#</a>
+              
+          
+      
     
     
     
@@ -195,33 +208,26 @@ Old links should still work." />
   
   
   <div class="post">
-    <p>I&rsquo;ve replaced the static blogging engine of this blog. The previous blogging engine
-(<a href="https://octopress.org">Octopress</a>) hasn&rsquo;t been updated in a while, so I switched to
-<a href="https://gohugo.io/">Hugo</a>.</p>
-<p>Old links should still work.</p>
-<p>In case</p>
-<ul>
-<li>you find a broken link</li>
-<li>or another feature from the previous layout missing</li>
-</ul>
-<p>don&rsquo;t hesitate to contact me.</p>
-<p>There will be some minor changes to the layout, but hopefully everything else just works.</p>
+    <p>I always forget how to write Haskell-like function signatures in F#.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">AddOne</span> <span style="color:#f92672">=</span> int <span style="color:#f92672">-&gt;</span> int
+<span style="color:#66d9ef">let</span> addOne <span style="color:#f92672">:</span> AddOne <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">fun</span> i <span style="color:#f92672">-&gt;</span>
+        i <span style="color:#f92672">+</span> 1
+</code></pre></div><p><img src="/images/posts/fsharp-domain-signature/ide-example3.png" alt="screenshot with signature2"></p>
+<p>You can think of <code>AddOne</code> as an interface in OO-languages, for functions.
+Basically, it&rsquo;s a (C#) delegate, with less boilerplate.</p>
+<p>The beauty of it: I can model my domain with <code>AddOne</code>, without caring about the implementation of <code>addOne</code>.</p>
 
   </div>
   
 
 <div class="navigation navigation-single">
     
-    <a href="/posts/2019/06/25/review-hands-on-ddd-dotnetcore/" class="navigation-prev">
+    <a href="/posts/2020/01/05/blog-update-to-hugo/" class="navigation-prev">
       <i aria-hidden="true" class="fa fa-chevron-left"></i>
-      <span class="navigation-tittle">Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</span>
+      <span class="navigation-tittle">Blog: Update to Hugo</span>
     </a>
     
-    
-    <a href="/posts/2020/02/05/fsharp-function-signature/" class="navigation-next">
-      <span class="navigation-tittle">F#: Function Signature</span>
-      <i aria-hidden="true" class="fa fa-chevron-right"></i>
-    </a>
     
 </div>
 
