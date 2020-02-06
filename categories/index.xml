@@ -21,11 +21,20 @@
     </item>
     
     <item>
-      <title>f#</title>
-      <link>https://draptik.github.io/categories/f#/</link>
+      <title>fsharp</title>
+      <link>https://draptik.github.io/categories/fsharp/</link>
       <pubDate>Wed, 05 Feb 2020 08:54:33 +0100</pubDate>
       
-      <guid>https://draptik.github.io/categories/f#/</guid>
+      <guid>https://draptik.github.io/categories/fsharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>haskell</title>
+      <link>https://draptik.github.io/categories/haskell/</link>
+      <pubDate>Wed, 05 Feb 2020 08:54:33 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/categories/haskell/</guid>
       <description></description>
     </item>
     
@@ -134,15 +143,6 @@
       <pubDate>Tue, 25 Jun 2019 21:42:37 +0000</pubDate>
       
       <guid>https://draptik.github.io/categories/review/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fsharp</title>
-      <link>https://draptik.github.io/categories/fsharp/</link>
-      <pubDate>Thu, 29 Nov 2018 00:58:33 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/fsharp/</guid>
       <description></description>
     </item>
     

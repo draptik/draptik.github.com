@@ -18,12 +18,17 @@
   </url>
   
   <url>
-    <loc>https://draptik.github.io/categories/f#/</loc>
+    <loc>https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/</loc>
     <lastmod>2020-02-05T08:54:33+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/</loc>
+    <loc>https://draptik.github.io/categories/fsharp/</loc>
+    <lastmod>2020-02-05T08:54:33+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/categories/haskell/</loc>
     <lastmod>2020-02-05T08:54:33+01:00</lastmod>
   </url>
   
@@ -104,11 +109,6 @@
   
   <url>
     <loc>https://draptik.github.io/posts/2018/11/29/fsharp-linux-mixed-feelings/</loc>
-    <lastmod>2018-11-29T00:58:33+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/categories/fsharp/</loc>
     <lastmod>2018-11-29T00:58:33+00:00</lastmod>
   </url>
   

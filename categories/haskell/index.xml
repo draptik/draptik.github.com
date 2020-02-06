@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>haskell on draptik</title>
+    <link>https://draptik.github.io/categories/haskell/</link>
+    <description>Recent content in haskell on draptik</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Feb 2020 08:54:33 +0100</lastBuildDate>
+    
+	<atom:link href="https://draptik.github.io/categories/haskell/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>F#: Function Signature</title>
+      <link>https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/</link>
+      <pubDate>Wed, 05 Feb 2020 08:54:33 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2020/02/05/fsharp-function-signature/</guid>
+      <description>I always forget how to write Haskell-like function signatures in F#.
+type AddOne = int -&amp;gt; int let addOne : AddOne = fun i -&amp;gt; i + 1 You can think of AddOne as an interface in OO-languages, for functions.</description>
+    </item>
+    
+  </channel>
+</rss>
