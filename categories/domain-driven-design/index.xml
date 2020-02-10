@@ -6,10 +6,21 @@
     <description>Recent content in domain-driven-design on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Feb 2020 08:54:33 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2020 22:20:01 +0100</lastBuildDate>
     
 	<atom:link href="https://draptik.github.io/categories/domain-driven-design/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>F# Smart Constructor</title>
+      <link>https://draptik.github.io/posts/2020/02/10/fsharp-smart-constructor/</link>
+      <pubDate>Mon, 10 Feb 2020 22:20:01 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2020/02/10/fsharp-smart-constructor/</guid>
+      <description>The &amp;ldquo;Smart Constructor&amp;rdquo; pattern allows us to create a type with F#. With validation.
+TL/DR Here is the F# boiler plate needed to implement the Value Object pattern.
+let UserName = private UserName of string module UserName = let isValid s = // .</description>
+    </item>
     
     <item>
       <title>F#: Function Signature</title>

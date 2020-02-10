@@ -6,7 +6,7 @@
     <description>Recent content in Categories on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Feb 2020 08:54:33 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 10 Feb 2020 22:20:01 +0100</lastBuildDate>
     
 	<atom:link href="https://draptik.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>domain-driven-design</title>
       <link>https://draptik.github.io/categories/domain-driven-design/</link>
-      <pubDate>Wed, 05 Feb 2020 08:54:33 +0100</pubDate>
+      <pubDate>Mon, 10 Feb 2020 22:20:01 +0100</pubDate>
       
       <guid>https://draptik.github.io/categories/domain-driven-design/</guid>
       <description></description>
@@ -23,9 +23,18 @@
     <item>
       <title>fsharp</title>
       <link>https://draptik.github.io/categories/fsharp/</link>
-      <pubDate>Wed, 05 Feb 2020 08:54:33 +0100</pubDate>
+      <pubDate>Mon, 10 Feb 2020 22:20:01 +0100</pubDate>
       
       <guid>https://draptik.github.io/categories/fsharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>value object</title>
+      <link>https://draptik.github.io/categories/value-object/</link>
+      <pubDate>Mon, 10 Feb 2020 22:20:01 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/categories/value-object/</guid>
       <description></description>
     </item>
     
