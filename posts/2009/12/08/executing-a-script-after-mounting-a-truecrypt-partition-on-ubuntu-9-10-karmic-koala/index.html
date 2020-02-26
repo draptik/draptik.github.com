@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -48,7 +48,7 @@ Background info on udev (very short)
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -236,17 +236,17 @@ A rule to match, can be composed by the attributes of the device
 and the attributes from one single parent device.
 
 looking at device <span style="color:#e6db74">&#39;/devices/virtual/block/dm-0&#39;</span>:
-KERNEL<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dm-0&#34;</span>
-SUBSYSTEM<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;block&#34;</span>
-DRIVER<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
-ATTR<span style="color:#f92672">{</span>range<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
-ATTR<span style="color:#f92672">{</span>extrange<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
-ATTR<span style="color:#f92672">{</span>removable<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>
-ATTR<span style="color:#f92672">{</span>ro<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>
-ATTR<span style="color:#f92672">{</span>size<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6290941&#34;</span>
-ATTR<span style="color:#f92672">{</span>alignmentoffset<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0&#34;</span>
-ATTR<span style="color:#f92672">{</span>capability<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;10&#34;</span>
-ATTR<span style="color:#f92672">{</span>stat<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;    6521        0     7172     5870        1        0     1        0        0       70     5870&#34;</span>
+KERNEL<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;dm-0&#34;</span>
+SUBSYSTEM<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;block&#34;</span>
+DRIVER<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;&#34;</span>
+ATTR<span style="color:#f92672">{</span>range<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;1&#34;</span>
+ATTR<span style="color:#f92672">{</span>extrange<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;1&#34;</span>
+ATTR<span style="color:#f92672">{</span>removable<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;0&#34;</span>
+ATTR<span style="color:#f92672">{</span>ro<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;0&#34;</span>
+ATTR<span style="color:#f92672">{</span>size<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;6290941&#34;</span>
+ATTR<span style="color:#f92672">{</span>alignmentoffset<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;0&#34;</span>
+ATTR<span style="color:#f92672">{</span>capability<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;10&#34;</span>
+ATTR<span style="color:#f92672">{</span>stat<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;    6521        0     7172     5870        1        0     1        0        0       70     5870&#34;</span>
 </code></pre></div><p>Not much unique stuff there. The only thing that looks unique is <code>ATTR{size}==&quot;6290941&quot;</code>. Let&rsquo;s take that.</p>
 <p><strong>udev rule</strong></p>
 <ul>
@@ -258,7 +258,7 @@ ATTR<span style="color:#f92672">{</span>stat<span style="color:#f92672">}</span>
 </li>
 <li>
 <p>Add the following line (adapted to your needs) </p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ACTION<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;add&#34;</span>, KERNEL<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dm-[0-9]*&#34;</span>, SUBSYSTEM<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;block&#34;</span>, ATTR<span style="color:#f92672">{</span>size<span style="color:#f92672">}</span><span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6290941&#34;</span>, RUN<span style="color:#f92672">+=</span><span style="color:#e6db74">&#34;/usr/bin/touch /home/your-user-name-here/testcrypt.txt&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ACTION<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;add&#34;</span>, KERNEL<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;dm-[0-9]*&#34;</span>, SUBSYSTEM<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;block&#34;</span>, ATTR<span style="color:#f92672">{</span>size<span style="color:#f92672">}==</span><span style="color:#e6db74">&#34;6290941&#34;</span>, RUN<span style="color:#f92672">+=</span><span style="color:#e6db74">&#34;/usr/bin/touch /home/your-user-name-here/testcrypt.txt&#34;</span>
 </code></pre></div></li>
 <li>
 <p>Some notes:</p>

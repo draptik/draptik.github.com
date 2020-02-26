@@ -6,10 +6,20 @@
     <description>Recent content in csharp on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 25 Feb 2020 00:49:53 +0100</lastBuildDate>
     
 	<atom:link href="https://draptik.github.io/categories/csharp/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TDD Money Step-by-Step in C#</title>
+      <link>https://draptik.github.io/posts/2020/02/25/tdd-money-step-by-step-in-c/</link>
+      <pubDate>Tue, 25 Feb 2020 00:49:53 +0100</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2020/02/25/tdd-money-step-by-step-in-c/</guid>
+      <description>While preparing a TDD workshop, I ported Kent Beck&amp;lsquo;s Money example from the book &amp;ldquo;Test-Driven Development by Example&amp;rdquo;
+ to C# using .NET Core  I&amp;rsquo;ve tried to map each change described in the book to a dedicated git commit with a sensible commit message.</description>
+    </item>
     
     <item>
       <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -44,7 +44,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -226,125 +226,125 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
          <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;modelVersion</span><span style="color:#f92672">&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
+    <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
 
-    <span style="color:#f92672">&lt;name</span><span style="color:#f92672">&gt;</span>ngdemo Maven Webapp<span style="color:#f92672">&lt;/name&gt;</span>
-    <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>ngdemo<span style="color:#f92672">&lt;/groupId&gt;</span>
-    <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>ngdemo<span style="color:#f92672">&lt;/artifactId&gt;</span>
-    <span style="color:#f92672">&lt;packaging</span><span style="color:#f92672">&gt;</span>war<span style="color:#f92672">&lt;/packaging&gt;</span>
-    <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>1.0-SNAPSHOT<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;name&gt;</span>ngdemo Maven Webapp<span style="color:#f92672">&lt;/name&gt;</span>
+    <span style="color:#f92672">&lt;groupId&gt;</span>ngdemo<span style="color:#f92672">&lt;/groupId&gt;</span>
+    <span style="color:#f92672">&lt;artifactId&gt;</span>ngdemo<span style="color:#f92672">&lt;/artifactId&gt;</span>
+    <span style="color:#f92672">&lt;packaging&gt;</span>war<span style="color:#f92672">&lt;/packaging&gt;</span>
+    <span style="color:#f92672">&lt;version&gt;</span>1.0-SNAPSHOT<span style="color:#f92672">&lt;/version&gt;</span>
 
-    <span style="color:#f92672">&lt;properties</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;project.build.sourceEncoding</span><span style="color:#f92672">&gt;</span>UTF-8<span style="color:#f92672">&lt;/project.build.sourceEncoding&gt;</span>
-        <span style="color:#f92672">&lt;jersey.version</span><span style="color:#f92672">&gt;</span>1.17.1<span style="color:#f92672">&lt;/jersey.version&gt;</span>
-        <span style="color:#f92672">&lt;guice.version</span><span style="color:#f92672">&gt;</span>3.0<span style="color:#f92672">&lt;/guice.version&gt;</span>
+    <span style="color:#f92672">&lt;properties&gt;</span>
+        <span style="color:#f92672">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span style="color:#f92672">&lt;/project.build.sourceEncoding&gt;</span>
+        <span style="color:#f92672">&lt;jersey.version&gt;</span>1.17.1<span style="color:#f92672">&lt;/jersey.version&gt;</span>
+        <span style="color:#f92672">&lt;guice.version&gt;</span>3.0<span style="color:#f92672">&lt;/guice.version&gt;</span>
     <span style="color:#f92672">&lt;/properties&gt;</span>
 
-    <span style="color:#f92672">&lt;build</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;finalName</span><span style="color:#f92672">&gt;</span>ngdemo<span style="color:#f92672">&lt;/finalName&gt;</span>
-        <span style="color:#f92672">&lt;plugins</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;plugin</span><span style="color:#f92672">&gt;</span>
-                <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>org.apache.maven.plugins<span style="color:#f92672">&lt;/groupId&gt;</span>
-                <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>maven-compiler-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
-                <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>3.0<span style="color:#f92672">&lt;/version&gt;</span>
-                <span style="color:#f92672">&lt;configuration</span><span style="color:#f92672">&gt;</span>
-                    <span style="color:#f92672">&lt;source</span><span style="color:#f92672">&gt;</span>1.7<span style="color:#f92672">&lt;/source&gt;</span>
-                    <span style="color:#f92672">&lt;target</span><span style="color:#f92672">&gt;</span>1.7<span style="color:#f92672">&lt;/target&gt;</span>
+    <span style="color:#f92672">&lt;build&gt;</span>
+        <span style="color:#f92672">&lt;finalName&gt;</span>ngdemo<span style="color:#f92672">&lt;/finalName&gt;</span>
+        <span style="color:#f92672">&lt;plugins&gt;</span>
+            <span style="color:#f92672">&lt;plugin&gt;</span>
+                <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.maven.plugins<span style="color:#f92672">&lt;/groupId&gt;</span>
+                <span style="color:#f92672">&lt;artifactId&gt;</span>maven-compiler-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+                <span style="color:#f92672">&lt;version&gt;</span>3.0<span style="color:#f92672">&lt;/version&gt;</span>
+                <span style="color:#f92672">&lt;configuration&gt;</span>
+                    <span style="color:#f92672">&lt;source&gt;</span>1.7<span style="color:#f92672">&lt;/source&gt;</span>
+                    <span style="color:#f92672">&lt;target&gt;</span>1.7<span style="color:#f92672">&lt;/target&gt;</span>
                 <span style="color:#f92672">&lt;/configuration&gt;</span>
             <span style="color:#f92672">&lt;/plugin&gt;</span>
-            <span style="color:#f92672">&lt;plugin</span><span style="color:#f92672">&gt;</span>
-                <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>org.mortbay.jetty<span style="color:#f92672">&lt;/groupId&gt;</span>
-                <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jetty-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
-                <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>8.1.11.v20130520<span style="color:#f92672">&lt;/version&gt;</span>
-                <span style="color:#f92672">&lt;configuration</span><span style="color:#f92672">&gt;</span>
-                    <span style="color:#f92672">&lt;scanIntervalSeconds</span><span style="color:#f92672">&gt;</span>10<span style="color:#f92672">&lt;/scanIntervalSeconds&gt;</span>
-                    <span style="color:#f92672">&lt;connectors</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;plugin&gt;</span>
+                <span style="color:#f92672">&lt;groupId&gt;</span>org.mortbay.jetty<span style="color:#f92672">&lt;/groupId&gt;</span>
+                <span style="color:#f92672">&lt;artifactId&gt;</span>jetty-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+                <span style="color:#f92672">&lt;version&gt;</span>8.1.11.v20130520<span style="color:#f92672">&lt;/version&gt;</span>
+                <span style="color:#f92672">&lt;configuration&gt;</span>
+                    <span style="color:#f92672">&lt;scanIntervalSeconds&gt;</span>10<span style="color:#f92672">&lt;/scanIntervalSeconds&gt;</span>
+                    <span style="color:#f92672">&lt;connectors&gt;</span>
                         <span style="color:#f92672">&lt;connector</span> <span style="color:#a6e22e">implementation=</span><span style="color:#e6db74">&#34;org.eclipse.jetty.nio.SelectChannelConnector&#34;</span><span style="color:#f92672">&gt;</span>
-                            <span style="color:#f92672">&lt;port</span><span style="color:#f92672">&gt;</span>8080<span style="color:#f92672">&lt;/port&gt;</span>
-                            <span style="color:#f92672">&lt;maxIdleTime</span><span style="color:#f92672">&gt;</span>60000<span style="color:#f92672">&lt;/maxIdleTime&gt;</span>
+                            <span style="color:#f92672">&lt;port&gt;</span>8080<span style="color:#f92672">&lt;/port&gt;</span>
+                            <span style="color:#f92672">&lt;maxIdleTime&gt;</span>60000<span style="color:#f92672">&lt;/maxIdleTime&gt;</span>
                         <span style="color:#f92672">&lt;/connector&gt;</span>
                     <span style="color:#f92672">&lt;/connectors&gt;</span>
-                    <span style="color:#f92672">&lt;stopKey</span><span style="color:#f92672">/&gt;</span>
-                    <span style="color:#f92672">&lt;stopPort</span><span style="color:#f92672">/&gt;</span>
+                    <span style="color:#f92672">&lt;stopKey/&gt;</span>
+                    <span style="color:#f92672">&lt;stopPort/&gt;</span>
                 <span style="color:#f92672">&lt;/configuration&gt;</span>
             <span style="color:#f92672">&lt;/plugin&gt;</span>
         <span style="color:#f92672">&lt;/plugins&gt;</span>
     <span style="color:#f92672">&lt;/build&gt;</span>
 
-    <span style="color:#f92672">&lt;dependencies</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;dependencies&gt;</span>
 
-        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> javax: XML binding </span><span style="color:#75715e">--&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>javax.xml.bind<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jaxb-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>2.1<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#75715e">&lt;!-- javax: XML binding --&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>javax.xml.bind<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jaxb-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>2.1<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> RESTful web service: Jersey ====================================== </span><span style="color:#75715e">--&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-server<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#75715e">&lt;!-- RESTful web service: Jersey ====================================== --&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-server<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-servlet<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-servlet<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-json<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
-        <span style="color:#f92672">&lt;/dependency&gt;</span>
-
-        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Guice ============================================================= </span><span style="color:#75715e">--&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.google.inject<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>guice<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${guice.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-json<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.google.inject.extensions<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>guice-servlet<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${guice.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#75715e">&lt;!-- Guice ============================================================= --&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.google.inject<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>guice<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${guice.version}<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey.contribs<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-guice<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.google.inject.extensions<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>guice-servlet<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${guice.version}<span style="color:#f92672">&lt;/version&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Required for bypassing web.xml via Guice. Used in TestServlet.java </span><span style="color:#75715e">--&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>javax.servlet<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>javax.servlet-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>3.0.1<span style="color:#f92672">&lt;/version&gt;</span>
-            <span style="color:#f92672">&lt;scope</span><span style="color:#f92672">&gt;</span>provided<span style="color:#f92672">&lt;/scope&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey.contribs<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-guice<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+        <span style="color:#f92672">&lt;/dependency&gt;</span>
+
+        <span style="color:#75715e">&lt;!-- Required for bypassing web.xml via Guice. Used in TestServlet.java --&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>javax.servlet<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>javax.servlet-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>3.0.1<span style="color:#f92672">&lt;/version&gt;</span>
+            <span style="color:#f92672">&lt;scope&gt;</span>provided<span style="color:#f92672">&lt;/scope&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
 
-        <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> Unit testing ====================================================== </span><span style="color:#75715e">--&gt;</span>
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>4.11<span style="color:#f92672">&lt;/version&gt;</span>
-            <span style="color:#f92672">&lt;scope</span><span style="color:#f92672">&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+        <span style="color:#75715e">&lt;!-- Unit testing ====================================================== --&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>junit<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>junit<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>4.11<span style="color:#f92672">&lt;/version&gt;</span>
+            <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-client<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
-            <span style="color:#f92672">&lt;scope</span><span style="color:#f92672">&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-client<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+            <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
 
-        <span style="color:#f92672">&lt;dependency</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;groupId</span><span style="color:#f92672">&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId</span><span style="color:#f92672">&gt;</span>jersey-grizzly2<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version</span><span style="color:#f92672">&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
-            <span style="color:#f92672">&lt;scope</span><span style="color:#f92672">&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
+        <span style="color:#f92672">&lt;dependency&gt;</span>
+            <span style="color:#f92672">&lt;groupId&gt;</span>com.sun.jersey<span style="color:#f92672">&lt;/groupId&gt;</span>
+            <span style="color:#f92672">&lt;artifactId&gt;</span>jersey-grizzly2<span style="color:#f92672">&lt;/artifactId&gt;</span>
+            <span style="color:#f92672">&lt;version&gt;</span>${jersey.version}<span style="color:#f92672">&lt;/version&gt;</span>
+            <span style="color:#f92672">&lt;scope&gt;</span>test<span style="color:#f92672">&lt;/scope&gt;</span>
         <span style="color:#f92672">&lt;/dependency&gt;</span>
     <span style="color:#f92672">&lt;/dependencies&gt;</span>
 <span style="color:#f92672">&lt;/project&gt;</span>
@@ -373,8 +373,8 @@
 
     <span style="color:#a6e22e">@GET</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getDefaultUserInJSON</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getDefaultUser</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getDefaultUserInJSON</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getDefaultUser</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Here is the corresponding unit test class <code>UserRestServiceTest.java</code>:</p>
@@ -410,51 +410,51 @@
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserRestServiceTest</span> <span style="color:#f92672">{</span>
 
-    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> URI BASE_URI <span style="color:#f92672">=</span> getBaseURI<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> URI BASE_URI <span style="color:#f92672">=</span> getBaseURI<span style="color:#f92672">();</span>
     HttpServer server<span style="color:#f92672">;</span>
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> URI <span style="color:#a6e22e">getBaseURI</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> UriBuilder<span style="color:#f92672">.</span><span style="color:#a6e22e">fromUri</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://localhost/&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">port</span><span style="color:#f92672">(</span>9998<span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">build</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> URI <span style="color:#a6e22e">getBaseURI</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> UriBuilder<span style="color:#f92672">.</span><span style="color:#a6e22e">fromUri</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;http://localhost/&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">port</span><span style="color:#f92672">(</span>9998<span style="color:#f92672">).</span><span style="color:#a6e22e">build</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@Before</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startServer</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Starting grizzly...&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">startServer</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Starting grizzly...&#34;</span><span style="color:#f92672">);</span>
 
-        Injector injector <span style="color:#f92672">=</span> Guice<span style="color:#f92672">.</span><span style="color:#a6e22e">createInjector</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ServletModule<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        Injector injector <span style="color:#f92672">=</span> Guice<span style="color:#f92672">.</span><span style="color:#a6e22e">createInjector</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ServletModule<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
             <span style="color:#a6e22e">@Override</span>
-            <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                bind<span style="color:#f92672">(</span>UserService<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserServiceImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                bind<span style="color:#f92672">(</span>UserRepository<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserRepositoryImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                bind<span style="color:#f92672">(</span>UserService<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">).</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserServiceImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+                bind<span style="color:#f92672">(</span>UserRepository<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">).</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserRepositoryImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
             <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">});</span>
 
-        ResourceConfig rc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PackagesResourceConfig<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ngdemo.rest&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        IoCComponentProviderFactory ioc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GuiceComponentProviderFactory<span style="color:#f92672">(</span>rc<span style="color:#f92672">,</span> injector<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        server <span style="color:#f92672">=</span> GrizzlyServerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createHttpServer</span><span style="color:#f92672">(</span>BASE_URI <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;rest/&#34;</span><span style="color:#f92672">,</span> rc<span style="color:#f92672">,</span> ioc<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        ResourceConfig rc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PackagesResourceConfig<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ngdemo.rest&#34;</span><span style="color:#f92672">);</span>
+        IoCComponentProviderFactory ioc <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> GuiceComponentProviderFactory<span style="color:#f92672">(</span>rc<span style="color:#f92672">,</span> injector<span style="color:#f92672">);</span>
+        server <span style="color:#f92672">=</span> GrizzlyServerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">createHttpServer</span><span style="color:#f92672">(</span>BASE_URI <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;rest/&#34;</span><span style="color:#f92672">,</span> rc<span style="color:#f92672">,</span> ioc<span style="color:#f92672">);</span>
 
         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">format</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Jersey app started with WADL available at &#34;</span>
                 <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;%srest/application.wadl\nTry out %sngdemo\nHit enter to stop it...&#34;</span><span style="color:#f92672">,</span>
-                BASE_URI<span style="color:#f92672">,</span> BASE_URI<span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                BASE_URI<span style="color:#f92672">,</span> BASE_URI<span style="color:#f92672">));</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@After</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stopServer</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        server<span style="color:#f92672">.</span><span style="color:#a6e22e">stop</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">stopServer</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        server<span style="color:#f92672">.</span><span style="color:#a6e22e">stop</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@Test</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetDefaultUser</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
-        Client client <span style="color:#f92672">=</span> Client<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DefaultClientConfig<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        WebResource service <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span><span style="color:#a6e22e">resource</span><span style="color:#f92672">(</span>getBaseURI<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        ClientResponse resp <span style="color:#f92672">=</span> service<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rest&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;users&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testGetDefaultUser</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> IOException <span style="color:#f92672">{</span>
+        Client client <span style="color:#f92672">=</span> Client<span style="color:#f92672">.</span><span style="color:#a6e22e">create</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> DefaultClientConfig<span style="color:#f92672">());</span>
+        WebResource service <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span><span style="color:#a6e22e">resource</span><span style="color:#f92672">(</span>getBaseURI<span style="color:#f92672">());</span>
+        ClientResponse resp <span style="color:#f92672">=</span> service<span style="color:#f92672">.</span><span style="color:#a6e22e">path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;rest&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;users&#34;</span><span style="color:#f92672">)</span>
                 <span style="color:#f92672">.</span><span style="color:#a6e22e">accept</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
-                <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ClientResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Got stuff: &#34;</span> <span style="color:#f92672">+</span> resp<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        String text <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span><span style="color:#a6e22e">getEntity</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>ClientResponse<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Got stuff: &#34;</span> <span style="color:#f92672">+</span> resp<span style="color:#f92672">);</span>
+        String text <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span><span style="color:#a6e22e">getEntity</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
 
-        assertEquals<span style="color:#f92672">(</span>200<span style="color:#f92672">,</span> resp<span style="color:#f92672">.</span><span style="color:#a6e22e">getStatus</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        assertEquals<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;firstName\&#34;:\&#34;JonFromREST\&#34;,\&#34;lastName\&#34;:\&#34;DoeFromREST\&#34;}&#34;</span><span style="color:#f92672">,</span> text<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        assertEquals<span style="color:#f92672">(</span>200<span style="color:#f92672">,</span> resp<span style="color:#f92672">.</span><span style="color:#a6e22e">getStatus</span><span style="color:#f92672">());</span>
+        assertEquals<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{\&#34;firstName\&#34;:\&#34;JonFromREST\&#34;,\&#34;lastName\&#34;:\&#34;DoeFromREST\&#34;}&#34;</span><span style="color:#f92672">,</span> text<span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>In the <code>startServer</code> method we create an injector for Guice, which we can then pass into the <code>GuiceComponentProviderFactory</code> to create the inversion of control (IoC) container.</p>

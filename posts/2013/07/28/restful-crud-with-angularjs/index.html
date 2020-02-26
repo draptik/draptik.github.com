@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -46,7 +46,7 @@ A prerequisite for this demo is a working RESTful web service." />
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -232,7 +232,7 @@ A prerequisite for this demo is a working RESTful web service." />
 <p><img src="/images/posts/angular/usercreationdetail.png" alt="img"></p>
 <p>They only differ in the actions provided. These actions (<code>cancel()</code>, <code>updateUser()</code>, <code>createNewUser()</code>) are invoked using <code>ng-click</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;container&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;h1</span><span style="color:#f92672">&gt;</span>User detail<span style="color:#f92672">&lt;/h1&gt;</span>
+    <span style="color:#f92672">&lt;h1&gt;</span>User detail<span style="color:#f92672">&lt;/h1&gt;</span>
 
     <span style="color:#f92672">&lt;form</span> <span style="color:#a6e22e">novalidate=</span><span style="color:#e6db74">&#34;novalidate&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;form-horizontal&#34;</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-group&#34;</span><span style="color:#f92672">&gt;</span>
@@ -249,11 +249,11 @@ A prerequisite for this demo is a working RESTful web service." />
         <span style="color:#f92672">&lt;/div&gt;</span>
         <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;control-group&#34;</span><span style="color:#f92672">&gt;</span>
             <span style="color:#f92672">&lt;div</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;controls&#34;</span><span style="color:#f92672">&gt;</span>
-            	<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> user</span><span style="color:#75715e">-</span><span style="color:#75715e">detail.html: </span><span style="color:#75715e">--&gt;</span>
+            	<span style="color:#75715e">&lt;!-- user-detail.html: --&gt;</span>
                 <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;cancel()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small&#34;</span><span style="color:#f92672">&gt;</span>cancel<span style="color:#f92672">&lt;/a&gt;</span>
                 <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;updateUser()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small btn-primary&#34;</span><span style="color:#f92672">&gt;</span>update user<span style="color:#f92672">&lt;/a&gt;</span>
 
-				<span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> user</span><span style="color:#75715e">-</span><span style="color:#75715e">creation.html: </span><span style="color:#75715e">--&gt;</span>
+				<span style="color:#75715e">&lt;!-- user-creation.html: --&gt;</span>
                 <span style="color:#f92672">&lt;a</span> <span style="color:#a6e22e">ng-click=</span><span style="color:#e6db74">&#34;createNewUser()&#34;</span> <span style="color:#a6e22e">class=</span><span style="color:#e6db74">&#34;btn btn-small btn-primary&#34;</span><span style="color:#f92672">&gt;</span>create new user<span style="color:#f92672">&lt;/a&gt;</span>
             <span style="color:#f92672">&lt;/div&gt;</span>
         <span style="color:#f92672">&lt;/div&gt;</span>
@@ -381,22 +381,22 @@ A prerequisite for this demo is a working RESTful web service." />
     
     <span style="color:#a6e22e">@GET</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsersInJSON</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getAllUsers</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getAllUsersInJSON</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getAllUsers</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@GET</span>
     <span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{id}&#34;</span><span style="color:#f92672">)</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getUserById</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">int</span> id<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getById</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">getById</span><span style="color:#f92672">(</span>id<span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@POST</span>
     <span style="color:#a6e22e">@Consumes</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">create</span><span style="color:#f92672">(</span>User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewUser</span><span style="color:#f92672">(</span>user<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">createNewUser</span><span style="color:#f92672">(</span>user<span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@PUT</span>
@@ -404,14 +404,14 @@ A prerequisite for this demo is a working RESTful web service." />
     <span style="color:#a6e22e">@Consumes</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>User user<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>user<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> userService<span style="color:#f92672">.</span><span style="color:#a6e22e">update</span><span style="color:#f92672">(</span>user<span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@DELETE</span>
     <span style="color:#a6e22e">@Path</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;{id}&#34;</span><span style="color:#f92672">)</span>
     <span style="color:#a6e22e">@Produces</span><span style="color:#f92672">(</span>MediaType<span style="color:#f92672">.</span><span style="color:#a6e22e">APPLICATION_JSON</span><span style="color:#f92672">)</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span><span style="color:#a6e22e">@PathParam</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">int</span> id<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        userService<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>id<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        userService<span style="color:#f92672">.</span><span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>id<span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>You can clone a copy of this project here: <a href="https://github.com/draptik/angulardemorestful">https://github.com/draptik/angulardemorestful</a>.</p>

@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -46,7 +46,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -247,7 +247,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#f92672">[&lt;</span>Fact<span style="color:#f92672">&gt;]</span>
 <span style="color:#66d9ef">let</span> ``Array with Number 1 returns &#39;one&#39;`` () <span style="color:#f92672">=</span>
     <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> FizzBuzz.Generate <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
-    Assert.Equal<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">one</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+    Assert.Equal<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;one&#34;</span><span style="color:#f92672">)</span>
 </code></pre></div><ul>
 <li><code>[&lt;Fact&gt;]</code>: this is F#&lsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
 <li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
@@ -261,25 +261,25 @@ In this post I would like to show how to setup an idiomatic F# testing environme
 </span><span style="color:#75715e"></span>Assert.Equal<span style="color:#f92672">(</span>1 <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> 2<span style="color:#f92672">)</span>
 
 <span style="color:#75715e">// idiomatic F# (using pipe) with FsUnit:
-</span><span style="color:#75715e"></span>1 <span style="color:#f92672">+</span> 1 <span style="color:#f92672">|</span><span style="color:#f92672">&gt;</span> should equal 2
+</span><span style="color:#75715e"></span>1 <span style="color:#f92672">+</span> 1 <span style="color:#f92672">|&gt;</span> should equal 2
 </code></pre></div><h4 id="installing-fsunit">Installing FsUnit</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd FizzBuzz.Tests
 dotnet add package FsUnit.Xunit
 </code></pre></div><p>File <code>FizzBuzz.Tests/FizzBuzz.Tests.fsproj</code> should now look like this (plus/minus some version numbers):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Project</span> <span style="color:#a6e22e">Sdk=</span><span style="color:#e6db74">&#34;Microsoft.NET.Sdk&#34;</span><span style="color:#f92672">&gt;</span>
 
-  <span style="color:#f92672">&lt;PropertyGroup</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;TargetFramework</span><span style="color:#f92672">&gt;</span>netcoreapp2.0<span style="color:#f92672">&lt;/TargetFramework&gt;</span>
+  <span style="color:#f92672">&lt;PropertyGroup&gt;</span>
+    <span style="color:#f92672">&lt;TargetFramework&gt;</span>netcoreapp2.0<span style="color:#f92672">&lt;/TargetFramework&gt;</span>
 
-    <span style="color:#f92672">&lt;IsPackable</span><span style="color:#f92672">&gt;</span>false<span style="color:#f92672">&lt;/IsPackable&gt;</span>
+    <span style="color:#f92672">&lt;IsPackable&gt;</span>false<span style="color:#f92672">&lt;/IsPackable&gt;</span>
   <span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
 
-  <span style="color:#f92672">&lt;ItemGroup</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;ItemGroup&gt;</span>
     <span style="color:#f92672">&lt;Compile</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Tests.fs&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;Compile</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Program.fs&#34;</span> <span style="color:#f92672">/&gt;</span>
   <span style="color:#f92672">&lt;/ItemGroup&gt;</span>
 
-  <span style="color:#f92672">&lt;ItemGroup</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;ItemGroup&gt;</span>
     <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;FsUnit.Xunit&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;3.0.0&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;Microsoft.NET.Test.Sdk&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;15.5.0&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;PackageReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;xunit&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.3.1&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -287,7 +287,7 @@ dotnet add package FsUnit.Xunit
     <span style="color:#f92672">&lt;DotNetCliToolReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;dotnet-xunit&#34;</span> <span style="color:#a6e22e">Version=</span><span style="color:#e6db74">&#34;2.3.1&#34;</span> <span style="color:#f92672">/&gt;</span>
   <span style="color:#f92672">&lt;/ItemGroup&gt;</span>
 
-  <span style="color:#f92672">&lt;ItemGroup</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;ItemGroup&gt;</span>
     <span style="color:#f92672">&lt;ProjectReference</span> <span style="color:#a6e22e">Include=</span><span style="color:#e6db74">&#34;..\FizzBuzz\FizzBuzz.fsproj&#34;</span> <span style="color:#f92672">/&gt;</span>
   <span style="color:#f92672">&lt;/ItemGroup&gt;</span>
 
@@ -305,7 +305,7 @@ dotnet add package FsUnit.Xunit
 <span style="color:#f92672">[&lt;</span>Fact<span style="color:#f92672">&gt;]</span>
 <span style="color:#66d9ef">let</span> ``Array with Number 1 returns &#39;one&#39;`` () <span style="color:#f92672">=</span>
     FizzBuzz.Generate <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> 
-    <span style="color:#f92672">|</span><span style="color:#f92672">&gt;</span> should equal <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">one</span><span style="color:#e6db74">&#34;</span> <span style="color:#75715e">// using &#34;|&gt;&#34; and &#34;should&#34; syntax
+    <span style="color:#f92672">|&gt;</span> should equal <span style="color:#e6db74">&#34;one&#34;</span> <span style="color:#75715e">// using &#34;|&gt;&#34; and &#34;should&#34; syntax
 </span></code></pre></div><p>Running the unit tests within the test folder:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">dotnet test
 Build started, please wait...

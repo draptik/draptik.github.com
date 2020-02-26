@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -48,7 +48,7 @@ After unpacking the file and running the install script I encountered the proble
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -223,10 +223,10 @@ Linux golem 2.6.28-12-generic <span style="color:#75715e">#43-Ubuntu</span>
 </span><span style="color:#75715e"></span>return &#39;no&#39;;
 }
 <span style="color:#a6e22e">+  if ($name eq &#39;vsock&#39;) {
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+    print wrap(&#34;VMWare config patch VSOCK!\n&#34;);
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+    system(shell_string($gHelper{&#39;mv&#39;}) . &#39; -vi &#39; . shell_string($build_dir . &#39;/../Module.symvers&#39;) . &#39; &#39; . shell_string($build_dir . &#39;/vsock-only/&#39; ));
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+  }
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+
+</span><span style="color:#a6e22e">+    print wrap(&#34;VMWare config patch VSOCK!\n&#34;);
+</span><span style="color:#a6e22e">+    system(shell_string($gHelper{&#39;mv&#39;}) . &#39; -vi &#39; . shell_string($build_dir . &#39;/../Module.symvers&#39;) . &#39; &#39; . shell_string($build_dir . &#39;/vsock-only/&#39; ));
+</span><span style="color:#a6e22e">+  }
+</span><span style="color:#a6e22e">+
 </span><span style="color:#a6e22e"></span>print wrap(&#39;Building the &#39; . $name . &#39; module.&#39; . &#34;\n\n&#34;, 0);
 if (system(shell_string($gHelper{&#39;make&#39;}) . &#39; -C &#39;
 . shell_string($build_dir . &#39;/&#39; . $name . &#39;-only&#39;)
@@ -235,9 +235,9 @@ if (system(shell_string($gHelper{&#39;make&#39;}) . &#39; -C &#39;
 print wrap(&#39;The &#39; . $name . &#39; module loads perfectly into the running kernel.&#39;
 . &#34;\n\n&#34;, 0);
 <span style="color:#a6e22e">+      if ($name eq &#39;vmci&#39;) {
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+	print wrap(&#34;VMWare config patch VMCI!\n&#34;);
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+	system(shell_string($gHelper{&#39;cp&#39;}) . &#39; -vi &#39; . shell_string($build_dir.&#39;/vmci-only/Module.symvers&#39;) . &#39; &#39; . shell_string($build_dir . &#39;/../&#39;));
-</span><span style="color:#a6e22e"></span><span style="color:#a6e22e">+      }
+</span><span style="color:#a6e22e">+	print wrap(&#34;VMWare config patch VMCI!\n&#34;);
+</span><span style="color:#a6e22e">+	system(shell_string($gHelper{&#39;cp&#39;}) . &#39; -vi &#39; . shell_string($build_dir.&#39;/vmci-only/Module.symvers&#39;) . &#39; &#39; . shell_string($build_dir . &#39;/../&#39;));
+</span><span style="color:#a6e22e">+      }
 </span><span style="color:#a6e22e"></span>remove_tmp_dir($build_dir);
 return &#39;yes&#39;;
 }

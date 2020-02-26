@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -46,7 +46,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -205,9 +205,9 @@
 #
 <span style="color:#75715e">## TODO: Make sure you don&#39;t have a directory by</span> 
 <span style="color:#75715e">## this name</span>
-DEMODIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/tmp/diff-patch-demo-draptik</span><span style="color:#e6db74">&#34;</span>
-ORIGDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/original-stuff</span><span style="color:#e6db74">&#34;</span>
-APPLYDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/patch-usage</span><span style="color:#e6db74">&#34;</span>
+DEMODIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/tmp/diff-patch-demo-draptik&#34;</span>
+ORIGDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/original-stuff&#34;</span>
+APPLYDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/patch-usage&#34;</span>
 #
 <span style="color:#75715e">## Cleanup before use</span>
 rm -rf <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
@@ -245,8 +245,8 @@ echo <span style="color:#e6db74">&#34;THIS IS THE NEW CONTENT&#34;</span> &gt; $
 PATCHFILE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;patch-mycode&#34;</span>
 echo <span style="color:#e6db74">&#34;&#34;</span>
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;</span><span style="color:#e6db74">&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** DIFF BETWEEN\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;&#34;</span>
+echo <span style="color:#e6db74">&#34;*** DIFF BETWEEN\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:&#34;</span>
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
 diff -u $ORIGCODE $NEWCODE | tee $PATCHFILE
 #
@@ -272,8 +272,8 @@ cp $ORIGDIR/$PATCHFILE $APPLYDIR
 cd $APPLYDIR
 echo <span style="color:#e6db74">&#34;&#34;</span>
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34; ...</span><span style="color:#e6db74">&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** NOW PATCHING WITH COMMAND \&#34;patch --backup -p0 &lt; </span>$PATCHFILE<span style="color:#e6db74">\&#34;...</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34; ...&#34;</span>
+echo <span style="color:#e6db74">&#34;*** NOW PATCHING WITH COMMAND \&#34;patch --backup -p0 &lt; </span>$PATCHFILE<span style="color:#e6db74">\&#34;...&#34;</span>
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
 patch --backup -p0 &lt; $PATCHFILE
 <span style="color:#75715e">## patch -p0 &lt; $PATCHFILE</span>
@@ -282,8 +282,8 @@ patch --backup -p0 &lt; $PATCHFILE
 cd ..
 echo <span style="color:#e6db74">&#34;&#34;</span>
 echo <span style="color:#e6db74">&#34;****************************&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;</span><span style="color:#e6db74">&#34;</span>
-echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">*** DIFF BETWEEN\n***\t\&#34;</span>$ORIGDIR<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$APPLYDIR<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:</span><span style="color:#e6db74">&#34;</span>
+echo <span style="color:#e6db74">&#34;*** YOU ARE NOW IN FOLDER: \&#34;</span>$PWD<span style="color:#e6db74">\&#34;&#34;</span>
+echo <span style="color:#e6db74">&#34;*** DIFF BETWEEN\n***\t\&#34;</span>$ORIGDIR<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$APPLYDIR<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:&#34;</span>
 echo <span style="color:#e6db74">&#34;****************************&#34;</span>
 diff -u $ORIGDIR/$ORIGCODE $APPLYDIR/$ORIGCODE
 </code></pre></div>

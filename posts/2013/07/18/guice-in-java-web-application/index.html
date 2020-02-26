@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -48,7 +48,7 @@ Advantages compared to Spring:
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -242,13 +242,13 @@ Advantages compared to Spring:
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDefaultUsers</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">userFactory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">createUsers</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>User<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDefaultUsers</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">userFactory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">createUsers</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
     <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getDefaultUser</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">userFactory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">createUser</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">public</span> User <span style="color:#a6e22e">getDefaultUser</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">userFactory</span><span style="color:#f92672">.</span><span style="color:#a6e22e">createUser</span><span style="color:#f92672">();</span>
     <span style="color:#f92672">}</span>
 
 <span style="color:#f92672">}</span>
@@ -263,9 +263,9 @@ Advantages compared to Spring:
 
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UserModule</span> <span style="color:#66d9ef">extends</span> AbstractModule <span style="color:#f92672">{</span>
     <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        bind<span style="color:#f92672">(</span>UserFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserFactoryImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-        bind<span style="color:#f92672">(</span>UserService<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserServiceImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        bind<span style="color:#f92672">(</span>UserFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">).</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserFactoryImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+        bind<span style="color:#f92672">(</span>UserService<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">).</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>UserServiceImpl<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>The <code>UserModule</code> class demonstrates the advantage of Guice vs. Spring: <em>NO XML</em>. When using Spring you normally would have to create Spring beans in an XML file like this:</p>
@@ -295,23 +295,23 @@ Advantages compared to Spring:
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NgDemoApplicationSetup</span> <span style="color:#66d9ef">extends</span> GuiceServletContextListener <span style="color:#f92672">{</span>
 
     <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">protected</span> Injector <span style="color:#a6e22e">getInjector</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">protected</span> Injector <span style="color:#a6e22e">getInjector</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-        <span style="color:#66d9ef">return</span> Guice<span style="color:#f92672">.</span><span style="color:#a6e22e">createInjector</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ServletModule<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> Guice<span style="color:#f92672">.</span><span style="color:#a6e22e">createInjector</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> ServletModule<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
             <span style="color:#a6e22e">@Override</span>
-            <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
 
-                <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#66d9ef">super</span><span style="color:#f92672">.</span><span style="color:#a6e22e">configureServlets</span><span style="color:#f92672">();</span>
 
                 <span style="color:#75715e">// Configuring Jersey via Guice:
-</span><span style="color:#75715e"></span>                ResourceConfig resourceConfig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PackagesResourceConfig<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ngdemo/rest&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-                <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;</span><span style="color:#f92672">?</span><span style="color:#f92672">&gt;</span> resource <span style="color:#f92672">:</span> resourceConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">getClasses</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-                    bind<span style="color:#f92672">(</span>resource<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+</span><span style="color:#75715e"></span>                ResourceConfig resourceConfig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PackagesResourceConfig<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;ngdemo/rest&#34;</span><span style="color:#f92672">);</span>
+                <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;?&gt;</span> resource <span style="color:#f92672">:</span> resourceConfig<span style="color:#f92672">.</span><span style="color:#a6e22e">getClasses</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+                    bind<span style="color:#f92672">(</span>resource<span style="color:#f92672">);</span>
                 <span style="color:#f92672">}</span>
-                serve<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/rest/*&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#a6e22e">with</span><span style="color:#f92672">(</span>GuiceContainer<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                serve<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/rest/*&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">with</span><span style="color:#f92672">(</span>GuiceContainer<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
             <span style="color:#f92672">}</span>
-        <span style="color:#f92672">}</span><span style="color:#f92672">,</span> <span style="color:#66d9ef">new</span> UserModule<span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#75715e">// &lt;-- Adding other Guice Dependency Injection Modules
+        <span style="color:#f92672">},</span> <span style="color:#66d9ef">new</span> UserModule<span style="color:#f92672">());</span> <span style="color:#75715e">// &lt;-- Adding other Guice Dependency Injection Modules
 </span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>And finally the file <code>web.xml</code>:</p>
@@ -325,20 +325,20 @@ Advantages compared to Spring:
          <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://java.sun.com/xml/ns/j2ee
 </span><span style="color:#e6db74">	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd&#34;</span><span style="color:#f92672">&gt;</span>
 
-    <span style="color:#f92672">&lt;display-name</span><span style="color:#f92672">&gt;</span>Restful Web Application<span style="color:#f92672">&lt;/display-name&gt;</span>
+    <span style="color:#f92672">&lt;display-name&gt;</span>Restful Web Application<span style="color:#f92672">&lt;/display-name&gt;</span>
 
-    <span style="color:#f92672">&lt;filter</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;filter-name</span><span style="color:#f92672">&gt;</span>guiceFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
-        <span style="color:#f92672">&lt;filter-class</span><span style="color:#f92672">&gt;</span>com.google.inject.servlet.GuiceFilter<span style="color:#f92672">&lt;/filter-class&gt;</span>
+    <span style="color:#f92672">&lt;filter&gt;</span>
+        <span style="color:#f92672">&lt;filter-name&gt;</span>guiceFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
+        <span style="color:#f92672">&lt;filter-class&gt;</span>com.google.inject.servlet.GuiceFilter<span style="color:#f92672">&lt;/filter-class&gt;</span>
     <span style="color:#f92672">&lt;/filter&gt;</span>
 
-    <span style="color:#f92672">&lt;filter-mapping</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;filter-name</span><span style="color:#f92672">&gt;</span>guiceFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
-        <span style="color:#f92672">&lt;url-pattern</span><span style="color:#f92672">&gt;</span>/*<span style="color:#f92672">&lt;/url-pattern&gt;</span>
+    <span style="color:#f92672">&lt;filter-mapping&gt;</span>
+        <span style="color:#f92672">&lt;filter-name&gt;</span>guiceFilter<span style="color:#f92672">&lt;/filter-name&gt;</span>
+        <span style="color:#f92672">&lt;url-pattern&gt;</span>/*<span style="color:#f92672">&lt;/url-pattern&gt;</span>
     <span style="color:#f92672">&lt;/filter-mapping&gt;</span>
 
-    <span style="color:#f92672">&lt;listener</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;listener-class</span><span style="color:#f92672">&gt;</span>ngdemo.infrastructure.NgDemoApplicationSetup<span style="color:#f92672">&lt;/listener-class&gt;</span>
+    <span style="color:#f92672">&lt;listener&gt;</span>
+        <span style="color:#f92672">&lt;listener-class&gt;</span>ngdemo.infrastructure.NgDemoApplicationSetup<span style="color:#f92672">&lt;/listener-class&gt;</span>
     <span style="color:#f92672">&lt;/listener&gt;</span>
 <span style="color:#f92672">&lt;/web-app&gt;</span>
 </code></pre></div><p>The file <code>web.xml</code> is now free of any <code>&lt;servlet&gt;</code> tags. The only thing that has to be configured in XML is the <code>&lt;listener-class&gt;</code>. The value of the <code>&lt;listener-class&gt;</code> is our Java class <code>NgDemoApplicationSetup</code>, so all further configuration can be defined in a type safe manner.</p>

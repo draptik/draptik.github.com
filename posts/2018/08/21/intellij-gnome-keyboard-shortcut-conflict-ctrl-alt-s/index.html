@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.64.1" />
+<meta name="generator" content="Hugo 0.65.3" />
 
     
     
@@ -44,7 +44,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.92c66d107d7b219f0792cfd67223179af884b03f386ac46894f9f735932bbca3.css" integrity="sha256-ksZtEH17IZ8Hks/WciMXmviEsD84asRolPn3NZMrvKM=">
+<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -254,12 +254,12 @@ gsettings get org.gnome.shell.extensions.screenshot-window-sizer cycle-screensho
 <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;&lt;Shift&gt;&lt;Alt&gt;&lt;Control&gt;s&#39;</span><span style="color:#f92672">]</span>
 </code></pre></div><p>The following snippet disables the hijacked <code>Ctrl Alt s</code> binding from <code>screenshot-window-sizer</code> (found <a href="https://extensions.gnome.org/extension/881/screenshot-window-sizer/">here</a>)</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># disable:</span>
-gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes <span style="color:#f92672">[</span><span style="color:#f92672">]</span>
+gsettings set org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes <span style="color:#f92672">[]</span>
 gsettings reset org.gnome.desktop.wm.keybindings toggle-shaded
 
 <span style="color:#75715e"># To re-enable:</span> 
 gsettings reset org.gnome.shell.extensions.screenshot-window-sizer cycle-screenshot-sizes
-gsettings set org.gnome.desktop.wm.keybindings toggle-shaded <span style="color:#f92672">[</span><span style="color:#f92672">]</span>
+gsettings set org.gnome.desktop.wm.keybindings toggle-shaded <span style="color:#f92672">[]</span>
 </code></pre></div><p>Now the keybinding <code>Ctrl Alt s</code> works as expected in IntelliJ products &ndash; even with Gnome.</p>
 
   </div>
