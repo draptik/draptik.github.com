@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.67.1" />
+<meta name="generator" content="Hugo 0.70.0" />
 
     
     
@@ -296,7 +296,7 @@ workingWithSmartCtor <span style="color:#e6db74">&#34;&#34;</span>     <span sty
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> UserName <span style="color:#f92672">=</span> <span style="color:#66d9ef">private</span> UserName <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">string</span>
 
 <span style="color:#66d9ef">module</span> UserName <span style="color:#f92672">=</span>
-    <span style="color:#66d9ef">let</span> isValid s <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>String.IsNullOrEmpty<span style="color:#f92672">(</span>s<span style="color:#f92672">)</span> <span style="color:#f92672">&amp;&amp;</span> s<span style="color:#f92672">.</span>Length <span style="color:#f92672">&lt;</span> 50
+    <span style="color:#66d9ef">let</span> isValid s <span style="color:#f92672">=</span> <span style="color:#f92672">not</span> <span style="color:#f92672">(</span>String.IsNullOrEmpty<span style="color:#f92672">(</span>s<span style="color:#f92672">))</span> <span style="color:#f92672">&amp;&amp;</span> s<span style="color:#f92672">.</span>Length <span style="color:#f92672">&lt;</span> 50
 
     <span style="color:#75715e">// smart constructor
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> create <span style="color:#f92672">(</span>str<span style="color:#f92672">:</span> <span style="color:#66d9ef">string</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
