@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.70.0" />
+<meta name="generator" content="Hugo 0.74.3" />
 
     
     
@@ -157,6 +157,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
 	
 	
 	
+	
 	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 </section>
@@ -249,7 +250,7 @@ In this post I would like to show how to setup an idiomatic F# testing environme
     <span style="color:#66d9ef">let</span> result <span style="color:#f92672">=</span> FizzBuzz.Generate <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
     Assert.Equal<span style="color:#f92672">(</span>result<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;one&#34;</span><span style="color:#f92672">)</span>
 </code></pre></div><ul>
-<li><code>[&lt;Fact&gt;]</code>: this is F#&lsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
+<li><code>[&lt;Fact&gt;]</code>: this is F#&rsquo;s annotation style. The same as C# <code>[Fact]</code> or Java <code>@Fact</code></li>
 <li><code>Array with Number 1 returns 'one'</code>: Method name in double back-ticks improves readability, especially in unit tests. No CamelCasing or snake_casing needed. It&rsquo;s an F# language feature.</li>
 <li><code>Assert.Equal(...)</code>: This is probably familiar to everyone who has ever written a unit test. Every assertion library has a different signature: Is it <code>Equal(expected, actual)</code> or <code>Equal(actual, expected)</code>? I hate this! Thankfully there are alternative assertion libraries. Example: In C# you can write <code>actual.Should().Be(expected)</code> (using <a href="http://fluentassertions.com/"><code>FluentAssertions</code></a>). The same is true for F#.</li>
 </ul>
@@ -404,12 +405,11 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
-<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
 
 
     
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
         
             
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/fsharp.min.js"></script>
@@ -419,7 +419,6 @@ if (!doNotTrack) {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></script>
             
         
-    
     <script type="text/javascript">
         
         hljs.configure({languages: ["fsharp, java, bash"]});
@@ -427,7 +426,6 @@ if (!doNotTrack) {
         hljs.initHighlightingOnLoad();
     </script>
     
-
 
 
 

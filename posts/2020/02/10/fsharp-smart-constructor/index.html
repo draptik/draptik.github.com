@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.70.0" />
+<meta name="generator" content="Hugo 0.74.3" />
 
     
     
@@ -159,6 +159,7 @@ let UserName = private UserName of string module UserName = let isValid s = // .
 	
 	
 	
+	
 	<a href="mailto:blog@pdrechsler.de" rel="me"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
 	
 </section>
@@ -253,7 +254,7 @@ workingWithSmartCtor <span style="color:#e6db74">&#34;&#34;</span>     <span sty
     LastName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Simpson&#34;</span>
     UserName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Homer Simpson&#34;</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Note that F#&lsquo;s record types are immutable by default. <code>homer</code> can&rsquo;t be modified.</p>
+</code></pre></div><p>Note that F#&rsquo;s record types are immutable by default. <code>homer</code> can&rsquo;t be modified.</p>
 <p>Imagine a <code>FormatName</code> function expecting <code>FirstName</code> and <code>LastName</code>. A naive C# method signature would look like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-csharp" data-lang="csharp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">string</span> FormatName(<span style="color:#66d9ef">string</span> firstName, <span style="color:#66d9ef">string</span> LastName) =&gt; <span style="color:#75715e">// ...
 </span></code></pre></div><p>A naive F# function signature would look the same way (with less boiler plate):</p>
@@ -390,12 +391,11 @@ if (!doNotTrack) {
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
 
-<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js" integrity="sha384-b3ua1l97aVGAPEIe48b4TC60WUQbQaGi2jqAWM90y0OZXZeyaTCWtBTKtjW2GXG1" crossorigin="anonymous"></script>
 
 
     
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
         
             
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/fsharp.min.js"></script>
@@ -405,7 +405,6 @@ if (!doNotTrack) {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/languages/bash.min.js"></script>
             
         
-    
     <script type="text/javascript">
         
         hljs.configure({languages: ["fsharp, java, bash"]});
@@ -413,7 +412,6 @@ if (!doNotTrack) {
         hljs.initHighlightingOnLoad();
     </script>
     
-
 
 
 
