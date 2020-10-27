@@ -6,11 +6,7 @@
     <description>Recent content in charting on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Jul 2015 00:07:12 +0000</lastBuildDate>
-    
-	<atom:link href="https://draptik.github.io/categories/charting/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 30 Jul 2015 00:07:12 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/charting/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</title>
       <link>https://draptik.github.io/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/</link>

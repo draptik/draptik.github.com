@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="public" />
 <!-- Enable responsiveness on mobile devices -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.74.3" />
+<meta name="generator" content="Hugo 0.76.5" />
 
     
     
@@ -23,11 +23,11 @@
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Creating and applying a patch file"/>
 <meta name="twitter:description" content="This is a simple example shell script demonstrating how to apply a patch file.
-#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode."/>
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by  ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode."/>
 
 <meta property="og:title" content="Creating and applying a patch file" />
 <meta property="og:description" content="This is a simple example shell script demonstrating how to apply a patch file.
-#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode." />
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&#39;t have a directory by  ## this name DEMODIR=&#34;$HOME/tmp/diff-patch-demo-draptik&#34; ORIGDIR=&#34;$DEMODIR/original-stuff&#34; APPLYDIR=&#34;$DEMODIR/patch-usage&#34; # ## Cleanup before use rm -rf &#34;$DEMODIR&#34; mkdir &#34;$DEMODIR&#34; cd &#34;$DEMODIR&#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&#34;mycode." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2009/05/21/creating-and-applying-a-patch-file/" />
 <meta property="article:published_time" content="2009-05-21T03:00:26+00:00" />
@@ -46,7 +46,7 @@
 
 
 
-<link rel="stylesheet" href="/scss/hyde-hyde.3081c4981fb69a2783dd36ecfdd0e6ba7a158d4cbfdd290ebce8f78ba0469fc6.css" integrity="sha256-MIHEmB&#43;2mieD3Tbs/dDmunoVjUy/3SkOvOj3i6BGn8Y=">
+<link rel="stylesheet" href="/scss/hyde-hyde.71157e768c4e111a23c3531b95e0cbb59bbef3c9e6901d36247cb53d6b6be258.css" integrity="sha256-cRV&#43;doxOERojw1MbleDLtZu&#43;88nmkB02JHy1PWtr4lg=">
 
 
 <link rel="stylesheet" href="/scss/print.2744dcbf8a0b2e74f8a50e4b34e5f441be7cf93cc7de27029121c6a09f9e77bc.css" integrity="sha256-J0Tcv4oLLnT4pQ5LNOX0Qb58&#43;TzH3icCkSHGoJ&#43;ed7w=" media="print">
@@ -198,41 +198,41 @@
   <div class="post">
     <p>This is a simple example shell script demonstrating how to apply a patch file.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
-</span><span style="color:#75715e"></span>#
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
 <span style="color:#75715e"># Description: Simple demo of creating and</span>
 <span style="color:#75715e"># applying a patch file.</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e"># Author: draptik</span>
-#
-<span style="color:#75715e">## TODO: Make sure you don&#39;t have a directory by</span> 
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">## TODO: Make sure you don&#39;t have a directory by </span>
 <span style="color:#75715e">## this name</span>
 DEMODIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/tmp/diff-patch-demo-draptik&#34;</span>
 ORIGDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/original-stuff&#34;</span>
 APPLYDIR<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">/patch-usage&#34;</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Cleanup before use</span>
 rm -rf <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
 mkdir <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
 cd <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Create directories</span>
 mkdir $ORIGDIR
 mkdir $APPLYDIR
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Switch directory</span>
 cd $ORIGDIR
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Create original file (the file you want to patch)</span>
 ORIGCODE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mycode.txt&#34;</span>
 echo <span style="color:#e6db74">&#34;This is the old content&#34;</span> &gt; $ORIGCODE
 <span style="color:#75715e">## Create file with your changes</span>
 NEWCODE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mycode.new.txt&#34;</span>
 echo <span style="color:#e6db74">&#34;THIS IS THE NEW CONTENT&#34;</span> &gt; $NEWCODE
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## ============================</span>
 <span style="color:#75715e"># 1. CREATE A PATCH</span>
 <span style="color:#75715e">## ============================</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Make a diff between the files and save the</span>
 <span style="color:#75715e">## result to $PATCHFILE</span>
 <span style="color:#75715e">##</span>
@@ -250,24 +250,24 @@ echo <span style="color:#e6db74">&#34;*** YOU ARE NOW IN FOLDER: \&#34;</span>$P
 echo <span style="color:#e6db74">&#34;*** DIFF BETWEEN\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$ORIGCODE<span style="color:#e6db74">\&#34;\n*** AND\n***\t\&#34;</span>$PWD<span style="color:#e6db74">/</span>$NEWCODE<span style="color:#e6db74">\&#34;:&#34;</span>
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
 diff -u $ORIGCODE $NEWCODE | tee $PATCHFILE
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Switch directory</span>
 cd <span style="color:#e6db74">&#34;</span>$DEMODIR<span style="color:#e6db74">&#34;</span>
-#
-<span style="color:#75715e">## Copy the unpatched original file ($ORIGCODE) and</span> 
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">## Copy the unpatched original file ($ORIGCODE) and </span>
 <span style="color:#75715e">## the $PATCHFILE to different directory ($APPLYDIR).</span>
 cp $ORIGDIR/$ORIGCODE $APPLYDIR
 cp $ORIGDIR/$PATCHFILE $APPLYDIR
-#
-#
+<span style="color:#75715e">#</span>
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## ============================</span>
 <span style="color:#75715e"># APPLY A PATCH</span>
 <span style="color:#75715e">## ============================</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Apply the patch to a copy of the original file</span>
 <span style="color:#75715e">##</span>
-<span style="color:#75715e">## The &#34;--backup&#34; option will create a file</span> 
-<span style="color:#75715e">## &#34;$ORIGCODE.orig&#34; as backup.</span> 
+<span style="color:#75715e">## The &#34;--backup&#34; option will create a file </span>
+<span style="color:#75715e">## &#34;$ORIGCODE.orig&#34; as backup. </span>
 <span style="color:#75715e">## You can drop this option.</span>
 <span style="color:#75715e">##</span>
 cd $APPLYDIR
@@ -278,7 +278,7 @@ echo <span style="color:#e6db74">&#34;*** NOW PATCHING WITH COMMAND \&#34;patch 
 echo <span style="color:#e6db74">&#34;***************************&#34;</span>
 patch --backup -p0 &lt; $PATCHFILE
 <span style="color:#75715e">## patch -p0 &lt; $PATCHFILE</span>
-#
+<span style="color:#75715e">#</span>
 <span style="color:#75715e">## Show that the file has been patched correctly:</span>
 cd ..
 echo <span style="color:#e6db74">&#34;&#34;</span>

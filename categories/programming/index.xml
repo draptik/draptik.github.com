@@ -6,11 +6,7 @@
     <description>Recent content in programming on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 May 2013 15:55:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://draptik.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 30 May 2013 15:55:00 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ReorderList demo for AjaxControlToolkit</title>
       <link>https://draptik.github.io/posts/2013/05/30/reorderlist-demo-for-ajaxcontroltoolkit/</link>

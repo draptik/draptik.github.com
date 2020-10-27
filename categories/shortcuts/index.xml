@@ -6,11 +6,7 @@
     <description>Recent content in shortcuts on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Aug 2018 23:01:12 +0000</lastBuildDate>
-    
-	<atom:link href="https://draptik.github.io/categories/shortcuts/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 21 Aug 2018 23:01:12 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/shortcuts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</title>
       <link>https://draptik.github.io/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/</link>

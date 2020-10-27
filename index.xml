@@ -6,11 +6,7 @@
     <description>Recent content on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Feb 2020 00:49:53 +0100</lastBuildDate>
-    
-	<atom:link href="https://draptik.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Feb 2020 00:49:53 +0100</lastBuildDate><atom:link href="https://draptik.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TDD Money Step-by-Step in C#</title>
       <link>https://draptik.github.io/posts/2020/02/25/tdd-money-step-by-step-in-c/</link>
@@ -588,7 +584,7 @@ Destination:</description>
       
       <guid>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</guid>
       <description>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs
-murrine_style_draw_box: assertion height &amp;gt;= -1&amp;rsquo; failed`
+murrine_style_draw_box: assertion height &amp;gt;= -1&#39; failed`
 after every action within Emacs.
 The solution is simple, but has not been integrated in the Ubuntu repository yet.</description>
     </item>
@@ -780,7 +776,7 @@ After unpacking the file and running the install script I encountered the proble
       
       <guid>https://draptik.github.io/posts/2009/05/21/creating-and-applying-a-patch-file/</guid>
       <description>This is a simple example shell script demonstrating how to apply a patch file.
-#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&amp;#39;t have a directory by ## this name DEMODIR=&amp;#34;$HOME/tmp/diff-patch-demo-draptik&amp;#34; ORIGDIR=&amp;#34;$DEMODIR/original-stuff&amp;#34; APPLYDIR=&amp;#34;$DEMODIR/patch-usage&amp;#34; # ## Cleanup before use rm -rf &amp;#34;$DEMODIR&amp;#34; mkdir &amp;#34;$DEMODIR&amp;#34; cd &amp;#34;$DEMODIR&amp;#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&amp;#34;mycode.</description>
+#!/bin/sh # # Description: Simple demo of creating and # applying a patch file. # # Author: draptik # ## TODO: Make sure you don&amp;#39;t have a directory by  ## this name DEMODIR=&amp;#34;$HOME/tmp/diff-patch-demo-draptik&amp;#34; ORIGDIR=&amp;#34;$DEMODIR/original-stuff&amp;#34; APPLYDIR=&amp;#34;$DEMODIR/patch-usage&amp;#34; # ## Cleanup before use rm -rf &amp;#34;$DEMODIR&amp;#34; mkdir &amp;#34;$DEMODIR&amp;#34; cd &amp;#34;$DEMODIR&amp;#34; # ## Create directories mkdir $ORIGDIR mkdir $APPLYDIR # ## Switch directory cd $ORIGDIR # ## Create original file (the file you want to patch) ORIGCODE=&amp;#34;mycode.</description>
     </item>
     
     <item>

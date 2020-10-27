@@ -6,11 +6,7 @@
     <description>Recent content in linux on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate>
-    
-	<atom:link href="https://draptik.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Jun 2019 21:42:37 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</title>
       <link>https://draptik.github.io/posts/2019/06/25/review-hands-on-ddd-dotnetcore/</link>
@@ -147,7 +143,7 @@ This solution should work for all Linux distributions supported by VirtualBox4.
       
       <guid>https://draptik.github.io/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/</guid>
       <description>This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs
-murrine_style_draw_box: assertion height &amp;gt;= -1&amp;rsquo; failed`
+murrine_style_draw_box: assertion height &amp;gt;= -1&#39; failed`
 after every action within Emacs.
 The solution is simple, but has not been integrated in the Ubuntu repository yet.</description>
     </item>
