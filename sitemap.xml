@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://draptik.github.io/</loc>
+    <lastmod>2021-02-26T22:02:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/posts/2021/02/26/how-to-setup-jupyter-with-dotnet-5-on-arch-linux-in-2021/</loc>
+    <lastmod>2021-02-26T22:02:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://draptik.github.io/posts/</loc>
+    <lastmod>2021-02-26T22:02:59+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://draptik.github.io/categories/</loc>
     <lastmod>2020-02-25T00:49:53+01:00</lastmod>
   </url>
@@ -14,16 +29,6 @@
   
   <url>
     <loc>https://draptik.github.io/categories/dotnetcore/</loc>
-    <lastmod>2020-02-25T00:49:53+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/</loc>
-    <lastmod>2020-02-25T00:49:53+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://draptik.github.io/posts/</loc>
     <lastmod>2020-02-25T00:49:53+01:00</lastmod>
   </url>
   

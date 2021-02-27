@@ -6,7 +6,16 @@
     <description>Recent content on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Feb 2020 00:49:53 +0100</lastBuildDate><atom:link href="https://draptik.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Feb 2021 22:02:59 +0000</lastBuildDate><atom:link href="https://draptik.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to setup Jupyter with dotnet 5 on Arch Linux in 2021</title>
+      <link>https://draptik.github.io/posts/2021/02/26/how-to-setup-jupyter-with-dotnet-5-on-arch-linux-in-2021/</link>
+      <pubDate>Fri, 26 Feb 2021 22:02:59 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2021/02/26/how-to-setup-jupyter-with-dotnet-5-on-arch-linux-in-2021/</guid>
+      <description>Jupyter &amp;ldquo;Notebooks&amp;rdquo; are an interesting way of documenting / teaching code interactively. Jupyter has extended their plattform for other languages (it was originally conceived for Python). See this microsoft anouncement from 2020-06 for dotnet core integration.</description>
+    </item>
+    
     <item>
       <title>TDD Money Step-by-Step in C#</title>
       <link>https://draptik.github.io/posts/2020/02/25/tdd-money-step-by-step-in-c/</link>
