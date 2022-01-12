@@ -188,7 +188,7 @@
         </span>
         <span >
         
-        This posts showcases different ways of writing parameterized tests with xUnit using F#.
+        This post showcases different ways of writing parameterized tests with xUnit using F#.
 I&rsquo;m assuming you
  have a basic knowledge of F# are familiar with the concept of parameterized tests are familiar with parameterized tests with C#/xUnit  TL/DR type Somebody = { Name : string } let samplesTLDR : obj[] list = [ [| { Name = &#34;Homer&#34; }; &#34;Homer&#34; |] [| { Name = &#34;Marge&#34; }; &#34;Marge&#34; |] ] [&lt;Theory&gt;] [&lt;MemberData(nameof(samplesTLDR))&gt;] let ``test TLDR`` someBody expected = Assert.
         
