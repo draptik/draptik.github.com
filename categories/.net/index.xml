@@ -6,7 +6,18 @@
     <description>Recent content in .NET on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Feb 2018 20:53:43 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/.net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 16:56:10 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/.net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Parameterized xUnit Tests with F#</title>
+      <link>https://draptik.github.io/posts/2022/01/12/fsharp-writing-parameterized-xunit-tests/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/posts/2022/01/12/fsharp-writing-parameterized-xunit-tests/</guid>
+      <description>This posts showcases different ways of writing parameterized tests with xUnit using F#.
+I&amp;rsquo;m assuming you
+ have a basic knowledge of F# are familiar with the concept of parameterized tests are familiar with parameterized tests with C#/xUnit  TL/DR type Somebody = { Name : string } let samplesTLDR : obj[] list = [ [| { Name = &amp;#34;Homer&amp;#34; }; &amp;#34;Homer&amp;#34; |] [| { Name = &amp;#34;Marge&amp;#34; }; &amp;#34;Marge&amp;#34; |] ] [&amp;lt;Theory&amp;gt;] [&amp;lt;MemberData(nameof(samplesTLDR))&amp;gt;] let ``test TLDR`` someBody expected = Assert.</description>
+    </item>
+    
     <item>
       <title>F# Test Setup for FizzBuzz</title>
       <link>https://draptik.github.io/posts/2018/02/07/fsharp-test-setup-for-fizzbuzz/</link>

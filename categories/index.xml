@@ -6,7 +6,52 @@
     <description>Recent content in Categories on draptik</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Feb 2021 22:02:59 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 16:56:10 +0000</lastBuildDate><atom:link href="https://draptik.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET</title>
+      <link>https://draptik.github.io/categories/.net/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/.net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fsharp</title>
+      <link>https://draptik.github.io/categories/fsharp/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/fsharp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://draptik.github.io/categories/test/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
+      <link>https://draptik.github.io/categories/testing/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>xunit</title>
+      <link>https://draptik.github.io/categories/xunit/</link>
+      <pubDate>Wed, 12 Jan 2022 16:56:10 +0000</pubDate>
+      
+      <guid>https://draptik.github.io/categories/xunit/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>arch linux</title>
       <link>https://draptik.github.io/categories/arch-linux/</link>
@@ -22,15 +67,6 @@
       <pubDate>Fri, 26 Feb 2021 22:02:59 +0000</pubDate>
       
       <guid>https://draptik.github.io/categories/dotnet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fsharp</title>
-      <link>https://draptik.github.io/categories/fsharp/</link>
-      <pubDate>Fri, 26 Feb 2021 22:02:59 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/fsharp/</guid>
       <description></description>
     </item>
     
@@ -278,15 +314,6 @@
     </item>
     
     <item>
-      <title>.NET</title>
-      <link>https://draptik.github.io/categories/.net/</link>
-      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/.net/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>fizzbuzz</title>
       <link>https://draptik.github.io/categories/fizzbuzz/</link>
       <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
@@ -301,24 +328,6 @@
       <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
       
       <guid>https://draptik.github.io/categories/kata/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>test</title>
-      <link>https://draptik.github.io/categories/test/</link>
-      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/test/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>testing</title>
-      <link>https://draptik.github.io/categories/testing/</link>
-      <pubDate>Wed, 07 Feb 2018 20:53:43 +0000</pubDate>
-      
-      <guid>https://draptik.github.io/categories/testing/</guid>
       <description></description>
     </item>
     
