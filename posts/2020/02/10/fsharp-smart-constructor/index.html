@@ -233,7 +233,7 @@ type UserName = private UserName of string module UserName = let isValid s = // 
     <span style="color:#75715e">// smart ctor
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> create <span style="color:#f92672">(</span>str<span style="color:#f92672">:</span> <span style="color:#66d9ef">string</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
         <span style="color:#66d9ef">if</span> isValid str <span style="color:#66d9ef">then</span>
-            Some UserName str
+            Some <span style="color:#f92672">(</span>UserName str<span style="color:#f92672">)</span>
         <span style="color:#66d9ef">else</span>
             None
 
