@@ -15,7 +15,7 @@
       <guid>https://draptik.github.io/posts/2020/02/10/fsharp-smart-constructor/</guid>
       <description>The &amp;ldquo;Smart Constructor&amp;rdquo; pattern allows us to create a type with F#. With validation.
 TL/DR Here is the F# boiler plate needed to implement the Value Object pattern.
-let UserName = private UserName of string module UserName = let isValid s = // .</description>
+type UserName = private UserName of string module UserName = let isValid s = // .</description>
     </item>
     
   </channel>

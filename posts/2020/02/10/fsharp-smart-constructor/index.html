@@ -23,12 +23,12 @@
 <meta name="twitter:title" content="F# Smart Constructor"/>
 <meta name="twitter:description" content="The &ldquo;Smart Constructor&rdquo; pattern allows us to create a type with F#. With validation.
 TL/DR Here is the F# boiler plate needed to implement the Value Object pattern.
-let UserName = private UserName of string module UserName = let isValid s = // ."/>
+type UserName = private UserName of string module UserName = let isValid s = // ."/>
 
 <meta property="og:title" content="F# Smart Constructor" />
 <meta property="og:description" content="The &ldquo;Smart Constructor&rdquo; pattern allows us to create a type with F#. With validation.
 TL/DR Here is the F# boiler plate needed to implement the Value Object pattern.
-let UserName = private UserName of string module UserName = let isValid s = // ." />
+type UserName = private UserName of string module UserName = let isValid s = // ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://draptik.github.io/posts/2020/02/10/fsharp-smart-constructor/" />
 <meta property="article:published_time" content="2020-02-10T22:20:01+01:00" />
@@ -225,7 +225,7 @@ let UserName = private UserName of string module UserName = let isValid s = // .
     <p>The &ldquo;Smart Constructor&rdquo; pattern allows us to create a type with F#. <strong>With validation</strong>.</p>
 <h2 id="tldr">TL/DR</h2>
 <p>Here is the F# boiler plate needed to implement the <a href="https://en.wikipedia.org/wiki/Value_object">Value Object</a> pattern.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">let</span> UserName <span style="color:#f92672">=</span> <span style="color:#66d9ef">private</span> UserName <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">string</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserName</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">private</span> UserName <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">string</span>
 
 <span style="color:#66d9ef">module</span> UserName <span style="color:#f92672">=</span>
     <span style="color:#66d9ef">let</span> isValid s <span style="color:#f92672">=</span> <span style="color:#75715e">// ...
@@ -302,7 +302,7 @@ workingWithSmartCtor <span style="color:#e6db74">&#34;&#34;</span>     <span sty
 </code></pre></div><p>But how to guarantee a valid <code>UserName</code>?</p>
 <p>This is where the Smart Constructor pattern comes into play:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fsharp" data-lang="fsharp"><span style="color:#75715e">// type is private
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> UserName <span style="color:#f92672">=</span> <span style="color:#66d9ef">private</span> UserName <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">string</span>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">UserName</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">private</span> UserName <span style="color:#66d9ef">of</span> <span style="color:#66d9ef">string</span>
 
 <span style="color:#66d9ef">module</span> UserName <span style="color:#f92672">=</span>
     <span style="color:#66d9ef">let</span> isValid s <span style="color:#f92672">=</span> <span style="color:#f92672">not</span> <span style="color:#f92672">(</span>String.IsNullOrEmpty<span style="color:#f92672">(</span>s<span style="color:#f92672">))</span> <span style="color:#f92672">&amp;&amp;</span> s<span style="color:#f92672">.</span>Length <span style="color:#f92672">&lt;</span> 50
@@ -310,7 +310,7 @@ workingWithSmartCtor <span style="color:#e6db74">&#34;&#34;</span>     <span sty
     <span style="color:#75715e">// smart constructor
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">let</span> create <span style="color:#f92672">(</span>str<span style="color:#f92672">:</span> <span style="color:#66d9ef">string</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span>
         <span style="color:#66d9ef">if</span> isValid str <span style="color:#66d9ef">then</span>
-            Some UserName str
+            Some <span style="color:#f92672">(</span>UserName str<span style="color:#f92672">)</span>
         <span style="color:#66d9ef">else</span>
             None
 
@@ -323,6 +323,7 @@ workingWithSmartCtor <span style="color:#e6db74">&#34;&#34;</span>     <span sty
 <span style="color:#f92672">|</span> None <span style="color:#f92672">-&gt;</span> <span style="color:#e6db74">&#34;invalid UserName&#34;</span>
 </code></pre></div><p>We can now decide if we want to create another Smart Constructor for the <code>ValidPerson</code> type or some other type of pipeline (f.ex. &ldquo;applicative validation&rdquo;) or a combination of these strategies.</p>
 <p>But we have ensured that the type <code>UserName</code> <strong>is always valid, so we don&rsquo;t ever have to check it again</strong>.</p>
+<p>UPDATE 2022-05-13: Fix syntax error (replace <code>let</code> with <code>type</code>).Thanks Alex!</p>
 
   </div>
   

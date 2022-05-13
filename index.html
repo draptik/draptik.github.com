@@ -280,7 +280,7 @@ I&rsquo;m assuming you
         
         The &ldquo;Smart Constructor&rdquo; pattern allows us to create a type with F#. With validation.
 TL/DR Here is the F# boiler plate needed to implement the Value Object pattern.
-let UserName = private UserName of string module UserName = let isValid s = // .
+type UserName = private UserName of string module UserName = let isValid s = // .
         
         </span>
         
