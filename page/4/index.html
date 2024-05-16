@@ -180,18 +180,24 @@
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2017/03/30/learning/" >Learning by meeting people</a>
+          <a href="/posts/2012/02/07/converting-a-mercurial-repository-to-git/" >Converting a Mercurial repository to Git</a>
         </span>
         <span class="item__date">
-          Mar 30, 2017
+          Feb 07, 2012
         </span>
         <span >
         
-        In my day job I&rsquo;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.
+        Note to self:
+Converting Hg repos to git using hg-fast-export.
+Installation:
+$ sudo aptitude install hg-fast-export
+Usage:
+$ cd new_git_dir $ git init $ hg-fast-export -r &lt;hg-repo&gt; Works with:
+git version 1.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2017/03/30/learning/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2012/02/07/converting-a-mercurial-repository-to-git/">➦</a>
         
         </div>
         
@@ -201,18 +207,18 @@
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/" >Pi Hole - simple ad blocker for your network</a>
+          <a href="/posts/2012/02/06/converting-a-subversion-repository-to-git/" >Converting a Subversion repository to Git</a>
         </span>
         <span class="item__date">
-          Jan 11, 2017
+          Feb 06, 2012
         </span>
         <span >
         
-        Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. Troy Hunt recently wrote a nice post on the subject.
+        Just discovered this:
+John Albin wrote an excellent article on how to convert a subversion repository to git:
+http://john.albin.net/git/convert-subversion-to-git
         
         </span>
-        
-          ... <a class="read-more-symbol" href="/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/">➦</a>
         
         </div>
         
@@ -222,20 +228,16 @@
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2017/01/10/bash-tricks/" >Bash tricks</a>
+          <a href="/posts/2011/11/09/nhibernate-3-2/" >NHibernate 3.2 Upgrades</a>
         </span>
         <span class="item__date">
-          Jan 10, 2017
+          Nov 09, 2011
         </span>
         <span >
         
-        Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
- autocd autojump  Neither of these features is new.
-autocd autocd is very simple: It&rsquo;s a built-in bash feature which prepends cd in case you enter a valid path.
+        Trying Google Plus for blogging&hellip; https://plus.google.com/u/0/110847643332707464429/posts/7ymoJ6ZEfj3
         
         </span>
-        
-          ... <a class="read-more-symbol" href="/posts/2017/01/10/bash-tricks/">➦</a>
         
         </div>
         
@@ -245,20 +247,19 @@ autocd autocd is very simple: It&rsquo;s a built-in bash feature which prepends 
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2016/05/09/testing-objects-have-same-properties/" >Testing that different objects have the same properties</a>
+          <a href="/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/" >uNhAddIns patch for NHibernate 3.1</a>
         </span>
         <span class="item__date">
-          May 09, 2016
+          Oct 05, 2011
         </span>
         <span >
         
-        Sometimes you want to ensure that 2 unrelated objects share a set of properties &ndash; without using an interface.
-Here is an example:
-namespace Demo { public class Customer { public string FirstName { get; set; } public string LastName { get; set; } } public class Person { public string FirstName { get; set; } public string LastName { get; set; } } } First thought for C# developers: AutoMapper
+        since most NuGet packages related to NHibernate come with NHibernate version 3.1.0.4000 (at the time of writing), I tried rebuilding uNhAddIns (commit #773) with the newer version of NHibernate.
+My changes:
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2016/05/09/testing-objects-have-same-properties/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2011/10/05/unhaddins-patch-for-nhibernate-3-1/">➦</a>
         
         </div>
         
@@ -268,20 +269,243 @@ namespace Demo { public class Customer { public string FirstName { get; set; } p
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/" >Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</a>
+          <a href="/posts/2011/09/23/app-config-order-matters/" >App.Config: Order matters</a>
         </span>
         <span class="item__date">
-          Jul 30, 2015
+          Sep 23, 2011
         </span>
         <span >
         
-        Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
-In this post I&rsquo;ll describe how to display the data.
-TL;DR  Download and unzip the source code from https://github.
+        Note to self:
+Within an App/Web.config in .NET&hellip; The startup node must be the last node&hellip;
+Example: Create a plain WPF application from Visual Studio 2010, add an App.Config file, and try building Option 1 and Option 2 below.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2011/09/23/app-config-order-matters/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/" >Rails and Emacs: Rsense and Auto-Complete</a>
+        </span>
+        <span class="item__date">
+          Jul 17, 2011
+        </span>
+        <span >
+        
+        If you&rsquo;re developing Rails with Emacs and using Rinari here are two more extensions you might like:
+http://cx4a.org/software/auto-complete/
+and
+http://cx4a.org/software/rsense/
+Installation. Just as described. Code completion for ruby-on-rails with emacs!
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/07/17/rails-and-emacs-rsense-and-auto-complete/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/" >Antivir regression bug makes Visual Studio 2010 unusable</a>
+        </span>
+        <span class="item__date">
+          Jul 09, 2011
+        </span>
+        <span >
+        
+        The current version of Antivir Personal slows down Visual Studio 2010 making it unbearable to develop ASP.NET applications.
+Debugging with active Antivir: appr. 5min for an empty Default.aspx page to display.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/07/09/antivir-regression-bug-makes-visual-studio-2010-unusable/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/" >Workaround for VirtualBox 4.0.8 regression bug</a>
+        </span>
+        <span class="item__date">
+          May 25, 2011
+        </span>
+        <span >
+        
+        The current version of Oracle&rsquo;s VirtualBox (4.0.8) hasVersion 4.0.8 had a regression bug which seems to only manifest itself when using Debian based hosts with 64-bit and Windows 7 64-bit guest system.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/05/25/workaround-for-virtualbox-4-0-8-regression-bug/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/" >Adding Truecrypt to Ubuntu&#39;s Unity panel</a>
+        </span>
+        <span class="item__date">
+          May 09, 2011
+        </span>
+        <span >
+        
+        To add applications like Truecrypt to Ubuntu&rsquo;s Unity panel the application has to be &ldquo;white listed&rdquo;.
+  Install dconf-editor (ie sudo aptitude install dconf-editor)
+  Go to section desktop | unity | panel and add &lsquo;Truecrypt&rsquo; to the systray-whitelist variable
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/05/09/adding-truecrypt-to-ubuntus-unity-panel/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/04/11/nhibernate-simple-setup/" >NHibernate Simple Setup</a>
+        </span>
+        <span class="item__date">
+          Apr 11, 2011
+        </span>
+        <span >
+        
+        My simple NHibernate 3 setup under GitHub: https://github.com/draptik/nhibernate-nunit
+        
+        </span>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/03/29/snippet-for-adding-unknown-filesdirs-to-subversion-command-line/" >Snippet for adding unknown files/dirs to Subversion (command line)</a>
+        </span>
+        <span class="item__date">
+          Mar 29, 2011
+        </span>
+        <span >
+        
+        svn add `svn st | grep &quot;^?&quot; | awk '{print $2}'` 
+        
+        </span>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/" >Installing SQL Server Management Studio 2008 Express after installing Visual Studio 2010</a>
+        </span>
+        <span class="item__date">
+          Mar 17, 2011
+        </span>
+        <span >
+        
+        Visual Studio 2010 comes with its own version of SQL Server Express.
+If you try to install SSMS(E) (SQL Server Management Studio Express) afterwards and run into trouble, take a look at this post by Alexander Zeitler.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/03/17/installing-sql-server-management-studio-2008-express-after-installing-visual-studio-2010/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/" >Configure VirtualBox Windows guest system to use 2 monitors</a>
+        </span>
+        <span class="item__date">
+          Jan 01, 2011
+        </span>
+        <span >
+        
+        ﻿Purpose Our host system for VirtualBox is GNU/Linux. We want our guest system, windows, to use two monitors.
+This solution should work for all Linux distributions supported by VirtualBox4.
+﻿Required software   Ubuntu 10.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2011/01/01/configure-virtualbox-windows-guest-system-to-use-2-monitors/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/" >NHibernate Code Completion (IntelliSense) for Visual Studio</a>
+        </span>
+        <span class="item__date">
+          Dec 08, 2010
+        </span>
+        <span >
+        
+        Enable code completion (IntelliSense) in Visual Studio by copying the XSD files from NHibernate to your Visual Studio&rsquo;s XML folder.
+For example (NHibernate 2.0.1):
+Files to copy:
+${nhibernate-location}\NHibernate\2.0.1\nhibernate-configuration.xsd ${nhibernate-location}\NHibernate\2.0.1\nhibernate-mapping.xsd
+Destination:
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2010/12/08/nhibernate-code-completion-intellisense-for-visual-studio/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/" >Emacs: murrine_style_draw_box: assertion `height &gt;= -1&#39; failed</a>
+        </span>
+        <span class="item__date">
+          Nov 02, 2010
+        </span>
+        <span >
+        
+        This nasty bug has been around for over a year: Calling Emacs on Ubuntu from the console outputs
+murrine_style_draw_box: assertion height &gt;= -1' failed`
+after every action within Emacs.
+The solution is simple, but has not been integrated in the Ubuntu repository yet.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2010/11/02/emacs-murrine_style_draw_box-assertion-height-1-failed/">➦</a>
         
         </div>
         
@@ -363,108 +587,7 @@ TL;DR  Download and unzip the source code from https://github.
         
     
     
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/page/17/">17</a></li>
+    <li class="page-item"><a class="page-link" href="/page/6/">6</a></li>
     
     
     <li class="page-item">
@@ -472,7 +595,7 @@ TL;DR  Download and unzip the source code from https://github.
     </li>
     
     <li class="page-item">
-        <a href="/page/17/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/6/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -480,20 +603,6 @@ TL;DR  Download and unzip the source code from https://github.
 
         </div>
         
-  
-    
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-65991503-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
   
   <script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 

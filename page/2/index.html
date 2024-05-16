@@ -180,19 +180,18 @@
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2020/02/05/fsharp-function-signature/" >F#: Function Signature</a>
+          <a href="/posts/2017/03/30/learning/" >Learning by meeting people</a>
         </span>
         <span class="item__date">
-          Feb 05, 2020
+          Mar 30, 2017
         </span>
         <span >
         
-        I always forget how to write Haskell-like function signatures in F#.
-type AddOne = int -&gt; int let addOne : AddOne = fun i -&gt; i + 1 You can think of AddOne as an interface in OO-languages, for functions.
+        In my day job I&rsquo;m a full-stack .NET developer. In the past I mainly learned new concepts in programming by reading books, blog posts, watching video tutorials (i.e. Pluralsight), listening to podcasts and visiting conferences.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2020/02/05/fsharp-function-signature/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2017/03/30/learning/">➦</a>
         
         </div>
         
@@ -202,19 +201,18 @@ type AddOne = int -&gt; int let addOne : AddOne = fun i -&gt; i + 1 You can thin
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2020/01/05/blog-update-to-hugo/" >Blog: Update to Hugo</a>
+          <a href="/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/" >Pi Hole - simple ad blocker for your network</a>
         </span>
         <span class="item__date">
-          Jan 05, 2020
+          Jan 11, 2017
         </span>
         <span >
         
-        I&rsquo;ve replaced the static blogging engine of this blog. The previous blogging engine (Octopress) hasn&rsquo;t been updated in a while, so I switched to Hugo.
-Old links should still work.
+        Advertisements in web pages can be a nuisance. But they are a necessary evil because companies/bloggers producing high quality content have to earn a living. Troy Hunt recently wrote a nice post on the subject.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2020/01/05/blog-update-to-hugo/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2017/01/11/pi-hole-simple-ad-blocker-for-your-network/">➦</a>
         
         </div>
         
@@ -224,19 +222,20 @@ Old links should still work.
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2019/06/25/review-hands-on-ddd-dotnetcore/" >Review: Hands-On Domain-Driven Design with .NET Core by Alexey Zimarev</a>
+          <a href="/posts/2017/01/10/bash-tricks/" >Bash tricks</a>
         </span>
         <span class="item__date">
-          Jun 25, 2019
+          Jan 10, 2017
         </span>
         <span >
         
-        I have updated this post because the author took the time to respond to my review.
- TL;DR The book Hands-On Domain-Driven-Design with .NET Core by Alexey Zimarev illustrates the pros &amp; cons of different CQRS/ES persistency options in the .
+        Over the holidays I stumbled across 2 neat bash tricks to simplify navigation between folders:
+ autocd autojump  Neither of these features is new.
+autocd autocd is very simple: It&rsquo;s a built-in bash feature which prepends cd in case you enter a valid path.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2019/06/25/review-hands-on-ddd-dotnetcore/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2017/01/10/bash-tricks/">➦</a>
         
         </div>
         
@@ -246,19 +245,20 @@ Old links should still work.
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2018/11/29/fsharp-linux-mixed-feelings/" >F# Linux: mixed feelings</a>
+          <a href="/posts/2016/05/09/testing-objects-have-same-properties/" >Testing that different objects have the same properties</a>
         </span>
         <span class="item__date">
-          Nov 29, 2018
+          May 09, 2016
         </span>
         <span >
         
-        I have been trying to learn F# with .NET Core and Linux for some time. My experience so far are mixed. Let me explain what I mean by &ldquo;mixed&rdquo;:
-First off all: It is great that we can use .
+        Sometimes you want to ensure that 2 unrelated objects share a set of properties &ndash; without using an interface.
+Here is an example:
+namespace Demo { public class Customer { public string FirstName { get; set; } public string LastName { get; set; } } public class Person { public string FirstName { get; set; } public string LastName { get; set; } } } First thought for C# developers: AutoMapper
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2018/11/29/fsharp-linux-mixed-feelings/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2016/05/09/testing-objects-have-same-properties/">➦</a>
         
         </div>
         
@@ -268,18 +268,240 @@ First off all: It is great that we can use .
       
       <div class="post-list__item">
         <span class="item__title--big">
-          <a href="/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/" >IntelliJ and Gnome keyboard shortcut conflict: Ctrl Alt s</a>
+          <a href="/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/" >Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 3: UI)</a>
         </span>
         <span class="item__date">
-          Aug 21, 2018
+          Jul 30, 2015
         </span>
         <span >
         
-        I am currenty experimenting with Jetbrains Rider under Linux. Sticking to the default window manager GNOME for my linux distro (Arch Linux), I ran into some problems with conflicting keyboard shortcuts.
+        Part 1 describes how to setup the hardware, part 2 describes how to to record/persist the sensor information.
+In this post I&rsquo;ll describe how to display the data.
+TL;DR  Download and unzip the source code from https://github.
         
         </span>
         
-          ... <a class="read-more-symbol" href="/posts/2018/08/21/intellij-gnome-keyboard-shortcut-conflict-ctrl-alt-s/">➦</a>
+          ... <a class="read-more-symbol" href="/posts/2015/07/30/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-3-ui/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/" >Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 2: Software)</a>
+        </span>
+        <span class="item__date">
+          Jul 10, 2015
+        </span>
+        <span >
+        
+        In the previous post I described how to setup the hardware for measuring temperatures at home. This post will use a small python program to save the recorded temperatures to a database.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-2-software/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/" >Remotly measuring temperatures with a Raspberry Pi using radio frequency modules from Ciseco (Part 1: Hardware)</a>
+        </span>
+        <span class="item__date">
+          Jul 10, 2015
+        </span>
+        <span >
+        
+        Since I&rsquo;m a software developer, I&rsquo;ve always been wanting to do some hardware stuff (including some soldering) with my Raspberry Pi. So, for starters, I picked something that was useful and only involved sensors (no actors - yet):
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2015/07/10/remotly-measuring-temperatures-with-a-raspberry-pi-using-radio-frequency-modules-from-ciseco-part-1-hardware/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2014/07/18/dot-net-backend-providing-rest/" >.NET backend providing REST</a>
+        </span>
+        <span class="item__date">
+          Jul 18, 2014
+        </span>
+        <span >
+        
+        TL;DR My AngularJS demo app has a new backend implementation using .NET Web API.
+&hellip; Recap Our goals:
+ server side: minimal working REST API providing  GET dummy CRUD users   client side (angular): communicate with server side  Setup Creating a Web API project is straightforward: Just follow the instructions at
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2014/07/18/dot-net-backend-providing-rest/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2014/04/21/link-collection-number-4/" >link collection #4</a>
+        </span>
+        <span class="item__date">
+          Apr 21, 2014
+        </span>
+        <span >
+        
+        I&rsquo;m a bit behind on this section, I know. Here&rsquo;s the first batch:
+currently reading:
+ Growing Object-Oriented Software, Guided by Tests Implementing Domain-Driven Design  c# stuff:
+ Mark Seemann&rsquo;s on Bastard Injection foreach vs ForEach  sql stuff:
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2014/04/21/link-collection-number-4/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2014/04/21/installing-seafile-on-raspberry-pi/" >Installing Seafile on Raspberry Pi</a>
+        </span>
+        <span class="item__date">
+          Apr 21, 2014
+        </span>
+        <span >
+        
+        With all the security issues in the past relating to privacy I&rsquo;ve been wanting to install a private cloud service similar to Dropbox for some time now. So, here&rsquo;s a post on how to install Seafile on the Raspberry Pi.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2014/04/21/installing-seafile-on-raspberry-pi/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2014/01/03/link-collection-number-3/" >link collection #3</a>
+        </span>
+        <span class="item__date">
+          Jan 03, 2014
+        </span>
+        <span >
+        
+        JavaScript stuff:
+ Basics of NodeJS and ExpressJS: REST, Authentication, Sessions Another great tutorial on SPAs: Authentication in Single Page Applications If you&rsquo;re in for using JavaScript for your complete stack, try MEAN: mean.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2014/01/03/link-collection-number-3/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2013/10/01/node-dot-js-backend-providing-rest/" >Node.js backend providing REST</a>
+        </span>
+        <span class="item__date">
+          Oct 01, 2013
+        </span>
+        <span >
+        
+        TL;DR My AngularJS demo app has a new backend implementation using node.js.
+&hellip; After some reading I decided I&rsquo;ll stick with node&rsquo;s express module.
+OK. Here is a &lsquo;minimal&rsquo; setup for a node.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2013/10/01/node-dot-js-backend-providing-rest/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2013/09/16/link-collection-2/" >link collection #2</a>
+        </span>
+        <span class="item__date">
+          Sep 16, 2013
+        </span>
+        <span >
+        
+        I attended the Herbstcampus 2013 this month. As usual, a very good conference.
+Here is some fun stuff I learned:
+ NancyFx is to ASP.NET as Sinatra is to Ruby-on-Rails. Simple.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2013/09/16/link-collection-2/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2013/08/19/angularjs-and-cors/" >AngularJS and CORS</a>
+        </span>
+        <span class="item__date">
+          Aug 19, 2013
+        </span>
+        <span >
+        
+        TL;DR While splitting my AngularJS demo app into independent back- and frontend projects (running two different servers) I stumbled across cross domain issues during development. This post describes how to implement CORS on the server and/or client side of an application.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2013/08/19/angularjs-and-cors/">➦</a>
+        
+        </div>
+        
+     
+      
+        
+      
+      <div class="post-list__item">
+        <span class="item__title--big">
+          <a href="/posts/2013/08/05/link-collection-1/" >link collection #1</a>
+        </span>
+        <span class="item__date">
+          Aug 05, 2013
+        </span>
+        <span >
+        
+        When I try to learn new technologies I stumble across many sites. If a site is useful to the problem at hand, I normally add a comment in my source code referencing the URL.
+        
+        </span>
+        
+          ... <a class="read-more-symbol" href="/posts/2013/08/05/link-collection-1/">➦</a>
         
         </div>
         
@@ -359,106 +581,7 @@ First off all: It is great that we can use .
         
     
     
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/page/17/">17</a></li>
+    <li class="page-item"><a class="page-link" href="/page/6/">6</a></li>
     
     
     <li class="page-item">
@@ -466,7 +589,7 @@ First off all: It is great that we can use .
     </li>
     
     <li class="page-item">
-        <a href="/page/17/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/6/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -474,20 +597,6 @@ First off all: It is great that we can use .
 
         </div>
         
-  
-    
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-65991503-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
   
   <script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" integrity="sha384-ZbbbT1gw3joYkKRqh0kWyRp32UAvdqkpbLedQJSlnI8iLQcFVxaGyrOgOJiDQTTR" crossorigin="anonymous"></script>
 
